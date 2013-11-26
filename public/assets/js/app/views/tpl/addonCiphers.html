@@ -1,0 +1,16 @@
+<% 
+if(typeof uses !== 'undefined'){
+	_.each(uses, function(form){ 
+%>
+		<div class="addon-wrapper">
+			<% if(form.type == "number"){ %>
+				<label class="form-label"><%= form.label %></label>
+				<input class="submit_input addon number hasTooltip" type="number" value="1" data-toggle="tooltip" title="<%= form.hint %>" />
+			<% } else if(form.type == "key"){ %>
+				<input class="submit_input addon key keyed_input hasTooltip" type="text" placeholder="<%= form.placeholder %>" data-toggle="tooltip" title="<%= form.hint %>" />
+			<% } %>
+		</div>
+<% 
+	}); 
+}
+%>

@@ -1,0 +1,62 @@
+<div id="wrapper" class="container">
+	<header id="main-header">
+	    <span id="title">Ciphers &amp; Codes</span>
+	    <span id="madeby"><a href="http://thalida.com" target="_blank">made with ♥ by thalida.</a></span>
+	</header>
+	<form id="form">
+		<section id="menu">
+			<div id="menu-type-wrapper">
+				<select id="result_type" class="selectpicker show-menu-arrow show-tick" data-container="body" data-live-search="true" data-size="5" data-width="130px">
+			        <% _.each(ciphers, function(cipher){ %>
+			        <option id="cipher_<%= cipher.id %>" value="<%= cipher.id %>"><%= cipher.name %></option>
+			        <% }); %>
+			    </select>
+		    </div>
+		    
+			<div id="result_addons"></div>
+			
+			<div id="submit-btns-wrapper">
+				<select id="submit-btns" class="selectpicker show-menu-arrow show-tick" data-container="body" data-style="btn-danger" data-width="130px">
+					<option id="encode_submit" class="submit-btn" value="encode" selected="selected">Encode</option>
+				    <option id="decode_submit" class="submit-btn" value="decode">Decode</option>
+			    </select>
+			</div>
+		</section>
+			
+		<section id="textarea-section">
+			<div class="textarea-wrapper">
+				<div class="textarea-menu">
+					<div class="btn-group">
+						<div class="btn-group">
+							<button type="button" class="btn btn-clear dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-align-left"></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+							</button>
+							<ul class="textarea-dropdown-menu dropdown-menu show-menu-arrow show-tick" role="menu">
+						  		<% _.each(fillerText, function(filler){ %>
+						  			<li id="<%= filler.id %>" class="menu_sm_btn filler_text"><a><%= filler.name %></a></li>
+						  		<% }); %>
+						  </ul>
+						</div>
+						<button id="clear_orig" type="button" class="arrow btn btn-clear">
+							<span class="glyphicon glyphicon-remove">
+						</button>
+					</div>
+				</div>
+				<textarea id="orig_text" class="text-input" placeholder="Paste your text or choose a filler from the menu..."></textarea>
+				<label class="textarea-label">Original</label>
+			</div>
+			
+			<div id="arrows">
+				<button id="arrow_left" type="button" class="arrow btn btn-default">&laquo;</button>
+			</div>
+			
+			<div class="textarea-wrapper result">
+				<div class="textarea-menu"></div>
+				<p id="result_text"></p>
+				<label class="textarea-label">Result</label>
+			</div>
+		</section>
+			
+		<div id="info"></div>
+	</form>
+</div>
