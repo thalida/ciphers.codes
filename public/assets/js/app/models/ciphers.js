@@ -252,6 +252,59 @@ define(function (require) {
 					
 					return output;
 				},
+				
+				playfair: function(opts){
+					var
+						string = opts.text.replace(/[^A-Za-z]+/gi, '').toLowerCase(),
+						keyword = opts.addons[0].replace(/[j]+/gi, 'i').toLowerCase(),
+						output = '',
+						alpha_arr = that.utils.playfair_keyedAlpha(that.getAttributeByName('playfairData'),keyword),
+						str = that.utils.playfair_strToArr(string, opts.isEncoding);
+					
+					for(var i = 0; i < str.length; i++){
+						var
+							char1 = (str[i][0] == 'j') ? 'i' : str[i][0],
+							char2 = (str[i][1] == 'j') ? 'i' : str[i][1],
+							coords1 = that.utils.find(char1,alpha_arr),
+							coords2 = that.utils.find(char2,alpha_arr),
+							new_coords1 = {x:null,y:null},
+							new_coords2 = {x:null,y:null};
+					
+						if(coords1.x == coords2.x){
+							new_coords1.y = (opts.isEncoding == true) ? (coords1.y + 1) : (coords1.y - 1);
+							new_coords1.y = (new_coords1.y > 4) ? 0 : new_coords1.y;
+							new_coords1.y = (new_coords1.y < 0) ? 4 : new_coords1.y;
+							
+							new_coords2.y = (opts.isEncoding == true) ? (coords2.y + 1) : (coords2.y - 1);
+							new_coords2.y = (new_coords2.y > 4) ? 0 : new_coords2.y;
+							new_coords2.y = (new_coords2.y < 0) ? 4 : new_coords2.y;
+							
+							new_coords1.x = new_coords2.x = coords1.x;
+						}else if(coords1.y == coords2.y){
+							new_coords1.x = (opts.isEncoding == true) ? (coords1.x + 1) : (coords1.x - 1);
+							new_coords1.x = (new_coords1.x > 4) ? 0 : new_coords1.x;
+							new_coords1.x = (new_coords1.x < 0) ? 4 : new_coords1.x;
+							
+							new_coords2.x = (opts.isEncoding == true) ? (coords2.x + 1) : (coords2.x - 1);
+							new_coords2.x = (new_coords2.x > 4) ? 0 : new_coords2.x;
+							new_coords2.x = (new_coords2.x < 0) ? 4 : new_coords2.x;
+							
+							new_coords1.y = new_coords2.y = coords1.y;
+						}else{
+							new_coords1.x = coords1.x;
+							new_coords1.y = coords2.y;
+							
+							new_coords2.x = coords2.x;
+							new_coords2.y = coords1.y;
+						}
+						var letter1 = alpha_arr[new_coords1.x][new_coords1.y];
+						var letter2 = alpha_arr[new_coords2.x][new_coords2.y];
+						output += letter1 + letter2;
+					}
+						
+					that.set('playfairData',{key: keyword, alpha: alpha_arr});
+					return output;
+				},
             	
 				polysq: function(opts){
 					var
@@ -317,59 +370,6 @@ define(function (require) {
 						output += char;
 					});
 					
-					return output;
-				},
-            	
-				playfair: function(opts){
-					var
-						string = opts.text.replace(/[^A-Za-z]+/gi, '').toLowerCase(),
-						keyword = opts.addons[0].replace(/[j]+/gi, 'i').toLowerCase(),
-						output = '',
-						alpha_arr = that.utils.playfair_keyedAlpha(that.getAttributeByName('playfairData'),keyword),
-						str = that.utils.playfair_strToArr(string, opts.isEncoding);
-					
-					for(var i = 0; i < str.length; i++){
-						var
-							char1 = (str[i][0] == 'j') ? 'i' : str[i][0],
-							char2 = (str[i][1] == 'j') ? 'i' : str[i][1],
-							coords1 = that.utils.find(char1,alpha_arr),
-							coords2 = that.utils.find(char2,alpha_arr),
-							new_coords1 = {x:null,y:null},
-							new_coords2 = {x:null,y:null};
-					
-						if(coords1.x == coords2.x){
-							new_coords1.y = (opts.isEncoding == true) ? (coords1.y + 1) : (coords1.y - 1);
-							new_coords1.y = (new_coords1.y > 4) ? 0 : new_coords1.y;
-							new_coords1.y = (new_coords1.y < 0) ? 4 : new_coords1.y;
-							
-							new_coords2.y = (opts.isEncoding == true) ? (coords2.y + 1) : (coords2.y - 1);
-							new_coords2.y = (new_coords2.y > 4) ? 0 : new_coords2.y;
-							new_coords2.y = (new_coords2.y < 0) ? 4 : new_coords2.y;
-							
-							new_coords1.x = new_coords2.x = coords1.x;
-						}else if(coords1.y == coords2.y){
-							new_coords1.x = (opts.isEncoding == true) ? (coords1.x + 1) : (coords1.x - 1);
-							new_coords1.x = (new_coords1.x > 4) ? 0 : new_coords1.x;
-							new_coords1.x = (new_coords1.x < 0) ? 4 : new_coords1.x;
-							
-							new_coords2.x = (opts.isEncoding == true) ? (coords2.x + 1) : (coords2.x - 1);
-							new_coords2.x = (new_coords2.x > 4) ? 0 : new_coords2.x;
-							new_coords2.x = (new_coords2.x < 0) ? 4 : new_coords2.x;
-							
-							new_coords1.y = new_coords2.y = coords1.y;
-						}else{
-							new_coords1.x = coords1.x;
-							new_coords1.y = coords2.y;
-							
-							new_coords2.x = coords2.x;
-							new_coords2.y = coords1.y;
-						}
-						var letter1 = alpha_arr[new_coords1.x][new_coords1.y];
-						var letter2 = alpha_arr[new_coords2.x][new_coords2.y];
-						output += letter1 + letter2;
-					}
-						
-					that.set('playfairData',{key: keyword, alpha: alpha_arr});
 					return output;
 				}
             		},
