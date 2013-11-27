@@ -16,6 +16,12 @@
 
 define(function (require) {
 	"use strict";
+	
+	// FIX FOR MOD ISSUES
+	Number.prototype.mod = function(n){
+		return ( (this % n) + n ) % n;
+	};
+	
 	var
 		$		=	require('jquery'),
 		_		= 	require('underscore'),
@@ -110,10 +116,16 @@ define(function (require) {
     	        				{
     	        					id: 7, 
     	        					name: "Playfair", 
-    	        					uses: [{type: "key", label: "Key", placeholder: "Enter your key...", 
-    	        					hint: "Duplicate letters will be removed"}],
+    	        					uses: [{type: "key", label: "Key", placeholder: "Enter your key...", hint: "Duplicate letters will be removed"}],
     	        					desc: "The playfair cipher combines the letters i and j so that the alphabet can fit on a 5x5 grid, as a result any 'j' you use in your text, will be treated like an 'i'. In addition, please read below how the playfair cipher is encoded and decoded.",
     	        					link: "http://en.wikipedia.org/wiki/Playfair_cipher",
+    	        					func: function(opts){ return that.process(opts) }
+    	        				},
+    	        				{
+    	        					id: 8, 
+    	        					name: "Affine",
+    	        					desc: "The affine cipher is a type of monoalphabetic substitution cipher, wherein each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter. (via Wikipedia)",
+    	        					link: "http://en.wikipedia.org/wiki/Affine_cipher",
     	        					func: function(opts){ return that.process(opts) }
     	        				}
     						];
@@ -148,12 +160,37 @@ define(function (require) {
 					case 7:
 						return this.use.playfair(opts);
 						break;
+					case 8:
+						return this.use.affine(opts);
+						break;
 					default:
 						return '';
 						break;
 				}
 			},
 			use: {
+				affine: function(opts){
+					var
+						alpha = _.toArray(that.getAttributeByName('alpha')),
+						string = opts.text,
+						output = '';
+					that.utils.eachCharacter(string, 1, function(i, char, isUpper){
+						if(char.match(/^[A-Za-z]$/)){
+							var pos = jQuery.inArray(char.toLowerCase(), alpha);
+							if(opts.isEncoding === true){
+								var new_pos = ( (5 * pos) + 8) % alpha.length;
+								char = alpha[new_pos];
+							}else{
+								var new_pos = (21 * (pos - 8)) % alpha.length;
+								char = alpha[new_pos];
+							}
+						}
+						char = (char.match(/\n/g)) ? '<br />' : char;
+						output += (isUpper === true) ? char.toUpperCase() : char;
+					});
+					
+					return output;
+				},
             
 				///////
 				// ATBASH
@@ -165,8 +202,9 @@ define(function (require) {
 						output = '';
 					that.utils.eachCharacter(string, 1, function(i, char, isUpper){
 						if(char.match(/^[A-Za-z]$/)){
-							var pos = jQuery.inArray(char.toLowerCase(), alpha),
-							new_pos = alpha.length - pos - 1;
+							var 
+								pos = jQuery.inArray(char.toLowerCase(), alpha),
+								new_pos = alpha.length - pos - 1;
 							char = alpha[new_pos];
 						}
 						char = (char.match(/\n/g)) ? '<br />' : char;
@@ -189,14 +227,15 @@ define(function (require) {
 					
 					that.utils.eachCharacter(string, 1, function(i, char, isUpper){
 						if(char.match(/^[A-Za-z]$/)){
-							var pos = jQuery.inArray(char.toLowerCase(), alpha),
-							new_pos = (opts.isEncoding === true) ? (pos + n) : (pos - n);
+							var 
+								pos = jQuery.inArray(char.toLowerCase(), alpha),
+								new_pos = (opts.isEncoding === true) ? (pos + n) : (pos - n);
 							
 							if(new_pos >= alpha.length)
-							new_pos = new_pos.mod(alpha.length);
+								new_pos = new_pos.mod(alpha.length);
 							
 							else if(new_pos < 0 )
-							new_pos = alpha.length + new_pos;
+								new_pos = alpha.length + new_pos;
 							
 							char = alpha[new_pos];
 						}
@@ -459,8 +498,3 @@ define(function (require) {
             });
             return {Ciphers: Ciphers};
 });
-
-// FIX FOR MOD ISSUES
-Number.prototype.mod = function(n){
-	return ( (this % n) + n ) % n;
-}
