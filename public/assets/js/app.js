@@ -3,7 +3,7 @@ require.config({
 	baseUrl: 'public/assets/js/libs',
 	paths: {
 		app: '../app',
-		tpl: '../app/tpl', //templates
+		tpl: '../app/templates', //templates
 		
 		jquery: "http://code.jquery.com/jquery-latest",
 		jqueryui: "http://code.jquery.com/ui/1.10.3/jquery-ui.min",
