@@ -25,6 +25,11 @@ define(function (require) {
 	
 	return Backbone.View.extend({
 		render: function () {
+			//SORT CIPHERS ALPHABETICALLY
+			Ciphers.attributes.ciphers.sort(function (a, b) {
+				return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
+			});
+			
 			this.$el.html(template(Ciphers.attributes));
 			$('.selectpicker').selectpicker();
             
