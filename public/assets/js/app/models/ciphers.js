@@ -20,7 +20,7 @@ define(function (require) {
 	// FIX FOR MOD ISSUES
 	Number.prototype.mod = function(n){
 		return ( (this % n) + n ) % n;
-	};
+	}
 	
 	var
 		$		=	require('jquery'),
@@ -101,7 +101,7 @@ define(function (require) {
     	        				{
     	        					id: 5, 
     	        					name: "Polybius",
-    	        					desc: "A cipher where each alphanumeric (a-z, 0-9) character is represented by it's coordinates in a grid.s",
+    	        					desc: "A cipher where each alphanumeric (a-z, 0-9) character is represented by it's coordinates in a grid. <br /> <img src='/public/assets/images/polybius.png' /> <br />",
     	        					link: "http://en.wikipedia.org/wiki/Polybius_square",
     	        					func: function(opts){ return that.process(opts) }
     	        				},
@@ -272,7 +272,6 @@ define(function (require) {
 						output += (isUpper == true) ? char.toUpperCase() : char;
 					});
 					
-					
 					return output;
 				},
             	
@@ -348,37 +347,36 @@ define(function (require) {
 				polysq: function(opts){
 					var
 						output = '',
-						string = opts.text,
+						strings = opts.text.split(/\s+/),
 						alphanumeric = _.toArray(that.getAttributeByName('alphanumeric'));
 					
-					for( var i = 0; i < string.length; i++ ){
-						var
-							value = '',
-							char = string.charAt(i).toLowerCase();
-						
-						if(opts.isEncoding === true && char.match(/^[a-z0-9]$/)){
-							var alpha_pos = jQuery.inArray(char.toString(),alphanumeric) + 1,
-							pos1 = Math.ceil(alpha_pos / 6),
-							pos2 = (alpha_pos % 6 == 0) ? 6 : alpha_pos % 6 ;
-							value = pos1 + '' + pos2 + ' ';
-						}
-						
-						else if(opts.isEncoding === false && char.match(/^[1-6]$/)){
-							var char2 = string.charAt(i + 1);
-						
-							if(char2.match(/^[1-6]$/)){
-								i = (string.charAt(i + 2).match(/^[1-6]$/)) ? i + 1 : i + 2;
-								if(typeof polyAlpha[char][char2] == 'undefined')
-									break;
-								else
-									value = polyAlpha[char][char2]
+					_.each(strings, function(string, index){
+						if(opts.isEncoding === true){
+							for( var i = 0; i < string.length; i++ ){
+								var char = string.charAt(i).toLowerCase();
+								if(char.match(/^[a-z0-9]$/)){
+									var
+										alpha_pos = jQuery.inArray(char.toString(),alphanumeric) + 1,
+										pos1 = Math.ceil(alpha_pos / 6),
+										pos2 = (alpha_pos % 6 == 0) ? 6 : alpha_pos % 6 ;
+									output += pos1 + '' + pos2 + ' ';
+								}
+								else if(char.match(/\n/g))
+									output += '<br />';
 							}
+						}else if(opts.isEncoding === false && string != ''){
+							var 
+								char1 = string[0],
+								char2 = string[1];
+							if(char1.match(/^[1-6]$/) && char2.match(/^[1-6]$/)){
+								if(typeof that.get('polyAlpha')[char1][char2] != 'undefined')
+									output += that.get('polyAlpha')[char1][char2];
+							}
+							else if(char1.match(/\n/g))
+								output += '<br />';
 						}
-						
-						else if(char.match(/\n/g))
-							value = '<br />';
-						output += value;
-					}
+					});
+					
 					return output;
 				},
             	
@@ -494,7 +492,7 @@ define(function (require) {
 					return str;
 				}
 			}
-            	
-            });
-            return {Ciphers: Ciphers};
+		});
+		
+	return {Ciphers: Ciphers};
 });
