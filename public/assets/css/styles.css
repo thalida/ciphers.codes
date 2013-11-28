@@ -71,6 +71,13 @@ header#main-header{
         font-weight: 400;
         line-height: 30px;
     }
+    	header#main-header span#title a{
+    		color: #fff;
+    	}
+	header#main-header span#title a:hover{
+		color: #fff;
+		text-decoration: none;
+	}
     header#main-header span#madeby{
     	display: block;
     	margin: 20px 0 0 0;
