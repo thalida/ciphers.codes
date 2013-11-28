@@ -7,8 +7,8 @@ define(function (require) {
 		
 		// TEMPLATE FILES
 		tpl				=	require('text!tpl/main.html'),
-		cipherAddonsTpl		= 	require('text!tpl/addonCiphers.html'),
-		cipherDescTpl			= 	require('text!tpl/aboutCiphers.html'),
+		cipherAddonsTpl		=	require('text!tpl/addonCiphers.html'),
+		cipherDescTpl			=	require('text!tpl/aboutCiphers.html'),
 		
 		// MODELS
 		model				=	require('app/models/ciphers'),
@@ -21,7 +21,7 @@ define(function (require) {
 		
 		// OTHER VARIABLES
 		isEncoding			=	true,
-		$formAddons, $orig, $result, $resultType, $orig, savedKey;
+		$formAddons, $orig, $result, $resultType, savedKey;
 	
 	return Backbone.View.extend({
 		render: function () {
@@ -64,9 +64,8 @@ define(function (require) {
 		/////
 		// BASED ON DROPDOWN SET THE TYPE OF CIPHER BEING USED
 		setCipherType: function (event) {
-			var
-				$target = $(event.target),
-				val 	= parseInt($target.val(), 10),
+			var	$target = $(event.target),
+				val = parseInt($target.val(), 10),
 				cipher	= _.findWhere(Ciphers.getAttributeByName('ciphers'), {id: val});
 			
 			// RENDER ANY FORM ADDONS USED BY CIPHER
@@ -96,7 +95,7 @@ define(function (require) {
 				if(c.match(/^[a-z]$/)){
 					var regex = new RegExp(c, 'gi'),
 					isUnique = currentKey.match(regex);
-					if(isUnique.length == 1){ out += c; }
+					if(isUnique.length === 1){ out += c; }
 					else { out = savedKey; break; }
 				}
 			}
@@ -158,7 +157,7 @@ define(function (require) {
 			event.preventDefault();
 			var output = '';
 			if($orig.val() != ''){
-				var 	id = parseInt($resultType.val(), 10);
+				var 	id = parseInt($resultType.val(), 10),
 					cipher = _.findWhere(Ciphers.getAttributeByName('ciphers'), {id: id});
 				output = cipher.func({
 						id: parseInt($resultType.val(), 10), 
