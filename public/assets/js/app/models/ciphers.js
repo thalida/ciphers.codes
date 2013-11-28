@@ -72,7 +72,7 @@ define(function (require) {
 							name: "Atbash", 
 							desc: "A simple substitution cipher orginally created for the Hebrew alphabet, when converted to work with the Latin Alphabet (abc), this cipher reverses the alphabet so that the cipher alphabet is now 'zyxwvutsrqponmlkjihgfedcba'.",
 							link: "http://en.wikipedia.org/wiki/Atbash",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.atbash(opts); }
 						},
 						{
 							id: 2, 
@@ -80,7 +80,7 @@ define(function (require) {
 							uses: [{type: "number", label: "Shift by"}],
 							desc: "A simple substitution cipher in which the alphabet is shifted up or down a specified number of positions.",
 							link: "http://en.wikipedia.org/wiki/Caesar_cipher",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.caesar(opts); }
 						},
 						{
 							id: 3, 
@@ -88,21 +88,21 @@ define(function (require) {
 							uses: [{type: "key", label: "Key", placeholder: "Enter your key..."}],
 							desc: "A monoalphabetic substitution cipher, where a keyword placed into beginning of the alphabet, and any duplicated letters are removed.",
 							link: "http://en.wikipedia.org/wiki/Keyword_cipher",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.keyedsub(opts); }
 						},
 						{
 							id: 4, 
 							name: "Masonic",
 							desc: "A geometric simple substitution cipher which exchanges letters for symbols which are fragments of a grid.",
 							link: "http://en.wikipedia.org/wiki/Pigpen_cipher",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.mason(opts); }
 						},
 						{
 							id: 5, 
 							name: "Polybius",
 							desc: "A cipher where each alphanumeric (a-z, 0-9) character is represented by it's coordinates in a grid. <br /> <img src='/public/assets/images/polybius.png' /> <br />",
 							link: "http://en.wikipedia.org/wiki/Polybius_square",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.polysq(opts); }
 						},
 						{
 							id: 6, 
@@ -110,7 +110,7 @@ define(function (require) {
 							uses: [{type: "key", label: "Key", placeholder: "Enter your key..."}],
 							desc: "A simple polyalphabetic substitution cipher which uses a tableau composed of each of the 26 options for a Caesar Cipher.",
 							link: "http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.vegenere(opts); }
 						},
 						{
 							id: 7, 
@@ -118,54 +118,22 @@ define(function (require) {
 							uses: [{type: "key", label: "Key", placeholder: "Enter your key...", hint: "Duplicate letters will be removed"}],
 							desc: "The playfair cipher combines the letters i and j so that the alphabet can fit on a 5x5 grid, as a result any 'j' you use in your text, will be treated like an 'i'. In addition, please read below how the playfair cipher is encoded and decoded.",
 							link: "http://en.wikipedia.org/wiki/Playfair_cipher",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.playfair(opts); }
 						},
 						{
 							id: 8, 
 							name: "Affine",
 							desc: "The affine cipher is a type of monoalphabetic substitution cipher, wherein each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter. (via Wikipedia)",
 							link: "http://en.wikipedia.org/wiki/Affine_cipher",
-							func: function(opts){ return that.process(opts); }
+							func: function(opts){ return that.use.affine(opts); }
 						}];
-					return ciphers;
-				},
+				return ciphers;
+			},
 			getAttributeByName: function( attr ){
 				//RETURN A COPY OF THE ATTRIBUTE
 				return $.extend(true, {}, this.get(attr));
 			},
 			
-			process: function(opts){
-				//BASED ON THE INPUT ID => RETURN THE CORRECT CIPHER OUTPUT
-				switch(opts.id){
-					case 1:
-						return this.use.atbash(opts);
-						break;
-					case 2:
-						return this.use.caesar(opts);
-						break;
-					case 3:
-						return this.use.keyedsub(opts);
-						break;
-					case 4:
-						return this.use.mason(opts);
-						break;
-					case 5:
-						return this.use.polysq(opts);
-						break;
-					case 6:
-						return this.use.vegenere(opts);
-						break;
-					case 7:
-						return this.use.playfair(opts);
-						break;
-					case 8:
-						return this.use.affine(opts);
-						break;
-					default:
-						return '';
-						break;
-				}
-			},
 			use: {
 				affine: function(opts){
 					var

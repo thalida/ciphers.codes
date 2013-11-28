@@ -158,7 +158,9 @@ define(function (require) {
 			event.preventDefault();
 			var output = '';
 			if($orig.val() != ''){
-				output = Ciphers.process({
+				var 	id = parseInt($resultType.val(), 10);
+					cipher = _.findWhere(Ciphers.getAttributeByName('ciphers'), {id: id});
+				output = cipher.func({
 						id: parseInt($resultType.val(), 10), 
 						text: $orig.val(),
 						isEncoding: isEncoding,
