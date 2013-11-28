@@ -20,7 +20,7 @@ define(function (require) {
 	// FIX FOR MOD ISSUES
 	Number.prototype.mod = function(n){
 		return ( (this % n) + n ) % n;
-	}
+	};
 	
 	var
 		$		=	require('jquery'),
@@ -35,7 +35,7 @@ define(function (require) {
 			// DEFAULT MODEL DATA
 			defaults: {
 				'polyAlpha'		:	null,
-				'playfairData'		:	 {key: null, alpha: null},
+				'playfairData'		:	{key: null, alpha: null},
 				'alpha'			:	['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
 				'fillerText'		:	[
 									{id: "abc", name: "Alphanumeric &amp; Symbols", text: "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >\r\n"},
@@ -142,12 +142,13 @@ define(function (require) {
 						output = '';
 					that.utils.eachCharacter(string, 1, function(i, char, isUpper){
 						if(char.match(/^[A-Za-z]$/)){
-							var pos = jQuery.inArray(char.toLowerCase(), alpha);
+							var	pos = jQuery.inArray(char.toLowerCase(), alpha),
+								new_pos;
 							if(opts.isEncoding === true){
-								var new_pos = ( (5 * pos) + 8) % alpha.length;
+								new_pos = ( (5 * pos) + 8) % alpha.length;
 								char = alpha[new_pos];
 							}else{
-								var new_pos = (21 * (pos - 8)) % alpha.length;
+								new_pos = (21 * (pos - 8)) % alpha.length;
 								char = alpha[new_pos];
 							}
 						}
@@ -185,24 +186,22 @@ define(function (require) {
 				// CAESAR
 				// if n = 2 =>  a = c, b = d, c = e
 				caesar: function(opts){
-					var 
-						alpha = _.toArray(that.getAttributeByName('alpha')),
-						n = parseInt( opts.addons[0] ),
+					var	alpha = _.toArray(that.getAttributeByName('alpha')),
+						n = parseInt( opts.addons[0] , 10),
 						string = opts.text,
 						output = '';
 					
 					that.utils.eachCharacter(string, 1, function(i, char, isUpper){
 						if(char.match(/^[A-Za-z]$/)){
-							var 
-								pos = jQuery.inArray(char.toLowerCase(), alpha),
+							var	pos = jQuery.inArray(char.toLowerCase(), alpha),
 								new_pos = (opts.isEncoding === true) ? (pos + n) : (pos - n);
 							
-							if(new_pos >= alpha.length)
+							if(new_pos >= alpha.length){
 								new_pos = new_pos.mod(alpha.length);
-							
-							else if(new_pos < 0 )
+							} else if(new_pos < 0 ){
 								new_pos = alpha.length + new_pos;
-							
+							}
+
 							char = alpha[new_pos];
 						}
 						char = (char.match(/\n/g)) ? '<br />' : char;
@@ -236,7 +235,7 @@ define(function (require) {
 						}
 						
 						char = (char.match(/\n/g)) ? '<br />' : char;
-						output += (isUpper == true) ? char.toUpperCase() : char;
+						output += (isUpper === true) ? char.toUpperCase() : char;
 					});
 					
 					return output;
@@ -249,8 +248,9 @@ define(function (require) {
 					
 					that.utils.eachCharacter(string, 1, function(i, char){
 						char = char.toLowerCase();
-						if(opts.isEncoding === true && char.match(/^[a-z]$/))
+						if(opts.isEncoding === true && char.match(/^[a-z]$/)){
 							char = '<span class="mason_text">'+char+'</span>';
+						}	
 						char = (char.match(/\n/g)) ? '<br />' : char;
 						output += char;
 					});
@@ -268,14 +268,14 @@ define(function (require) {
 					
 					for(var i = 0; i < str.length; i++){
 						var
-							char1 = (str[i][0] == 'j') ? 'i' : str[i][0],
-							char2 = (str[i][1] == 'j') ? 'i' : str[i][1],
+							char1 = (str[i][0] === 'j') ? 'i' : str[i][0],
+							char2 = (str[i][1] === 'j') ? 'i' : str[i][1],
 							coords1 = that.utils.find(char1,alpha_arr),
 							coords2 = that.utils.find(char2,alpha_arr),
 							new_coords1 = {x:null,y:null},
 							new_coords2 = {x:null,y:null};
 					
-						if(coords1.x == coords2.x){
+						if(coords1.x === coords2.x){
 							new_coords1.y = (opts.isEncoding == true) ? (coords1.y + 1) : (coords1.y - 1);
 							new_coords1.y = (new_coords1.y > 4) ? 0 : new_coords1.y;
 							new_coords1.y = (new_coords1.y < 0) ? 4 : new_coords1.y;
@@ -285,7 +285,7 @@ define(function (require) {
 							new_coords2.y = (new_coords2.y < 0) ? 4 : new_coords2.y;
 							
 							new_coords1.x = new_coords2.x = coords1.x;
-						}else if(coords1.y == coords2.y){
+						}else if(coords1.y === coords2.y){
 							new_coords1.x = (opts.isEncoding == true) ? (coords1.x + 1) : (coords1.x - 1);
 							new_coords1.x = (new_coords1.x > 4) ? 0 : new_coords1.x;
 							new_coords1.x = (new_coords1.x < 0) ? 4 : new_coords1.x;
@@ -338,9 +338,9 @@ define(function (require) {
 							if(char1.match(/^[1-6]$/) && char2.match(/^[1-6]$/)){
 								if(typeof that.get('polyAlpha')[char1][char2] != 'undefined')
 									output += that.get('polyAlpha')[char1][char2];
-							}
-							else if(char1.match(/\n/g))
+							} else if(char1.match(/\n/g)) {
 								output += '<br />';
+							}
 						}
 					});
 					
