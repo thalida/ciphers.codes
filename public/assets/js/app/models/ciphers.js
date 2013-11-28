@@ -23,21 +23,21 @@ define(function (require) {
 	}
 	
 	var
-		$       =   require('jquery'),
-		_       =   require('underscore'),
-		Backbone    =   require('backbone'),
+		$		=	require('jquery'),
+		_		=	require('underscore'),
+		Backbone	=	require('backbone'),
 		
 		that,
 		
 		Ciphers = Backbone.Model.extend({
 			
-				///////
-				// DEFAULT MODEL DATA
+			///////
+			// DEFAULT MODEL DATA
 			defaults: {
-				'polyAlpha'     :   null,
-				'playfairData'      :   {key: null, alpha: null},
-				'alpha'         :   ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
-				'fillerText'        :   [
+				'polyAlpha'		:	null,
+				'playfairData'		:	 "value",  "value", {key: null, alpha: null},
+				'alpha'			:	['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
+				'fillerText'		:	[
 									{id: "abc", name: "Alphanumeric &amp; Symbols", text: "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >\r\n"},
 									{id: "lorem", name: "Lorem Ipsum", text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.\r\n"},
 									{id: "pangram", name: "Pangrams", text: "Every good cow, fox, squirrel, and zebra likes to jump over happy dogs.\r\nWoven silk pyjamas exchanged for blue quartz.\r\nThe quick onyx goblin jumps over the lazy dwarf.\r\nBrawny gods just flocked up to quiz and vex him.\r\n"}
@@ -67,71 +67,69 @@ define(function (require) {
 				this.set('polyAlpha', polyAlpha);
 			},
 			getCiphers: function(){
-						var ciphers = [
-								{
-								id: 1, 
-								name: "Atbash", 
-								desc: "A simple substitution cipher orginally created for the Hebrew alphabet, when converted to work with the Latin Alphabet (abc), this cipher reverses the alphabet so that the cipher alphabet is now 'zyxwvutsrqponmlkjihgfedcba'.",
-								link: "http://en.wikipedia.org/wiki/Atbash",
-								func: function(opts){ return that.process(opts) }
-							},
-								{
-									id: 2, 
-									name: "Caesar", 
-									uses: [{type: "number", label: "Shift by"}],
-									desc: "A simple substitution cipher in which the alphabet is shifted up or down a specified number of positions.",
-									link: "http://en.wikipedia.org/wiki/Caesar_cipher",
-									func: function(opts){ return that.process(opts) }
-								},
-								{
-									id: 3, 
-									name: "Keyword Substitution", 
-									uses: [{type: "key", label: "Key", placeholder: "Enter your key..."}],
-									desc: "A monoalphabetic substitution cipher, where a keyword placed into beginning of the alphabet, and any duplicated letters are removed.",
-									link: "http://en.wikipedia.org/wiki/Keyword_cipher",
-									func: function(opts){ return that.process(opts) }
-								},
-								{
-									id: 4, 
-									name: "Masonic",
-									desc: "A geometric simple substitution cipher which exchanges letters for symbols which are fragments of a grid.",
-									link: "http://en.wikipedia.org/wiki/Pigpen_cipher",
-									func: function(opts){ return that.process(opts) }
-								},
-								{
-									id: 5, 
-									name: "Polybius",
-									desc: "A cipher where each alphanumeric (a-z, 0-9) character is represented by it's coordinates in a grid. <br /> <img src='/public/assets/images/polybius.png' /> <br />",
-									link: "http://en.wikipedia.org/wiki/Polybius_square",
-									func: function(opts){ return that.process(opts) }
-								},
-								{
-									id: 6, 
-									name: "Vigenère", 
-									uses: [{type: "key", label: "Key", placeholder: "Enter your key..."}],
-									desc: "A simple polyalphabetic substitution cipher which uses a tableau composed of each of the 26 options for a Caesar Cipher.",
-									link: "http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher",
-									func: function(opts){ return that.process(opts) }
-								},
-								{
-									id: 7, 
-									name: "Playfair", 
-									uses: [{type: "key", label: "Key", placeholder: "Enter your key...", hint: "Duplicate letters will be removed"}],
-									desc: "The playfair cipher combines the letters i and j so that the alphabet can fit on a 5x5 grid, as a result any 'j' you use in your text, will be treated like an 'i'. In addition, please read below how the playfair cipher is encoded and decoded.",
-									link: "http://en.wikipedia.org/wiki/Playfair_cipher",
-									func: function(opts){ return that.process(opts) }
-								},
-								{
-									id: 8, 
-									name: "Affine",
-									desc: "The affine cipher is a type of monoalphabetic substitution cipher, wherein each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter. (via Wikipedia)",
-									link: "http://en.wikipedia.org/wiki/Affine_cipher",
-									func: function(opts){ return that.process(opts) }
-								}
-							];
+				var ciphers = [{
+							id: 1, 
+							name: "Atbash", 
+							desc: "A simple substitution cipher orginally created for the Hebrew alphabet, when converted to work with the Latin Alphabet (abc), this cipher reverses the alphabet so that the cipher alphabet is now 'zyxwvutsrqponmlkjihgfedcba'.",
+							link: "http://en.wikipedia.org/wiki/Atbash",
+							func: function(opts){ return that.process(opts); }
+						},
+						{
+							id: 2, 
+							name: "Caesar", 
+							uses: [{type: "number", label: "Shift by"}],
+							desc: "A simple substitution cipher in which the alphabet is shifted up or down a specified number of positions.",
+							link: "http://en.wikipedia.org/wiki/Caesar_cipher",
+							func: function(opts){ return that.process(opts); }
+						},
+						{
+							id: 3, 
+							name: "Keyword Substitution", 
+							uses: [{type: "key", label: "Key", placeholder: "Enter your key..."}],
+							desc: "A monoalphabetic substitution cipher, where a keyword placed into beginning of the alphabet, and any duplicated letters are removed.",
+							link: "http://en.wikipedia.org/wiki/Keyword_cipher",
+							func: function(opts){ return that.process(opts); }
+						},
+						{
+							id: 4, 
+							name: "Masonic",
+							desc: "A geometric simple substitution cipher which exchanges letters for symbols which are fragments of a grid.",
+							link: "http://en.wikipedia.org/wiki/Pigpen_cipher",
+							func: function(opts){ return that.process(opts); }
+						},
+						{
+							id: 5, 
+							name: "Polybius",
+							desc: "A cipher where each alphanumeric (a-z, 0-9) character is represented by it's coordinates in a grid. <br /> <img src='/public/assets/images/polybius.png' /> <br />",
+							link: "http://en.wikipedia.org/wiki/Polybius_square",
+							func: function(opts){ return that.process(opts); }
+						},
+						{
+							id: 6, 
+							name: "Vigen&egrave;re", 
+							uses: [{type: "key", label: "Key", placeholder: "Enter your key..."}],
+							desc: "A simple polyalphabetic substitution cipher which uses a tableau composed of each of the 26 options for a Caesar Cipher.",
+							link: "http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher",
+							func: function(opts){ return that.process(opts); }
+						},
+						{
+							id: 7, 
+							name: "Playfair", 
+							uses: [{type: "key", label: "Key", placeholder: "Enter your key...", hint: "Duplicate letters will be removed"}],
+							desc: "The playfair cipher combines the letters i and j so that the alphabet can fit on a 5x5 grid, as a result any 'j' you use in your text, will be treated like an 'i'. In addition, please read below how the playfair cipher is encoded and decoded.",
+							link: "http://en.wikipedia.org/wiki/Playfair_cipher",
+							func: function(opts){ return that.process(opts); }
+						},
+						{
+							id: 8, 
+							name: "Affine",
+							desc: "The affine cipher is a type of monoalphabetic substitution cipher, wherein each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter. (via Wikipedia)",
+							link: "http://en.wikipedia.org/wiki/Affine_cipher",
+							func: function(opts){ return that.process(opts); }
+						}];
 					return ciphers;
 				},
-				getAttributeByName: function( attr ){
+			getAttributeByName: function( attr ){
 				//RETURN A COPY OF THE ATTRIBUTE
 				return $.extend(true, {}, this.get(attr));
 			},
@@ -259,11 +257,12 @@ define(function (require) {
 					
 					that.utils.eachCharacter(string, 1, function(i, char, isUpper){
 						if(char.match(/^[A-Za-z]$/)){
+							var pos;
 							if(opts.isEncoding === true){
-								var pos = jQuery.inArray(char.toLowerCase(), alpha);
+								pos = jQuery.inArray(char.toLowerCase(), alpha);
 								char = keyedAlpha[pos];
 							}else{
-								var pos = jQuery.inArray(char.toLowerCase(), keyedAlpha);
+								pos = jQuery.inArray(char.toLowerCase(), keyedAlpha);
 								char = alpha[pos];
 							}
 						}
@@ -409,8 +408,8 @@ define(function (require) {
 					
 					return output;
 				}
-					},
-					utils: {
+			},
+			utils: {
 				eachCharacter: function(string, increment, callback){
 					for( var i = 0; i < string.length; i = i + increment ){
 						var c = string.charAt(i),

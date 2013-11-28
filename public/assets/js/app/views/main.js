@@ -1,26 +1,26 @@
 define(function (require) {
 	"use strict";
 	var
-		$		=	require('jquery'),
-		_		=	require('underscore'),
-		Backbone	=	require('backbone'),
+		$				=	require('jquery'),
+		_				=	require('underscore'),
+		Backbone			=	require('backbone'),
 		
 		// TEMPLATE FILES
-		tpl		=	require('text!tpl/main.html'),
-		cipherAddonsTpl	= 	require('text!tpl/addonCiphers.html'),
-		cipherDescTpl	= 	require('text!tpl/aboutCiphers.html'),
+		tpl				=	require('text!tpl/main.html'),
+		cipherAddonsTpl		= 	require('text!tpl/addonCiphers.html'),
+		cipherDescTpl			= 	require('text!tpl/aboutCiphers.html'),
 		
 		// MODELS
-		model		=	require('app/models/ciphers'),
-		Ciphers		= 	new model.Ciphers(),
+		model				=	require('app/models/ciphers'),
+		Ciphers			=	new model.Ciphers(),
 		
 		// TEMPLATES
-		template		=	_.template(tpl),
+		template			=	_.template(tpl),
 		cipherAddonsTemplate	=	_.template(cipherAddonsTpl),
-		cipherDescTemplate	=	_.template(cipherDescTpl),
+		cipherDescTemplate		=	_.template(cipherDescTpl),
 		
 		// OTHER VARIABLES
-		isEncoding	=	true,
+		isEncoding			=	true,
 		$formAddons, $orig, $result, $resultType, $orig, savedKey;
 	
 	return Backbone.View.extend({
@@ -47,7 +47,7 @@ define(function (require) {
 		},
 
 		events: {
-			"change		.addon"		:	"submit",
+			"change		.addon"	:	"submit",
 			"change		#result_type"	:	"setCipherType",
 			"change		#submit-btns"	:	"setSubmitType",
 			
