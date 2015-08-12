@@ -21,16 +21,25 @@ app.service('cipherUtils', [
 
 		var utils = {};
 
-		utils.alpha = function(){
+		utils.ALPHA = function(){
 			return angular.copy( _alpha );
 		};
 
-		utils.alphagrid = function(){
+		utils.ALPHAGRID = function(){
 			return angular.copy(_alphagrid);
 		};
 
-		utils.alphanumeric = function(){
+		utils.ALPHANUMERIC = function(){
 			return angular.copy( _alphanumeric );
+		};
+
+		utils.TOTAL_ALPHA = (function(){
+			return _alpha.length;
+		})();
+
+
+		utils.setCase = function(char, makeUpperCase){
+			return (makeUpperCase === true) ? char.toUpperCase() : char;
 		};
 
 		utils.eachCharacter = function( string, increment, cb ){
@@ -62,6 +71,10 @@ app.service('cipherUtils', [
 				}
 			}
 			return false;
+		};
+
+		utils.isLetter = function( str ){
+			return str.match(/^[A-Za-z]$/);
 		};
 
 		utils.makeKeyedAlpha = function( key ){

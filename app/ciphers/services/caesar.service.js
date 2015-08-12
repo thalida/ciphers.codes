@@ -5,7 +5,7 @@
 //	Caesar Cipher
 //
 //------------------------------------------------------------------------------
-app.service('caesarCipher', [
+app.service('caesarService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
@@ -15,8 +15,9 @@ app.service('caesarCipher', [
 				label: 'Caesar',
 				addons: [
 					{
-						type: 'number',
+						name: 'shift',
 						label: 'Shift by',
+						type: 'number',
 						defaultVal: 1
 					}
 				],
@@ -37,28 +38,27 @@ app.service('caesarCipher', [
 			};
 
 			var opts = utils.extendCopy(_defaults, args);
-			var	alpha = utils.alpha();
+			var	alpha = utils.ALPHA();
 			var shift = parseInt(opts.addons.shift, 10);
 			var output = '';
 
 			utils.eachCharacter(opts.string, function( i, char, isUpper ){
-				if( char.match(/^[A-Za-z]$/) ){
+				if( utils.isLetter(char) ){
 					var letterPos = alpha.indexOf( char.toLowerCase() );
 					var direction = (opts.isEncoding === true ) ? 1 : -1;
 					var newLetterPos = letterPos + (direction * shift);
-					var totalLetters = alpha.length;
 
-					if(newLetterPos >= totalLetters){
-						newLetterPos = utils.mod(newLetterPos, totalLetters);
+					if(newLetterPos >= utils.TOTAL_ALPHA ){
+						newLetterPos = utils.mod(newLetterPos, utils.TOTAL_ALPHA);
 					} else if(newLetterPos < 0 ){
-						newLetterPos = totalLetters + newLetterPos;
+						newLetterPos = utils.TOTAL_ALPHA + newLetterPos;
 					}
 
 					char = alpha[newLetterPos];
 				}
 
-				output += (isUpper === true) ? char.toUpperCase() : char;
-			});
+				output += utils.setCase(char, isUpper);
+			}.bind(this));
 
 			return output;
 		};

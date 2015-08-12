@@ -9,7 +9,8 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 app.run([
-	'caesarCipher',
+	'caesarService',
+	'affineService',
 	function(){
 
 	}

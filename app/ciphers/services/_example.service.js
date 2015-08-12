@@ -5,11 +5,11 @@
 //	Cipher/Code Name
 //
 //------------------------------------------------------------------------------
-app.service('exampleCipher', [
+app.service('exampleService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
-		var Cipher = function(){
+		var Service = function(){
 			this.details = {
 				name: 'example',
 				label: 'Example Foo Bar',
@@ -21,7 +21,7 @@ app.service('exampleCipher', [
 			cipherCollection.add( this );
 		};
 
-		Cipher.prototype.run = function( args ){
+		Service.prototype.run = function( args ){
 			var _defaults = {
 				isEncoding: true,
 				string: '',
@@ -33,6 +33,6 @@ app.service('exampleCipher', [
 			return output;
 		};
 
-		return new Cipher();
+		return new Service();
 	}
 ]);
