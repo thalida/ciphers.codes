@@ -1,0 +1,22 @@
+body {
+	background: #fefefe;
+	margin: 0;
+	padding: 0;
+}
+
+.site-menu {
+	padding: 10px 20px;
+	&-link {
+		display: inline-block;
+		margin-right: 10px;
+	}
+}
+
+a {
+	color: blue;
+	text-decoration: none;
+
+	&:hover {
+		color: rgba(blue, 0.6);
+	}
+}
