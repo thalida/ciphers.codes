@@ -2,24 +2,36 @@
 
 app.service('cipherUtils', [
 	function(){
-		var utils = {};
-
-	  	utils.alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-	  	utils.alphanumeric = utils.alpha.concat(['0','1','2','3','4','5','6','7','8','9']);
-	  	utils.alphagrid = (function(){
-	  		var alphagrid = new Array(6);
-	  		var index = 0;
+		var _alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+		var _alphanumeric = _alpha.concat(['0','1','2','3','4','5','6','7','8','9']);
+		var _alphagrid = (function(){
+			var alphagrid = new Array(6);
+			var index = 0;
 
 			for( var i = 1; i <= 6; i += 1 ){
 				alphagrid[i] = new Array(6);
 				for( var j = 1; j <= 6; j += 1 ){
-					alphagrid[i][j] = utils.alphanumeric[index];
+					alphagrid[i][j] = _alphanumeric[index];
 					index += 1;
 				}
 			}
 
 			return alphagrid;
-	  	})();
+		})();
+
+		var utils = {};
+
+		utils.alpha = function(){
+			return angular.copy( _alpha );
+		};
+
+		utils.alphagrid = function(){
+			return angular.copy(_alphagrid);
+		};
+
+		utils.alphanumeric = function(){
+			return angular.copy( _alphanumeric );
+		};
 
 		utils.eachCharacter = function( string, increment, cb ){
 			if( typeof increment === 'function' ){
@@ -37,6 +49,21 @@ app.service('cipherUtils', [
 			}
 		};
 
+		utils.extendCopy = function(obj1, obj2){
+			return angular.extend({}, obj1, obj2);
+		};
+
+		utils.find = function( item, array ){
+			for(var i = 0; i < array.length; i += 1){
+				for(var j = 0; j < array.length; j += 1){
+					if(item == array[i][j]){
+						return { x: i, y: j };
+					}
+				}
+			}
+			return false;
+		};
+
 		utils.makeKeyedAlpha = function( key ){
 			var alpha = angular.copy( utils.alpha );
 			var keyedAlpha = (key != '' && key != null) ? key.split('') : [];
@@ -51,15 +78,8 @@ app.service('cipherUtils', [
 			return keyedAlpha;
 		};
 
-		utils.find = function( item, array ){
-			for(var i = 0; i < array.length; i += 1){
-				for(var j = 0; j < array.length; j += 1){
-					if(item == array[i][j]){
-						return { x: i, y: j };
-					}
-				}
-			}
-			return false;
+		utils.mod = function(a, b){
+			return ((a % b) + b) % b;
 		};
 
 		return utils;

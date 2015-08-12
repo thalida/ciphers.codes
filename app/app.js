@@ -1,6 +1,5 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
 var app = angular.module('app', [
 	'ngRoute'
 ]);
@@ -8,3 +7,10 @@ var app = angular.module('app', [
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/'});
 }]);
+
+app.run([
+	'caesarCipher',
+	function(){
+
+	}
+]);
