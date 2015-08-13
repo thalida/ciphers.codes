@@ -62,12 +62,15 @@ gulp.task('inject', ['minify-styles', 'minify-app', 'minify-bower'], function(){
 		.pipe(inject(gulp.src('./dist/assets/css/app.css'), {relative: true}))
 		.pipe(inject(gulp.src('./dist/app.js'), {relative: true}))
 		.pipe(inject(gulp.src('./dist/libs/libs.min.js'), {relative: true, name: 'bower'}))
-		.pipe(gulp.dest('./dist'))
-		.pipe(connect.reload());
+		.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('livereload', function() {
 	var watchedFiles = [
+		'./app/**/*.css',
+		'./app/**/*.js',
+		'./app/**/*.html',
+
 		'./dist/**/*.css',
 		'./dist/**/*.js',
 		'./dist/**/*.html'

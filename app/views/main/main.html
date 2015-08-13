@@ -1,15 +1,34 @@
 <div class="main-page">
-	<select ng-model="selectedCipherName"
-			ng-change="onCipherChange()">
-        <option ng-repeat="(key, cipher) in ciphers" value="{{key}}">
-        	{{cipher.details.label}}
-        </option>
-    </select>
+	<select ng-model="settings.cipherName"
+			ng-change="events.onCipherChange()">
+		<option ng-repeat="(key, cipher) in ciphers" value="{{key}}">
+			{{cipher.details.label}}
+		</option>
+	</select>
 
-    <div ng-repeat="(key, addon) in selectedCipher.details.addons"
-    	 ng-switch on="addon.type">
-    	 <input ng-switch-when="number"
-    	 	 	type="number" />
-    	 <input type="text" ng-switch-when="key" />
-    </div>
+	<div ng-repeat="(key, addon) in settings.cipher.details.addons"
+		 ng-switch on="addon.type">
+		 <input ng-switch-when="number"
+				type="number"
+				ng-model="settings.addons[addon.name]" />
+
+		 <input ng-switch-when="key"
+				type="text"
+				ng-model="settings.addons[addon.name]" />
+	</div>
+
+	<div>
+		<button ng-show="settings.autoSubmit == false" ng-click="events.submit()">
+			Submit
+		</button>
+		<input type="checkbox" ng-model="settings.autoSubmit" /> Submit automatically?
+	</div>
+
+	<hr />
+
+	<div>
+		<textarea ng-model="settings.originalText"></textarea>
+	</div>
+
+	<div ng-bind-html="results.html"></div>
 </div>
