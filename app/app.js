@@ -13,6 +13,7 @@ app.run([
 	'atbashService',
 	'caesarService',
 	'keyedsubService',
+	'masonService',
 	function(){
 
 	}

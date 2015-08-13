@@ -61,5 +61,11 @@ app.controller('MainCtrl', [
 			addons: {key: 'lorem'}
 		});
 		console.log( keyedsubEncode, keyedsubDecode );
+
+
+		var masonEncode = $scope.ciphers['mason'].run({
+			string: 'abcdefg'
+		});
+		console.log( masonEncode );
 	}
 ]);
