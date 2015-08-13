@@ -5,7 +5,8 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	rename = require('gulp-rename'),
 	uglify = require('gulp-uglify'),
-	sourcemaps = require('gulp-sourcemaps');
+	sourcemaps = require('gulp-sourcemaps'),
+	KarmaServer = require('karma').Server;
 
 gulp.task('webserver', function() {
 	connect.server({
@@ -43,7 +44,7 @@ gulp.task('concatCiphers', function(){
 	var ciphersDest = 'app/ciphers/dist';
 	var ciphersDestFile = 'ciphers.generated';
 
-	return gulp.src(['app/ciphers/*.js', 'app/ciphers/services/**/*.js'])
+	return gulp.src(['app/ciphers/*.js', 'app/ciphers/types/**/*.service.js'])
 		.pipe(sourcemaps.init())
 		.pipe(concat(ciphersDestFile + '.js'))
 		.pipe(gulp.dest(ciphersDest))
@@ -53,10 +54,15 @@ gulp.task('concatCiphers', function(){
 		.pipe(gulp.dest(ciphersDest));
 });
 
+gulp.task('tests', function (done) {
+	new KarmaServer({
+		configFile: __dirname + '/karma.conf.js'
+	}, done).start();
+});
 
 gulp.task('watch', function() {
 	gulp.watch('app/**/*.scss', ['sass']);
-	gulp.watch(['app/ciphers/*.js', 'app/ciphers/services/**/*.js'], ['concatCiphers']);
+	gulp.watch(['app/ciphers/*.js', 'app/ciphers/types/**/*.js'], ['concatCiphers']);
 });
 
-gulp.task('default', ['sass', 'concatCiphers', 'webserver', 'livereload', 'watch']);
+gulp.task('default', ['sass', 'concatCiphers', 'webserver', 'tests', 'livereload', 'watch']);

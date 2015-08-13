@@ -76,7 +76,7 @@ app.service('polysqService', [
 				}
 			});
 
-			return output;
+			return output.trim();
 		};
 
 		return new Service();
