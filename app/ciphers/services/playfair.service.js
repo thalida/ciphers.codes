@@ -3,12 +3,17 @@
 //==============================================================================
 //
 //	Playfair
+// 		Converts the alphabet into a 5x5 grid of letters and eycrypts based
+// 		on the position of a pair of letters w/ respect to each other in the grid
 //
 //------------------------------------------------------------------------------
 app.service('playfairService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
+		//	@constructor
+		// 		Setup the details and private variables for the cipher
+		//----------------------------------------------------------------------
 		var Service = function(){
 			this.details = {
 				name: 'playfair',
@@ -24,104 +29,128 @@ app.service('playfairService', [
 				url: 'http://en.wikipedia.org/wiki/Playfair_cipher'
 			};
 
+			this._placeholderChar = 'x';
 			this._keyedArrSize = 5;
 			this._keyedAlphas = [];
 
 			cipherCollection.add( this );
 		};
 
+		//	@_getKeyedAlpha
+		//		Add the key to the alphabet and then convert into a 5x5 array
+		//----------------------------------------------------------------------
 		Service.prototype._getKeyedAlpha = function( key ){
+			// Return if we've already generated the grided keyed alphabet
 			if( this._keyedAlphas.indexOf(key) >= 0 ){
 				return this._keyedAlphas[key];
 			}
 
+			// Create the flat keyed alphabet
 			var keyedAlpha = utils.makeKeyedAlpha( key );
+			// The current index of the keyedAlphabet
 			var keyedIdx = 0;
 
+			// What size grid are we making
 			var arrSize = this._keyedArrSize;
 			var alphaGrid = new Array( arrSize );
 
-			for(var i = 0; i < arrSize; i += 1){
+			for( var i = 0; i < arrSize; i += 1 ){
 				alphaGrid[i] = new Array( arrSize );
-
-				for(var j = 0; j < arrSize; j += 1){
+				for( var j = 0; j < arrSize; j += 1 ){
+					// If we're not on 'j' in the keyed alphabet then add the
+					// current letter in the key to it's position on the grid
 					if( keyedAlpha[keyedIdx] !== 'j' ){
 						alphaGrid[i][j] = keyedAlpha[keyedIdx];
 					} else {
+						// We encounted and skiped j, so lets NOT count this
+						// postion as filled on the grid
 						j -= 1;
 					}
 
+					// Move onto the next letter in the keyed alphabet
 					keyedIdx += 1;
 				}
 			}
 
+			// Cache this gridded keyed alphabet
 			this._keyedAlphas[key] = alphaGrid;
 
 			return alphaGrid;
 		};
 
-		Service.prototype._strToArr = function(string, isEncoding){
-			var strlen = string.length;
-			var strIdx = 0;
-			var strArr = [];
-			var arrSize = Math.floor(strlen / 2);
-			if( strlen % 2 === 1 ){
-				arrSize += 1;
-			}
+		//	@_strToPairs
+		//		Convert a given string in to an array of pairs
+		// 		X's are used to fill in the missing spot of a pair and also
+		// 		to seperate out duplicate letters.
+		// 		Example: Hellos => [[h,e],[l,x],[l,o],[s,x]]
+		//----------------------------------------------------------------------
+		Service.prototype._strToPairs = function(string, isEncoding){
+			var strPairs = [];
 
-			for(var i = 0; i < arrSize; i += 1){
-				strArr[i] = new Array(2);
-				strArr[i][0] = string.charAt(strIdx);
-				strArr[i][1] = string.charAt(strIdx + 1);
+			for(var i = 0; i < string.length; i += 2){
+				var currLetter = string.charAt( i );
+				var nextLetter = string.charAt(i + 1);
 
-				var firstChar = strArr[i][0];
-				var secondChar = strArr[i][1];
-				var nextPair = true;
-
-				if( isEncoding === true ){
-					if( firstChar === secondChar ){
-						nextPair = false;
-						strArr[i][1] = 'x';
-						if(strlen % 2 === 0){
-							arrSize += 1;
-						}
-						strIdx += 1;
-						strlen += 1;
-					} else if( strIdx + 1 >= string.length ){
-						strArr[i][1] = 'x';
-					}
+				if( isEncoding === true && (currLetter === nextLetter || nextLetter.length === 0) ){
+					nextLetter = this._placeholderChar;
+					i -= 1;
 				}
 
-				if( nextPair ){
-					strIdx += 2;
-				}
+				strPairs.push([currLetter, nextLetter]);
 			}
 
-			return strArr;
+			return strPairs;
 		};
 
-		Service.prototype._find =  function( item, array ){
-			for(var i = 0; i < array.length; i += 1){
-				for(var j = 0; j < array.length; j += 1){
-					if( item === array[i][j] ){
+		//	@_getCoords
+		//		Get the current coordinates of the letter in the array
+		//----------------------------------------------------------------------
+		Service.prototype._getCoords =  function( str, array ){
+			var arrSize = array.length;
+
+			for( var i = 0; i < arrSize; i += 1 ){
+				for( var j = 0; j < arrSize; j += 1 ){
+					if( str === array[i][j] ){
 						return { x: i, y: j };
 					}
 				}
 			}
+
 			return false;
 		};
 
-		Service.prototype._getCoord = function( coord, isEncoding ){
+		//	@_calcNewCoord
+		//		Calculate the new coordinate based on if we're encoding/decoding
+		//----------------------------------------------------------------------
+		Service.prototype._calcNewCoord = function( coord, isEncoding ){
 			var newCoord;
+
+			// Get the last valid index of the array
 			var lastArrIdx = this._keyedArrSize - 1;
 
+			// Add/subtract based on the action we're peforming
 			newCoord = (isEncoding === true) ? (coord + 1) : (coord - 1);
+
+			// Make sure the new coords are within the bounds of the grid
 			newCoord = (newCoord > lastArrIdx) ? 0 : newCoord;
 			newCoord = (newCoord < 0) ? lastArrIdx : newCoord;
 
 			return newCoord;
 		};
 
+		Service.prototype._formatChar = function(alpha, letter){
+			var char = {};
+
+			char.letter = (letter === 'j') ? 'i' : letter;
+			char.coords = this._getCoords(char.letter, alpha);
+			char.newCoords = {x: null, y: null};
+
+			return char;
+		};
+
+		//	@run
+		//		Encodes/Decodes a string w/ the given arguments
+		//----------------------------------------------------------------------
 		Service.prototype.run = function( args ){
 			var _defaults = {
 				isEncoding: true,
@@ -135,42 +164,48 @@ app.service('playfairService', [
 
 			// Remove any non letter character
 			opts.string = opts.string.replace(/[^A-Za-z]+/gi, '').toLowerCase();
+			// Replace any j's with i's
 			opts.string = opts.string.replace(/[j]+/gi, 'i').toLowerCase();
+
+			// Replace any j's with i's in the key
 			var keyword = opts.addons.key.replace(/[j]+/gi, 'i').toLowerCase();
+
+			// Created a grid based keyed version of the alphabet
 			var alpha = this._getKeyedAlpha( keyword );
-			var str = this._strToArr(opts.string, opts.isEncoding);
+
+			// Convert the string to an array of pairs
+			var str = this._strToPairs(opts.string, opts.isEncoding);
 
 			for(var i = 0; i < str.length; i++){
-				var char1 = {};
-				char1.letter = (str[i][0] === 'j') ? 'i' : str[i][0];
-				char1.coords = this._find(char1.letter, alpha);
-				char1.newCoords = {x: null, y: null};
+				// Get the info for the first + second characters of the pair
+				var char1 = this._formatChar( alpha, str[i][0] );
+				var char2 = this._formatChar( alpha, str[i][1] );
 
-				var char2 = {};
-				char2.letter = (str[i][0] === 'j') ? 'i' : str[i][1];
-				char2.coords = this._find(char2.letter, alpha);
-				char2.newCoords = {x: null, y: null};
-
+				// If the two letters are on the same row
 				if(char1.coords.x === char2.coords.x){
+					// Keep the same x coords
 					char1.newCoords.x = char2.newCoords.x = char1.coords.x;
-					char1.newCoords.y = this._getCoord(char1.coords.y, opts.isEncoding);
-					char2.newCoords.y = this._getCoord(char2.coords.y, opts.isEncoding);
-				}else if(char1.coords.y === char2.coords.y){
-					char1.newCoords.x = this._getCoord(char1.coords.x, opts.isEncoding );
-					char2.newCoords.x = this._getCoord(char2.coords.x, opts.isEncoding );
-					char1.newCoords.y = char2.newCoords.y = char1.coords.y;
-				}else{
-					char1.newCoords = {
-						x: char1.coords.x,
-						y: char2.coords.y
-					};
-
-					char2.newCoords = {
-						x: char2.coords.x,
-						y: char1.coords.y
-					};
+					// Calculate the new y coord for each letter
+					char1.newCoords.y = this._calcNewCoord(char1.coords.y, opts.isEncoding);
+					char2.newCoords.y = this._calcNewCoord(char2.coords.y, opts.isEncoding);
 				}
 
+				// If the two letters share the same column
+				else if(char1.coords.y === char2.coords.y){
+					// Keep the same y coords
+					char1.newCoords.y = char2.newCoords.y = char1.coords.y;
+					// Calculate the the nex x coord for each letter
+					char1.newCoords.x = this._calcNewCoord(char1.coords.x, opts.isEncoding );
+					char2.newCoords.x = this._calcNewCoord(char2.coords.x, opts.isEncoding );
+				}
+
+				// The two letters are on a diagonal from one another
+				else{
+					char1.newCoords = {x: char1.coords.x, y: char2.coords.y};
+					char2.newCoords = {x: char2.coords.x, y: char1.coords.y};
+				}
+
+				// Get the letters corresponding to each coord in the grid
 				var letter1 = alpha[char1.newCoords.x][char1.newCoords.y];
 				var letter2 = alpha[char2.newCoords.x][char2.newCoords.y];
 				output += letter1 + letter2;

@@ -2,13 +2,19 @@
 
 //==============================================================================
 //
-//	Cipher/Code Name
+//	Polybius Square
+//		The alphanumeric array is laided out in a 6x6 grid and each letter
+// 		correspondes to it's coordinates in the gri.
+// 		Example: a => 11, b => 12, c => 13 etc
 //
 //------------------------------------------------------------------------------
 app.service('polysqService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
+		//	@constructor
+		// 		Setup the details and private variables for the cipher
+		//----------------------------------------------------------------------
 		var Service = function(){
 			this.details = {
 				name: 'polysq',
@@ -21,6 +27,9 @@ app.service('polysqService', [
 			cipherCollection.add( this );
 		};
 
+		//	@run
+		//		Encodes/Decodes a string w/ the given arguments
+		//----------------------------------------------------------------------
 		Service.prototype.run = function( args ){
 			var _defaults = {
 				isEncoding: true,
@@ -29,32 +38,40 @@ app.service('polysqService', [
 			};
 
 			var opts = utils.extendCopy(_defaults, args);
-			var output = '';
 			var alphanumeric = utils.ALPHANUMERIC();
 			var alphagrid = utils.ALPHAGRID();
-			var alphaGridSize = alphagrid.length - 1;
-			var increment = (opts.isEncoding) ? 1 : 2;
+			var alphaGridSize = alphagrid.length - 1; //the 0 index isn't used
+			var output = '';
 
+			// Remove all spaces from the string
 			opts.string = opts.string.replace(/[\s]+/gi, '');
 
+			// If we're encoding we need to go trough letter by letter. BUT,
+			// If we're decoding we need to get each pair of numbers.
+			var increment = (opts.isEncoding) ? 1 : 2;
 			utils.eachCharacter(opts.string, increment, function(i, char){
 				if(opts.isEncoding === true){
+					// Find the character in the alphanumeric array, and based
+					// on it's position calculate the x and y coords in the grid
 					char = char.toLowerCase();
 					if( char.match(/^[a-z0-9]$/) ){
 						var letterPos = alphanumeric.indexOf(char.toString()) + 1;
-						var pos1 = Math.ceil(letterPos / alphaGridSize);
-						var pos2 = (letterPos % alphaGridSize === 0) ? alphaGridSize : letterPos % alphaGridSize;
-						output += pos1 + '' + pos2 + ' ';
+						var x = Math.ceil(letterPos / alphaGridSize);
+						var y = (letterPos % alphaGridSize === 0) ? alphaGridSize : letterPos % alphaGridSize;
+						output += x + '' + y + ' ';
 					}
 				} else {
-					var char1 = char;
-					var char2 = opts.string.charAt(i + 1);
+					// Get the x and y "characters" ex. 13 => x: 1, y: 3
+					var x = char;
+					var y = opts.string.charAt(i + 1);
 
-					var isValidPair = char1.match(/^[1-6]$/) && char2.match(/^[1-6]$/);
-					var letter = alphagrid[char1][char2];
-
-					if( isValidPair && typeof letter !== 'undefined'){
-						output += letter;
+					// Check if the x, y are valid numbers/a valid pair
+					if( x.match(/^[1-6]$/) && y.match(/^[1-6]$/) ){
+						// Find the letter in the grid
+						var letter = alphagrid[x][y];
+						if( typeof letter !== 'undefined' ){
+							output += letter;
+						}
 					}
 				}
 			});

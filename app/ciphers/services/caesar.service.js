@@ -3,12 +3,16 @@
 //==============================================================================
 //
 //	Caesar Cipher
+//		This cipher shifts the letters in the alphabet by x (user defined value)
 //
 //------------------------------------------------------------------------------
 app.service('caesarService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
+		//	@constructor
+		// 		Setup the details and private variables for the cipher
+		//----------------------------------------------------------------------
 		var Cipher = function(){
 			this.details = {
 				name: 'caesar',
@@ -17,8 +21,7 @@ app.service('caesarService', [
 					{
 						name: 'shift',
 						label: 'Shift by',
-						type: 'number',
-						defaultVal: 1
+						type: 'number'
 					}
 				],
 				description: 'A simple substitution cipher in which the alphabet is shifted up or down a specified number of positions.',
@@ -28,6 +31,9 @@ app.service('caesarService', [
 			cipherCollection.add( this );
 		};
 
+		//	@run
+		//		Encodes/Decodes a string w/ the given arguments
+		//----------------------------------------------------------------------
 		Cipher.prototype.run = function( args ){
 			var _defaults = {
 				isEncoding: true,
@@ -44,15 +50,17 @@ app.service('caesarService', [
 
 			utils.eachCharacter(opts.string, function( i, char, isUpper ){
 				if( utils.isLetter(char) ){
+					// The current positin of the letter in the alphabet
 					var letterPos = alpha.indexOf( char.toLowerCase() );
+
+					// Which direction are we moving? (addition/subtraction)
 					var direction = (opts.isEncoding === true ) ? 1 : -1;
+
+					// Get the new letter position by shifting in the given direction
 					var newLetterPos = letterPos + (direction * shift);
 
-					if(newLetterPos >= utils.TOTAL_ALPHA ){
-						newLetterPos = utils.mod(newLetterPos, utils.TOTAL_ALPHA);
-					} else if(newLetterPos < 0 ){
-						newLetterPos = utils.TOTAL_ALPHA + newLetterPos;
-					}
+					// Mod the new postion in case we've gone past the bounds of the alphabet
+					newLetterPos = utils.mod(newLetterPos, utils.TOTAL_ALPHA);
 
 					char = alpha[newLetterPos];
 				}

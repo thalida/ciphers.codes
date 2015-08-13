@@ -3,12 +3,16 @@
 //==============================================================================
 //
 //	Atbash
+//		A simple cipher wherein the alphabet is reversed.
 //
 //------------------------------------------------------------------------------
 app.service('atbashService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
+		//	@constructor
+		// 		Setup the details and private variables for the cipher
+		//----------------------------------------------------------------------
 		var Service = function(){
 			this.details = {
 				name: 'atbash',
@@ -21,6 +25,9 @@ app.service('atbashService', [
 			cipherCollection.add( this );
 		};
 
+		//	@run
+		//		Encodes/Decodes a string w/ the given arguments
+		//----------------------------------------------------------------------
 		Service.prototype.run = function( args ){
 			var _defaults = {
 				isEncoding: true,
@@ -32,11 +39,16 @@ app.service('atbashService', [
 
 			utils.eachCharacter(opts.string, function(i, char, isUpper){
 				if( utils.isLetter(char) ){
+					// Get the current position in the alphabet
 					var letterPos = alpha.indexOf( char.toLowerCase() );
+
+					// Get the position from the other end of the alphabet
 					var newLetterPos = utils.TOTAL_ALPHA - letterPos - 1;
+
 					char = alpha[newLetterPos];
 				}
 
+				// If the character was uppercase, make it so again
 				output += utils.setCase(char, isUpper);
 			}.bind(this));
 

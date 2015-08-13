@@ -3,12 +3,18 @@
 //==============================================================================
 //
 //	Mason
+// 		Converts each letter into a symbol based on its position in a grid
+// 		A special font is being used for this cipher, so it currently
+// 		just return the letter as is
 //
 //------------------------------------------------------------------------------
 app.service('masonService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
+		//	@constructor
+		// 		Setup the details and private variables for the cipher
+		//----------------------------------------------------------------------
 		var Service = function(){
 			this.details = {
 				name: 'mason',
@@ -21,6 +27,9 @@ app.service('masonService', [
 			cipherCollection.add( this );
 		};
 
+		//	@run
+		//		Encodes/Decodes a string w/ the given arguments
+		//----------------------------------------------------------------------
 		Service.prototype.run = function( args ){
 			var _defaults = {
 				isEncoding: true,

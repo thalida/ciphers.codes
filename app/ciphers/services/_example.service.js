@@ -3,12 +3,16 @@
 //==============================================================================
 //
 //	Cipher/Code Name
+// 		A quick summary of the cipher
 //
 //------------------------------------------------------------------------------
 app.service('exampleService', [
 	'cipherCollection',
 	'cipherUtils',
 	function(cipherCollection, utils){
+		//	@constructor
+		// 		Setup the details and private variables for the cipher
+		//----------------------------------------------------------------------
 		var Service = function(){
 			this.details = {
 				name: 'example',
@@ -21,6 +25,9 @@ app.service('exampleService', [
 			cipherCollection.add( this );
 		};
 
+		//	@run
+		//		Encodes/Decodes a string w/ the given arguments
+		//----------------------------------------------------------------------
 		Service.prototype.run = function( args ){
 			var _defaults = {
 				isEncoding: true,

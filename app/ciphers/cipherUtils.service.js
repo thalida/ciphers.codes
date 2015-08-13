@@ -1,5 +1,11 @@
 'use strict';
 
+//==============================================================================
+//
+//	Cipher Utils
+// 		General functions and variables to be used by some/all of the ciphers.
+//
+//------------------------------------------------------------------------------
 app.service('cipherUtils', [
 	function(){
 		var _alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -24,6 +30,7 @@ app.service('cipherUtils', [
 
 			return alphagrid;
 		})();
+		var _cachedKeyedAlphas = [];
 
 		var utils = {};
 
@@ -106,7 +113,12 @@ app.service('cipherUtils', [
 		// 			keyed alphabet: loremabcdfghijknpqstuvwxyz
 		//----------------------------------------------------------------------
 		utils.makeKeyedAlpha = function( key ){
+			if( _cachedKeyedAlphas.indexOf(key) >= 0 ){
+				return _cachedKeyedAlphas[key];
+			}
+
 			var alpha = utils.ALPHA();
+			var keyedAlphabet = [];
 
 			// Return the regular alphabet if no key
 			if( key.length === 0 || key === null ){
@@ -120,8 +132,13 @@ app.service('cipherUtils', [
 				alpha.splice(n, 1);
 			});
 
-			// Return the keyed array: the key + the rest of the alphabet
-			return key.split('').concat(alpha);
+			// Add the key + the rest of the alphabet
+			keyedAlphabet = key.split('').concat(alpha);
+
+			// Save this keyed alphabet
+			_cachedKeyedAlphas[key] = keyedAlphabet;
+
+			return keyedAlphabet;
 		};
 
 		//	@mod
