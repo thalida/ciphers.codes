@@ -16,6 +16,7 @@ app.run([
 	'masonService',
 	'playfairService',
 	'polysqService',
+	'vegenereService',
 	function(){
 
 	}

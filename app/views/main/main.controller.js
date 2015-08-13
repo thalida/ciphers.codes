@@ -99,5 +99,17 @@ app.controller('MainCtrl', [
 			addons: {key: 'lorem'}
 		});
 		logGroup( 'polysq', polysqEncode, polysqDecode );
+
+
+		var vegenereEncode = $scope.ciphers['vegenere'].run({
+			string: testStr,
+			addons: {key: 'lorem'}
+		});
+		var vegenereDecode = $scope.ciphers['vegenere'].run({
+			isEncoding: false,
+			string: vegenereEncode,
+			addons: {key: 'lorem'}
+		});
+		logGroup( 'vegenere', vegenereEncode, vegenereDecode );
 	}
 ]);
