@@ -11,8 +11,8 @@ app.service('cipherCollection', [
 		// 		Setup the array to house the ciphers + the total count
 		//----------------------------------------------------------------------
 		var Ciphers = function(){
-			this.ciphers = [];
-			this.totalCiphers = this.ciphers.length;
+			this.ciphers = {};
+			this.totalCiphers = 0;
 		};
 
 		//	@add
@@ -20,7 +20,7 @@ app.service('cipherCollection', [
 		//----------------------------------------------------------------------
 		Ciphers.prototype.add = function( cipher ){
 			this.ciphers[cipher.details.name] = cipher;
-			this.totalCiphers = this.ciphers.length;
+			this.totalCiphers += 1;
 		};
 
 		//	@get

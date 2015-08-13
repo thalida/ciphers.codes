@@ -1,3 +1,15 @@
 <div class="main-page">
-	Main loaded.
+	<select ng-model="selectedCipherName"
+			ng-change="onCipherChange()">
+        <option ng-repeat="(key, cipher) in ciphers" value="{{key}}">
+        	{{cipher.details.label}}
+        </option>
+    </select>
+
+    <div ng-repeat="(key, addon) in selectedCipher.details.addons"
+    	 ng-switch on="addon.type">
+    	 <input ng-switch-when="number"
+    	 	 	type="number" />
+    	 <input type="text" ng-switch-when="key" />
+    </div>
 </div>
