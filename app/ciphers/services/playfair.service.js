@@ -41,7 +41,7 @@ app.service('playfairService', [
 		//----------------------------------------------------------------------
 		Service.prototype._getKeyedAlpha = function( key ){
 			// Return if we've already generated the grided keyed alphabet
-			if( this._keyedAlphas.indexOf(key) >= 0 ){
+			if( typeof this._keyedAlphas[key] !== 'undefined' ){
 				return this._keyedAlphas[key];
 			}
 

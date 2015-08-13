@@ -113,7 +113,7 @@ app.service('cipherUtils', [
 		// 			keyed alphabet: loremabcdfghijknpqstuvwxyz
 		//----------------------------------------------------------------------
 		utils.makeKeyedAlpha = function( key ){
-			if( _cachedKeyedAlphas.indexOf(key) >= 0 ){
+			if( typeof _cachedKeyedAlphas[key] !== 'undefined' ){
 				return _cachedKeyedAlphas[key];
 			}
 
