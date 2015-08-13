@@ -13,12 +13,21 @@ app.controller('MainCtrl', [
 	'cipherCollection',
 	'cipherUtils',
 	function($rootScope, $scope, cipherCollection, cipherUtils) {
+		var testStr = "Hello here's my str: a b cc\n\nd ef g g h i j\nk l m n o pqr s tuv wx y z - 1, 2, 3, 4 5 6789";
+		var logGroup = function(name){
+			console.group( name );
+			for( var i = 1; i < arguments.length; i += 1){
+				console.log( arguments[i] );
+			}
+			console.groupEnd();
+		};
+
 		$scope.ciphers = cipherCollection.get();
 		console.log( $scope.ciphers );
 
 
 		var caesarEncode = $scope.ciphers['caesar'].run({
-			string: 'abcdefg',
+			string: testStr,
 			addons: {shift: 3}
 		});
 		var caesarDecode = $scope.ciphers['caesar'].run({
@@ -26,11 +35,10 @@ app.controller('MainCtrl', [
 			string: caesarEncode,
 			addons: {shift: 3}
 		});
-		console.log( caesarEncode, caesarDecode );
-
+		logGroup( 'caesar', caesarEncode, caesarDecode );
 
 		var affineEncode = $scope.ciphers['affine'].run({
-			string: 'abcdefg',
+			string: testStr,
 			addons: {shift: 3}
 		});
 		var affineDecode = $scope.ciphers['affine'].run({
@@ -38,21 +46,21 @@ app.controller('MainCtrl', [
 			string: affineEncode,
 			addons: {shift: 3}
 		});
-		console.log( affineEncode, affineDecode );
+		logGroup( 'affine', affineEncode, affineDecode );
 
 
 		var atbashEncode = $scope.ciphers['atbash'].run({
-			string: 'abcdefg'
+			string: testStr
 		});
 		var atbashDecode = $scope.ciphers['atbash'].run({
 			isEncoding: false,
 			string: atbashEncode
 		});
-		console.log( atbashEncode, atbashDecode );
+		logGroup( 'atbash', atbashEncode, atbashDecode );
 
 
 		var keyedsubEncode = $scope.ciphers['keyedsub'].run({
-			string: 'abcdefg',
+			string: testStr,
 			addons: {key: 'lorem'}
 		});
 		var keyedsubDecode = $scope.ciphers['keyedsub'].run({
@@ -60,12 +68,24 @@ app.controller('MainCtrl', [
 			string: keyedsubEncode,
 			addons: {key: 'lorem'}
 		});
-		console.log( keyedsubEncode, keyedsubDecode );
+		logGroup( 'keyedsub', keyedsubEncode, keyedsubDecode );
 
 
 		var masonEncode = $scope.ciphers['mason'].run({
-			string: 'abcdefg'
+			string: testStr
 		});
-		console.log( masonEncode );
+		logGroup( 'mason', masonEncode );
+
+
+		var playfairEncode = $scope.ciphers['playfair'].run({
+			string: testStr,
+			addons: {key: 'lorem'}
+		});
+		var playfairDecode = $scope.ciphers['playfair'].run({
+			isEncoding: false,
+			string: playfairEncode,
+			addons: {key: 'lorem'}
+		});
+		logGroup( 'playfair', playfairEncode, playfairDecode );
 	}
 ]);

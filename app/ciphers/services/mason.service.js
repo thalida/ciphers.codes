@@ -31,7 +31,7 @@ app.service('masonService', [
 
 			utils.eachCharacter(opts.string, function(i, char){
 				char = char.toLowerCase();
-				if(opts.isEncoding === true && char.match(/^[a-z]$/)){
+				if( opts.isEncoding === true && char.match(/^[a-z]$/) ){
 					char = '<span class="mason_text">'+char+'</span>';
 				}
 				output += char;

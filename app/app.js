@@ -14,6 +14,7 @@ app.run([
 	'caesarService',
 	'keyedsubService',
 	'masonService',
+	'playfairService',
 	function(){
 
 	}
