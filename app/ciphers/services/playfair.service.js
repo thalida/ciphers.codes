@@ -100,6 +100,17 @@ app.service('playfairService', [
 			return strArr;
 		};
 
+		Service.prototype._find =  function( item, array ){
+			for(var i = 0; i < array.length; i += 1){
+				for(var j = 0; j < array.length; j += 1){
+					if( item === array[i][j] ){
+						return { x: i, y: j };
+					}
+				}
+			}
+			return false;
+		};
+
 		Service.prototype._getCoord = function( coord, isEncoding ){
 			var newCoord;
 			var lastArrIdx = this._keyedArrSize - 1;
@@ -132,12 +143,12 @@ app.service('playfairService', [
 			for(var i = 0; i < str.length; i++){
 				var char1 = {};
 				char1.letter = (str[i][0] === 'j') ? 'i' : str[i][0];
-				char1.coords = utils.find(char1.letter, alpha);
+				char1.coords = this._find(char1.letter, alpha);
 				char1.newCoords = {x: null, y: null};
 
 				var char2 = {};
 				char2.letter = (str[i][0] === 'j') ? 'i' : str[i][1];
-				char2.coords = utils.find(char2.letter, alpha);
+				char2.coords = this._find(char2.letter, alpha);
 				char2.newCoords = {x: null, y: null};
 
 				if(char1.coords.x === char2.coords.x){
