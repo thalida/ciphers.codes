@@ -24,6 +24,7 @@ app.service('playfairService', [
 				url: 'http://en.wikipedia.org/wiki/Playfair_cipher'
 			};
 
+			this._keyedArrSize = 5;
 			this._keyedAlphas = [];
 
 			cipherCollection.add( this );
@@ -35,23 +36,28 @@ app.service('playfairService', [
 			}
 
 			var keyedAlpha = utils.makeKeyedAlpha( key );
-			var alpha = new Array( 5 );
 			var keyedIdx = 0;
-			for(var i = 0; i < 5; i += 1){
-				alpha[i] = new Array(5);
-				for(var j = 0; j < 5; j += 1){
+
+			var arrSize = this._keyedArrSize;
+			var alphaGrid = new Array( arrSize );
+
+			for(var i = 0; i < arrSize; i += 1){
+				alphaGrid[i] = new Array( arrSize );
+
+				for(var j = 0; j < arrSize; j += 1){
 					if( keyedAlpha[keyedIdx] !== 'j' ){
-						alpha[i][j] = keyedAlpha[keyedIdx];
+						alphaGrid[i][j] = keyedAlpha[keyedIdx];
 					} else {
 						j -= 1;
 					}
+
 					keyedIdx += 1;
 				}
 			}
 
-			this._keyedAlphas[key] = alpha;
+			this._keyedAlphas[key] = alphaGrid;
 
-			return alpha;
+			return alphaGrid;
 		};
 
 		Service.prototype._strToArr = function(string, isEncoding){
@@ -96,10 +102,11 @@ app.service('playfairService', [
 
 		Service.prototype._getCoord = function( coord, isEncoding ){
 			var newCoord;
+			var lastArrIdx = this._keyedArrSize - 1;
 
 			newCoord = (isEncoding === true) ? (coord + 1) : (coord - 1);
-			newCoord = (newCoord > 4) ? 0 : newCoord;
-			newCoord = (newCoord < 0) ? 4 : newCoord;
+			newCoord = (newCoord > lastArrIdx) ? 0 : newCoord;
+			newCoord = (newCoord < 0) ? lastArrIdx : newCoord;
 
 			return newCoord;
 		};

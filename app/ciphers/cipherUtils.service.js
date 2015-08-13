@@ -82,7 +82,7 @@ app.service('cipherUtils', [
 			var keyedAlpha = (key !== '' && key !== null) ? key.split('') : [];
 
 			$.each(keyedAlpha, function(index, letter){
-				var n = alpha.indexOf( letter.toLowerCase() );
+				var n = alpha.indexOf(letter.toLowerCase(),alpha);
 				alpha.splice(n,1);
 			});
 

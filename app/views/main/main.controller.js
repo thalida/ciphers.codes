@@ -87,5 +87,17 @@ app.controller('MainCtrl', [
 			addons: {key: 'lorem'}
 		});
 		logGroup( 'playfair', playfairEncode, playfairDecode );
+
+
+		var polysqEncode = $scope.ciphers['polysq'].run({
+			string: testStr,
+			addons: {key: 'lorem'}
+		});
+		var polysqDecode = $scope.ciphers['polysq'].run({
+			isEncoding: false,
+			string: polysqEncode,
+			addons: {key: 'lorem'}
+		});
+		logGroup( 'polysq', polysqEncode, polysqDecode );
 	}
 ]);

@@ -15,6 +15,7 @@ app.run([
 	'keyedsubService',
 	'masonService',
 	'playfairService',
+	'polysqService',
 	function(){
 
 	}
