@@ -141,6 +141,24 @@ app.service('cipherUtils', [
 			return keyedAlphabet;
 		};
 
+		utils.makeValidInt = function(currVal, defaultVal){
+			if( angular.isNumber(currVal) ){
+				return currVal;
+			} else if( angular.isString(currVal) ){
+				return parseInt( currVal, 10 );
+			}
+
+			return defaultVal;
+		};
+
+		utils.makeValidKey = function(currVal, defaultVal){
+			if( angular.isString(currVal) ){
+				return currVal.toLowerCase();
+			}
+
+			return defaultVal;
+		};
+
 		//	@mod
 		// 		A fix for JS issues with modding a negative number
 		//----------------------------------------------------------------------

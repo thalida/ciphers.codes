@@ -35,4 +35,12 @@ describe('playfair service', function(){
 
 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.decoded);
 	});
+
+	it('should encode alphabet with a blank key', function() {
+		cipherArgs.isEncoding = true;
+		cipherArgs.string = cipherStrs.normal;
+		cipherArgs.addons.key = null;
+
+		expect(cipherService.run(cipherArgs)).toEqual('bcdeakhihykfmnoplustuqwxyzvy');
+	});
 });

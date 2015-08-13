@@ -62,14 +62,15 @@ gulp.task('inject', ['minify-styles', 'minify-app', 'minify-bower'], function(){
 		.pipe(inject(gulp.src('./dist/assets/css/app.css'), {relative: true}))
 		.pipe(inject(gulp.src('./dist/app.js'), {relative: true}))
 		.pipe(inject(gulp.src('./dist/libs/libs.min.js'), {relative: true, name: 'bower'}))
-		.pipe(gulp.dest('./dist'));
+		.pipe(gulp.dest('./dist'))
+		.pipe(connect.reload());
 });
 
 gulp.task('livereload', function() {
 	var watchedFiles = [
-		'app/**/*.css',
-		'app/**/*.js',
-		'app/**/*.html'
+		'./dist/**/*.css',
+		'./dist/**/*.js',
+		'./dist/**/*.html'
 	];
 
 	gulp
@@ -82,7 +83,7 @@ gulp.task('webserver', function() {
 	connect.server({
 		livereload: true,
 		port: 8000,
-		root: ['dist']
+		root: 'dist'
 	});
 });
 
@@ -92,10 +93,12 @@ gulp.task('tests', function (done) {
 	}, done).start();
 });
 
-gulp.task('watch', function() {
-	gulp.watch('app/**/*.html', ['copy']);
-	gulp.watch('app/**/*.scss', ['styles']);
-	gulp.watch(['app/ciphers/*.js', 'app/ciphers/types/**/*.js'], ['concatCiphers']);
+gulp.task('watch', ['clean'], function() {
+	gulp.watch([
+		'app/**/*.html',
+		'app/**/*.js',
+		'app/**/*.scss'
+	], ['copy', 'minify-styles', 'minify-app', 'minify-bower', 'inject']);
 });
 
 gulp.task('default', ['clean'], function() {

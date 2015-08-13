@@ -34,4 +34,12 @@ describe('cipher service', function(){
 
 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
 	});
+
+	it('should encode alphabet by 0', function() {
+		cipherArgs.isEncoding = true;
+		cipherArgs.string = cipherStrs.normal;
+		cipherArgs.addons.shift = null;
+
+		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
+	});
 });

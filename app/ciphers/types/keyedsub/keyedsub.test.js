@@ -34,4 +34,12 @@ describe('keyedsup service', function(){
 
 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
 	});
+
+	it('should encode alphabet with a blank key', function() {
+		cipherArgs.isEncoding = true;
+		cipherArgs.string = cipherStrs.normal;
+		cipherArgs.addons.key = null;
+
+		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
+	});
 });

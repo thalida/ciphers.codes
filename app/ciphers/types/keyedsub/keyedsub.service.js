@@ -23,6 +23,7 @@ app.service('keyedsubService', [
 				addons: [
 					{
 						type: 'key',
+						name: 'key',
 						label: 'Key',
 						placeholder: 'Enter your key...'
 					}
@@ -45,7 +46,7 @@ app.service('keyedsubService', [
 			};
 			var opts = utils.extendCopy(_defaults, args);
 			var alpha = utils.ALPHA();
-			var key = opts.addons.key;
+			var key = utils.makeValidKey(opts.addons.key, _defaults.addons.key);
 
 			// Create an alphabet w/ this key in the beginning of it
 			var keyedAlpha = utils.makeKeyedAlpha(key);

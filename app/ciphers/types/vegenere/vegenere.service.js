@@ -19,6 +19,7 @@ app.service('vegenereService', [
 				addons: [
 					{
 						type: 'key',
+						name: 'key',
 						label: 'Key',
 						placeholder: 'Enter your key...'
 					}
@@ -42,12 +43,13 @@ app.service('vegenereService', [
 				}
 			};
 			var opts = utils.extendCopy(_defaults, args);
+			var optsKey = utils.makeValidKey(opts.addons.key, _defaults.addons.key);
 			var alpha = utils.ALPHA();
 
 			//Remove any non letter characters from the string
 			var string = opts.string.replace(/[^A-Za-z]+/gi, '').toLowerCase();
 			// Remove any spaces from the key
-			var keySimple = opts.addons.key.replace(/[\s]+/gi, '').toLowerCase();
+			var keySimple = optsKey.replace(/[\s]+/gi, '').toLowerCase();
 			var key = keySimple;
 			var output = '';
 

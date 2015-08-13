@@ -4,6 +4,7 @@ module.exports = function(config){
     basePath : './',
 
     files : [
+      'app/bower_components/es5-shim/es5-shim.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
@@ -20,7 +21,8 @@ module.exports = function(config){
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['PhantomJS'],
+    // browsers : ['Chrome'],
 
     plugins : [
       'karma-chrome-launcher',

@@ -39,13 +39,13 @@ app.service('caesarService', [
 				isEncoding: true,
 				string: '',
 				addons: {
-					shift: 1
+					shift: 0
 				}
 			};
 
 			var opts = utils.extendCopy(_defaults, args);
 			var	alpha = utils.ALPHA();
-			var shift = parseInt(opts.addons.shift, 10);
+			var shift = utils.makeValidInt(opts.addons.shift, _defaults.addons.shift);
 			var output = '';
 
 			utils.eachCharacter(opts.string, function( i, char, isUpper ){

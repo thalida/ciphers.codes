@@ -21,6 +21,7 @@ app.service('playfairService', [
 				addons: [
 					{
 						type: 'key',
+						name: 'key',
 						label: 'Key',
 						placeholder: 'Enter your key...'
 					}
@@ -160,6 +161,7 @@ app.service('playfairService', [
 				}
 			};
 			var opts = utils.extendCopy(_defaults, args);
+			var optsKey = utils.makeValidKey(opts.addons.key, _defaults.addons.key);
 			var output = '';
 
 			// Remove any non letter character
@@ -168,7 +170,7 @@ app.service('playfairService', [
 			opts.string = opts.string.replace(/[j]+/gi, 'i').toLowerCase();
 
 			// Replace any j's with i's in the key
-			var keyword = opts.addons.key.replace(/[j]+/gi, 'i').toLowerCase();
+			var keyword = optsKey.replace(/[j]+/gi, 'i').toLowerCase();
 
 			// Created a grid based keyed version of the alphabet
 			var alpha = this._getKeyedAlpha( keyword );
