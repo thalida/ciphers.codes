@@ -78,11 +78,11 @@ app.service('cipherUtils', [
 		};
 
 		utils.makeKeyedAlpha = function( key ){
-			var alpha = angular.copy( utils.alpha );
-			var keyedAlpha = (key != '' && key != null) ? key.split('') : [];
+			var alpha = utils.ALPHA();
+			var keyedAlpha = (key !== '' && key !== null) ? key.split('') : [];
 
 			$.each(keyedAlpha, function(index, letter){
-				var n = jQuery.inArray(letter.toLowerCase(),alpha);
+				var n = alpha.indexOf( letter.toLowerCase() );
 				alpha.splice(n,1);
 			});
 

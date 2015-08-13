@@ -9,8 +9,10 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 app.run([
-	'caesarService',
 	'affineService',
+	'atbashService',
+	'caesarService',
+	'keyedsubService',
 	function(){
 
 	}
