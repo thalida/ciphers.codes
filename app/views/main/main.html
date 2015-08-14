@@ -1,9 +1,14 @@
 <div class="main-page">
-	<select ng-model="settings.cipherName"
-			ng-change="events.onCipherChange()">
-		<option ng-repeat="(key, cipher) in ciphers" value="{{key}}">
-			{{cipher.details.label}}
-		</option>
+	<select ng-model="settings.isEncoding"
+			ng-change="events.onCipherChange()"
+			ng-options="action.value as action.label for action in actionTypes">
+	</select>
+
+	<br />
+
+	<select ng-model="settings.cipher"
+			ng-change="events.onCipherChange()"
+			ng-options="cipher as cipher.details.label for cipher in ciphers">
 	</select>
 
 	<div ng-repeat="(key, addon) in settings.cipher.details.addons"
@@ -14,6 +19,7 @@
 
 		 <input ng-switch-when="key"
 				type="text"
+				ng-keyup="events.onKeyAddonChange()"
 				ng-model="settings.addons[addon.name]" />
 	</div>
 
@@ -27,8 +33,15 @@
 	<hr />
 
 	<div>
+		<select ng-model="settings.fillerText"
+				ng-change="events.onFillerChange()"
+				ng-options="filler as filler.label for filler in fillerTypes">
+		</select>
+		<br />
 		<textarea ng-model="settings.originalText"></textarea>
 	</div>
+
+	<div ng-click="events.moveResultsText()">move</div>
 
 	<div ng-bind-html="results.html"></div>
 </div>
