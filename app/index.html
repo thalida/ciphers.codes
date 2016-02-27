@@ -1,33 +1,42 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html lang="en">
 <head>
+ 	<base href="/">
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-	<title>Ciphers &amp; Codes</title>
-	<meta name="description" content="">
-	<meta name="keywords" content="">
+	<meta name="theme-color" content="#252658">
+	<meta name="msapplication-navbutton-color" content="#252658">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<!-- bower:css -->
-	<!-- bower installed css files will go here... -->
-	<!-- endinject -->
+	<meta name="robots" content="index,follow">
 
-	<!-- inject:css -->
-	<!-- endinject -->
+	<title>EncodeDecode</title>
+	<meta name="description" content="A beautifully crafted site to test ciphers &amp; codes">
+
+	<link rel="author" href="https://plus.google.com/u/0/+ThalidaNoel">
+	<link rel="shortcut icon" href="/favicon.ico?v=1">
+
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="EncodeDecode: for ciphers &amp; codes">
+	<meta name="twitter:description" content="A beautifully crafted site to test ciphers &amp; codes">
+	<meta name="twitter:creator" content="@thalidanoel">
+	<!-- <meta name="twitter:image:src" content="https://shapeconnector.com/assets/images/logo-gradient-512.png"> -->
+
+	<!-- Open Graph data -->
+	<meta property="og:title" content="EncodeDecode: for ciphers &amp; codes" />
+	<meta property="og:type" content="product" />
+	<!-- <meta property="og:url" content="https://shapeconnector.com/" /> -->
+	<!-- <meta property="og:image" content="https://shapeconnector.com/assets/images/gameplay-mini.glow.copy.gif" /> -->
+	<meta property="og:description" content="A site to experiment with ciphers &amp; codes" />
 </head>
 <body>
-	<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
-
-	<div ng-view></div>
-
-	<!-- bower:js -->
-	<!-- endinject -->
-
-	<!-- inject:js -->
-	<!-- endinject -->
+	<div class="app" ui-view></div>
 </body>
 </html>
