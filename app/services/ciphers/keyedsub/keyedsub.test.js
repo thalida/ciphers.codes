@@ -13,9 +13,9 @@ describe('keyedsup service', function(){
 		encoded: 'LoremabcdfghijknpqstuvwxyZ - 0123456789'
 	};
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
-	beforeEach(inject(function(cipherCollection, cipherUtils, keyedsubService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, keyedsubService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
 		cipherService = keyedsubService;

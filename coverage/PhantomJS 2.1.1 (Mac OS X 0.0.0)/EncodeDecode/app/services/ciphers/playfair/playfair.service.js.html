@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EncodeDecode/app/services/ciphers/playfair/playfair.service.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">EncodeDecode/app/services/ciphers/playfair/</a> playfair.service.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.76% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/84</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.06% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/66</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+//==============================================================================
+//
+//	Playfair
+// 		Converts the alphabet into a 5x5 grid of letters and eycrypts based
+// 		on the position of a pair of letters w/ respect to each other in the grid
+//
+//------------------------------------------------------------------------------
+var $requires = [
+	'cipherCollection',
+	'cipherUtils'
+];
+&nbsp;
+var _service = <span class="fstat-no" title="function not covered" >function(cipherCollection, utils)<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >{</span></span></span></span></span></span>
+	//	@constructor
+	// 		Setup the details and private variables for the cipher
+	//----------------------------------------------------------------------
+<span class="cstat-no" title="statement not covered" >	var Service = <span class="fstat-no" title="function not covered" >f</span>unction(){</span>
+<span class="cstat-no" title="statement not covered" >		this.details = {</span>
+			name: 'playfair',
+			label: 'Playfair',
+			addons: [
+				{
+					type: 'key',
+					name: 'key',
+					label: 'Key',
+					placeholder: 'Enter your key...'
+				}
+			],
+			description: 'The playfair cipher combines the letters i and j so that the alphabet can fit on a 5x5 grid, as a result any "j" you use in your text, will be treated like an "i". In addition, please read more on how the Playfair cipher is encoded and decoded.',
+			url: 'http://en.wikipedia.org/wiki/Playfair_cipher'
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		this._placeholderChar = 'x';</span>
+<span class="cstat-no" title="statement not covered" >		this._keyedArrSize = 5;</span>
+<span class="cstat-no" title="statement not covered" >		this._keyedAlphas = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		cipherCollection.add( this );</span>
+	};
+&nbsp;
+	//	@_getKeyedAlpha
+	//		Add the key to the alphabet and then convert into a 5x5 array
+	//----------------------------------------------------------------------
+	Service.prototype._getKeyedAlpha = <span class="fstat-no" title="function not covered" >function( key )<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >{</span></span></span></span></span>
+		// Return if we've already generated the grided keyed alphabet
+<span class="cstat-no" title="statement not covered" >		i</span>f( typeof this._keyedAlphas[key] !== 'undefined' ){
+<span class="cstat-no" title="statement not covered" >			return this._keyedAlphas[key];</span>
+		}
+&nbsp;
+		// Create the flat keyed alphabet
+		var keyedAlpha = utils.makeKeyedAlpha( key );
+		// The current index of the keyedAlphabet
+		var keyedIdx = 0;
+&nbsp;
+		// What size grid are we making
+		var arrSize = this._keyedArrSize;
+<span class="cstat-no" title="statement not covered" >		var alphaGrid = new Array( arrSize );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		f</span>or( var i = 0; i &lt; arrSize; i += 1 ){
+<span class="cstat-no" title="statement not covered" >			alphaGrid[i] = new Array( arrSize );</span>
+<span class="cstat-no" title="statement not covered" >			f</span>or( var j = 0; j &lt; arrSize; j += 1 )<span class="cstat-no" title="statement not covered" >{</span>
+				// If we're not on 'j' in the keyed alphabet then add the
+				// current letter in the key to it's position on the grid
+<span class="cstat-no" title="statement not covered" >				i</span>f( keyedAlpha[keyedIdx] !== 'j' ){
+<span class="cstat-no" title="statement not covered" >					alphaGrid[i][j] = keyedAlpha[keyedIdx];</span>
+				} else {
+					// We encounted and skiped j, so lets NOT count this
+					// postion as filled on the grid
+<span class="cstat-no" title="statement not covered" >					j -= 1;</span>
+				}
+&nbsp;
+				// Move onto the next letter in the keyed alphabet
+				keyedIdx += 1;
+			}
+		}
+&nbsp;
+		// Cache this gridded keyed alphabet
+		this._keyedAlphas[key] = alphaGrid;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return alphaGrid;</span>
+	};
+&nbsp;
+	//	@_strToPairs
+	//		Convert a given string in to an array of pairs
+	// 		X's are used to fill in the missing spot of a pair and also
+	// 		to seperate out duplicate letters.
+	// 		Example: Hellos =&gt; [[h,e],[l,x],[l,o],[s,x]]
+	//----------------------------------------------------------------------
+	Service.prototype._strToPairs = <span class="fstat-no" title="function not covered" >function(string, isEncoding){</span>
+<span class="cstat-no" title="statement not covered" >		var strPairs = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		f</span>or(var i = 0; i &lt; string.length; i += 2){
+<span class="cstat-no" title="statement not covered" >			var currLetter = string.charAt( i );</span>
+<span class="cstat-no" title="statement not covered" >			var nextLetter = string.charAt(i + 1);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			i</span>f( isEncoding === true &amp;&amp; (currLetter === nextLetter || nextLetter.length === 0) ){
+<span class="cstat-no" title="statement not covered" >				nextLetter = this._placeholderChar;</span>
+<span class="cstat-no" title="statement not covered" >				i -= 1;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			strPairs.push([currLetter, nextLetter]);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return strPairs;</span>
+	};
+&nbsp;
+	//	@_getCoords
+	//		Get the current coordinates of the letter in the array
+	//----------------------------------------------------------------------
+	Service.prototype._getCoords =  <span class="fstat-no" title="function not covered" >function( str, array ){</span>
+<span class="cstat-no" title="statement not covered" >		var arrSize = array.length;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		f</span>or( var i = 0; i &lt; arrSize; i += 1 ){
+<span class="cstat-no" title="statement not covered" >			f</span>or( var j = 0; j &lt; arrSize; j += 1 ){
+<span class="cstat-no" title="statement not covered" >				i</span>f( str === array[i][j] ){
+<span class="cstat-no" title="statement not covered" >					return { x: i, y: j };</span>
+				}
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return false;</span>
+	};
+&nbsp;
+	//	@_calcNewCoord
+	//		Calculate the new coordinate based on if we're encoding/decoding
+	//----------------------------------------------------------------------
+	Service.prototype._calcNewCoord = <span class="fstat-no" title="function not covered" >function( coord, isEncoding )<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >{</span></span></span></span>
+<span class="cstat-no" title="statement not covered" >		v</span>ar newCoord;
+&nbsp;
+		// Get the last valid index of the array
+		var lastArrIdx = this._keyedArrSize - 1;
+&nbsp;
+		// Add/subtract based on the action we're peforming
+		newCoord = (isEncoding === true) ? (coord + 1) : (coord - 1);
+&nbsp;
+		// Make sure the new coords are within the bounds of the grid
+		newCoord = (newCoord &gt; lastArrIdx) ? 0 : newCoord;
+<span class="cstat-no" title="statement not covered" >		newCoord = (newCoord &lt; 0) ? lastArrIdx : newCoord;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return newCoord;</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	Service.prototype._formatChar = <span class="fstat-no" title="function not covered" >f</span>unction(alpha, letter){</span>
+<span class="cstat-no" title="statement not covered" >		var char = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		char.letter = (letter === 'j') ? 'i' : letter;</span>
+<span class="cstat-no" title="statement not covered" >		char.coords = this._getCoords(char.letter, alpha);</span>
+<span class="cstat-no" title="statement not covered" >		char.newCoords = {x: null, y: null};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return char;</span>
+	};
+&nbsp;
+	//	@run
+	//		Encodes/Decodes a string w/ the given arguments
+	//----------------------------------------------------------------------
+	Service.prototype.run = <span class="fstat-no" title="function not covered" >function( args )<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >{</span></span></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >		var _defaults = {</span>
+			isEncoding: true,
+			string: '',
+			addons: {
+				key: ''
+			}
+		};
+<span class="cstat-no" title="statement not covered" >		var opts = utils.extendCopy(_defaults, args);</span>
+<span class="cstat-no" title="statement not covered" >		var optsKey = utils.makeValidKey(opts.addons.key, _defaults.addons.key);</span>
+<span class="cstat-no" title="statement not covered" >		var o</span>utput = '';
+&nbsp;
+		// Remove any non letter character
+		opts.string = opts.string.replace(/[^A-Za-z]+/gi, '').toLowerCase();
+		// Replace any j's with i's
+		opts.string = opts.string.replace(/[j]+/gi, 'i').toLowerCase();
+&nbsp;
+		// Replace any j's with i's in the key
+		var keyword = optsKey.replace(/[j]+/gi, 'i').toLowerCase();
+&nbsp;
+		// Created a grid based keyed version of the alphabet
+		var alpha = this._getKeyedAlpha( keyword );
+&nbsp;
+		// Convert the string to an array of pairs
+		var str = this._strToPairs(opts.string, opts.isEncoding);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		f</span>or(var i = 0; i &lt; str.length; i++)<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >{</span></span>
+			// Get the info for the first + second characters of the pair
+<span class="cstat-no" title="statement not covered" >			var char1 = this._formatChar( alpha, str[i][0] );</span>
+<span class="cstat-no" title="statement not covered" >			var c</span>har2 = this._formatChar( alpha, str[i][1] );
+&nbsp;
+			// If the two letters are on the same row
+			if(char1.coords.x === char2.coords.x)<span class="cstat-no" title="statement not covered" >{</span>
+				// Keep the same x coords
+<span class="cstat-no" title="statement not covered" >				char1.newCoords.x = char2.newCoords.x = c</span>har1.coords.x;
+				// Calculate the new y coord for each letter
+				char1.newCoords.y = this._calcNewCoord(char1.coords.y, opts.isEncoding);
+<span class="cstat-no" title="statement not covered" >				char2.newCoords.y = this._calcNewCoord(char2.coords.y, opts.isEncoding);</span>
+			}
+&nbsp;
+			// If the two letters share the same column
+			else <span class="cstat-no" title="statement not covered" >i</span>f(char1.coords.y === char2.coords.y)<span class="cstat-no" title="statement not covered" >{</span>
+				// Keep the same y coords
+<span class="cstat-no" title="statement not covered" >				char1.newCoords.y = char2.newCoords.y = c</span>har1.coords.y;
+				// Calculate the the nex x coord for each letter
+				char1.newCoords.x = this._calcNewCoord(char1.coords.x, opts.isEncoding );
+<span class="cstat-no" title="statement not covered" >				char2.newCoords.x = this._calcNewCoord(char2.coords.x, opts.isEncoding );</span>
+			}
+&nbsp;
+			// The two letters are on a diagonal from one another
+			else{
+<span class="cstat-no" title="statement not covered" >				char1.newCoords = {x: char1.coords.x, y: char2.coords.y};</span>
+<span class="cstat-no" title="statement not covered" >				char2.newCoords = {x: char2.coords.x, y: char1.coords.y};</span>
+			}
+&nbsp;
+			// Get the letters corresponding to each coord in the grid
+			var letter1 = alpha[char1.newCoords.x][char1.newCoords.y];
+<span class="cstat-no" title="statement not covered" >			var letter2 = alpha[char2.newCoords.x][char2.newCoords.y];</span>
+<span class="cstat-no" title="statement not covered" >			output += letter1 + letter2;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return output;</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return new Service();</span>
+}
+&nbsp;
+_service.$inject = $requires;
+module.exports = _service;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Feb 27 2016 03:00:10 GMT-0500 (EST)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

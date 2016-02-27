@@ -12,9 +12,9 @@ describe('polysq service', function(){
 		decoded: 'abcdefghijklmnopqrstuvwxyz0123456789'
 	};
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
-	beforeEach(inject(function(cipherCollection, cipherUtils, polysqService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, polysqService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
 		cipherService = polysqService;

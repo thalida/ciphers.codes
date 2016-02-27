@@ -19,8 +19,6 @@ var common = {
         vendors: [
             'angular',
             'angular-animate',
-            'angular-loader',
-            'angular-mocks',
             'angular-resource',
             'angular-sanitize',
             'angular-touch',
@@ -86,7 +84,6 @@ var productionConfig = {
     ]
 };
 var devConfig = {
-    hot: true,
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ]

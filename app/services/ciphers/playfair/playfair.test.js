@@ -14,9 +14,9 @@ describe('playfair service', function(){
 		decoded: 'abcdefghixiklmnopqrstuvwxyzx'
 	};
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
-	beforeEach(inject(function(cipherCollection, cipherUtils, playfairService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, playfairService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
 		cipherService = playfairService;

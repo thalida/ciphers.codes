@@ -11,9 +11,9 @@ describe('atbash service', function(){
 		encoded: 'ZyxwvutsrqponmlkjihgfedcbA - 0123456789'
 	};
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
-	beforeEach(inject(function(cipherCollection, cipherUtils, atbashService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, atbashService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
 		cipherService = atbashService;

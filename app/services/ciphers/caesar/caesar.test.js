@@ -13,9 +13,9 @@ describe('cipher service', function(){
 		encoded: 'DefghijklmnopqrstuvwxyzabC - 0123456789'
 	};
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
-	beforeEach(inject(function(cipherCollection, cipherUtils, caesarService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, caesarService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
 		cipherService = caesarService;

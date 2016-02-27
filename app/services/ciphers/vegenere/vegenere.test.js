@@ -14,9 +14,9 @@ describe('vegenere service', function(){
 		decoded: 'abcdefghijklmnopqrstuvwxyz'
 	};
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
-	beforeEach(inject(function(cipherCollection, cipherUtils, vegenereService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, vegenereService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
 		cipherService = vegenereService;

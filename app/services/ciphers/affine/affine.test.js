@@ -13,9 +13,9 @@ describe('affine service', function(){
 		encoded: 'DinsxchmrwbglqvafkpuzejotY - 0123456789'
 	};
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module('app'));
 
-	beforeEach(inject(function(cipherCollection, cipherUtils, affineService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, affineService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
 		cipherService = affineService;
