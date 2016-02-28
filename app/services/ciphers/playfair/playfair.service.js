@@ -91,6 +91,10 @@ var _service = function(cipherCollection, utils){
 	Service.prototype._strToPairs = function(string, isEncoding){
 		var strPairs = [];
 
+		if( !isEncoding && string.length % 2 === 1){
+			string += this._placeholderChar;
+		}
+
 		for(var i = 0; i < string.length; i += 2){
 			var currLetter = string.charAt( i );
 			var nextLetter = string.charAt(i + 1);
@@ -216,6 +220,7 @@ var _service = function(cipherCollection, utils){
 			output += letter1 + letter2;
 		}
 
+		// return output.replace(/(.{5})/g,"$1");
 		return output;
 	};
 
