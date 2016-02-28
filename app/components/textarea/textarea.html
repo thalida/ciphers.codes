@@ -1,0 +1,16 @@
+<div class="cc_textarea" ng-class="[$ctrl.styles]" ng-cloak>
+    <textarea
+        id="cc_textarea-{{$ctrl.$id}}"
+        style="height: 1em;"
+        ng-cloak
+        rows="1"
+        class="cc_textarea-field main"
+        placeholder="{{$ctrl.placeholder}}"
+        ng-model="$ctrl.model"
+        ng-change="$ctrl.onChange()"
+        ng-keydown="$ctrl.onKeydown()"
+        ng-cut="$ctrl.onCut()"
+        ng-paste="$ctrl.onPaste()"></textarea>
+
+    <textarea rows="1" class="cc_textarea-field off_screen" ng-model="$ctrl.model" disabled="disabled"></textarea>
+</div>

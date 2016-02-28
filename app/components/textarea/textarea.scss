@@ -1,0 +1,36 @@
+@import '../../assets/styles/mixins';
+
+.cc_textarea {
+    display: block;
+    position: absolute;
+    width: 100%;
+
+    &-field {
+        display: block;
+        position: relative;
+        width: 70%;
+
+        background: transparent;
+        border: 0;
+        padding: 0;
+
+        color: white;
+        font: normal 100 64px/1.4 'Roboto Slab', serif;
+        text-align: center;
+        resize: none;
+        word-wrap: break-word;
+
+
+        &.main {
+            @include vertical-align();
+            margin: 0 auto;
+        }
+
+        &.off_screen {
+            position: absolute;
+            display: block;
+            color: transparent;
+            top: -300%;
+        }
+    }
+}
