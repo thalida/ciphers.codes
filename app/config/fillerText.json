@@ -6,7 +6,7 @@
     },
     {
         "id": "abc",
-        "label": "Alphanumeric &amp; Symbols",
+        "label": "Alphanumeric & Symbols",
         "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >\r\n"
     },
     {

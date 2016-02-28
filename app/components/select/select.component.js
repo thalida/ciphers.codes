@@ -5,7 +5,8 @@ module.exports = {
     bindings: {
         model: '<',
         options: '=',
-        expression: '@',
+        optionsExpr: '@',
+        labelExpr: '@',
         styles: '@',
         onChange: '&?'
     },

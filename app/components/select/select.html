@@ -1,7 +1,8 @@
 <div class="cc-select" ng-class="[$ctrl.styles]">
+    <!-- <span class="cc-select-text_label" ng-bind="{{$ctrl.labelExpr}}"></span> -->
     <select ng-model="$ctrl.model"
             ng-change="$ctrl.onChange({option: $ctrl.model})"
-            ng-options="{{$ctrl.expression}}">
+            ng-options="{{$ctrl.optionsExpr}}">
     </select>
 </div>
 <!--

@@ -1,16 +1,19 @@
-@mixin cssSprite( $spriteVals ) {
+@mixin sprite( $spriteVals ) {
+    $spriteUrl1x: nth( $spriteVals, 3 );
+    $spriteUrl2x: nth( $spriteVals, 6 );
+
     width: nth( $spriteVals, 1 );
     height: nth( $spriteVals, 2 );
     background-repeat: no-repeat;
-    background-image: url( #{ nth( $spriteVals, 3 ) } );
+    background-image: url( $spriteUrl1x  );
     background-position: nth( $spriteVals, 4 ) nth( $spriteVals, 5 );
     @media only screen and ( -webkit-min-device-pixel-ratio: 2 ), only screen and ( min-device-pixel-ratio: 2 ) {
-        background-image: url( #{ nth( $spriteVals, 6 ) } );
+        background-image: url( $spriteUrl2x );
         background-size: $bgiSizeW $bgiSizeH;
     }
 }
 
-$spritesPath: '../images/sprites';
+$spritesPath: 'assets/images/sprites';
 $spritesURL: $spritesPath + '.png';
 $spritesx2URL: $spritesPath + '@2x.png';
 $bgiSizeW: 188px;

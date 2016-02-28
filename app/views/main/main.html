@@ -5,14 +5,16 @@
 				styles="float-left"
 				model="main.ciphers.selected"
 				options="main.ciphers.list"
-				expression="cipher as cipher.details.label for cipher in $ctrl.options"
+				options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
+				label-expr="$ctrl.model.details.label"
 				on-change="main.events.onCipherChange( option )">
 			</cc:select>
 			<cc:select
 				styles="float-right"
 				model="main.ciphers.isEncoding"
 				options="main.ciphers.actionTypes"
-				expression="action.value as action.label for action in $ctrl.options"
+				options-expr="action.value as action.label for action in $ctrl.options"
+				label-expr="$ctrl.model.detials.label"
 				on-change="main.events.onIsEncodingChange( option )">
 			</cc:select>
 		</div>
@@ -42,7 +44,8 @@
 					styles="main-view-form-input"
 					model="main.fillers.selected"
 					options="main.fillers.list"
-					expression="filler as filler.label for filler in $ctrl.options"
+					options-expr="filler as filler.label for filler in $ctrl.options"
+					label-expr="$ctrl.model.lable"
 					on-change="main.events.onFillerChange( option )">
 				</cc:select>
 			</div>
