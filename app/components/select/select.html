@@ -1,14 +1,14 @@
 <div class="cc_select" ng-class="[$ctrl.styles]">
-    <label class="cc_select-label" for="cc_select-{{$ctrl.$id}}" ng-cloak ng-if="$ctrl.label">{{$ctrl.label}}</label>
+    <label class="cc_select-label label" for="cc_select-{{$ctrl.$id}}" ng-cloak ng-if="$ctrl.label">{{$ctrl.label}}</label>
 
     <div class="cc_select-field-wrapper">
         <select
             id="cc_select-{{$ctrl.$id}}"
-            class="cc_select-field"
+            class="cc_select-field animated_border-trigger"
             ng-model="$ctrl.model"
             ng-change="$ctrl.onChange({option: $ctrl.model})"
             ng-options="{{$ctrl.optionsExpr}}">
         </select>
-        <label class="cc_select-border" for="cc_select-{{$ctrl.$id}}" ng-cloak></label>
+        <label class="cc_select-border animated_border" for="cc_select-{{$ctrl.$id}}" ng-cloak></label>
     </div>
 </div>

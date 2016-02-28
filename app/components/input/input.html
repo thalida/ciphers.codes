@@ -1,10 +1,10 @@
 <span class="cc_input" ng-class="[$ctrl.styles]" ng-cloak>
-    <label class="cc_input-label" for="cc_input-{{$ctrl.$id}}" ng-cloak>{{$ctrl.label}}</label>
+    <label class="cc_input-label label" for="cc_input-{{$ctrl.$id}}" ng-cloak>{{$ctrl.label}}</label>
 
     <div class="cc_input-field-wrapper">
         <input
             id="cc_input-{{$ctrl.$id}}"
-            class="cc_input-field"
+            class="cc_input-field animated_border-trigger"
             ng-class="[$ctrl.type]"
             type="{{$ctrl.type}}"
             placeholder="{{$ctrl.placeholder}}"
@@ -13,7 +13,7 @@
             ng-keyup="$ctrl.onKeyup({value: $ctrl.model})"
             ng-change="$ctrl.onChange({value: $ctrl.model})" />
 
-        <label class="cc_input-border" for="cc_input-{{$ctrl.$id}}" ng-cloak></label>
+        <label class="cc_input-border animated_border" for="cc_input-{{$ctrl.$id}}" ng-cloak></label>
     </div>
 
 </span>

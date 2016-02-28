@@ -85,6 +85,7 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 
 	main.events = {
 		onCipherChange: function( cipher ){
+			main.ciphers.selected = cipher;
 			main.output = {};
 			main.ciphers.addons = main.ciphers.selected.details.addons.reduce(function(obj, addon, i){
 				obj[addon.name] = addon.default;
@@ -100,6 +101,7 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		},
 
 		onFillerChange: function( fill ){
+			main.fillers.selected = fill;
 			main.input = main.fillers.selected.text;
 
 			main.ciphers.run();

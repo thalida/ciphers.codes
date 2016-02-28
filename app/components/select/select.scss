@@ -19,17 +19,7 @@
         @include sprite($arrow-down-white);
     }
 
-    &-label {
-        float: left;
-        padding-top: 5px;
-
-        color: white;
-        font-size: 12px;
-        font-weight: 100;
-        margin-right: 10px;
-    }
-
-     &-field {
+    &-field {
         &-wrapper {
             display: inline-block;
             float: left;
@@ -72,63 +62,6 @@
         appearance: none;
     }
 
-    &-border {
-        display: block;
-        position: relative;
-        height: 3px;
-        width: 100%;
-        pointer-events: none;
-
-        @extend %clickable;
-
-        &:before,
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            border-bottom: 1px solid white;
-        }
-
-        &:after {
-            border-bottom: 3px solid $yellow-1;
-            -webkit-transform: translate3d(-100%, 0, 0);
-            transform: translate3d(-100%, 0, 0);
-            -webkit-transition: -webkit-transform 0.3s;
-            transition: transform 0.3s;
-        }
-    }
-
-    &-field:hover + &-border:after,
-    &-field:focus + &-border:after {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-
-    // select {
-    //     padding: 0 40px 0 0;
-    //     width: 120%;
-    //     height: 24px;
-
-    //     background: transparent;
-    //     border: 0;
-    //     outline: 0;
-
-    //     color: white;
-    //     font: 14px 'Roboto Slab', serif;
-
-    //     -webkit-user-select: none;
-    //     -moz-user-select: -moz-none;
-    //     -ms-user-select: none;
-    //     user-select: none;
-
-    //     -webkit-appearance: none;
-    //     -moz-appearance: radio-container;
-    //     appearance: none;
-    // }
-
-
     // SELECT HACKS: https://github.com/filamentgroup/select-css
     // -------------------------------------------------------------------------
 
@@ -137,7 +70,7 @@
         display:none;
     }
 
-     /* IE 10/11+ - This hides native dropdown button arrow so it will have the custom appearance, IE 9 and earlier get a native select - targeting media query hack via http://browserhacks.com/#hack-28f493d247a12ab654f6c3637f6978d5 - looking for better ways to achieve this targeting */
+    /* IE 10/11+ - This hides native dropdown button arrow so it will have the custom appearance, IE 9 and earlier get a native select - targeting media query hack via http://browserhacks.com/#hack-28f493d247a12ab654f6c3637f6978d5 - looking for better ways to achieve this targeting */
     /* The second rule removes the odd blue bg color behind the text in the select button in IE 10/11 and sets the text color to match the focus style's - fix via http://stackoverflow.com/questions/17553300/change-ie-background-color-on-unopened-focused-select-box */
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
         &::-ms-expand {
@@ -149,7 +82,6 @@
             color: black;
         }
     }
-
 
     /* FIREFOX won't let us hide the native select arrow, so we have to make it wider than needed and clip it via overflow on the parent container. The percentage width is a fallback since FF 4+ supports calc() so we can just add a fixed amount of extra width to push the native arrow out of view. We're applying this hack across all FF versions because all the previous hacks were too fragile and complex. You might want to consider not using this hack and using the native select arrow in FF. Note this makes the menus wider than the select button because they display at the specified width and aren't clipped. Targeting hack via http://browserhacks.com/#hack-758bff81c5c32351b02e10480b5ed48e */
     /* Show only the native arrow */
@@ -167,6 +99,6 @@
     /* Firefox focus has odd artifacts around the text, this kills that. See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring */
     & select:-moz-focusring {
         color: transparent;
-        text-shadow: 0 0 0 #000;
+        text-shadow: 0 0 0 white;
     }
 }

@@ -13,13 +13,25 @@
             float: left;
             overflow: hidden;
             position: relative;
+            margin-top: 5px;
             width: 64px;
+
+            -webkit-transition: width 350ms;
+            transition: width 350ms;
+
+            @media (min-width: 400px) {
+                width: 96px;
+            }
+
+            @media (min-width: 600px) {
+                width: 128px;
+            }
 
             @extend %clearfix;
         }
 
         display: block;
-        padding: 5px 0;
+        padding: 0;
         position: relative;
         width: 100%;
 
@@ -31,52 +43,5 @@
         color: white;
         font: normal normal 14px 'Roboto Slab', serif;
 
-        &.number {
-            text-align: center;
-        }
-    }
-
-    &-label {
-        float: left;
-        padding-top: 5px;
-
-        color: white;
-        font-size: 12px;
-        font-weight: 100;
-        margin-right: 10px;
-    }
-
-    &-border {
-        display: block;
-        position: relative;
-        height: 3px;
-        width: 100%;
-        pointer-events: none;
-
-        @extend %clickable;
-
-        &:before,
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            border-bottom: 1px solid white;
-        }
-
-        &:after {
-            border-bottom: 3px solid $yellow-1;
-            -webkit-transform: translate3d(-100%, 0, 0);
-            transform: translate3d(-100%, 0, 0);
-            -webkit-transition: -webkit-transform 0.3s;
-            transition: transform 0.3s;
-        }
-    }
-
-    &-field:hover + &-border:after,
-    &-field:focus + &-border:after {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
     }
 }
