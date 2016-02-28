@@ -168,6 +168,14 @@ var service = function(){
 		return ((a % b) + b) % b;
 	};
 
+	utils.createSet = function ( arr ) {
+		var createSet = arr.filter(function( value, index, self ){
+			 return self.indexOf(value) === index;
+		});
+
+		return createSet;
+	};
+
 	return utils;
 }
 
