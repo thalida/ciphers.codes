@@ -1,0 +1,28 @@
+<span class="cc_input" ng-class="[$ctrl.styles]">
+    <input
+        class="cc_input-field"
+        type="{{$ctrl.type}}"
+        placeholder="{{$ctrl.placeholder}}"
+        ng-cloak
+        ng-model="$ctrl.model"
+        ng-keyup="$ctrl.onKeyup({value: $ctrl.model})"
+        ng-change="$ctrl.onChange({value: $ctrl.model})" />
+
+    <label class="cc_input-label">
+        <span class="cc-input-label-content">{{$ctrl.label}}</span>
+    </label>
+</span>
+
+
+<!-- <input class="main-view-form-input"
+                        ng-switch-when="number"
+                        type="number"
+                        ng-keyup="main.events.onAddonChange('number', addon)"
+                        ng-model="main.ciphers.addons[addon.name]" />
+
+                 <input class="main-view-form-input"
+                        ng-switch-when="key"
+                        type="text"
+                        placeholder="{{addon.placeholder}}"
+                        ng-keyup="main.events.onAddonChange( 'key', addon )"
+                        ng-model="main.ciphers.addons[addon.name]" /> -->
