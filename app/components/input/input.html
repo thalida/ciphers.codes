@@ -1,28 +1,19 @@
-<span class="cc_input" ng-class="[$ctrl.styles]">
-    <input
-        class="cc_input-field"
-        type="{{$ctrl.type}}"
-        placeholder="{{$ctrl.placeholder}}"
-        ng-cloak
-        ng-model="$ctrl.model"
-        ng-keyup="$ctrl.onKeyup({value: $ctrl.model})"
-        ng-change="$ctrl.onChange({value: $ctrl.model})" />
+<span class="cc_input" ng-class="[$ctrl.styles]" ng-cloak>
+    <label class="cc_input-label" for="cc_input-{{$ctrl.$id}}" ng-cloak>{{$ctrl.label}}</label>
 
-    <label class="cc_input-label">
-        <span class="cc-input-label-content">{{$ctrl.label}}</span>
-    </label>
+    <div class="cc_input-field-wrapper">
+        <input
+            id="cc_input-{{$ctrl.$id}}"
+            class="cc_input-field"
+            ng-class="[$ctrl.type]"
+            type="{{$ctrl.type}}"
+            placeholder="{{$ctrl.placeholder}}"
+            ng-cloak
+            ng-model="$ctrl.model"
+            ng-keyup="$ctrl.onKeyup({value: $ctrl.model})"
+            ng-change="$ctrl.onChange({value: $ctrl.model})" />
+
+        <label class="cc_input-border" for="cc_input-{{$ctrl.$id}}" ng-cloak></label>
+    </div>
+
 </span>
-
-
-<!-- <input class="main-view-form-input"
-                        ng-switch-when="number"
-                        type="number"
-                        ng-keyup="main.events.onAddonChange('number', addon)"
-                        ng-model="main.ciphers.addons[addon.name]" />
-
-                 <input class="main-view-form-input"
-                        ng-switch-when="key"
-                        type="text"
-                        placeholder="{{addon.placeholder}}"
-                        ng-keyup="main.events.onAddonChange( 'key', addon )"
-                        ng-model="main.ciphers.addons[addon.name]" /> -->

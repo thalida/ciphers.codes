@@ -6,7 +6,6 @@
 				model="main.ciphers.selected"
 				options="main.ciphers.list"
 				options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
-				label-expr="$ctrl.model.details.label"
 				on-change="main.events.onCipherChange( option )">
 			</cc:select>
 			<cc:select
@@ -14,7 +13,6 @@
 				model="main.ciphers.isEncoding"
 				options="main.ciphers.actionTypes"
 				options-expr="action.value as action.label for action in $ctrl.options"
-				label-expr="$ctrl.model.detials.label"
 				on-change="main.events.onIsEncodingChange( option )">
 			</cc:select>
 		</div>
@@ -22,38 +20,22 @@
 			<div class="main-view-form-input-container float-left"
 				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
 				 ng-switch on="addon.type">
-				 <label class="main-view-form-label">{{addon.label}}</label>
 				 <cc:input
 				 	type="{{addon.type}}"
 				 	model="main.ciphers.addons[addon.name]"
 				 	on-change="main.events.onAddonChange('number', value)"
+				 	label="{{addon.label}}"
 				 	placeholder="{{addon.placeholder}}"
 				 	default="addon.default"></cc:input>
-
-
-				 <!-- <input class="main-view-form-input"
-				 		ng-switch-when="number"
-						type="number"
-						ng-keyup="main.events.onAddonChange('number', addon)"
-						ng-init="main.ciphers.addons[addon.name] = addon.default"
-						ng-model="main.ciphers.addons[addon.name]" /> -->
-
-				 <!-- <input class="main-view-form-input"
-				 		ng-switch-when="key"
-						type="text"
-						placeholder="{{addon.placeholder}}"
-						ng-keyup="main.events.onAddonChange( 'key', addon )"
-						ng-init="main.ciphers.addons[addon.name] = addon.default"
-						ng-model="main.ciphers.addons[addon.name]" /> -->
 			</div>
 			<div class="float-right">
-				<label class="main-view-form-label">Sample text</label>
+				<!-- <label class="main-view-form-label">Sample text</label> -->
 				<cc:select
 					styles="main-view-form-input"
+					label="Sample text"
 					model="main.fillers.selected"
 					options="main.fillers.list"
 					options-expr="filler as filler.label for filler in $ctrl.options"
-					label-expr="$ctrl.model.lable"
 					on-change="main.events.onFillerChange( option )">
 				</cc:select>
 			</div>

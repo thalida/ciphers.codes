@@ -1,1 +1,82 @@
-.cc-input {}
+@import '../../assets/styles/colors';
+@import '../../assets/styles/generics';
+
+.cc_input {
+    position: relative;
+    display: inline-block;
+
+    @extend %clearfix;
+
+    &-field {
+        &-wrapper {
+            display: inline-block;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            width: 64px;
+
+            @extend %clearfix;
+        }
+
+        display: block;
+        padding: 5px 0;
+        position: relative;
+        width: 100%;
+
+        -webkit-appearance: none; /* for box shadows to show on iOS */
+        border: none;
+        border-radius: 0;
+        background: transparent;
+
+        color: white;
+        font: normal normal 14px 'Roboto Slab', serif;
+
+        &.number {
+            text-align: center;
+        }
+    }
+
+    &-label {
+        float: left;
+        padding-top: 5px;
+
+        color: white;
+        font-size: 12px;
+        font-weight: 100;
+        margin-right: 10px;
+    }
+
+    &-border {
+        display: block;
+        position: relative;
+        height: 3px;
+        width: 100%;
+        pointer-events: none;
+
+        @extend %clickable;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 1px solid white;
+        }
+
+        &:after {
+            border-bottom: 3px solid $yellow-1;
+            -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+            -webkit-transition: -webkit-transform 0.3s;
+            transition: transform 0.3s;
+        }
+    }
+
+    &-field:hover + &-border:after,
+    &-field:focus + &-border:after {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}

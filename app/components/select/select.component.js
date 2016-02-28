@@ -6,11 +6,11 @@ module.exports = {
         model: '=',
         options: '=',
         optionsExpr: '@',
-        labelExpr: '@',
+        label: '@?',
         styles: '@?',
         onChange: '&?'
     },
-    controller: function(){
-
-    }
+    controller: ['$scope', function($scope){
+        this.$id = $scope.$id;
+    }]
 };

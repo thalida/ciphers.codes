@@ -12,9 +12,11 @@ module.exports = {
         onKeyup: '&?',
         onChange: '&?'
     },
-    controller: function(){
+    controller: ['$scope', function($scope){
+        this.$id = $scope.$id;
+
         if( typeof this.model === 'undefined' || this.model === null ){
             this.model = this.default;
         }
-    }
+    }]
 };
