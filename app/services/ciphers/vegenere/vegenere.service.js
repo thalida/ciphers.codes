@@ -23,7 +23,8 @@ var _service = function(cipherCollection, utils){
 					type: 'key',
 					name: 'key',
 					label: 'Key',
-					placeholder: 'Enter your key...'
+					placeholder: 'Enter your key...',
+					default: 'loremipsu'
 				}
 			],
 			description: 'A simple polyalphabetic substitution cipher which uses a tableau composed of each of the 26 options for a Caesar Cipher.',

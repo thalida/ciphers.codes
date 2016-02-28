@@ -26,7 +26,8 @@ var _service = function(cipherCollection, utils){
 				{
 					name: 'shift',
 					label: 'Shift by',
-					type: 'number'
+					type: 'number',
+					default: 10,
 				}
 			]
 		};

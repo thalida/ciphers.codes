@@ -27,7 +27,8 @@ var _service = function(cipherCollection, utils){
 					type: 'key',
 					name: 'key',
 					label: 'Key',
-					placeholder: 'Enter your key...'
+					placeholder: 'Enter your key...',
+					default: 'loremipsu'
 				}
 			]
 		};

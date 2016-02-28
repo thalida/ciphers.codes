@@ -23,7 +23,8 @@ var _service = function(cipherCollection, utils){
 				{
 					name: 'shift',
 					label: 'Shift by',
-					type: 'number'
+					type: 'number',
+					default: 10
 				}
 			],
 			description: 'A simple substitution cipher in which the alphabet is shifted up or down a specified number of positions.',

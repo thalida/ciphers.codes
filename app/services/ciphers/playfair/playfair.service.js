@@ -25,7 +25,8 @@ var _service = function(cipherCollection, utils){
 					type: 'key',
 					name: 'key',
 					label: 'Key',
-					placeholder: 'Enter your key...'
+					placeholder: 'Enter your key...',
+					default: 'loremipsu'
 				}
 			],
 			description: 'The playfair cipher combines the letters i and j so that the alphabet can fit on a 5x5 grid, as a result any "j" you use in your text, will be treated like an "i". In addition, please read more on how the Playfair cipher is encoded and decoded.',
