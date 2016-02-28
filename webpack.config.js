@@ -53,7 +53,7 @@ var common = {
             },
             {
                 test: /\.(json)(\?]?.*)?$/,
-                loader: 'file-loader?name=[path][name].[ext]'
+                loader: 'json-loader'
             }
         ]
     },

@@ -13,5 +13,8 @@ angular.module('app', [
 ])
 .config( require('./app.route.js') );
 
+// Constants
+require('./app.constants.js');
+
 // Views
 require('./views/main');
