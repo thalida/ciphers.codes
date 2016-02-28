@@ -1,47 +1,61 @@
-<div class="main-page">
-	<select ng-model="settings.isEncoding"
-			ng-change="events.onCipherChange()"
-			ng-options="action.value as action.label for action in actionTypes">
-	</select>
+<div class="main-view">
+	<form class="main-view-form" novalidate>
+		<div class="main-view-form-primary_settings">
+			<cc:select
+				styles="float-left"
+				model="main.ciphers.selected"
+				options="main.ciphers.list"
+				expression="cipher as cipher.details.label for cipher in $ctrl.options"
+				on-change="main.events.onCipherChange( option )">
+			</cc:select>
+			<cc:select
+				styles="float-right"
+				model="main.ciphers.isEncoding"
+				options="main.ciphers.actionTypes"
+				expression="action.value as action.label for action in $ctrl.options"
+				on-change="main.events.onIsEncodingChange( option )">
+			</cc:select>
+		</div>
+		<div class="main-view-form-secondary_settings">
+			<div class="main-view-form-input-container float-left"
+				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
+				 ng-switch on="addon.type">
+				 <label class="main-view-form-label">{{addon.label}}</label>
+				 <input class="main-view-form-input"
+				 		ng-switch-when="number"
+						type="number"
+						ng-keyup="main.events.onAddonChange('number', addon)"
+						ng-init="main.ciphers.addons[addon.name] = addon.default"
+						ng-model="main.ciphers.addons[addon.name]" />
 
-	<br />
-
-	<select ng-model="settings.cipher"
-			ng-change="events.onCipherChange()"
-			ng-options="cipher as cipher.details.label for cipher in ciphers">
-	</select>
-
-	<div ng-repeat="(key, addon) in settings.cipher.details.addons"
-		 ng-switch on="addon.type">
-		 <input ng-switch-when="number"
-				type="number"
-				ng-model="settings.addons[addon.name]" />
-
-		 <input ng-switch-when="key"
-				type="text"
-				ng-keyup="events.onKeyAddonChange()"
-				ng-model="settings.addons[addon.name]" />
+				 <input class="main-view-form-input"
+				 		ng-switch-when="key"
+						type="text"
+						placeholder="{{addon.placeholder}}"
+						ng-keyup="main.events.onAddonChange( 'key', addon )"
+						ng-init="main.ciphers.addons[addon.name] = addon.default"
+						ng-model="main.ciphers.addons[addon.name]" />
+			</div>
+			<div class="float-right">
+				<label class="main-view-form-label">Sample text</label>
+				<cc:select
+					styles="main-view-form-input"
+					model="main.fillers.selected"
+					options="main.fillers.list"
+					expression="filler as filler.label for filler in $ctrl.options"
+					on-change="main.events.onFillerChange( option )">
+				</cc:select>
+			</div>
+		</div>
+		<textarea
+			class="main-view-form-textarea"
+			placeholder="Type here.."
+			ng-model="main.input"
+			ng-change="main.events.onInputChange()"></textarea>
+		<div class="main-view-form-info">{{main.ciphers.selected.details.description}}</div>
+	</form>
+	<div class="main-view-output">
+		<div ng-bind-html="main.output.html"></div>
+		<div class="footer"></div>
 	</div>
-
-	<div>
-		<button ng-show="settings.autoSubmit == false" ng-click="events.submit()">
-			Submit
-		</button>
-		<input type="checkbox" ng-model="settings.autoSubmit" /> Submit automatically?
-	</div>
-
-	<hr />
-
-	<div>
-		<select ng-model="settings.fillerText"
-				ng-change="events.onFillerChange()"
-				ng-options="filler as filler.label for filler in fillerTypes">
-		</select>
-		<br />
-		<textarea ng-model="settings.originalText"></textarea>
-	</div>
-
-	<div ng-click="events.moveResultsText()">move</div>
-
-	<div ng-bind-html="results.html"></div>
 </div>

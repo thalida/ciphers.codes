@@ -1,125 +1,129 @@
 'use strict';
 
 var $requires = [
-	'$rootScope',
 	'$scope',
 	'$sce',
+	'FILLER_TEXT',
 	'cipherCollection',
 	'cipherUtils'
 ].concat( require('../../services/ciphers') );
 
-var MainController = function($rootScope, $scope, $sce, cipherCollection, cipherUtils) {
-	$scope.ciphers = cipherCollection.get();
+var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, cipherUtils) {
+	var main = this;
 
-	$scope.fillerTypes = [
-		{
-			id: 'abc',
-			label: 'Alphanumeric &amp; Symbols',
-			text: "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >\r\n"
-		},
-		{
-			id: 'lorem',
-			label: 'Lorem Ipsum',
-			text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.\r\n"
-		},
-		{
-			id: 'pangram',
-			label: 'Pangrams',
-			text: "Every good cow, fox, squirrel, and zebra likes to jump over happy dogs.\r\nWoven silk pyjamas exchanged for blue quartz.\r\nThe quick onyx goblin jumps over the lazy dwarf.\r\nBrawny gods just flocked up to quiz and vex him.\r\n"
-		},
-		{
-			id: 'none',
-			label: 'None',
-			text: ''
-		}
-	];
+	main.init = function(){
+		main.ciphers.init();
+		main.fillers.init();
 
-	$scope.actionTypes = [
-		{
-			id: 'encrypt',
-			value: true,
-			label: 'Encrypt'
-		},
-		{
-			id: 'decrypt',
-			value: false,
-			label: 'Decrypt'
-		}
-	];
+		main.input = main.fillers.selected.text;
+		main.output = {};
 
-	$scope.settings = {
-		isEncoding: true,
-		autoSubmit: false,
-		fillerText: $scope.fillerTypes[3],
-		cipher: {},
+		main.ciphers.run();
+	}
+
+	main.ciphers = {
+		list: cipherCollection.get(),
+		selected: null,
+		default: null,
 		addons: {},
-		originalText: ''
-	};
-
-	$scope.results = {};
-
-	$scope.events = {
-		onCipherChange: function(){
-			$scope.results = {};
-			$scope.settings.addons = {};
-		},
-
-		onFillerChange: function(){
-			$scope.settings.originalText = $scope.settings.fillerText.text;
-		},
-
-		onKeyAddonChange: function(){
-			var onlyUnique = function (value, index, self) {
-			    return self.indexOf(value) === index;
-			};
-
-			$scope.settings.addons.key = $scope.settings.addons.key.replace(/[^A-Za-z]+/gi, '').toLowerCase();
-			var keyArr = $scope.settings.addons.key.split('');
-			var unique = keyArr.filter(onlyUnique).join('');
-
-			$scope.settings.addons.key = unique;
-		},
-
-		moveResultsText: function(){
-			if( angular.isString($scope.results.text) ){
-				$scope.settings.originalText = $scope.results.text;
-				$scope.results = {};
+		isEncoding: true,
+		actionTypes: [
+			{
+				id: 'encrypt',
+				value: true,
+				label: 'Encrypt'
+			},
+			{
+				id: 'decrypt',
+				value: false,
+				label: 'Decrypt'
 			}
-		},
+		],
+		init: function(){
+			this.default = this.list.caesar;
+			this.selected = this.default;
 
-		submit: function(){
-			if( typeof $scope.settings.cipher === 'undefined'
-				|| $scope.settings.cipher === null
-				|| angular.equals({}, $scope.settings.cipher)
+			this.addons = this.selected.details.addons.reduce(function(obj, addon, i){
+				obj[addon.name] = addon.default;
+				return obj;
+			}, {});
+		},
+		run: function(){
+			if( typeof main.ciphers.selected === 'undefined'
+				|| main.ciphers.selected === null
+				|| angular.equals({}, main.ciphers.selected)
 			){
 				return;
 			}
 
 			var params = {
-				string: $scope.settings.originalText,
-				isEncoding: $scope.settings.isEncoding
+				string: main.input,
+				isEncoding: main.ciphers.isEncoding
 			};
 
-			if( !angular.equals({}, $scope.settings.addons) ){
-				params.addons = $scope.settings.addons;
+			if( !angular.equals({}, main.ciphers.addons) ){
+				params.addons = main.ciphers.addons;
 			}
 
-			$scope.results.text = $scope.settings.cipher.run( params );
-			var formattedText = $scope.results.text.replace(/\r?\n/g, '<br />');
-			$scope.results.html = $sce.trustAsHtml( formattedText );
+			main.output.text = main.ciphers.selected.run( params );
+			var formattedText = main.output.text.replace(/\r?\n/g, '<br />');
+			main.output.html = $sce.trustAsHtml( formattedText );
+		}
+	}
+
+
+	main.fillers = {
+		list: FILLER_TEXT,
+		selected: null,
+		default: null,
+		init: function(){
+			this.default = this.list[0];
+			this.selected = this.default;
+		}
+	}
+
+
+	main.events = {
+		onCipherChange: function( cipher ){
+			main.ciphers.selected = cipher;
+			main.output = {};
+			main.ciphers.addons = main.ciphers.selected.details.addons.reduce(function(obj, addon, i){
+				obj[addon.name] = addon.default;
+				return obj;
+			}, {});
+
+			main.ciphers.run();
 		},
 
-		checkIfAutoSubmit: function( collection ){
-			if( $scope.settings.autoSubmit === true ){
-				$scope.events.submit();
+		onIsEncodingChange: function( isEncoding ){
+			main.ciphers.isEncoding = isEncoding;
+			main.ciphers.run();
+		},
+
+		onFillerChange: function( fill ){
+			console.log( fill );
+
+			main.fillers.selected = fill;
+			main.input = main.fillers.selected.text;
+
+			main.ciphers.run();
+		},
+
+		onAddonChange: function( type, addon ){
+			if( type === 'key' && main.ciphers.addons.key ){
+				var keyArr = main.ciphers.addons.key.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('');
+				main.ciphers.addons.key = cipherUtils.createSet( keyArr ).join('');
 			}
+
+			main.ciphers.run();
+		},
+
+		onInputChange: function(){
+			main.ciphers.run();
 		}
 	};
 
-	$scope.$watchCollection('settings', $scope.events.checkIfAutoSubmit, true);
-	$scope.$watchCollection('settings.addons', $scope.events.checkIfAutoSubmit, true);
-	$scope.$watchCollection('settings.cipher', $scope.events.checkIfAutoSubmit, true);
-	$scope.$watch('settings.isEncoding', $scope.events.checkIfAutoSubmit);
+	main.init();
 }
 
 MainController.$inject = $requires;

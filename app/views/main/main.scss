@@ -1,2 +1,81 @@
-.main-page{
+@import '../../assets/styles/colors';
+@import '../../assets/styles/generics';
+
+.main-view {
+    height: 100%;
+    width: 100%;
+
+    &-form {
+        position: relative;
+        background: $blue-1;
+        height: 50%;
+
+        &-primary_settings,
+        &-secondary_settings {
+            padding: 0 5%;
+
+            @extend %clearfix;
+        }
+
+        &-primary_settings {
+            background-color: $faded-black-1;
+            height: 64px;
+            padding-top: 20px;
+        }
+
+        &-secondary_settings {
+            background-color: $faded-black-2;
+            padding-top: 5px;
+            height: 32px;
+        }
+
+        &-textarea {
+            display: block;
+            margin: 0 auto;
+            position: relative;
+            width: 90%;
+
+            background: transparent;
+            border: 0;
+            padding: 0;
+
+            color: white;
+            font: normal 100 60px/1 'Roboto Slab', serif;
+            text-align: center;
+            resize: none;
+        }
+
+        &-label {
+            float: left;
+
+            color: white;
+            font-size: 12px;
+            font-weight: 100;
+        }
+
+        &-input {
+            &-container {
+                @extend %clearfix;
+            }
+
+            float: left;
+        }
+
+        &-info {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            width: 90%;
+
+            color: $faded-white-2;
+            font-size: 14px;
+            font-weight: 300;
+            text-align: center;
+        }
+    }
+
+    &-output {
+        position: relative;
+        height: 50%;
+    }
 }
