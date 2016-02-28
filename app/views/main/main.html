@@ -23,20 +23,28 @@
 				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
 				 ng-switch on="addon.type">
 				 <label class="main-view-form-label">{{addon.label}}</label>
-				 <input class="main-view-form-input"
+				 <cc:input
+				 	type="{{addon.type}}"
+				 	model="main.ciphers.addons[addon.name]"
+				 	on-change="main.events.onAddonChange('number', value)"
+				 	placeholder="{{addon.placeholder}}"
+				 	default="addon.default"></cc:input>
+
+
+				 <!-- <input class="main-view-form-input"
 				 		ng-switch-when="number"
 						type="number"
 						ng-keyup="main.events.onAddonChange('number', addon)"
 						ng-init="main.ciphers.addons[addon.name] = addon.default"
-						ng-model="main.ciphers.addons[addon.name]" />
+						ng-model="main.ciphers.addons[addon.name]" /> -->
 
-				 <input class="main-view-form-input"
+				 <!-- <input class="main-view-form-input"
 				 		ng-switch-when="key"
 						type="text"
 						placeholder="{{addon.placeholder}}"
 						ng-keyup="main.events.onAddonChange( 'key', addon )"
 						ng-init="main.ciphers.addons[addon.name] = addon.default"
-						ng-model="main.ciphers.addons[addon.name]" />
+						ng-model="main.ciphers.addons[addon.name]" /> -->
 			</div>
 			<div class="float-right">
 				<label class="main-view-form-label">Sample text</label>

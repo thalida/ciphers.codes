@@ -1,6 +1,7 @@
 'use strict';
 
 require('../../components/select');
+require('../../components/input');
 
 require('../../services/cipherCollection');
 require('../../services/cipherUtils');

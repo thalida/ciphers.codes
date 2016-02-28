@@ -2,12 +2,24 @@
 @import '../../assets/styles/generics';
 @import '../../assets/styles/colors';
 
-.cc-select {
+.cc_select {
     position: relative;
     display: inline-block;
     overflow: hidden;
     width: 128px;
     border-bottom: 1px solid white;
+
+    -webkit-transition: width 350ms;
+    transition: width 350ms;
+
+    @media (min-width: 400px) {
+        width: 160px;
+    }
+
+    @media (min-width: 600px) {
+        width: 256px;
+    }
+
 
     &,
     > * {

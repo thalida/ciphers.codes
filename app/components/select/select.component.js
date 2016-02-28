@@ -3,11 +3,11 @@
 module.exports = {
     templateUrl: 'components/select/select.html',
     bindings: {
-        model: '<',
+        model: '=',
         options: '=',
         optionsExpr: '@',
         labelExpr: '@',
-        styles: '@',
+        styles: '@?',
         onChange: '&?'
     },
     controller: function(){
