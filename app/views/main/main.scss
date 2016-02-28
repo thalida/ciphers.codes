@@ -25,32 +25,7 @@
 
         &-secondary_settings {
             background-color: $faded-black-2;
-            // padding-top: 5px;
             height: 32px;
-        }
-
-        &-textarea {
-            display: block;
-            margin: 0 auto;
-            position: relative;
-            width: 90%;
-
-            background: transparent;
-            border: 0;
-            padding: 0;
-
-            color: white;
-            font: normal 100 60px/1 'Roboto Slab', serif;
-            text-align: center;
-            resize: none;
-        }
-
-        &-label {
-            float: left;
-
-            color: white;
-            font-size: 12px;
-            font-weight: 100;
         }
 
         &-input {
@@ -77,5 +52,6 @@
     &-output {
         position: relative;
         height: 50%;
+        word-wrap: break-word;
     }
 }

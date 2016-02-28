@@ -116,7 +116,9 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 			main.ciphers.run();
 		},
 
-		onInputChange: function(){
+		onInputChange: function( text ){
+			main.input = text;
+
 			main.ciphers.run();
 		}
 	};

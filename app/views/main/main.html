@@ -29,22 +29,20 @@
 				 	default="addon.default"></cc:input>
 			</div>
 			<div class="float-right">
-				<!-- <label class="main-view-form-label">Sample text</label> -->
 				<cc:select
 					styles="main-view-form-input"
 					label="Sample"
 					model="main.fillers.selected"
 					options="main.fillers.list"
-					options-expr="filler as filler.label for filler in $ctrl.options"
+					options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
 					on-change="main.events.onFillerChange( option )">
 				</cc:select>
 			</div>
 		</div>
-		<textarea
-			class="main-view-form-textarea"
+		<cc:textarea
 			placeholder="Type here.."
-			ng-model="main.input"
-			ng-change="main.events.onInputChange()"></textarea>
+			model="main.input"
+			on-change="main.events.onInputChange( value )"></cc:textarea>
 		<div class="main-view-form-info">{{main.ciphers.selected.details.description}}</div>
 	</form>
 	<div class="main-view-output">

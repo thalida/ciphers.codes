@@ -2,6 +2,7 @@
 
 require('../../components/select');
 require('../../components/input');
+require('../../components/textarea');
 
 require('../../services/cipherCollection');
 require('../../services/cipherUtils');
