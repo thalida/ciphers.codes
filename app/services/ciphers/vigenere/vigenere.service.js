@@ -2,7 +2,7 @@
 
 //==============================================================================
 //
-//	Vegenere
+//	Vigenère
 //
 //------------------------------------------------------------------------------
 var $requires = [
@@ -16,8 +16,8 @@ var _service = function(cipherCollection, utils){
 	//----------------------------------------------------------------------
 	var Service = function(){
 		this.details = {
-			name: 'vegenere',
-			label: 'Vigen&egrave;re',
+			name: 'vigenere',
+			label: 'Vigenère',
 			addons: [
 				{
 					type: 'key',

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('vegenere service', function(){
+describe('vigenere service', function(){
 	var mockCollection;
 	var mockUtils;
 	var cipherService;
@@ -16,10 +16,10 @@ describe('vegenere service', function(){
 
 	beforeEach(angular.mock.module('app'));
 
-	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, vegenereService){
+	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, vigenereService){
 		mockCollection = cipherCollection;
 		mockUtils = cipherUtils;
-		cipherService = vegenereService;
+		cipherService = vigenereService;
 	}));
 
 	it('should return encoded alphabet', function() {

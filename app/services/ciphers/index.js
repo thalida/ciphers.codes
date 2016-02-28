@@ -8,5 +8,5 @@ module.exports = [
     require('./mason'),
     require('./playfair'),
     require('./polysq'),
-    require('./vegenere')
+    require('./vigenere')
 ];
