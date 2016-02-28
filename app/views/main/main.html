@@ -17,7 +17,7 @@
 			</cc:select>
 		</div>
 		<div class="main-view-form-secondary_settings">
-			<div class="main-view-form-input-container float-left"
+			<div class="main-view-form-input-container"
 				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
 				 ng-switch on="addon.type">
 				 <cc:input
@@ -39,14 +39,24 @@
 				</cc:select>
 			</div>
 		</div>
+
 		<cc:textarea
 			placeholder="Type here.."
 			model="main.input"
 			on-change="main.events.onInputChange( value )"></cc:textarea>
-		<div class="main-view-form-info">{{main.ciphers.selected.details.description}}</div>
+
+		<!-- <div class="main-view-form-info">{{main.ciphers.selected.details.description}}</div> -->
 	</form>
 	<div class="main-view-output">
-		<div ng-bind-html="main.output.html"></div>
-		<div class="footer"></div>
+		<div class="main-view-output-header"></div>
+
+		<cc:textarea
+			disabled="true"
+			model="main.output.text"
+			styles="main-view-output-text"
+			margin-bottom="0"
+			offset=".main-view-output-footer"></cc:textarea>
+
+		<div class="main-view-output-footer"></div>
 	</div>
 </div>

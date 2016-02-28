@@ -9,32 +9,35 @@ module.exports = {
         model: '=',
         styles: '@?',
         placeholder: '@?',
+        disabled: '@?',
+        offset: '@?',
+        marginBottom: '@?',
         onChangeCB: '&?onChange'
     },
     controller: ['$scope', '$element', '$window', '$timeout', function($scope, $el, $window, $timeout){
         var $ctrl = this;
         this.$id = $scope.$id;
 
-        var $component = angular.element(document.querySelector('.cc_textarea'));
-        var $textarea = angular.element(document.querySelector('.cc_textarea-field.main'));
-        var $sizer = angular.element(document.querySelector('.cc_textarea-field.off_screen'));
+        var $component = angular.element($el[0].querySelector('.cc_textarea'));
+        var $textarea = angular.element($el[0].querySelector('.cc_textarea-field.main'));
+        var $sizer = angular.element($el[0].querySelector('.cc_textarea-field.off_screen'));
+        var $offset;
+        if( this.offset ){
+            var $offset = angular.element(document.querySelector(this.offset));
+        }
         var $win = angular.element($window);
 
-        var $primaryHeader = angular.element(document.querySelector('.main-view-form-primary_settings'));
-        var $secondaryHeader = angular.element(document.querySelector('.main-view-form-secondary_settings'));
-        var headerHeights = $primaryHeader[0].offsetHeight + $secondaryHeader[0].offsetHeight;
-
         var debounceTimeout;
-
 
         this.resize = function(){
             $sizer.text($ctrl.model);
 
-            var margin = 20;
-            var marginTop = margin;
-
+            var componentOffset = $component[0].offsetTop;
+            var offset = ($ctrl.offset) ? $offset[0].offsetHeight : 0;
+            var marginBottom = $ctrl.marginBottom || 10;
+            marginBottom = parseInt(marginBottom, 10);
             var minHeight = 64 * lineheight;
-            var maxHeight = (window.innerHeight / 2) - headerHeights - (margin * 2);
+            var maxHeight = (window.innerHeight / 2) - componentOffset - offset - marginBottom;
 
             var lineheight = 1.4;
             var minFontSize = 14;
@@ -42,7 +45,6 @@ module.exports = {
             var fontSize;
 
             var sizerHeight;
-            var textareaHeight;
             var ratio;
 
             $component[0].style.height = maxHeight + 'px';
@@ -65,47 +67,6 @@ module.exports = {
             $textarea[0].style.overflow = ( sizerHeight >= maxHeight ) ? 'auto' : 'hidden';
         }
 
-        this.resize_1 = function(){
-            // $sizer.text($ctrl.model);
-
-            // var lineheight = 1.4;
-            // var margin = 20;
-            // var marginTop = margin;
-
-            // var minHeight = 64 * lineheight;
-            // var maxHeight = (window.innerHeight / 2) - headerHeights - (margin * 2);
-            // var height = ($sizer[0].scrollHeight < minHeight) ? minHeight : $sizer[0].scrollHeight;
-
-            // console.log('height 1: ', height);
-            // var minFontSize = 12;
-            // var maxFontSize = 64;
-            // // var fontSize = Math.floor((maxFontSize - lineheight) - (height / maxFontSize));
-            // var fontSize = Math.floor((maxHeight * 100) / height);
-            // fontSize = (fontSize < minFontSize) ? minFontSize : fontSize;
-            // fontSize = (fontSize > maxFontSize) ? maxFontSize : fontSize;
-
-            // $sizer[0].style.fontSize = fontSize + 'px';
-            // height = ($sizer[0].scrollHeight < minHeight) ? minHeight : $sizer[0].scrollHeight;
-            // marginTop = (height < maxHeight) ? (maxHeight - height) / 2 : margin;
-            //             console.log('height 2: ', height);
-
-
-            // $textarea[0].style.overflow = (height >= maxHeight ) ? 'auto' : 'hidden';
-            // $textarea[0].style.minHeight = minHeight + 'px';
-            // $textarea[0].style.maxHeight = maxHeight + 'px';
-            // $textarea[0].style.height = 'auto';
-            // $textarea[0].style.height = ( height > 0 ) ? height + 'px' : 'auto';
-            // $textarea[0].style.marginTop = marginTop + 'px';
-            // $textarea[0].style.fontSize = fontSize + 'px';
-
-            // $sizer[0].style.fontSize = maxFontSize + 'px';
-
-            // console.log('================');
-
-            // console.log( $primaryHeader, $textarea, $sizer )
-            // console.log( height, 64, fontSize )
-        }
-
         this.delayedResize = function(){
             $timeout(this.resize, 0);
         }
@@ -126,6 +87,9 @@ module.exports = {
         this.onCut = this.delayedResize;
         this.onPaste = this.delayedResize;
         this.onKeydown = this.delayedResize;
+        this.onContainerClick = function(){
+            $textarea[0].focus();
+        }
 
         $textarea[0].focus();
         $textarea[0].select();
@@ -145,7 +109,6 @@ module.exports = {
                 }
 
                 $textarea[0].focus();
-                // $textarea[0].select();
                 $ctrl.delayedResize();
             }
         );
@@ -155,7 +118,6 @@ module.exports = {
                 return {w: $win[0].innerWidth, h: $win[0].innerHeight}
             },
             function( newDimensions, oldDimensions ){
-                // console.log( newDimensions, oldDimensions )
                 $ctrl.debouceResize();
             },
             true

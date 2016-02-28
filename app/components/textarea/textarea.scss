@@ -1,9 +1,16 @@
 @import '../../assets/styles/mixins';
+@import '../../assets/styles/generics';
 
 .cc_textarea {
     display: block;
-    position: absolute;
+    // position: absolute;
+    position: relative;
     width: 100%;
+
+    &:not(.is_disabled){
+        @extend .clickable;
+        cursor: text;
+    }
 
     &-field {
         display: block;
@@ -20,6 +27,9 @@
         resize: none;
         word-wrap: break-word;
 
+        .cc_textarea.is_disabled &{
+            cursor: default;
+        }
 
         &.main {
             @include vertical-align();
@@ -30,7 +40,7 @@
             position: absolute;
             display: block;
             color: transparent;
-            top: -300%;
+            top: -800%;
         }
     }
 }
