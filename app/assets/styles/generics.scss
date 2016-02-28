@@ -1,0 +1,17 @@
+%clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+.float-left {
+    float: left;
+    position: relative;
+}
+
+.float-right {
+    float: right;
+    position: relative;
+}

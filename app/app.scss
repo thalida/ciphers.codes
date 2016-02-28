@@ -1,22 +1,35 @@
 body {
-	background: #fefefe;
+	height: 100%;
 	margin: 0;
+	overflow: hidden;
 	padding: 0;
+	width: 100%;
+
+	background: white;
+	font: normal normal 16px/1.5 'Roboto Slab', serif;
 }
 
-.site-menu {
-	padding: 10px 20px;
-	&-link {
-		display: inline-block;
-		margin-right: 10px;
-	}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
-a {
-	color: blue;
-	text-decoration: none;
-
-	&:hover {
-		color: rgba(blue, 0.6);
-	}
+*:focus {
+    outline: none;
 }
+
+.app {
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+
+input {
+
+}
+
+
