@@ -60,6 +60,8 @@
         -webkit-appearance: none;
         -moz-appearance: radio-container;
         appearance: none;
+
+        @extend %clickable;
     }
 
     // SELECT HACKS: https://github.com/filamentgroup/select-css
