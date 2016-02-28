@@ -1,0 +1,20 @@
+<div class="cc-select" ng-class="[$ctrl.styles]">
+    <select ng-model="$ctrl.model"
+            ng-change="$ctrl.onChange({option: $ctrl.model})"
+            ng-options="{{$ctrl.expression}}">
+    </select>
+</div>
+<!--
+<select class="main-view-form-input styled-selected"
+    ng-model="main.ciphers.isEncoding"
+    ng-change="main.events.onCipherChange()"
+    ng-options="action.value as action.label for action in main.ciphers.actionTypes">
+</select>
+
+
+<select class="main-view-form-input"
+        ng-model="main.fillers.selected"
+        ng-change="main.events.onFillerChange()"
+        ng-options="filler as filler.label for filler in main.fillers.list">
+</select>
+ -->
