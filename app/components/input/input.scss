@@ -6,6 +6,7 @@
     display: inline-block;
 
     @extend %clearfix;
+    @extend %clickable;
 
     &-field {
         &-wrapper {

@@ -71,21 +71,24 @@ var common = {
             template: APP + '/index.html',
             inject: true,
             // favicon: APP + '/favicon.ico'
-        }),
-        new ExtractTextPlugin("[name].[hash].css", {
-            allChunks: true
         })
     ]
 };
 
 var productionConfig = {
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.[hash].js")
+        new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.[hash].js"),
+        new ExtractTextPlugin("[name].[hash].css", {
+            allChunks: true
+        })
     ]
 };
 var devConfig = {
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin("[name].[hash].css", {
+            allChunks: false
+        })
     ]
 };
 
