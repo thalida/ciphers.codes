@@ -34,7 +34,7 @@ module.exports = {
 
             var componentOffset = $component[0].offsetTop;
             var offset = ($ctrl.offset) ? $offset[0].offsetHeight : 0;
-            var marginBottom = $ctrl.marginBottom || 10;
+            var marginBottom = $ctrl.marginBottom || 0;
             marginBottom = parseInt(marginBottom, 10);
 
             var minHeight = 64;

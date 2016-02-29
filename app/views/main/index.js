@@ -4,6 +4,7 @@ require('../../components/select');
 require('../../components/input');
 require('../../components/textarea');
 require('../../components/toggle');
+require('../../components/drawer');
 
 require('../../services/cipherCollection');
 require('../../services/cipherUtils');

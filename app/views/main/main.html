@@ -42,9 +42,10 @@
 		<cc:textarea
 			placeholder="Type here.."
 			model="main.input"
+			margin-bottom="20"
 			on-change="main.events.onInputChange( value )"></cc:textarea>
 
-		<!-- <div class="main-view-form-info">{{main.ciphers.selected.details.description}}</div> -->
+		<cc:drawer content="{{main.ciphers.selected.details.description}}"></cc:drawer>
 	</form>
 	<div class="main-view-output" ng-class="[main.ciphers.selected.details.name]">
 		<div class="main-view-output-header"></div>
@@ -53,7 +54,6 @@
 			disabled="true"
 			model="main.output.text"
 			styles="main-view-output-text"
-			margin-bottom="0"
 			offset=".main-view-output-footer"></cc:textarea>
 
 		<div class="main-view-output-footer"></div>
