@@ -83,15 +83,12 @@
             position: relative;
             height: 1px;
             width: 100%;
-            // background-color: yellow;
 
             @media (min-height: 600px) {
-                // background-color: blue;
                 height: 16px;
             }
 
             @media (min-height: 900px) {
-                // background-color: green;
                 height: 32px;
             }
         }
