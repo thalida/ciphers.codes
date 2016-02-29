@@ -8,13 +8,12 @@
 				options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
 				on-change="main.events.onCipherChange( option )">
 			</cc:select>
-			<cc:select
+			<cc:toggle
 				styles="float-right"
 				model="main.ciphers.isEncoding"
-				options="main.ciphers.actionTypes"
-				options-expr="action.value as action.label for action in $ctrl.options"
-				on-change="main.events.onIsEncodingChange( option )">
-			</cc:select>
+				options="main.ciphers.encodingToggle"
+				on-change="main.events.onIsEncodingChange( value )">
+			</cc:toggle>
 		</div>
 		<div class="main-view-form-secondary_settings">
 			<div class="main-view-form-input-container"
@@ -23,7 +22,7 @@
 				 <cc:input
 				 	type="{{addon.type}}"
 				 	model="main.ciphers.addons[addon.name]"
-				 	on-change="main.events.onAddonChange('number', value)"
+				 	on-change="main.events.onAddonChange(addon, value)"
 				 	label="{{addon.label}}"
 				 	placeholder="{{addon.placeholder}}"
 				 	default="addon.default"></cc:input>

@@ -81,15 +81,25 @@
         &-header {
             display: block;
             position: relative;
-            height: 16px;
+            height: 1px;
             width: 100%;
+            // background-color: yellow;
+
+            @media (min-height: 600px) {
+                // background-color: blue;
+                height: 16px;
+            }
+
+            @media (min-height: 900px) {
+                // background-color: green;
+                height: 32px;
+            }
         }
 
         &-footer {
             background-color: $faded-black-1;
             width: 100%;
             position: relative;
-            margin-top: 16px;
             height: 40px;
 
             @media (min-height: 400px) {

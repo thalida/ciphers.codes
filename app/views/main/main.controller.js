@@ -27,18 +27,16 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		default: null,
 		addons: {},
 		isEncoding: true,
-		actionTypes: [
-			{
-				id: 'encrypt',
+		encodingToggle: {
+			on: {
 				value: true,
-				label: 'Encrypt'
+				label: 'Encode'
 			},
-			{
-				id: 'decrypt',
+			off: {
 				value: false,
-				label: 'Decrypt'
+				label: 'Decode'
 			}
-		],
+		},
 		init: function(){
 			this.default = this.list.caesar;
 			this.selected = this.default;
@@ -96,6 +94,7 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		},
 
 		onIsEncodingChange: function( isEncoding ){
+			console.log( isEncoding );
 			main.ciphers.isEncoding = isEncoding;
 			main.ciphers.run();
 		},
@@ -107,8 +106,10 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 			main.ciphers.run();
 		},
 
-		onAddonChange: function( type, addon ){
-			if( type === 'key' && main.ciphers.addons.key ){
+		onAddonChange: function(addon, value ){
+			main.ciphers.addons[addon.name] = value;
+
+			if( addon.type === 'key' && main.ciphers.addons.key ){
 				var keyArr = main.ciphers.addons.key.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('');
 				main.ciphers.addons.key = cipherUtils.createSet( keyArr ).join('');
 			}
