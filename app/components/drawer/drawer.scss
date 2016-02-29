@@ -1,0 +1,51 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/generics';
+@import '../../assets/styles/sprites';
+
+.cc_drawer {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    @extend %clickable;
+
+    &-handle {
+        display: block;
+        position: relative;
+        width: 100%;
+        padding: 5px 0;
+
+        &-icon {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .cc_drawer.is_open & {
+            background-color: transparent;
+            &-icon {
+                @include sprite($arrow-down-white);
+            }
+        }
+
+        .cc_drawer.is_closed & {
+            // background-color: rgba(#FF6464, 1);
+            &-icon {
+                @include sprite($arrow-up-white);
+            }
+        }
+    }
+
+    &-content {
+        width: 100%;
+        padding: 5px 10%;
+
+        background-color: rgba(#FF6464, 1);
+        box-shadow: 0px -2px 3px rgba(black, 0.2);
+        color: white;
+        font-size: 14px;
+        font-weight: 100;
+        text-align: center;
+    }
+}
