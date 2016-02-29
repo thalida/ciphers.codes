@@ -36,10 +36,10 @@ module.exports = {
             var offset = ($ctrl.offset) ? $offset[0].offsetHeight : 0;
             var marginBottom = $ctrl.marginBottom || 10;
             marginBottom = parseInt(marginBottom, 10);
-            var minHeight = 64 * lineheight;
+
+            var minHeight = 64;
             var maxHeight = (window.innerHeight / 2) - componentOffset - offset - marginBottom;
 
-            var lineheight = 1.4;
             var minFontSize = 14;
             var maxFontSize = 64;
             var fontSize;
