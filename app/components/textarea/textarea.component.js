@@ -40,7 +40,7 @@ module.exports = {
             var minHeight = 64;
             var maxHeight = (window.innerHeight / 2) - componentOffset - offset - marginBottom;
 
-            var minFontSize = 14;
+            var minFontSize = 16;
             var maxFontSize = 64;
             var fontSize;
 
