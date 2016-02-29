@@ -1,5 +1,6 @@
 @import '../../assets/styles/colors';
 @import '../../assets/styles/generics';
+@import '../../assets/fonts/babelstonepigpen/font';
 
 .main-view {
     height: 100%;
@@ -98,6 +99,11 @@
             @media (min-height: 600px) {
                 height: 64px;
             }
+        }
+
+
+        &.mason .cc_textarea-field {
+            font: normal normal 64px/1 'Masonic', serif;
         }
     }
 }

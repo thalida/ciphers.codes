@@ -35,9 +35,15 @@ var _service = function(cipherCollection, utils){
 	Service.prototype.run = function( args ){
 		var _defaults = {
 			isEncoding: true,
-			string: ''
+			string: '',
+			useFont: true,
 		};
 		var opts = utils.extendCopy(_defaults, args);
+
+		if( opts.useFont === true ){
+			return angular.copy(opts.string + '\r\n');
+		}
+
 		var output = '';
 
 		utils.eachCharacter(opts.string, function(i, char){
