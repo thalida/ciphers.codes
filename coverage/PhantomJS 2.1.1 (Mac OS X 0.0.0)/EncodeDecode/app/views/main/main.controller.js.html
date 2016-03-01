@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EncodeDecode/app/views/main/main.controller.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">EncodeDecode/app/views/main/</a> main.controller.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/36</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+var $requires = [
+	'$rootScope',
+	'$scope',
+	'$sce',
+	'cipherCollection',
+	'cipherUtils'
+].concat( require('../../services/ciphers') );
+&nbsp;
+var MainController = <span class="fstat-no" title="function not covered" >function($rootScope, $scope, $sce, cipherCollection, cipherUtils) {</span>
+<span class="cstat-no" title="statement not covered" >	$scope.ciphers = cipherCollection.get();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	$scope.fillerTypes = [</span>
+		{
+			id: 'abc',
+			label: 'Alphanumeric &amp;amp; Symbols',
+			text: "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ &amp; * ( )- _ = + [ ]{ } \\ / | &lt; &gt;\r\n"
+		},
+		{
+			id: 'lorem',
+			label: 'Lorem Ipsum',
+			text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.\r\n"
+		},
+		{
+			id: 'pangram',
+			label: 'Pangrams',
+			text: "Every good cow, fox, squirrel, and zebra likes to jump over happy dogs.\r\nWoven silk pyjamas exchanged for blue quartz.\r\nThe quick onyx goblin jumps over the lazy dwarf.\r\nBrawny gods just flocked up to quiz and vex him.\r\n"
+		},
+		{
+			id: 'none',
+			label: 'None',
+			text: ''
+		}
+	];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	$scope.actionTypes = [</span>
+		{
+			id: 'encrypt',
+			value: true,
+			label: 'Encrypt'
+		},
+		{
+			id: 'decrypt',
+			value: false,
+			label: 'Decrypt'
+		}
+	];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	$scope.settings = {</span>
+		isEncoding: true,
+		autoSubmit: false,
+		fillerText: $scope.fillerTypes[3],
+		cipher: {},
+		addons: {},
+		originalText: ''
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	$scope.results = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	$scope.events = {</span>
+		onCipherChange: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >			$scope.results = {};</span>
+<span class="cstat-no" title="statement not covered" >			$scope.settings.addons = {};</span>
+		},
+&nbsp;
+		onFillerChange: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >			$scope.settings.originalText = $scope.settings.fillerText.text;</span>
+		},
+&nbsp;
+		onKeyAddonChange: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >			var onlyUnique = <span class="fstat-no" title="function not covered" >function (value, index, self) {</span></span>
+<span class="cstat-no" title="statement not covered" >			    return self.indexOf(value) === index;</span>
+			};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			$scope.settings.addons.key = $scope.settings.addons.key.replace(/[^A-Za-z]+/gi, '').toLowerCase();</span>
+<span class="cstat-no" title="statement not covered" >			var keyArr = $scope.settings.addons.key.split('');</span>
+<span class="cstat-no" title="statement not covered" >			var unique = keyArr.filter(onlyUnique).join('');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			$scope.settings.addons.key = unique;</span>
+		},
+&nbsp;
+		moveResultsText: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >			i</span>f( angular.isString($scope.results.text) ){
+<span class="cstat-no" title="statement not covered" >				$scope.settings.originalText = $scope.results.text;</span>
+<span class="cstat-no" title="statement not covered" >				$scope.results = {};</span>
+			}
+		},
+&nbsp;
+		submit: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >			i</span>f( typeof $scope.settings.cipher === 'undefined'
+				|| $scope.settings.cipher === null
+				|| angular.equals({}, $scope.settings.cipher)
+			){
+<span class="cstat-no" title="statement not covered" >				return;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var params = {</span>
+				string: $scope.settings.originalText,
+				isEncoding: $scope.settings.isEncoding
+			};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			i</span>f( !angular.equals({}, $scope.settings.addons) ){
+<span class="cstat-no" title="statement not covered" >				params.addons = $scope.settings.addons;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			$scope.results.text = $scope.settings.cipher.run( params );</span>
+<span class="cstat-no" title="statement not covered" >			var formattedText = $scope.results.text.replace(/\r?\n/g, '&lt;br /&gt;');</span>
+<span class="cstat-no" title="statement not covered" >			$scope.results.html = $sce.trustAsHtml( formattedText );</span>
+		},
+&nbsp;
+		checkIfAutoSubmit: <span class="fstat-no" title="function not covered" >function( collection ){</span>
+<span class="cstat-no" title="statement not covered" >			i</span>f( $scope.settings.autoSubmit === true ){
+<span class="cstat-no" title="statement not covered" >				$scope.events.submit();</span>
+			}
+		}
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	$scope.$watchCollection('settings', $scope.events.checkIfAutoSubmit, true);</span>
+<span class="cstat-no" title="statement not covered" >	$scope.$watchCollection('settings.addons', $scope.events.checkIfAutoSubmit, true);</span>
+<span class="cstat-no" title="statement not covered" >	$scope.$watchCollection('settings.cipher', $scope.events.checkIfAutoSubmit, true);</span>
+<span class="cstat-no" title="statement not covered" >	$scope.$watch('settings.isEncoding', $scope.events.checkIfAutoSubmit);</span>
+}
+&nbsp;
+MainController.$inject = $requires;
+module.exports = MainController;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Feb 27 2016 03:00:10 GMT-0500 (EST)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

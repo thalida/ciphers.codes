@@ -1,0 +1,84 @@
+@import './assets/styles/colors';
+
+body {
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	width: 100%;
+
+	background: white;
+	font: normal normal 16px/1.5 'Roboto Slab', serif;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+*:focus {
+    outline: none;
+}
+
+.app {
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+
+// https://github.com/codrops/TextInputEffects
+
+.animated_border {
+    display: block;
+    position: relative;
+    height: 3px;
+    width: 100%;
+    pointer-events: none;
+
+    @extend %clickable;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid white;
+    }
+
+    &:after {
+        border-bottom: 3px solid $yellow-1;
+        -webkit-transform: translate3d(-101%, 0, 0);
+        transform: translate3d(-101%, 0, 0);
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+    }
+}
+
+.animated_border-trigger {
+    &:hover + .animated_border:after,
+    &:focus + .animated_border:after {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.label {
+    float: left;
+    padding-top: 5px;
+
+    color: white;
+    font-size: 12px;
+    font-weight: 100;
+    margin-right: 5px;
+
+    @media (min-width: 400px) {
+        margin-right: 10px;
+    }
+}

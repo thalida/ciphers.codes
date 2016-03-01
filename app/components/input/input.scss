@@ -1,0 +1,48 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/generics';
+
+.cc_input {
+    position: relative;
+    display: inline-block;
+
+    @extend %clearfix;
+    @extend %clickable;
+
+    &-field {
+        &-wrapper {
+            display: inline-block;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            margin-top: 5px;
+            width: 64px;
+
+            -webkit-transition: width 350ms;
+            transition: width 350ms;
+
+            @media (min-width: 400px) {
+                width: 96px;
+            }
+
+            @media (min-width: 600px) {
+                width: 128px;
+            }
+
+            @extend %clearfix;
+        }
+
+        display: block;
+        padding: 0;
+        position: relative;
+        width: 100%;
+
+        -webkit-appearance: none; /* for box shadows to show on iOS */
+        border: none;
+        border-radius: 0;
+        background: transparent;
+
+        color: white;
+        font: normal normal 14px 'Roboto Slab', serif;
+
+    }
+}

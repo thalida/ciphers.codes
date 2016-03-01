@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/services/cipherUtils/cipherUtils.service.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">app/services/cipherUtils/</a> cipherUtils.service.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.01% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>65/67</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">85% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>17/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>15/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.15% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>50/52</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">114×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">114×</span>
+<span class="cline-any cline-yes">684×</span>
+<span class="cline-any cline-yes">684×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">429×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-yes">650×</span>
+<span class="cline-any cline-yes">650×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">650×</span>
+<span class="cline-any cline-yes">650×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">429×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">234×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+//==============================================================================
+//
+//	Cipher Utils
+// 		General functions and variables to be used by some/all of the ciphers.
+//
+//------------------------------------------------------------------------------
+&nbsp;
+var $requires = [];
+&nbsp;
+var service = function(){
+	var _alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+	var _alphanumeric = _alpha.concat(['0','1','2','3','4','5','6','7','8','9']);
+	var _alphagrid = (function(){
+		// We need to create a 6x6 grid of the alphanumeric characters
+		var gridSize = 6;
+		var alphagrid = new Array( gridSize );
+&nbsp;
+		// Current index in the alphanumeric array
+		var index = 0;
+&nbsp;
+		// A should be at 1,1 NOT 0,0
+		for( var i = 1; i &lt;= gridSize; i += 1 ){
+			alphagrid[i] = new Array( gridSize );
+&nbsp;
+			for( var j = 1; j &lt;= gridSize; j += 1 ){
+				alphagrid[i][j] = _alphanumeric[index];
+				index += 1;
+			}
+		}
+&nbsp;
+		return alphagrid;
+	})();
+	var _cachedKeyedAlphas = [];
+&nbsp;
+	var utils = {};
+&nbsp;
+	//	ALPHA
+	// 		Return a copy of the basic alphabet
+	//----------------------------------------------------------------------
+	utils.ALPHA = function(){
+		return angular.copy( _alpha );
+	};
+&nbsp;
+	//	ALPHAGRID
+	// 		Return a copy of the alphabet and numbers 0 - 9 in a 6 x 6 grid
+	//----------------------------------------------------------------------
+	utils.ALPHAGRID = function(){
+		return angular.copy(_alphagrid);
+	};
+&nbsp;
+	//	ALPHANUMERIC
+	// 		Return a copy of the alphabet &amp; numbers 0 - 9 in an array
+	//----------------------------------------------------------------------
+	utils.ALPHANUMERIC = function(){
+		return angular.copy( _alphanumeric );
+	};
+&nbsp;
+	//	TOTAL_ALPHA
+	//		Set the total number of letters in the alphabet as a const
+	//----------------------------------------------------------------------
+	utils.TOTAL_ALPHA = (function(){
+		return _alpha.length;
+	})();
+&nbsp;
+	//	@setCase( char, boolean )
+	// 		Check if the char should be made uppercase, if so do so.
+	//----------------------------------------------------------------------
+	utils.setCase = function(char, makeUpperCase){
+		return (makeUpperCase === true) ? char.toUpperCase() : char;
+	};
+&nbsp;
+	//	@eachCharacter( string, int, function )
+	// 		Loop through a given string and call the passed function
+	// 		with the current index, letter, and if that letter is uppercase.
+	//----------------------------------------------------------------------
+	utils.eachCharacter = function( string, increment, cb ){
+		if( typeof increment === 'function' ){
+			cb = increment;
+			increment = 1;
+		}
+&nbsp;
+		for( var i = 0; i &lt; string.length; i += increment ){
+			var c = string.charAt(i);
+			var isUpper = (c.match(/^[A-Z]$/)) ? true : false;
+&nbsp;
+			<span class="missing-if-branch" title="else path not taken" >E</span>if( typeof cb === 'function' ){
+				cb(i, c, isUpper);
+			}
+		}
+	};
+&nbsp;
+	//	@extendCopy
+	// 		Extend a given object, and save it to a new empty object.
+	// 		This allows obj1 and obj2 to remain the same.
+	//----------------------------------------------------------------------
+	utils.extendCopy = function(obj1, obj2){
+		return angular.extend({}, obj1, obj2);
+	};
+&nbsp;
+	//	@isLetter
+	// 		Check if a given str has only letters
+	//----------------------------------------------------------------------
+	utils.isLetter = function( str ){
+		return str.match(/^[A-Za-z]$/);
+	};
+&nbsp;
+	//	@makeKeyedAlpha
+	// 		Create a keyed version of the alphabet - which is a common trick
+	// 		among ciphers/codes.
+	//
+	// 		Example:
+	// 			key: 'lorem'
+	// 			keyed alphabet: loremabcdfghijknpqstuvwxyz
+	//----------------------------------------------------------------------
+	utils.makeKeyedAlpha = function( key ){
+		<span class="missing-if-branch" title="if path not taken" >I</span>if( typeof _cachedKeyedAlphas[key] !== 'undefined' ){
+<span class="cstat-no" title="statement not covered" >			return _cachedKeyedAlphas[key];</span>
+		}
+&nbsp;
+		var alpha = utils.ALPHA();
+		var keyedAlphabet = [];
+&nbsp;
+		// Return the regular alphabet if no key
+		if( key.length === 0 || key === null ){
+			return alpha;
+		}
+&nbsp;
+		// Loop through each letter in the key -- and remove that letter
+		// from the regular alphabet
+		utils.eachCharacter(key, function(i, char){
+			var n = alpha.indexOf(char.toLowerCase());
+			alpha.splice(n, 1);
+		});
+&nbsp;
+		// Add the key + the rest of the alphabet
+		keyedAlphabet = key.split('').concat(alpha);
+&nbsp;
+		// Save this keyed alphabet
+		_cachedKeyedAlphas[key] = keyedAlphabet;
+&nbsp;
+		return keyedAlphabet;
+	};
+&nbsp;
+	utils.makeValidInt = function(currVal, defaultVal){
+		if( angular.isNumber(currVal) ){
+			return currVal;
+		} else <span class="missing-if-branch" title="if path not taken" >I</span>if( angular.isString(currVal) ){
+<span class="cstat-no" title="statement not covered" >			return parseInt( currVal, 10 );</span>
+		}
+&nbsp;
+		return defaultVal;
+	};
+&nbsp;
+	utils.makeValidKey = function(currVal, defaultVal){
+		if( angular.isString(currVal) ){
+			return currVal.toLowerCase();
+		}
+&nbsp;
+		return defaultVal;
+	};
+&nbsp;
+	//	@mod
+	// 		A fix for JS issues with modding a negative number
+	//----------------------------------------------------------------------
+	utils.mod = function(a, b){
+		return ((a % b) + b) % b;
+	};
+&nbsp;
+	return utils;
+}
+&nbsp;
+service.$inject = $requires;
+module.exports = service;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Feb 27 2016 03:08:00 GMT-0500 (EST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
