@@ -1,6 +1,6 @@
 require('angular');
 require('angular-mocks');
-require('./');
+require('./app.module.js');
 
-var testsContext = require.context(".", true, /.test$/);
+var testsContext = require.context(".", true, /.test.js$/);
 testsContext.keys().forEach(testsContext);

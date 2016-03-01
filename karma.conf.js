@@ -2,12 +2,15 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var APP = __dirname + '/app';
-var DIST = __dirname + '/dist';
+var webpackConfig = require('./webpack.config');
+webpackConfig.devtool = 'inline-source-map';
+// webpackConfig.context = null;
+webpackConfig.entry = {};
+webpackConfig.output = {};
 
 module.exports = function(config){
 	config.set({
-		basePath : '',
+		basePath: '',
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
@@ -15,55 +18,22 @@ module.exports = function(config){
 		frameworks: ['jasmine'],
 		browsers : ['PhantomJS2'],
 		singleRun: true,
-		files: [
-			'app/app.tests.js'
-		],
+		files: ['./app/app.tests.js'],
 		preprocessors: {
-			'app/app.tests.js': ['webpack', 'sourcemap']
+			'./app/app.tests.js': ['webpack']
 		},
-		reporters: [ 'progress', 'coverage' ],
-	    coverageReporter: {
-	        type: 'html',
-	        dir: 'coverage/'
-	    },
-		webpack: {
-			devtool: 'eval',
-			module: {
-				preLoaders: [
-					{
-					  test: /(\.jsx)|(\.js)$/,
-					  exclude: /(test|node_modules|bower_components)\//,
-					  loader: 'isparta-instrumenter-loader'
-					}
-				],
-				loaders: [
-					{
-							test: require.resolve('angular'),
-							loader: "expose?angular"
-					},
-					{
-							test: /\.scss$/,
-							loader: "css-loader!resolve-url-loader!sass-loader"
-					},
-					{
-							test: /\.html$/,
-							loader: 'ngtemplate?relativeTo=' + APP + '/!html',
-							exclude: path.resolve(APP, 'index.html')
-					},
-					{
-							test: /\.(woff|woff2|ttf|eot|svg|png|gif|jpg|jpeg|wav|mp3)(\?]?.*)?$/,
-							loader: 'null'
-					},
-					{
-							test: /\.(json)(\?]?.*)?$/,
-							loader: 'file-loader?name=[path][name].[ext]'
-					}
-				]
-			},
-			cache: true
-		},
+		// files: ['./app/**/*.test.js'],
+		// preprocessors: {
+		// 	'./app/**/*.test.js': ['webpack']
+		// },
+		webpack: webpackConfig,
 		webpackMiddleware: {
 			noInfo: true
+		},
+		reporters: [ 'progress', 'coverage' ],
+		coverageReporter: {
+			type: 'html',
+			dir: 'coverage/'
 		}
 	});
 };
