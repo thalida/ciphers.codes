@@ -30,7 +30,7 @@ var common = {
         path: DIST,
         filename: "[name].[hash].js",
         chunkFilename: "[id].js",
-        publicPath: ''
+        publicPath: ( isProduction ) ? '/CiphersCodes/' : ''
     },
     module: {
         loaders: [
