@@ -31,6 +31,7 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		default: null,
 		addons: {},
 		isEncoding: true,
+		validAddons: true,
 		encodingToggle: {
 			on: {
 				value: true,
@@ -51,6 +52,7 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 			}, {});
 		},
 		run: function(){
+				console.log('main.ciphers.selected ' , main.ciphers.selected);
 			if( typeof main.ciphers.selected === 'undefined'
 				|| main.ciphers.selected === null
 				|| angular.equals({}, main.ciphers.selected)
@@ -125,6 +127,10 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 			if( addon.type === 'key' && main.ciphers.addons.key ){
 				var keyArr = main.ciphers.addons.key.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('');
 				main.ciphers.addons.key = cipherUtils.createSet( keyArr ).join('');
+			}
+
+			if( addon.validation && main.ciphers.validAddons === true ){
+				main.ciphers.validAddons = addon.validation( value ) === true;
 			}
 
 			main.ciphers.run();

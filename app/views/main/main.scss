@@ -42,7 +42,12 @@
             }
         }
 
+        &.main {
+            z-index: 4;
+        }
+
         &.secondary {
+            z-index: 3;
             background-color: $faded-black-2;
         }
 
@@ -109,23 +114,15 @@
         }
     }
 
-    .cc_textarea {
-        height: calc(100% - 120px);
+    &-ciphers {
+        z-index: 2;
     }
 
     &-fillers {
-        display: none;
+        display: inline-block;
+    }
 
-        &.main {
-            @media all and (min-width: 1010px), (min-width: 505px) and (max-width: 700px){
-                display: inline-block;
-            }
-        }
-
-        &.secondary {
-            @media all and (min-width: 700px) and (max-width: 1009px), (max-width: 504px) {
-                display: inline-block;
-            }
-        }
+    .cc_textarea {
+        height: calc(100% - 120px);
     }
 }

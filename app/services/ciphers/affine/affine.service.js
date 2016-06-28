@@ -24,8 +24,20 @@ var _service = function(cipherCollection, utils){
 			url: 'http://en.wikipedia.org/wiki/Affine_cipher',
 			addons: [
 				{
+					name: 'coprime',
+					label: 'Co-prime',
+					tooltip: 'The coprimes of 26 are: 1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, and 25',
+					type: 'number',
+					default: 5,
+					validation: function( n ){
+						var allowedCoprimes = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+						return allowedCoprimes.indexOf( parseInt(n, 10) ) >= 0;
+					}
+				},
+				{
 					name: 'shift',
 					label: 'Shift by',
+					tooltip: 'Enter a number',
 					type: 'number',
 					default: 10,
 				}
@@ -47,13 +59,16 @@ var _service = function(cipherCollection, utils){
 			isEncoding: true,
 			string: '',
 			addons: {
-				shift: 0
+				shift: 0,
+				coprime: 5
 			}
 		};
 		var opts = utils.extendCopy(_defaults, args);
+		console.log('opts ' , opts);
 
 		var alpha = utils.ALPHA();
 		var shift = utils.makeValidInt(opts.addons.shift, _defaults.addons.shift);
+		var coprime = utils.makeValidInt(opts.addons.coprime, _defaults.addons.coprime);
 		var output = '';
 
 		utils.eachCharacter(opts.string, function(i, char, isUpper){
@@ -64,9 +79,9 @@ var _service = function(cipherCollection, utils){
 				var newLetterPos;
 
 				if(opts.isEncoding === true){
-					newLetterPos = (this._coprime * letterPos) + shift;
+					newLetterPos = (coprime * letterPos) + shift;
 				}else{
-					newLetterPos = (utils.TOTAL_ALPHA - this._coprime) * (letterPos - shift);
+					newLetterPos = (utils.TOTAL_ALPHA - coprime) * (letterPos - shift);
 				}
 
 				// The new letter postion may be out of bounds, mod the letter to get the valid position.

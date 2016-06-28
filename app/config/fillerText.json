@@ -8,7 +8,7 @@
     {
         "id": "abc",
         "enabled": true,
-        "label": "Alphanumeric & Symbols",
+        "label": "Alphabet",
         "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >"
     },
     {

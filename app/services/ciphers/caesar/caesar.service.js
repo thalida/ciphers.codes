@@ -22,7 +22,7 @@ var _service = function(cipherCollection, utils){
 			addons: [
 				{
 					name: 'shift',
-					label: 'Shift',
+					label: 'Shift by',
 					type: 'number',
 					default: 10
 				}

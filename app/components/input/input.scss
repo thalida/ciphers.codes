@@ -5,6 +5,8 @@
     position: relative;
     display: inline-block;
     vertical-align: text-top;
+    height: 24px;
+    margin-bottom: 10px;
 
     @extend %clearfix;
     @extend %clickable;
@@ -22,6 +24,16 @@
 
             @media (min-width: 400px) {
                 width: 96px;
+            }
+
+            @media (min-width: 805px) {
+                width: 128px;
+            }
+
+            .cc_input.number & {
+                width: 32px !important;
+                -webkit-transition: width 0ms;
+                transition: width 0ms;
             }
 
             @extend %clearfix;
