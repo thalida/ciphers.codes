@@ -52,7 +52,6 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 			}, {});
 		},
 		run: function(){
-				console.log('main.ciphers.selected ' , main.ciphers.selected);
 			if( typeof main.ciphers.selected === 'undefined'
 				|| main.ciphers.selected === null
 				|| angular.equals({}, main.ciphers.selected)
@@ -109,7 +108,6 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		},
 
 		onIsEncodingChange: function( isEncoding ){
-			console.log( isEncoding );
 			main.ciphers.isEncoding = isEncoding;
 			main.ciphers.run();
 		},
