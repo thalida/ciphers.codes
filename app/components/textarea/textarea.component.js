@@ -12,6 +12,7 @@ module.exports = {
         disabled: '@?',
         offset: '@?',
         marginBottom: '@?',
+        scrollTo: '@?',
         onChangeCB: '&?onChange'
     },
     controller: ['$scope', '$element', '$window', '$timeout', function($scope, $el, $window, $timeout){
@@ -38,7 +39,7 @@ module.exports = {
             marginBottom = parseInt(marginBottom, 10);
 
             var minHeight = 64;
-            var maxHeight = (window.innerHeight / 2) - componentOffset - offset - marginBottom;
+            var maxHeight = ($component[0].clientHeight * 0.8);
 
             var minFontSize = 16;
             var maxFontSize = 64;
@@ -47,7 +48,7 @@ module.exports = {
             var sizerHeight;
             var ratio;
 
-            $component[0].style.height = maxHeight + 'px';
+            // $component[0].style.height = maxHeight + 'px';
             $sizer[0].style.fontSize = maxFontSize + 'px';
 
             sizerHeight = ($sizer[0].scrollHeight < minHeight) ? minHeight : $sizer[0].scrollHeight;
@@ -65,6 +66,14 @@ module.exports = {
             $textarea[0].style.height = 'auto';
             $textarea[0].style.height = ( sizerHeight > 0 ) ? sizerHeight + 'px' : 'auto';
             $textarea[0].style.overflow = ( sizerHeight >= maxHeight ) ? 'auto' : 'hidden';
+
+            if( $ctrl.scrollTo ){
+                if( $ctrl.scrollTo === 'top' ){
+                    $textarea[0].scrollTop = 0;
+                } else if( $ctrl.scrollTo === 'bottom' ){
+                    $textarea[0].scrollTop = $textarea[0].scrollHeight;
+                }
+            }
         }
 
         this.delayedResize = function(){

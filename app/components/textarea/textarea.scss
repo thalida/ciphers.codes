@@ -3,9 +3,9 @@
 
 .cc_textarea {
     display: block;
-    // position: absolute;
     position: relative;
     width: 100%;
+    height: 100%;
 
     &:not(.is_disabled){
         @extend .clickable;
@@ -15,7 +15,7 @@
     &-field {
         display: block;
         position: relative;
-        width: 70%;
+        width: 85%;
 
         background: transparent;
         border: 0;

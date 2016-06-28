@@ -3,9 +3,16 @@
 
 .cc_toggle {
     @extend %clickable;
+    display: inline-block;
+    position: relative;
+    height: 24px;
+    margin-bottom: 9px;
+    vertical-align: text-top;
 
     &-label {
         color: $faded-white-1;
+        display: inline-block;
+        position: relative;
 
         @extend %clickable;
 
@@ -23,7 +30,7 @@
     &-symbol {
         display: inline-block;
         position: relative;
-        width: 25px;
+        width: 32px;
         height: 1px;
         margin: 0 5px 4px;
 
@@ -34,9 +41,9 @@
             content: '';
             display: block;
             position: absolute;
-            top: -5px;
-            width: 10px;
-            height: 10px;
+            top: -7px;
+            width: 14px;
+            height: 14px;
 
             background-color: transparent;
             border-radius: 50%;
@@ -51,11 +58,11 @@
         }
 
         .cc_toggle.is_on &:before {
-            background-color: $yellow-1;
+            background-color: $teal-1;
         }
 
         .cc_toggle.is_off &:after {
-            background-color: $yellow-1;
+            background-color: $teal-1;
         }
     }
 

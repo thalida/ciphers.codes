@@ -1,0 +1,46 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/generics';
+
+.cc_help-tooltip {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin-top: 9px;
+    line-height: 0;
+
+    &-label {
+        padding: 2px 5px;
+
+        background-color: $faded-black-3;
+        border-radius: 50%;
+
+        color: rgba(white, 0.70);
+        font-size: 8px;
+        font-weight: 700;
+        line-height: 11px;
+        text-align: center;
+        line-height: 0;
+    }
+
+    &-popup {
+        width: 300px;
+
+        font-size: 14px;
+        font-weight: 300;
+        text-align: left;
+
+        a {
+            display: block;
+
+            color: white;
+            font-size: 12px;
+            font-weight: 400;
+            text-align: right;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

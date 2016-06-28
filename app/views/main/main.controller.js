@@ -9,6 +9,8 @@ var $requires = [
 ].concat( require('../../services/ciphers') );
 
 var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, cipherUtils) {
+	window.scroll(0, 0);
+
 	var main = this;
 
 	main.init = function(){
@@ -17,6 +19,8 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 
 		main.input = main.fillers.selected.text;
 		main.output = {};
+
+		window.scroll(0, 0);
 
 		main.ciphers.run();
 	}
@@ -27,6 +31,7 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		default: null,
 		addons: {},
 		isEncoding: true,
+		validAddons: true,
 		encodingToggle: {
 			on: {
 				value: true,
@@ -72,11 +77,20 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 
 	main.fillers = {
 		list: FILLER_TEXT,
+		listById: {},
 		selected: null,
 		default: null,
 		init: function(){
-			this.default = this.list[0];
+			this.createListById();
+
+			this.default = this.listById.default;
 			this.selected = this.default;
+		},
+		createListById: function(){
+			for( var i = 0; i < this.list.length; i += 1 ){
+				var filler = this.list[i];
+				this.listById[filler.id] = filler;
+			}
 		}
 	}
 
@@ -94,7 +108,6 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		},
 
 		onIsEncodingChange: function( isEncoding ){
-			console.log( isEncoding );
 			main.ciphers.isEncoding = isEncoding;
 			main.ciphers.run();
 		},
@@ -114,12 +127,16 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 				main.ciphers.addons.key = cipherUtils.createSet( keyArr ).join('');
 			}
 
+			if( addon.validation && main.ciphers.validAddons === true ){
+				main.ciphers.validAddons = addon.validation( value ) === true;
+			}
+
 			main.ciphers.run();
 		},
 
 		onInputChange: function( text ){
 			main.input = text;
-
+			main.fillers.selected = main.fillers.listById.none;
 			main.ciphers.run();
 		}
 	};

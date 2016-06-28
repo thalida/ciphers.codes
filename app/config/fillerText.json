@@ -2,20 +2,20 @@
     {
         "id": "default",
         "enabled": true,
-        "label": "Ciphers & Codes",
+        "label": "Default",
         "text": "Ciphers & Codes"
     },
     {
         "id": "abc",
         "enabled": true,
-        "label": "Alphanumeric & Symbols",
+        "label": "Alphabet",
         "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >"
     },
     {
         "id": "lorem",
         "enabled": true,
         "label": "Lorem Ipsum",
-        "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
+        "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem."
     },
     {
         "id": "pangram",
@@ -32,7 +32,7 @@
     {
         "id": "none",
         "enabled": true,
-        "label": "None",
+        "label": "Custom",
         "text": ""
     }
 ]

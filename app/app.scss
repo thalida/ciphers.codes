@@ -1,9 +1,11 @@
 @import './assets/styles/colors';
+@import './assets/styles/sprites';
+
 
 body {
 	height: 100%;
 	margin: 0;
-	overflow: hidden;
+	// overflow: hidden;
 	padding: 0;
 	width: 100%;
 
@@ -26,13 +28,19 @@ html {
 .app {
 	display: block;
 	position: absolute;
-	overflow: hidden;
 	height: 100%;
 	width: 100%;
 }
 
-// https://github.com/codrops/TextInputEffects
+.logo {
+    @include sprite($logo-teal-large);
 
+    &.small {
+        @include sprite($logo-teal);
+    }
+}
+
+// https://github.com/codrops/TextInputEffects
 .animated_border {
     display: block;
     position: relative;
@@ -53,7 +61,7 @@ html {
     }
 
     &:after {
-        border-bottom: 3px solid $yellow-1;
+        border-bottom: 3px solid $teal-1;
         -webkit-transform: translate3d(-101%, 0, 0);
         transform: translate3d(-101%, 0, 0);
         -webkit-transition: -webkit-transform 0.3s;
@@ -70,8 +78,9 @@ html {
 }
 
 .label {
-    float: left;
-    padding-top: 5px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
 
     color: white;
     font-size: 12px;
@@ -79,6 +88,6 @@ html {
     margin-right: 5px;
 
     @media (min-width: 400px) {
-        margin-right: 10px;
+        margin-right: 5px;
     }
 }

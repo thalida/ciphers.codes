@@ -1,5 +1,6 @@
 'use strict';
 
+require('../../components/help-tooltip');
 require('../../components/select');
 require('../../components/input');
 require('../../components/textarea');

@@ -8,6 +8,7 @@ module.exports = {
         optionsExpr: '@',
         label: '@?',
         styles: '@?',
+        tooltip: '@?',
         onChange: '&?'
     },
     controller: ['$scope', function($scope){

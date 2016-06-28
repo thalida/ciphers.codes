@@ -1,41 +1,48 @@
 <div class="main-view">
 	<form class="main-view-form" novalidate>
-		<div class="main-view-form-primary_settings">
-			<cc:select
-				styles="float-left"
-				model="main.ciphers.selected"
-				options="main.ciphers.list"
-				options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
-				on-change="main.events.onCipherChange( option )">
-			</cc:select>
-			<cc:toggle
-				styles="float-right"
-				model="main.ciphers.isEncoding"
-				options="main.ciphers.encodingToggle"
-				on-change="main.events.onIsEncodingChange( value )">
-			</cc:toggle>
-		</div>
-		<div class="main-view-form-secondary_settings">
-			<div class="main-view-form-input-container"
-				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
-				 ng-switch on="addon.type">
-				 <cc:input
-				 	type="{{addon.type}}"
-				 	model="main.ciphers.addons[addon.name]"
-				 	on-change="main.events.onAddonChange(addon, value)"
-				 	label="{{addon.label}}"
-				 	placeholder="{{addon.placeholder}}"
-				 	default="addon.default"></cc:input>
+		<div class="main-view-header main">
+			<div class="main-view-header-inputs">
+				<cc:toggle
+					model="main.ciphers.isEncoding"
+					options="main.ciphers.encodingToggle"
+					on-change="main.events.onIsEncodingChange( value )">
+				</cc:toggle>
 			</div>
-			<div class="float-right">
+			<div class="main-view-header-inputs main-view-fillers">
 				<cc:select
-					styles="main-view-form-input"
-					label="Sample"
 					model="main.fillers.selected"
 					options="main.fillers.list"
 					options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
 					on-change="main.events.onFillerChange( option )">
 				</cc:select>
+			    <!-- <cc:help-tooltip text="Choose the text to be {{(main.ciphers.isEncoding ? 'encoded' : 'decoded')}}"></cc:help-tooltip> -->
+		    </div>
+		</div>
+		<div class="main-view-header secondary">
+			<div class="main-view-header-inputs main-view-ciphers">
+				<cc:select
+					model="main.ciphers.selected"
+					options="main.ciphers.list"
+					options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
+					on-change="main.events.onCipherChange( option )">
+				</cc:select>
+			    <cc:help-tooltip
+			    	ng-if="main.ciphers.selected.details.description"
+			    	text="{{main.ciphers.selected.details.description}} <a href='{{main.ciphers.selected.details.url}}' target='_blank'>Learn More &rsaquo;</a>">
+		    	</cc:help-tooltip>
+		    </div>
+			<div class="main-view-header-inputs"
+				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
+				 ng-switch on="addon.type">
+				 <cc:input
+				 	type="{{addon.type}}"
+				 	styles="{{addon.type}}"
+				 	model="main.ciphers.addons[addon.name]"
+				 	on-change="main.events.onAddonChange(addon, value)"
+				 	label="{{addon.label}}"
+				 	placeholder="{{addon.placeholder}}"
+				 	default="addon.default"></cc:input>
+			    <cc:help-tooltip ng-if="addon.tooltip" text="{{addon.tooltip}}"></cc:help-tooltip>
 			</div>
 		</div>
 
@@ -44,18 +51,19 @@
 			model="main.input"
 			margin-bottom="20"
 			on-change="main.events.onInputChange( value )"></cc:textarea>
-
-		<cc:drawer content="{{main.ciphers.selected.details.description}}"></cc:drawer>
 	</form>
 	<div class="main-view-output" ng-class="[main.ciphers.selected.details.name]">
-		<div class="main-view-output-header"></div>
+		<div class="main-view-header"></div>
+		<div class="main-view-header secondary invisible"></div>
 
 		<cc:textarea
 			disabled="true"
+			scroll-to="bottom"
 			model="main.output.text"
-			styles="main-view-output-text"
-			offset=".main-view-output-footer"></cc:textarea>
-
-		<div class="main-view-output-footer"></div>
+			styles="main-view-output-text"></cc:textarea>
+	</div>
+	<div class="main-view-footer">
+		<div class="logo small"></div>
+		<div class="copyright">Crafted with love by <a href="https://twitter.com/thalidanoel" target="_blank">thalida</a></div>
 	</div>
 </div>

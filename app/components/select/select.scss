@@ -1,10 +1,12 @@
 @import '../../assets/styles/sprites';
 @import '../../assets/styles/generics';
 @import '../../assets/styles/colors';
+@import '../../assets/styles/mixins';
 
 .cc_select {
     position: relative;
     display: inline-block;
+    vertical-align: text-top;
 
     &, > * {
         @extend %clickable;
@@ -22,7 +24,6 @@
     &-field {
         &-wrapper {
             display: inline-block;
-            float: left;
             overflow: hidden;
             position: relative;
             width: 128px;
@@ -30,12 +31,12 @@
             -webkit-transition: width 350ms;
             transition: width 350ms;
 
-            @media (min-width: 400px) {
-                width: 160px;
+            @media (min-width: 700px) {
+                width: 70px;
             }
 
-            @media (min-width: 600px) {
-                width: 256px;
+            @media (min-width: 840px) {
+                width: 145px;
             }
 
             @extend %clearfix;
@@ -102,5 +103,9 @@
     & select:-moz-focusring {
         color: transparent;
         text-shadow: 0 0 0 white;
+    }
+
+    .cc_help-tooltip {
+        margin-left: 5px;
     }
 }

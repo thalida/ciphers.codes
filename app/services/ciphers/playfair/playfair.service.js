@@ -26,6 +26,7 @@ var _service = function(cipherCollection, utils){
 					name: 'key',
 					label: 'Key',
 					placeholder: 'Enter your key...',
+					tooltip: 'Create a key by entering text without using duplicate letters.',
 					default: 'loremipsu'
 				}
 			],
