@@ -17,8 +17,6 @@
         position: relative;
         padding: 0 5%;
         height: $header-height;
-        min-height: 40px;
-        max-height: 60px;
 
         background-color: $faded-black-1;
 
@@ -69,6 +67,33 @@
         height: $footer-height;
 
         background-color: $blue-5;
+        text-align: center;
+
+        .logo {
+            @include vertical-align();
+            margin: 0 auto;
+        }
+
+        .copyright {
+            @include vertical-align();
+            position: absolute;
+            display: inline-block;
+            right: 3%;
+
+            color: white;
+            font-size: 12px;
+            font-weight: 100;
+
+            a {
+                color: white;
+                font-weight: 300;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 
 

@@ -1,4 +1,6 @@
 @import './assets/styles/colors';
+@import './assets/styles/sprites';
+
 
 body {
 	height: 100%;
@@ -26,13 +28,19 @@ html {
 .app {
 	display: block;
 	position: absolute;
-	// overflow: hidden;
 	height: 100%;
 	width: 100%;
 }
 
-// https://github.com/codrops/TextInputEffects
+.logo {
+    @include sprite($logo-teal-large);
 
+    &.small {
+        @include sprite($logo-teal);
+    }
+}
+
+// https://github.com/codrops/TextInputEffects
 .animated_border {
     display: block;
     position: relative;
