@@ -12,6 +12,7 @@ module.exports = {
         disabled: '@?',
         offset: '@?',
         marginBottom: '@?',
+        scrollTo: '@?',
         onChangeCB: '&?onChange'
     },
     controller: ['$scope', '$element', '$window', '$timeout', function($scope, $el, $window, $timeout){
@@ -65,6 +66,14 @@ module.exports = {
             $textarea[0].style.height = 'auto';
             $textarea[0].style.height = ( sizerHeight > 0 ) ? sizerHeight + 'px' : 'auto';
             $textarea[0].style.overflow = ( sizerHeight >= maxHeight ) ? 'auto' : 'hidden';
+
+            if( $ctrl.scrollTo ){
+                if( $ctrl.scrollTo === 'top' ){
+                    $textarea[0].scrollTop = 0;
+                } else if( $ctrl.scrollTo === 'bottom' ){
+                    $textarea[0].scrollTop = $textarea[0].scrollHeight;
+                }
+            }
         }
 
         this.delayedResize = function(){
