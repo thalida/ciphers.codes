@@ -36,16 +36,13 @@ var _service = function(cipherCollection, utils){
 				},
 				{
 					name: 'shift',
-					label: 'Shift by',
-					tooltip: 'Enter a number',
+					label: 'Shift',
+					tooltip: 'Enter a number (positive/negative) to shift the alphabet by.',
 					type: 'number',
 					default: 10,
 				}
 			]
 		};
-
-		// Used by the (en|de)coding function
-		this._coprime = 5;
 
 		// Add this cipher to the collection
 		cipherCollection.add( this );

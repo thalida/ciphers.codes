@@ -23,6 +23,7 @@ var _service = function(cipherCollection, utils){
 				{
 					name: 'shift',
 					label: 'Shift by',
+					tooltip: 'Enter a number (positive/negative) to shift the alphabet by.',
 					type: 'number',
 					default: 10
 				}
