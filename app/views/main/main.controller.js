@@ -72,11 +72,20 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 
 	main.fillers = {
 		list: FILLER_TEXT,
+		listById: {},
 		selected: null,
 		default: null,
 		init: function(){
-			this.default = this.list[0];
+			this.createListById();
+
+			this.default = this.listById.default;
 			this.selected = this.default;
+		},
+		createListById: function(){
+			for( var i = 0; i < this.list.length; i += 1 ){
+				var filler = this.list[i];
+				this.listById[filler.id] = filler;
+			}
 		}
 	}
 
@@ -119,7 +128,7 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 
 		onInputChange: function( text ){
 			main.input = text;
-
+			main.fillers.selected = main.fillers.listById.none;
 			main.ciphers.run();
 		}
 	};

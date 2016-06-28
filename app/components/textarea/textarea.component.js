@@ -33,7 +33,6 @@ module.exports = {
             $sizer.text($ctrl.model);
 
             var componentOffset = $component[0].offsetTop;
-            console.log('$component ' , $component);
             var offset = ($ctrl.offset) ? $offset[0].offsetHeight : 0;
             var marginBottom = $ctrl.marginBottom || 0;
             marginBottom = parseInt(marginBottom, 10);
