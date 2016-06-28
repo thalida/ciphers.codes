@@ -15,7 +15,7 @@
 				on-change="main.events.onCipherChange( option )">
 			</cc:select>
 			<cc:select
-				styles="main-view-header-inputs last"
+				styles="main-view-header-inputs last main-view-fillers"
 				model="main.fillers.selected"
 				options="main.fillers.list"
 				options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"

@@ -31,6 +31,10 @@
             &.last {
                 margin-right: 0;
             }
+
+            @media (max-width: 320px) {
+                margin-right: 3%;
+            }
         }
 
         &.secondary {
@@ -104,4 +108,9 @@
         height: calc(100% - 120px);
     }
 
+    &-fillers {
+        @media (max-width: 480px) {
+            display: none;
+        }
+    }
 }
