@@ -2,6 +2,7 @@
 require('angular');
 
 // Styles
+require('angular-tooltips/lib/angular-tooltips.scss');
 require('./app.scss');
 
 // App

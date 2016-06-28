@@ -4,6 +4,7 @@
 .cc_input {
     position: relative;
     display: inline-block;
+    vertical-align: text-top;
 
     @extend %clearfix;
     @extend %clickable;
@@ -11,10 +12,9 @@
     &-field {
         &-wrapper {
             display: inline-block;
-            float: left;
+            vertical-align: top;
             overflow: hidden;
             position: relative;
-            margin-top: 5px;
             width: 64px;
 
             -webkit-transition: width 350ms;
@@ -24,15 +24,11 @@
                 width: 96px;
             }
 
-            @media (min-width: 600px) {
-                width: 128px;
-            }
-
             @extend %clearfix;
         }
 
         display: block;
-        padding: 0;
+        padding: 0 0 3px 0;
         position: relative;
         width: 100%;
 

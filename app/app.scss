@@ -70,8 +70,9 @@ html {
 }
 
 .label {
-    float: left;
-    padding-top: 5px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
 
     color: white;
     font-size: 12px;
@@ -79,6 +80,6 @@ html {
     margin-right: 5px;
 
     @media (min-width: 400px) {
-        margin-right: 10px;
+        margin-right: 5px;
     }
 }

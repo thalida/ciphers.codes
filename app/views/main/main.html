@@ -1,28 +1,46 @@
 <div class="main-view">
 	<form class="main-view-form" novalidate>
 		<div class="main-view-header">
-			<cc:toggle
-				styles="main-view-header-inputs"
-				model="main.ciphers.isEncoding"
-				options="main.ciphers.encodingToggle"
-				on-change="main.events.onIsEncodingChange( value )">
-			</cc:toggle>
-			<cc:select
-				styles="main-view-header-inputs"
-				model="main.ciphers.selected"
-				options="main.ciphers.list"
-				options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
-				on-change="main.events.onCipherChange( option )">
-			</cc:select>
-			<cc:select
-				styles="main-view-header-inputs last main-view-fillers"
-				model="main.fillers.selected"
-				options="main.fillers.list"
-				options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
-				on-change="main.events.onFillerChange( option )">
-			</cc:select>
+			<div class="main-view-header-inputs">
+				<cc:toggle
+					model="main.ciphers.isEncoding"
+					options="main.ciphers.encodingToggle"
+					on-change="main.events.onIsEncodingChange( value )"
+					tooltip="foo">
+				</cc:toggle>
+			</div>
+			<div class="main-view-header-inputs">
+				<cc:select
+					model="main.ciphers.selected"
+					options="main.ciphers.list"
+					options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
+					on-change="main.events.onCipherChange( option )"
+					tooltip="foo">
+				</cc:select>
+			    <cc:help-tooltip text="sdfsdfsd"></cc:help-tooltip>
+		    </div>
+			<div class="main-view-header-inputs main-view-fillers main">
+				<cc:select
+					model="main.fillers.selected"
+					options="main.fillers.list"
+					options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
+					on-change="main.events.onFillerChange( option )"
+					tooltip="foo">
+				</cc:select>
+			    <cc:help-tooltip text="sdfsdfsd"></cc:help-tooltip>
+		    </div>
 		</div>
 		<div class="main-view-header secondary">
+			<div class="main-view-header-inputs main-view-fillers secondary">
+				<cc:select
+					model="main.fillers.selected"
+					options="main.fillers.list"
+					options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
+					on-change="main.events.onFillerChange( option )"
+					tooltip="foo">
+				</cc:select>
+			    <cc:help-tooltip text="sdfsdfsd"></cc:help-tooltip>
+		    </div>
 			<div class="main-view-header-inputs"
 				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
 				 ng-switch on="addon.type">
@@ -33,6 +51,7 @@
 				 	label="{{addon.label}}"
 				 	placeholder="{{addon.placeholder}}"
 				 	default="addon.default"></cc:input>
+			    <cc:help-tooltip text="sdfsdfsd"></cc:help-tooltip>
 			</div>
 		</div>
 

@@ -3,9 +3,14 @@
 
 .cc_toggle {
     @extend %clickable;
+    display: inline-block;
+    position: relative;
+    vertical-align: text-top;
 
     &-label {
         color: $faded-white-1;
+        display: inline-block;
+        position: relative;
 
         @extend %clickable;
 

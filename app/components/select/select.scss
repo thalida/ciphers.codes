@@ -6,6 +6,7 @@
 .cc_select {
     position: relative;
     display: inline-block;
+    vertical-align: text-top;
 
     &, > * {
         @extend %clickable;
@@ -94,5 +95,9 @@
     & select:-moz-focusring {
         color: transparent;
         text-shadow: 0 0 0 white;
+    }
+
+    .cc_help-tooltip {
+        margin-left: 5px;
     }
 }

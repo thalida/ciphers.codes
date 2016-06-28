@@ -5,6 +5,7 @@ module.exports = {
     bindings: {
         model: '=',
         options: '=',
+        tooltip: '@?',
         styles: '@?',
         onChange: '&?'
     },

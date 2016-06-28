@@ -7,7 +7,8 @@ angular.module('app', [
 	require('angular-resource'),
 	require('angular-sanitize'),
 	require('angular-touch'),
-	require('angular-ui-router'),
+    require('angular-ui-router'),
+    require('angular-tooltips'),
 	'ngStorage',
 	'app.main'
 ])

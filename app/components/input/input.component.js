@@ -9,6 +9,7 @@ module.exports = {
         type: '@',
         placeholder: '@?',
         label: '@?',
+        tooltip: '@?',
         onKeyup: '&?',
         onChange: '&?'
     },
