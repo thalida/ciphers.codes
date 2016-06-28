@@ -33,12 +33,13 @@ module.exports = {
             $sizer.text($ctrl.model);
 
             var componentOffset = $component[0].offsetTop;
+            console.log('$component ' , $component);
             var offset = ($ctrl.offset) ? $offset[0].offsetHeight : 0;
             var marginBottom = $ctrl.marginBottom || 0;
             marginBottom = parseInt(marginBottom, 10);
 
             var minHeight = 64;
-            var maxHeight = (window.innerHeight / 2) - componentOffset - offset - marginBottom;
+            var maxHeight = ($component[0].clientHeight * 0.8);
 
             var minFontSize = 16;
             var maxFontSize = 64;
@@ -47,7 +48,7 @@ module.exports = {
             var sizerHeight;
             var ratio;
 
-            $component[0].style.height = maxHeight + 'px';
+            // $component[0].style.height = maxHeight + 'px';
             $sizer[0].style.fontSize = maxFontSize + 'px';
 
             sizerHeight = ($sizer[0].scrollHeight < minHeight) ? minHeight : $sizer[0].scrollHeight;

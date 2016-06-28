@@ -1,22 +1,29 @@
 <div class="main-view">
 	<form class="main-view-form" novalidate>
-		<div class="main-view-form-primary_settings">
+		<div class="main-view-header">
+			<cc:toggle
+				styles="main-view-header-inputs"
+				model="main.ciphers.isEncoding"
+				options="main.ciphers.encodingToggle"
+				on-change="main.events.onIsEncodingChange( value )">
+			</cc:toggle>
 			<cc:select
-				styles="float-left"
+				styles="main-view-header-inputs"
 				model="main.ciphers.selected"
 				options="main.ciphers.list"
 				options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
 				on-change="main.events.onCipherChange( option )">
 			</cc:select>
-			<cc:toggle
-				styles="float-right"
-				model="main.ciphers.isEncoding"
-				options="main.ciphers.encodingToggle"
-				on-change="main.events.onIsEncodingChange( value )">
-			</cc:toggle>
+			<cc:select
+				styles="main-view-header-inputs last"
+				model="main.fillers.selected"
+				options="main.fillers.list"
+				options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
+				on-change="main.events.onFillerChange( option )">
+			</cc:select>
 		</div>
-		<div class="main-view-form-secondary_settings">
-			<div class="main-view-form-input-container"
+		<div class="main-view-header secondary">
+			<div class="main-view-header-inputs"
 				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
 				 ng-switch on="addon.type">
 				 <cc:input
@@ -27,16 +34,6 @@
 				 	placeholder="{{addon.placeholder}}"
 				 	default="addon.default"></cc:input>
 			</div>
-			<div class="float-right">
-				<cc:select
-					styles="main-view-form-input"
-					label="Sample"
-					model="main.fillers.selected"
-					options="main.fillers.list"
-					options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
-					on-change="main.events.onFillerChange( option )">
-				</cc:select>
-			</div>
 		</div>
 
 		<cc:textarea
@@ -44,18 +41,15 @@
 			model="main.input"
 			margin-bottom="20"
 			on-change="main.events.onInputChange( value )"></cc:textarea>
-
-		<cc:drawer content="{{main.ciphers.selected.details.description}}"></cc:drawer>
 	</form>
 	<div class="main-view-output" ng-class="[main.ciphers.selected.details.name]">
-		<div class="main-view-output-header"></div>
+		<div class="main-view-header"></div>
+		<div class="main-view-header secondary invisible"></div>
 
 		<cc:textarea
 			disabled="true"
 			model="main.output.text"
-			styles="main-view-output-text"
-			offset=".main-view-output-footer"></cc:textarea>
-
-		<div class="main-view-output-footer"></div>
+			styles="main-view-output-text"></cc:textarea>
 	</div>
+	<div class="main-view-footer"></div>
 </div>

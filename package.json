@@ -1,9 +1,9 @@
 {
-  "name": "EncodeDecode",
+  "name": "CiphersCodes",
   "private": true,
   "version": "0.0.0",
   "description": "",
-  "repository": "https://github.com/thalida/EncodeDecode",
+  "repository": "https://github.com/thalida/CiphersCodes",
   "scripts": {
     "build:prod": "NODE_ENV=production webpack -p --progress --colors",
     "build:staging": "NODE_ENV=production webpack -p --progress --colors",

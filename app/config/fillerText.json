@@ -2,7 +2,7 @@
     {
         "id": "default",
         "enabled": true,
-        "label": "Ciphers & Codes",
+        "label": "Default",
         "text": "Ciphers & Codes"
     },
     {
@@ -32,7 +32,7 @@
     {
         "id": "none",
         "enabled": true,
-        "label": "None",
+        "label": "Custom",
         "text": ""
     }
 ]
