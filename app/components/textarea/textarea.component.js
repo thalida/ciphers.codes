@@ -30,6 +30,8 @@ module.exports = {
 
         var debounceTimeout;
 
+        this.disabled = this.disabled === 'true';
+
         this.resize = function(){
             $sizer.text($ctrl.model);
 
@@ -89,6 +91,20 @@ module.exports = {
             debounceTimeout = $timeout(this.resize, 100);
         }
 
+        this.select = function(){
+            if( this.disabled ){
+                return;
+            }
+            $textarea[0].select();
+        }
+
+        this.focus = function(){
+            if( this.disabled ){
+                return;
+            }
+            $textarea[0].focus();
+        }
+
         this.onChange = function(){
             this.onChangeCB({value: this.model});
             this.resize();
@@ -97,11 +113,11 @@ module.exports = {
         this.onPaste = this.delayedResize;
         this.onKeydown = this.delayedResize;
         this.onContainerClick = function(){
-            $textarea[0].focus();
+            $ctrl.focus();
         }
 
-        $textarea[0].focus();
-        $textarea[0].select();
+        this.focus();
+        this.select();
         this.resize();
 
         $win.bind('resize', function () {

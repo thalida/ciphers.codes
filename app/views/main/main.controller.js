@@ -9,8 +9,6 @@ var $requires = [
 ].concat( require('../../services/ciphers') );
 
 var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, cipherUtils) {
-	window.scroll(0, 0);
-
 	var main = this;
 
 	main.init = function(){
@@ -19,8 +17,6 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 
 		main.input = main.fillers.selected.text;
 		main.output = {};
-
-		window.scroll(0, 0);
 
 		main.ciphers.run();
 	}
