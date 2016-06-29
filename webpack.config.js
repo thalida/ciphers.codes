@@ -6,6 +6,7 @@ var merge = require('webpack-merge');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 var isProduction = process.env.NODE_ENV === 'production'
 
@@ -30,7 +31,7 @@ var common = {
         path: DIST,
         filename: "[name].[hash].js",
         chunkFilename: "[id].js",
-        publicPath: ( isProduction ) ? '/CiphersCodes/' : ''
+        publicPath: ''
     },
     module: {
         loaders: [
@@ -77,6 +78,7 @@ var common = {
 
 var productionConfig = {
     plugins: [
+        new CopyWebpackPlugin([{ context: __dirname, from: './CNAME' }], { copyUnmodified: true }),
         new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.[hash].js"),
         new ExtractTextPlugin("[name].[hash].css", {
             allChunks: true
