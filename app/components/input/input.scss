@@ -17,24 +17,10 @@
             vertical-align: top;
             overflow: hidden;
             position: relative;
-            width: 64px;
+            width: 32px;
 
             -webkit-transition: width 350ms;
             transition: width 350ms;
-
-            @media (min-width: 400px) {
-                width: 96px;
-            }
-
-            @media (min-width: 805px) {
-                width: 128px;
-            }
-
-            .cc_input.number & {
-                width: 32px !important;
-                -webkit-transition: width 0ms;
-                transition: width 0ms;
-            }
 
             @extend %clearfix;
         }
