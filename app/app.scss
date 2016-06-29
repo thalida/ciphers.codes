@@ -3,14 +3,28 @@
 
 
 body {
-	height: 100%;
-	margin: 0;
-	// overflow: hidden;
-	padding: 0;
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+	height: 100vh;
 	width: 100%;
 
 	background: white;
 	font: normal normal 16px/1.5 'Roboto Slab', serif;
+
+    // https://gist.github.com/pburtchaell/e702f441ba9b3f76f587
+    @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
+        height: 1024px;
+    }
+
+    @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape){
+        height: 768px;
+    }
+
+    @media screen and (device-aspect-ratio: 40/71) {
+        height: 500px;
+    }
 }
 
 html {
@@ -27,7 +41,7 @@ html {
 
 .app {
 	display: block;
-	position: absolute;
+	position: relative;
 	height: 100%;
 	width: 100%;
 }
