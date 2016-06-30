@@ -39,6 +39,54 @@ html {
     outline: none;
 }
 
+h3,
+.h3 {
+    margin: 0;
+
+    color: $faded-white-2;
+    font-size: 12px;
+    font-weight: 100;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+button,
+.btn {
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+
+    background-color: transparent;
+}
+
+.icon {
+    border: 0;
+    background-color: transparent;
+    display: inline-block;
+
+    &-copy {
+        @include sprite($copy-white);
+    }
+
+    &-share {
+        @include sprite($share-white);
+    }
+}
+
+.responsive {
+    &-mobile {
+        @media (max-width: 480px) {
+            &-hidden {
+                display: none;
+            }
+        }
+    }
+}
+
+.text-right {
+    text-align: right;
+}
+
 .app {
 	display: block;
 	position: relative;

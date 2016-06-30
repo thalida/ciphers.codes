@@ -12,7 +12,14 @@ angular.module('app', [
 	'ngStorage',
 	'app.main'
 ])
-.config( require('./app.route.js') );
+.config( require('./app.route.js') )
+.config(['tooltipsConfProvider', function ( tooltipsConfProvider ){
+    tooltipsConfProvider.configure({
+        'smart' : true,
+        'size'  : 'small',
+        'speed' : 'medium'
+    });
+}]);
 
 // Constants
 require('./app.constants.js');

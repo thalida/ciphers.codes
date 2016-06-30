@@ -11,6 +11,7 @@
 			<div class="main-view-header-inputs main-view-fillers">
 				<cc:select
 					model="main.fillers.selected"
+					label="Text"
 					options="main.fillers.list"
 					options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
 					on-change="main.events.onFillerChange( option )">
@@ -19,7 +20,7 @@
 		    </div>
 		</div>
 		<div class="main-view-header secondary">
-			<div class="main-view-header-inputs main-view-ciphers">
+			<div class="main-view-header-inputs">
 				<cc:select
 					model="main.ciphers.selected"
 					options="main.ciphers.list"
@@ -27,6 +28,7 @@
 					on-change="main.events.onCipherChange( option )">
 				</cc:select>
 			    <cc:help-tooltip
+			    	styles="select-tooltip"
 			    	ng-if="main.ciphers.selected.details.description"
 			    	text="{{main.ciphers.selected.details.description}} <a href='{{main.ciphers.selected.details.url}}' target='_blank'>Learn More &rsaquo;</a>">
 		    	</cc:help-tooltip>
@@ -53,8 +55,23 @@
 			on-change="main.events.onInputChange( value )"></cc:textarea>
 	</form>
 	<div class="main-view-output" ng-class="[main.ciphers.selected.details.name]">
-		<div class="main-view-header"></div>
-		<div class="main-view-header secondary invisible"></div>
+		<div class="main-view-header">
+			<h3>{{(main.ciphers.isEncoding ? 'Encoded' : 'Decoded')}} Output</h3>
+		</div>
+		<div class="main-view-header secondary text-right">
+			<button
+				class="btn btn-copy"
+				data-clipboard-name="copy"
+				data-clipboard-target=".main-view-output-text .cc_textarea-field.main"
+				alt="copy to clipboard"
+		        tooltip-side="bottom"
+		        tooltip-template="copied!"
+		        tooltip-hidden="{{main.clipboards.tooltips.copy === false}}">
+				<i class="icon icon-copy"></i>
+			</button>
+			<!-- <button
+				class="icon icon-share"></button> -->
+		</div>
 
 		<cc:textarea
 			disabled="true"
@@ -64,6 +81,6 @@
 	</div>
 	<div class="main-view-footer">
 		<div class="logo small"></div>
-		<div class="copyright">Crafted with love by <a href="https://twitter.com/thalidanoel" target="_blank">thalida</a></div>
+		<div class="copyright">Crafted <span class="responsive responsive-mobile-hidden">with love</span> by <a href="https://twitter.com/thalidanoel" target="_blank">thalida</a></div>
 	</div>
 </div>

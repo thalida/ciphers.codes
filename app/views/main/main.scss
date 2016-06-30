@@ -38,6 +38,10 @@
             .cc_help-tooltip {
                 margin-left: 4px;
             }
+
+            &:hover {
+                z-index: 3;
+            }
         }
 
         &.main {
@@ -51,6 +55,25 @@
 
         &.invisible {
             background-color: transparent;
+        }
+
+        h3 {
+            text-align: center;
+            line-height: $header-secondary-height;
+        }
+
+        .btn {
+            @include vertical-align();
+            margin-left: 10px;
+            margin-right: 10px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
         }
 
         @media (max-width: 1200px) {
@@ -139,15 +162,17 @@
         }
     }
 
-    &-ciphers {
-        z-index: 2;
-    }
-
     &-fillers {
         display: inline-block;
     }
 
     .cc_textarea {
         height: calc(100% - 120px);
+    }
+
+    .cc_help-tooltip {
+        &.select-tooltip {
+            margin-top: 12px;
+        }
     }
 }

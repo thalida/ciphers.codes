@@ -40,6 +40,10 @@ var common = {
                 loader: "expose?angular"
             },
             {
+                test: require.resolve('clipboard/dist/clipboard'),
+                loader: "expose?Clipboard"
+            },
+            {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract("style-loader", "css-loader!resolve-url-loader!sass-loader?sourceMap")
             },
