@@ -124,9 +124,17 @@
             }
         }
 
-        .logo {
+        .logo-link {
             @include vertical-align();
+            display: inline-block;
             margin: 0 auto;
+            opacity: 1;
+            -webkit-transition: opacity 300ms;
+            transition: opacity 300ms;
+
+            &:hover {
+                opacity: 0.8;
+            }
         }
 
         .copyright {
@@ -221,6 +229,47 @@
 
     &-fillers {
         display: inline-block;
+        float: right;
+    }
+
+    .switch-contents-wrapper-tooltip,
+    .switch-contents-wrapper {
+        $width: 32px;
+        $height: 32px;
+
+        @extend %clickable;
+
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: calc(50% - 16px);
+        z-index: 10;
+        width: $width;
+        height: $height;
+
+        text-align: center;
+        background-color: rgba($teal-1, 0.3);
+        border-radius: 50%;
+        -webkit-transition: background-color 300ms, transform 1500ms;
+        transition: background-color 300ms, transform 1500ms;
+
+        .double-arrow-icon {
+            vertical-align: middle;
+            padding-top: 4px;
+            padding-left: 1px;
+        }
+
+        &:hover {
+            background-color: rgba($teal-1, 0.5);
+        }
+
+        @media all and (max-width: 900px) {
+            top: initial;
+            bottom: calc(60px - 16px);
+            -ms-transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
     }
 
     .cc_textarea {

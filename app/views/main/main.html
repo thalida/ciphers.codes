@@ -55,6 +55,11 @@
 			margin-bottom="20"
 			on-change="main.events.onInputChange( value )"></cc:textarea>
 	</form>
+	<div class="switch-contents-wrapper" ng-click="main.events.onSwitch()">
+		<img class="double-arrow-icon"
+			src="/assets/images/double-arrow-white-small.svg"
+			alt="Switch output &amp; input" />
+	</div>
 	<div class="main-view-output" ng-class="[main.ciphers.selected.details.name]">
 		<div class="main-view-header">
 			<h3>{{(main.ciphers.isEncoding ? 'Encoded' : 'Decoded')}} Output</h3>
@@ -101,12 +106,14 @@
 				<span class="emoji emoji-raised-hands"></span>
 			</a>
 		</div>
-		<div class="logo small"></div>
-			<div class="credits">
-				Emoji by
-				<a href="http://emojione.com/" target="_blank">
-					Emoji One
-				</a>
-			</div>
+		<a class="logo-link" href="/">
+			<div class="logo small"></div>
+		</a>
+		<div class="credits">
+			Emoji by
+			<a href="http://emojione.com/" target="_blank">
+				Emoji One
+			</a>
+		</div>
 	</div>
 </div>

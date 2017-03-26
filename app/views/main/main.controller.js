@@ -217,7 +217,14 @@ var MainController = function($scope, $sce, $state, $stateParams, FILLER_TEXT, c
 			main.input = text;
 			main.fillers.selected = main.fillers.listById.none;
 			main.ciphers.run();
-		}
+		},
+
+		onSwitch: function () {
+			main.ciphers.isEncoding = !main.ciphers.isEncoding;
+			main.input = main.output.text;
+			main.fillers.selected = main.fillers.listById.none;
+			main.ciphers.run();
+		},
 	};
 
 	main.init();
