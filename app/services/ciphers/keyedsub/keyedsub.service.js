@@ -29,7 +29,7 @@ var _service = function(cipherCollection, utils){
 					label: 'Key',
 					placeholder: 'Enter your key...',
 					tooltip: 'Create a key by entering text without using duplicate letters.',
-					default: 'loremipsu'
+					default: 'private'
 				}
 			]
 		};
