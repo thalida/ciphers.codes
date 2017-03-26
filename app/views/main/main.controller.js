@@ -105,7 +105,10 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 			this.createClipboard('share', '.btn-share');
 		},
 		createClipboard: function( name, el ){
-			this.collection[name] = new Clipboard( el );
+			// this.collection[name] = new Clipboard( el );
+			this.collection[name] = {
+				on: function () {},
+			};
 
 			this.collection[name].on('success', this.onSuccess.bind(this));
 			this.collection[name].on('error', this.onError.bind(this));
@@ -160,11 +163,15 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 				main.ciphers.addons.key = cipherUtils.createSet( keyArr ).join('');
 			}
 
-			if( addon.validation && main.ciphers.validAddons === true ){
+			if( addon.validation ){
 				main.ciphers.validAddons = addon.validation( value ) === true;
+			} else {
+				main.ciphers.validAddons = true;
 			}
 
-			main.ciphers.run();
+			if (main.ciphers.validAddons) {
+				main.ciphers.run();
+			}
 		},
 
 		onInputChange: function( text ){
