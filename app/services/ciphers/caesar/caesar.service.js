@@ -25,7 +25,7 @@ var _service = function(cipherCollection, utils){
 					label: 'Shift by',
 					tooltip: 'Enter a number (positive/negative) to shift the alphabet by.',
 					type: 'number',
-					default: 10
+					default: 2
 				}
 			],
 			description: 'A simple substitution cipher in which the alphabet is shifted up or down a specified number of positions.',

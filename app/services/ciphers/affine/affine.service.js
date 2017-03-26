@@ -17,6 +17,8 @@ var _service = function(cipherCollection, utils){
 	// 		Setup the details and private variables for the cipher
 	//----------------------------------------------------------------------
 	var Service = function(){
+		var self = this;
+		this.allowedCoprimes = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
 		this.details = {
 			name: 'affine',
 			label: 'Affine',
@@ -26,12 +28,11 @@ var _service = function(cipherCollection, utils){
 				{
 					name: 'coprime',
 					label: 'Co-prime',
-					tooltip: 'The coprimes of 26 are: 1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, and 25',
+					tooltip: 'The coprimes of 26 are: ' + this.allowedCoprimes.join(', '),
 					type: 'number',
 					default: 5,
 					validation: function( n ){
-						var allowedCoprimes = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
-						return allowedCoprimes.indexOf( parseInt(n, 10) ) >= 0;
+						return self.allowedCoprimes.indexOf( parseInt(n, 10) ) >= 0;
 					}
 				},
 				{
@@ -39,7 +40,7 @@ var _service = function(cipherCollection, utils){
 					label: 'Shift',
 					tooltip: 'Enter a number (positive/negative) to shift the alphabet by.',
 					type: 'number',
-					default: 10,
+					default: 2,
 				}
 			]
 		};
@@ -61,7 +62,6 @@ var _service = function(cipherCollection, utils){
 			}
 		};
 		var opts = utils.extendCopy(_defaults, args);
-		console.log('opts ' , opts);
 
 		var alpha = utils.ALPHA();
 		var shift = utils.makeValidInt(opts.addons.shift, _defaults.addons.shift);
