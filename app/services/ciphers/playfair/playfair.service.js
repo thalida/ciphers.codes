@@ -223,7 +223,7 @@ var _service = function(cipherCollection, utils){
 
 
 		if (opts.isEncoding) {
-			output = output.replace(/(.{4})/g, '$1 ');
+			output = output.replace(/(.{4})/g, '$1 ').trim();
 		} else {
 			output = output;
 		}

@@ -10,7 +10,7 @@ describe('playfair service', function(){
 	};
 	var cipherStrs = {
 		normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-		encoded: 'bcdfmdhisrknolhmqscxupwxyzvy',
+		encoded: 'bcdf mdhi srkn olhm qscx upwx yzvy',
 		decoded: 'abcdefghixiklmnopqrstuvwxyzx'
 	};
 
@@ -41,6 +41,6 @@ describe('playfair service', function(){
 		cipherArgs.string = cipherStrs.normal;
 		cipherArgs.addons.key = null;
 
-		expect(cipherService.run(cipherArgs)).toEqual('bcdeakhihykfmnoplustuqwxyzvy');
+		expect(cipherService.run(cipherArgs)).toEqual('bcde akhi hykf mnop lust uqwx yzvy');
 	});
 });
