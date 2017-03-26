@@ -35,12 +35,8 @@
             -webkit-transition: width 350ms;
             transition: width 350ms;
 
-            @media (min-width: 700px) {
+            @media (max-width: 500px) {
                 width: 70px;
-            }
-
-            @media (min-width: 840px) {
-                width: 145px;
             }
 
             @extend %clearfix;
