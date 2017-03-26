@@ -15,7 +15,7 @@
     &-field {
         display: block;
         position: relative;
-        width: 90%;
+        width: 80%;
 
         background: transparent;
         border: 0;
@@ -45,7 +45,7 @@
         }
 
         @media (max-width: 1200px) {
-            width: 96%;
+            width: 90%;
         }
     }
 }
