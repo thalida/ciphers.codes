@@ -7,10 +7,12 @@
         placeholder="{{$ctrl.placeholder}}"
         ng-model="$ctrl.model"
         ng-change="$ctrl.onChange()"
+        ng-keyup="$ctrl.onKeyup()"
         ng-keydown="$ctrl.onKeydown()"
         ng-cut="$ctrl.onCut()"
         ng-paste="$ctrl.onPaste()"
-        ng-readonly="{{$ctrl.disabled}}"></textarea>
+        ng-readonly="{{$ctrl.disabled}}"
+        ng-trim="false"></textarea>
 
     <textarea rows="1" class="cc_textarea-field off_screen" ng-model="$ctrl.model" disabled="disabled"></textarea>
 </div>

@@ -17,22 +17,31 @@ module.exports = {
     },
     controller: ['$scope', '$element', '$window', '$timeout', function($scope, $el, $window, $timeout){
         var $ctrl = this;
-        this.$id = $scope.$id;
 
+        var $win = angular.element($window);
         var $component = angular.element($el[0].querySelector('.cc_textarea'));
         var $textarea = angular.element($el[0].querySelector('.cc_textarea-field.main'));
         var $sizer = angular.element($el[0].querySelector('.cc_textarea-field.off_screen'));
         var $offset;
-        if( this.offset ){
-            var $offset = angular.element(document.querySelector(this.offset));
-        }
-        var $win = angular.element($window);
 
         var debounceTimeout;
 
-        this.disabled = this.disabled === 'true';
+        $ctrl.$onInit = function () {
+            $ctrl.$id = $scope.$id;
+            $ctrl.disabled = $ctrl.disabled === 'true';
 
-        this.resize = function(){
+            if( $ctrl.offset ){
+                $offset = angular.element(document.querySelector($ctrl.offset));
+            }
+
+            $ctrl.resize();
+            $ctrl.select();
+            $ctrl.focus();
+        };
+
+        $ctrl.$onChanges = function () {};
+
+        $ctrl.resize = function(){
             $sizer.text($ctrl.model);
 
             var componentOffset = $component[0].offsetTop;
@@ -50,15 +59,14 @@ module.exports = {
             var sizerHeight;
             var ratio;
 
-            // $component[0].style.height = maxHeight + 'px';
             $sizer[0].style.fontSize = maxFontSize + 'px';
-
             sizerHeight = ($sizer[0].scrollHeight < minHeight) ? minHeight : $sizer[0].scrollHeight;
             ratio = +((maxHeight / sizerHeight).toFixed(3));
             fontSize = ( ratio > 1 ) ? maxFontSize : (maxFontSize * ratio);
             fontSize = ( fontSize < minFontSize ) ? minFontSize : fontSize;
 
             $sizer[0].style.fontSize = fontSize + 'px';
+
             $textarea[0].style.minHeight = minHeight + 'px';
             $textarea[0].style.maxHeight = maxHeight + 'px';
             $textarea[0].style.fontSize = fontSize + 'px';
@@ -67,7 +75,6 @@ module.exports = {
 
             $textarea[0].style.height = 'auto';
             $textarea[0].style.height = ( sizerHeight > 0 ) ? sizerHeight + 'px' : 'auto';
-            $textarea[0].style.overflow = ( sizerHeight >= maxHeight ) ? 'auto' : 'hidden';
 
             if( $ctrl.scrollTo ){
                 if( $ctrl.scrollTo === 'top' ){
@@ -78,47 +85,48 @@ module.exports = {
             }
         }
 
-        this.delayedResize = function(){
-            $timeout(this.resize, 0);
+        $ctrl.delayedResize = function(){
+            $timeout($ctrl.resize, 0);
         }
 
-        this.debouceResize = function(){
+        $ctrl.debouceResize = function(){
             if( typeof debounceTimeout !== 'undefined' && debounceTimeout !== null ){
                 $timeout.cancel(debounceTimeout);
                 debounceTimeout = null;
             }
 
-            debounceTimeout = $timeout(this.resize, 100);
+            debounceTimeout = $timeout($ctrl.resize, 100);
         }
 
-        this.select = function(){
-            if( this.disabled ){
+        $ctrl.select = function(){
+            if( $ctrl.disabled ){
                 return;
             }
             $textarea[0].select();
         }
 
-        this.focus = function(){
-            if( this.disabled ){
+        $ctrl.focus = function(){
+            if( $ctrl.disabled ){
                 return;
             }
             $textarea[0].focus();
         }
 
-        this.onChange = function(){
-            this.onChangeCB({value: this.model});
-            this.resize();
-        }
-        this.onCut = this.delayedResize;
-        this.onPaste = this.delayedResize;
-        this.onKeydown = this.delayedResize;
-        this.onContainerClick = function(){
+        $ctrl.onChange = function(){
+            $ctrl.onChangeCB({value: $ctrl.model});
+            $ctrl.resize();
             $ctrl.focus();
         }
 
-        this.focus();
-        this.select();
-        this.resize();
+        $ctrl.onCut = $ctrl.delayedResize;
+
+        $ctrl.onPaste = $ctrl.delayedResize;
+
+        $ctrl.onKeyup = $ctrl.delayedResize;
+
+        $ctrl.onKeydown = $ctrl.delayedResize;
+
+        $ctrl.onContainerClick = $ctrl.focus;
 
         $win.bind('resize', function () {
             $scope.$apply();
@@ -133,7 +141,7 @@ module.exports = {
                     return;
                 }
 
-                $textarea[0].focus();
+                $ctrl.focus();
                 $ctrl.delayedResize();
             }
         );
