@@ -9,6 +9,7 @@ angular.module('app', [
 	require('angular-touch'),
     require('angular-ui-router'),
     require('angular-tooltips'),
+	require('ngclipboard'),
 	'ngStorage',
 	'app.main'
 ])

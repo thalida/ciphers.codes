@@ -16,7 +16,7 @@ module.exports = function(config){
 		logLevel: config.LOG_INFO,
 		autoWatch : true,
 		frameworks: ['jasmine'],
-		browsers : ['PhantomJS2'],
+		browsers : ['PhantomJS'],
 		singleRun: true,
 		files: ['./app/app.tests.js'],
 		preprocessors: {

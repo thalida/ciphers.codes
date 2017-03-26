@@ -1,6 +1,5 @@
 // Vendors
 require('angular');
-require('clipboard/dist/clipboard');
 
 // Styles
 require('angular-tooltips/lib/angular-tooltips.scss');
