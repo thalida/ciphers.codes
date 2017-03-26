@@ -62,12 +62,15 @@
 		<div class="main-view-header secondary text-right">
 			<button
 				class="btn btn-copy"
-				data-clipboard-name="copy"
+				ngclipboard
 				data-clipboard-target=".main-view-output-text .cc_textarea-field.main"
+				ngclipboard-success="main.clipboards.onSuccess(e, 'copy')"
+				ngclipboard-error="main.clipboards.onError(e, 'copy')"
 				alt="copy to clipboard"
+				tooltips
 		        tooltip-side="bottom"
-		        tooltip-template="copied!"
-		        tooltip-hidden="{{main.clipboards.tooltips.copy === false}}">
+				tooltip-show-trigger="click"
+		        tooltip-template="Copied!">
 				<i class="icon icon-copy"></i>
 			</button>
 			<!-- <button
@@ -81,6 +84,8 @@
 	</div>
 	<div class="main-view-footer">
 		<div class="logo small"></div>
-		<div class="copyright">Crafted <span class="responsive responsive-mobile-hidden">with love</span> by <a href="https://twitter.com/thalidanoel" target="_blank">thalida</a></div>
+		<div class="copyright">
+			Crafted <span class="responsive responsive-mobile-hidden">with love</span> by <a href="https://twitter.com/thalidanoel" target="_blank">thalida</a>
+		</div>
 	</div>
 </div>

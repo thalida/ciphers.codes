@@ -92,38 +92,13 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 	}
 
 	main.clipboards = {
-		tooltips: {
+		showTooltip: {
 			copy: false,
 			share: false
 		},
-		collection: {
-			copy: null,
-			share: null
-		},
-		init: function(){
-			this.createClipboard('copy', '.btn-copy');
-			this.createClipboard('share', '.btn-share');
-		},
-		createClipboard: function( name, el ){
-			// this.collection[name] = new Clipboard( el );
-			this.collection[name] = {
-				on: function () {},
-			};
-
-			this.collection[name].on('success', this.onSuccess.bind(this));
-			this.collection[name].on('error', this.onError.bind(this));
-
-			return this.collection[name];
-		},
-		onSuccess: function( e ){
-			console.log('e ' , e);
-			var name = e.trigger.dataset.clipboardName;
-
+		init: function () {},
+		onSuccess: function( e, name ){
 			e.clearSelection();
-
-			this.tooltips[name] = true;
-
-			$scope.$apply();
 		},
 		onError: function( e ){
 

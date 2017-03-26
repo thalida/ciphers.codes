@@ -63,9 +63,12 @@
         }
 
         .btn {
-            @include vertical-align();
             margin-left: 10px;
             margin-right: 10px;
+
+            &.vertical-align {
+                @include vertical-align();
+            }
 
             &:first-child {
                 margin-left: 0;
@@ -159,6 +162,12 @@
 
         &.mason .cc_textarea-field {
             font: normal normal 64px/1 'Masonic', serif;
+        }
+
+        .main-view-header {
+            tooltip {
+                padding: 20px 0px;
+            }
         }
     }
 
