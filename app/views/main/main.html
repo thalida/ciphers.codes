@@ -61,6 +61,20 @@
 		</div>
 		<div class="main-view-header secondary text-right">
 			<button
+				class="btn btn-copy"
+				ngclipboard
+				data-clipboard-target=".main-view-output-text .cc_textarea-field.main"
+				ngclipboard-success="main.clipboards.onSuccess(e, 'copy')"
+				ngclipboard-error="main.clipboards.onError(e, 'copy')"
+				alt="Copy output text to clipboard"
+				tooltips
+				tooltip-class="cc_help-tooltip-popup"
+				tooltip-side="bottom"
+				tooltip-show-trigger="click"
+				tooltip-template="Copied Output Text!">
+				<i class="icon icon-copy"></i>
+			</button>
+			<button
 				class="btn btn-share"
 				ngclipboard
 				data-clipboard-text="{{main.ciphers.shareUrl}}"
@@ -74,20 +88,6 @@
 		        tooltip-template="Copied Share Link!">
 				<i class="icon icon-share"></i>
 			</button>
-			<button
-				class="btn btn-copy"
-				ngclipboard
-				data-clipboard-target=".main-view-output-text .cc_textarea-field.main"
-				ngclipboard-success="main.clipboards.onSuccess(e, 'copy')"
-				ngclipboard-error="main.clipboards.onError(e, 'copy')"
-				alt="Copy output text to clipboard"
-				tooltips
-				tooltip-class="cc_help-tooltip-popup"
-		        tooltip-side="bottom"
-				tooltip-show-trigger="click"
-		        tooltip-template="Copied Output Text!">
-				<i class="icon icon-copy"></i>
-			</button>
 		</div>
 		<cc:textarea
 			disabled="true"
@@ -96,9 +96,17 @@
 			styles="main-view-output-text"></cc:textarea>
 	</div>
 	<div class="main-view-footer">
-		<div class="logo small"></div>
 		<div class="copyright">
-			Crafted <span class="responsive responsive-mobile-hidden">with love</span> by <a href="https://twitter.com/thalidanoel" target="_blank">thalida</a>
+			<a href="https://twitter.com/thalidanoel" target="_blank">
+				<span class="emoji emoji-raised-hands"></span>
+			</a>
 		</div>
+		<div class="logo small"></div>
+			<div class="credits">
+				Emoji by
+				<a href="http://emojione.com/" target="_blank">
+					Emoji One
+				</a>
+			</div>
 	</div>
 </div>

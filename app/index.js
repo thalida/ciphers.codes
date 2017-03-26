@@ -1,6 +1,9 @@
 // Vendors
 require('angular');
 
+// Images
+require('./assets/images');
+
 // Styles
 require('angular-tooltips/lib/angular-tooltips.scss');
 require('./app.scss');

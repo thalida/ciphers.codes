@@ -155,3 +155,34 @@ button,
         margin-right: 5px;
     }
 }
+
+
+
+.emoji {
+    display: inline-block;
+    position: relative;
+    width: 18px;
+    height: 18px;
+
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    vertical-align: middle;
+
+    &-laughing-with-tears {
+        margin-top: 2px;
+        background-image: url('/assets/images/emoji-laughing_with_tears.svg');
+    }
+
+    &-information-desk-person {
+        background-image: url('/assets/images/emoji-information_desk_person.svg');
+    }
+
+    &-palm-pointing-up {
+        background-image: url('/assets/images/emoji-palm_pointing_up.svg');
+    }
+
+    &-raised-hands {
+        margin-top: -4px;
+        background-image: url('/assets/images/emoji-raised_hands.svg');
+    }
+}

@@ -54,7 +54,7 @@ var common = {
             },
             {
                 test: /\.(woff|woff2|ttf|eot|svg|png|gif|jpg|jpeg|wav|mp3)(\?]?.*)?$/,
-                loader: 'file-loader?name=[path][name].[hash].[ext]'
+                loader: 'file-loader?name=[path][name].[ext]'
             },
             {
                 test: /\.(json)(\?]?.*)?$/,
