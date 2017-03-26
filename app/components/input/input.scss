@@ -22,6 +22,10 @@
             transition: width 350ms;
 
             @extend %clearfix;
+
+            @media (max-width: 500px) {
+                width: 24px;
+            }
         }
 
         display: block;

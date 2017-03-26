@@ -45,7 +45,7 @@ module.exports = {
             $sizer.text($ctrl.model);
 
             var componentOffset = $component[0].offsetTop;
-            var offset = ($ctrl.offset) ? $offset[0].offsetHeight : 0;
+            var offset = ($ctrl.offset) ? $offset[0].offsetHeight : null;
             var marginBottom = $ctrl.marginBottom || 0;
             marginBottom = parseInt(marginBottom, 10);
 
@@ -58,6 +58,10 @@ module.exports = {
 
             var sizerHeight;
             var ratio;
+
+            if (offset) {
+                $component[0].style.height = 'calc(100% - ' + offset +'px)';
+            }
 
             $sizer[0].style.fontSize = maxFontSize + 'px';
             sizerHeight = ($sizer[0].scrollHeight < minHeight) ? minHeight : $sizer[0].scrollHeight;

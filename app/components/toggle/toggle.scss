@@ -17,8 +17,8 @@
         @extend %clickable;
 
         &-content {
-            font-size: 14px;
-            font-weight: 400;
+            font-size: 12px;
+            font-weight: 100;
 
             .cc_toggle.is_on &.on_label,
             .cc_toggle.is_off &.off_label {

@@ -1,51 +1,57 @@
 <div class="main-view">
 	<form class="main-view-form" novalidate>
-		<div class="main-view-header main">
-			<div class="main-view-header-inputs">
-				<cc:toggle
-					model="main.ciphers.isEncoding"
-					options="main.ciphers.encodingToggle"
-					on-change="main.events.onIsEncodingChange( value )">
-				</cc:toggle>
+		<div class="main-view-header-group">
+			<div class="main-view-header main">
+				<div class="main-view-header-inputs">
+					<cc:toggle
+						model="main.ciphers.isEncoding"
+						options="main.ciphers.encodingToggle"
+						on-change="main.events.onIsEncodingChange( value )">
+					</cc:toggle>
+				</div>
+				<div class="main-view-header-inputs">
+					<cc:select
+						model="main.ciphers.selected"
+						label="Cipher"
+						options="main.ciphers.list"
+						options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
+						on-change="main.events.onCipherChange( option )">
+					</cc:select>
+				    <cc:help-tooltip
+				    	styles="select-tooltip"
+				    	ng-if="main.ciphers.selected.details.description"
+				    	text="{{main.ciphers.selected.details.description}} <a href='{{main.ciphers.selected.details.url}}' target='_blank'>Learn More &rsaquo;</a>">
+			    	</cc:help-tooltip>
+			    </div>
 			</div>
-			<div class="main-view-header-inputs main-view-fillers">
-				<cc:select
-					model="main.fillers.selected"
-					label="Sample Text"
-					options="main.fillers.list"
-					options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
-					on-change="main.events.onFillerChange( option )">
-				</cc:select>
-			    <!-- <cc:help-tooltip text="Choose the text to be {{(main.ciphers.isEncoding ? 'encoded' : 'decoded')}}"></cc:help-tooltip> -->
-		    </div>
-		</div>
-		<div class="main-view-header secondary">
-			<div class="main-view-header-inputs">
-				<cc:select
-					model="main.ciphers.selected"
-					label="Cipher"
-					options="main.ciphers.list"
-					options-expr="cipher as cipher.details.label for cipher in $ctrl.options"
-					on-change="main.events.onCipherChange( option )">
-				</cc:select>
-			    <cc:help-tooltip
-			    	styles="select-tooltip"
-			    	ng-if="main.ciphers.selected.details.description"
-			    	text="{{main.ciphers.selected.details.description}} <a href='{{main.ciphers.selected.details.url}}' target='_blank'>Learn More &rsaquo;</a>">
-		    	</cc:help-tooltip>
-		    </div>
-			<div class="main-view-header-inputs"
-				 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
-				 ng-switch on="addon.type">
-				 <cc:input
-				 	type="{{addon.type}}"
-				 	styles="{{addon.type}}"
-				 	model="main.ciphers.addons[addon.name]"
-				 	on-change="main.events.onAddonChange(addon, value)"
-				 	label="{{addon.label}}"
-				 	placeholder="{{addon.placeholder}}"
-				 	default="addon.default"></cc:input>
-			    <cc:help-tooltip ng-if="addon.tooltip" text="{{addon.tooltip}}"></cc:help-tooltip>
+			<div class="main-view-header secondary">
+				<div class="main-view-header-inputs main-view-fillers">
+					<cc:select
+						model="main.fillers.selected"
+						label="Text"
+						options="main.fillers.list"
+						options-expr="filler as filler.label for filler in $ctrl.options | filter: {enabled: true}"
+						on-change="main.events.onFillerChange( option )">
+					</cc:select>
+				    <cc:help-tooltip
+				    	styles="select-tooltip"
+				    	ng-if="main.ciphers.selected.details.description"
+				    	text="Choose the text to be {{(main.ciphers.isEncoding ? 'encoded' : 'decoded')}}">
+			    	</cc:help-tooltip>
+				</div>
+				<div class="main-view-header-inputs"
+					 ng-repeat="(key, addon) in main.ciphers.selected.details.addons"
+					 ng-switch on="addon.type">
+					 <cc:input
+					 	type="{{addon.type}}"
+					 	styles="{{addon.type}}"
+					 	model="main.ciphers.addons[addon.name]"
+					 	on-change="main.events.onAddonChange(addon, value)"
+					 	label="{{addon.label}}"
+					 	placeholder="{{addon.placeholder}}"
+					 	default="addon.default"></cc:input>
+				    <cc:help-tooltip ng-if="addon.tooltip" text="{{addon.tooltip}}"></cc:help-tooltip>
+				</div>
 			</div>
 		</div>
 
@@ -53,53 +59,61 @@
 			placeholder="Type here.."
 			model="main.input"
 			margin-bottom="20"
+			offset=".main-view-form .main-view-header-group"
 			on-change="main.events.onInputChange( value )"></cc:textarea>
 	</form>
+
 	<div class="switch-contents-wrapper" ng-click="main.events.onSwitch()">
 		<img class="double-arrow-icon"
 			src="/assets/images/double-arrow-white-small.svg"
 			alt="Switch output &amp; input" />
 	</div>
+
 	<div class="main-view-output" ng-class="[main.ciphers.selected.details.name]">
-		<div class="main-view-header">
-			<h3>{{(main.ciphers.isEncoding ? 'Encoded' : 'Decoded')}} Output</h3>
+		<div class="main-view-header-group">
+			<div class="main-view-header">
+				<h3>{{(main.ciphers.isEncoding ? 'Encoded' : 'Decoded')}} Output</h3>
+			</div>
+			<div class="main-view-header secondary text-right">
+				<button
+					class="btn btn-copy"
+					ngclipboard
+					data-clipboard-target=".main-view-output-text .cc_textarea-field.main"
+					ngclipboard-success="main.clipboards.onSuccess(e, 'copy')"
+					ngclipboard-error="main.clipboards.onError(e, 'copy')"
+					alt="Copy output text to clipboard"
+					tooltips
+					tooltip-class="cc_help-tooltip-popup"
+					tooltip-side="bottom"
+					tooltip-show-trigger="click"
+					tooltip-template="Copied Output Text!">
+					<i class="icon icon-copy"></i>
+				</button>
+				<button
+					class="btn btn-share"
+					ngclipboard
+					data-clipboard-text="{{main.ciphers.shareUrl}}"
+					ngclipboard-success="main.clipboards.onSuccess(e, 'share')"
+					ngclipboard-error="main.clipboards.onError(e, 'share')"
+					alt="Copy share url to clipboard"
+					tooltips
+			        tooltip-class="cc_help-tooltip-popup"
+			        tooltip-side="bottom"
+					tooltip-show-trigger="click"
+			        tooltip-template="Copied Share Link!">
+					<i class="icon icon-share"></i>
+				</button>
+			</div>
 		</div>
-		<div class="main-view-header secondary text-right">
-			<button
-				class="btn btn-copy"
-				ngclipboard
-				data-clipboard-target=".main-view-output-text .cc_textarea-field.main"
-				ngclipboard-success="main.clipboards.onSuccess(e, 'copy')"
-				ngclipboard-error="main.clipboards.onError(e, 'copy')"
-				alt="Copy output text to clipboard"
-				tooltips
-				tooltip-class="cc_help-tooltip-popup"
-				tooltip-side="bottom"
-				tooltip-show-trigger="click"
-				tooltip-template="Copied Output Text!">
-				<i class="icon icon-copy"></i>
-			</button>
-			<button
-				class="btn btn-share"
-				ngclipboard
-				data-clipboard-text="{{main.ciphers.shareUrl}}"
-				ngclipboard-success="main.clipboards.onSuccess(e, 'share')"
-				ngclipboard-error="main.clipboards.onError(e, 'share')"
-				alt="Copy share url to clipboard"
-				tooltips
-		        tooltip-class="cc_help-tooltip-popup"
-		        tooltip-side="bottom"
-				tooltip-show-trigger="click"
-		        tooltip-template="Copied Share Link!">
-				<i class="icon icon-share"></i>
-			</button>
-		</div>
+
 		<cc:textarea
 			disabled="true"
 			scroll-to="bottom"
 			model="main.output.text"
+			offset=".main-view-output .main-view-header-group"
 			styles="main-view-output-text"></cc:textarea>
 	</div>
+
 	<div class="main-view-footer">
 		<div class="copyright">
 			<a href="https://twitter.com/thalidanoel" target="_blank">

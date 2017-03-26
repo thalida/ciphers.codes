@@ -20,6 +20,19 @@
 
         background-color: $faded-black-1;
 
+        @media (max-width: 340px) {
+            min-height: $header-height;
+            height: auto;
+
+            .cc_select-field-wrapper {
+                width: 80px;
+            }
+
+            .cc_input-field-wrapper {
+                width: 32px;
+            }
+        }
+
         &-inputs {
             @include vertical-align();
             margin-right: 3%;
@@ -31,12 +44,19 @@
                 margin-right: 0;
             }
 
-            @media (max-width: 320px) {
+            @media (max-width: 340px) {
+                @include top-align();
                 margin-right: 2%;
+                display: block;
+                padding: 4px 0;
             }
 
             .cc_help-tooltip {
                 margin-left: 4px;
+
+                @media (max-width: 500px) {
+                    margin-left: 0px;
+                }
             }
 
             &:hover {
@@ -229,7 +249,7 @@
 
     &-fillers {
         display: inline-block;
-        float: right;
+        //float: right;
     }
 
     .switch-contents-wrapper-tooltip,
