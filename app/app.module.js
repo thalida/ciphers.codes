@@ -25,5 +25,12 @@ angular.module('app', [
 // Constants
 require('./app.constants.js');
 
+// Services
+require('./services/cipherCollection');
+require('./services/cipherUtils');
+
+// Components
+require('./components');
+
 // Views
-require('./views/main');
+require('./views');
