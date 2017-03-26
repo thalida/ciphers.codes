@@ -8,8 +8,8 @@
     {
         "id": "abc",
         "enabled": true,
-        "label": "Alphabet",
-        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\nabcdefghijklmnopqrstuvwxyz\r\n0123456789\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >"
+        "label": "abc, 123, #$!",
+        "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\n\r\nabcdefghijklmnopqrstuvwxyz\r\n\r\n0123456789\r\n\r\n, . ; : ' \" ` ~ ! @ # $ % ^ & * ( )- _ = + [ ]{ } \\ / | < >"
     },
     {
         "id": "lorem",
