@@ -221,7 +221,13 @@ var _service = function(cipherCollection, utils){
 			output += letter1 + letter2;
 		}
 
-		// return output.replace(/(.{5})/g,"$1");
+
+		if (opts.isEncoding) {
+			output = output.replace(/(.{4})/g, '$1 ');
+		} else {
+			output = output;
+		}
+
 		return output;
 	};
 
