@@ -3,31 +3,42 @@
 var $requires = [
 	'$scope',
 	'$sce',
+	'$state',
+	'$stateParams',
 	'FILLER_TEXT',
 	'cipherCollection',
 	'cipherUtils'
 ].concat( require('../../services/ciphers') );
 
-var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, cipherUtils) {
+var MainController = function($scope, $sce, $state, $stateParams, FILLER_TEXT, cipherCollection, cipherUtils) {
 	var main = this;
 
 	main.init = function(){
-		main.ciphers.init();
-		main.fillers.init();
+		var settings = main.ciphers.parseShareUrl($stateParams.settings) || {};
 
-		main.input = main.fillers.selected.text;
+		main.ciphers.init(settings);
+		main.fillers.init(settings);
+
+		if (settings && settings.opts && settings.opts.string
+			&& typeof settings.opts.string === 'string' && settings.opts.string.length > 0
+		) {
+			main.input = settings.opts.string;
+		} else {
+			main.input = main.fillers.selected.text;
+		}
+
 		main.output = {};
 
-		main.clipboards.init();
 		main.ciphers.run();
 	}
 
 	main.ciphers = {
 		list: cipherCollection.get(),
+		shareUrl: null,
 		selected: null,
 		default: null,
 		addons: {},
-		isEncoding: true,
+		isEncoding: null,
 		validAddons: true,
 		encodingToggle: {
 			on: {
@@ -39,14 +50,36 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 				label: 'Decode'
 			}
 		},
-		init: function(){
+		init: function (config) {
+			config = config || {};
+
 			this.default = this.list.caesar;
-			this.selected = this.default;
+
+			if (config && config.cipher && typeof config.cipher === 'string' && config.cipher.length > 0) {
+				this.selected = this.list[config.cipher];
+			}
+
+			if (typeof this.selected === 'undefined' || this.selected === null) {
+				this.selected = this.default;
+			}
+
+			if (config && config.opts && typeof config.opts.isEncoding === 'boolean') {
+				this.isEncoding = config.opts.isEncoding;
+			}
+
+			if (typeof this.isEncoding === 'undefined' || this.isEncoding === null) {
+				this.isEncoding = true;
+			}
 
 			this.addons = this.selected.details.addons.reduce(function(obj, addon, i){
 				obj[addon.name] = addon.default;
 				return obj;
 			}, {});
+
+			if (config && config.opts && config.opts.addons) {
+				this.addons = angular.extend({}, this.addons, config.opts.addons);
+			}
+
 		},
 		run: function(){
 			if( typeof main.ciphers.selected === 'undefined'
@@ -65,10 +98,36 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 				params.addons = main.ciphers.addons;
 			}
 
+			this.generateShareUrl({
+				cipher: main.ciphers.selected.details.name,
+				opts: params,
+			});
+
 			main.output.text = main.ciphers.selected.run( params );
 			var formattedText = main.output.text.replace(/\r?\n/g, '<br />');
 			main.output.html = $sce.trustAsHtml( formattedText );
-		}
+		},
+		generateShareUrl: function (json) {
+			var jsonStr = JSON.stringify(json);
+			var encoded = window.btoa(jsonStr);
+			this.shareUrl = window.location.origin + '/?settings=' + encoded;
+			$state.go($state.current.name, { settings: encoded }, { notify: false, reloadOnSearch: false });
+		},
+		parseShareUrl: function (str) {
+			if (typeof str !== 'string' || str === null || str.length === 0) {
+				return;
+			}
+
+			var settings;
+			var settingsJson;
+
+			try {
+				settings = window.atob(str);
+				settingsJson = JSON.parse(settings);
+			} catch (e) {}
+
+			return settingsJson;
+		},
 	}
 
 
@@ -77,11 +136,19 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 		listById: {},
 		selected: null,
 		default: null,
-		init: function(){
+		init: function(config){
 			this.createListById();
 
 			this.default = this.listById.default;
-			this.selected = this.default;
+
+			if (config && config.opts && config.opts.string
+				&& typeof config.opts.string === 'string' && config.opts.string.length > 0
+			) {
+				this.selected = this.listById.none;
+			} else {
+				this.selected = this.default;
+			}
+
 		},
 		createListById: function(){
 			for( var i = 0; i < this.list.length; i += 1 ){
@@ -96,13 +163,10 @@ var MainController = function($scope, $sce, FILLER_TEXT, cipherCollection, ciphe
 			copy: false,
 			share: false
 		},
-		init: function () {},
 		onSuccess: function( e, name ){
 			e.clearSelection();
 		},
-		onError: function( e ){
-
-		}
+		onError: function( e ){}
 	};
 
 

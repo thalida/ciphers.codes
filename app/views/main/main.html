@@ -61,20 +61,33 @@
 		</div>
 		<div class="main-view-header secondary text-right">
 			<button
+				class="btn btn-share"
+				ngclipboard
+				data-clipboard-text="{{main.ciphers.shareUrl}}"
+				ngclipboard-success="main.clipboards.onSuccess(e, 'share')"
+				ngclipboard-error="main.clipboards.onError(e, 'share')"
+				alt="Copy share url to clipboard"
+				tooltips
+		        tooltip-class="cc_help-tooltip-popup"
+		        tooltip-side="bottom"
+				tooltip-show-trigger="click"
+		        tooltip-template="Copied Share Link!">
+				<i class="icon icon-share"></i>
+			</button>
+			<button
 				class="btn btn-copy"
 				ngclipboard
 				data-clipboard-target=".main-view-output-text .cc_textarea-field.main"
 				ngclipboard-success="main.clipboards.onSuccess(e, 'copy')"
 				ngclipboard-error="main.clipboards.onError(e, 'copy')"
-				alt="copy to clipboard"
+				alt="Copy output text to clipboard"
 				tooltips
+				tooltip-class="cc_help-tooltip-popup"
 		        tooltip-side="bottom"
 				tooltip-show-trigger="click"
-		        tooltip-template="Copied!">
+		        tooltip-template="Copied Output Text!">
 				<i class="icon icon-copy"></i>
 			</button>
-			<!-- <button
-				class="icon icon-share"></button> -->
 		</div>
 		<cc:textarea
 			disabled="true"

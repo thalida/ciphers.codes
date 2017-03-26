@@ -2,7 +2,8 @@
 
 var route = function( $stateProvider ){
     $stateProvider.state('main', {
-        url: '/',
+        url: '/?settings',
+        params: {},
         templateUrl: 'views/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
