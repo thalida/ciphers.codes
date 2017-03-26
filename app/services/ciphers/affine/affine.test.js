@@ -10,7 +10,8 @@ describe('affine service', function(){
 	};
 	var cipherStrs = {
 		normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-		encoded: 'DinsxchmrwbglqvafkpuzejotY - 0123456789'
+		shiftThree: 'DinsxchmrwbglqvafkpuzejotY - 0123456789',
+		shiftNull: 'AfkpuzejotydinsxchmrwbglqV - 0123456789',
 	};
 
 	beforeEach(angular.mock.module('app'));
@@ -25,12 +26,12 @@ describe('affine service', function(){
 		cipherArgs.isEncoding = true;
 		cipherArgs.string = cipherStrs.normal;
 
-		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.encoded);
+		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.shiftThree);
 	});
 
 	it('should decode alphabet by 3', function() {
 		cipherArgs.isEncoding = false;
-		cipherArgs.string = cipherStrs.encoded;
+		cipherArgs.string = cipherStrs.shiftThree;
 
 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
 	});
@@ -40,6 +41,6 @@ describe('affine service', function(){
 		cipherArgs.string = cipherStrs.normal;
 		cipherArgs.addons.shift = null;
 
-		expect(cipherService.run(cipherArgs)).toEqual('AfkpuzejotydinsxchmrwbglqV - 0123456789');
+		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.shiftNull);
 	});
 });
