@@ -22,7 +22,7 @@ var _service = function(cipherCollection, utils){
 			name: 'mason',
 			label: 'Masonic',
 			addons: [],
-			desc: 'A geometric simple substitution cipher which exchanges letters for symbols which are fragments of a grid.',
+			description: 'A geometric simple substitution cipher which exchanges letters for symbols which are fragments of a grid.',
 			url: 'http://en.wikipedia.org/wiki/Pigpen_cipher'
 		};
 

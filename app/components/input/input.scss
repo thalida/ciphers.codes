@@ -36,6 +36,11 @@
 
         color: white;
         font: normal normal 14px 'Roboto Slab', serif;
+    }
 
+    &.key {
+        .cc_input-field-wrapper {
+            width: 64px;
+        }
     }
 }
