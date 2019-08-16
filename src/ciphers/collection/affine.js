@@ -1,6 +1,6 @@
 'use strict'
 
-import * as utils from '../utils.js'
+import * as utils from '../utils'
 
 // =============================================================================
 //
@@ -9,9 +9,9 @@ import * as utils from '../utils.js'
 //
 // -----------------------------------------------------------------------------
 export class Affine {
-  static NAME = 'affine'
-  static LABEL = 'Affine'
-  static DESC = {
+  NAME = 'affine'
+  LABEL = 'Affine'
+  DESC = {
     text: `
       The affine cipher is a type of monoalphabetic substitution cipher,
       wherein each letter in an alphabet is mapped to its numeric equivalent,
@@ -24,7 +24,7 @@ export class Affine {
     }
   }
 
-  static DEFAULT_ARGS = {
+  DEFAULT_ARGS = {
     isEncoding: true,
     string: '',
     inputs: {
@@ -33,32 +33,28 @@ export class Affine {
     }
   }
 
-  //  @constructor
-  //  Setup the details and private variables for the cipher
-  // ----------------------------------------------------------------------
-  constructor () {
-    this.allowedCoprimes = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
-    this.inputs = [
-      {
-        name: 'coprime',
-        label: 'Co-prime',
-        description: 'The coprimes of 26 are: ' + this.allowedCoprimes.join(', '),
-        type: Number,
-        default: this.DEFAULT_ARGS.inputs.coprime,
-        validation: this.validateCoprime
-      },
-      {
-        name: 'shift',
-        label: 'Shift',
-        description: 'Enter a number (positive/negative) to shift the alphabet by.',
-        type: Number,
-        default: this.DEFAULT_ARGS.inputs.shift
-      }
-    ]
-  }
+  ALLOWED_COPRIMES = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
+
+  INPUTS = [
+    {
+      name: 'coprime',
+      label: 'Co-prime',
+      description: 'The coprimes of 26 are: ' + this.ALLOWED_COPRIMES.join(', '),
+      type: Number,
+      default: this.DEFAULT_ARGS.inputs.coprime,
+      validation: this.validateCoprime
+    },
+    {
+      name: 'shift',
+      label: 'Shift',
+      description: 'Enter a number (positive/negative) to shift the alphabet by.',
+      type: Number,
+      default: this.DEFAULT_ARGS.inputs.shift
+    }
+  ]
 
   validateCoprime (n) {
-    return this.allowedCoprimes.indexOf(parseInt(n, 10)) >= 0
+    return this.ALLOWED_COPRIMES.indexOf(parseInt(n, 10)) >= 0
   }
 
   //  @run

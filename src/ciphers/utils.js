@@ -82,7 +82,7 @@ export function forEachCharacter (string, increment, cb) {
 
   for (let i = 0; i < string.length; i += increment) {
     const c = string.charAt(i)
-    const isUpper = c.match(/^[A-Z]$/)
+    const isUpper = c.match(/^[A-Z]$/) !== null
     cb(i, c, isUpper)
   }
 }
