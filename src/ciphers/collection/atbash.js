@@ -9,9 +9,9 @@ import * as utils from '../utils'
 //
 // -----------------------------------------------------------------------------
 export class Atbash {
-  NAME = 'atbash'
-  LABEL = 'Atbash'
-  DESC = {
+  KEY = 'atbash'
+  NAME = 'Atbash'
+  ABOUT = {
     text: `
       A simple substitution cipher originally created for the Hebrew alphabet,
       when converted to work with the Latin Alphabet (abc), this cipher reverses
@@ -32,7 +32,7 @@ export class Atbash {
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
   run (args) {
-    const opts = utils.extendCopy(this.DEFAULT_ARGS, args)
+    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
     const alpha = utils.getAlpha()
 
     let output = ''

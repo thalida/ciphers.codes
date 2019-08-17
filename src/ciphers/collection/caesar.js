@@ -9,9 +9,9 @@ import * as utils from '../utils'
 //
 // -----------------------------------------------------------------------------
 export class Caesar {
-  NAME = 'caesar'
-  LABEL = 'Caesar'
-  DESC = {
+  KEY = 'caesar'
+  NAME = 'Caesar'
+  ABOUT = {
     text: `
       A simple substitution cipher in which the alphabet is shifted up or down a
       specified number of positions.
@@ -32,10 +32,10 @@ export class Caesar {
 
   INPUTS = [
     {
+      type: Number,
       name: 'shift',
       label: 'Shift by',
       description: 'Enter a number (positive/negative) to shift the alphabet by.',
-      type: Number,
       default: this.DEFAULT_ARGS.inputs.shift
     }
   ]
@@ -44,7 +44,7 @@ export class Caesar {
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
   run (args) {
-    const opts = utils.extendCopy(this.DEFAULT_ARGS, args)
+    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
     const alpha = utils.getAlpha()
     const shift = utils.makeValidInt(opts.inputs.shift, this.DEFAULT_ARGS.inputs.shift)
 

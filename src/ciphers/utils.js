@@ -87,14 +87,6 @@ export function forEachCharacter (string, increment, cb) {
   }
 }
 
-//  @extendCopy
-//  Extend a given object, and save it to a new empty object.
-//  This allows obj1 and obj2 to remain the same.
-// ----------------------------------------------------------------------
-export function extendCopy (obj1, obj2) {
-  return Object.assign({}, obj1, obj2)
-};
-
 //  @isLetter
 //  Check if a given str has only letters
 // ----------------------------------------------------------------------
@@ -164,8 +156,4 @@ export function makeValidKey (currVal, defaultVal) {
 // ----------------------------------------------------------------------
 export function mod (a, b) {
   return ((a % b) + b) % b
-}
-
-export function createSet (arr) {
-  return new Set(arr)
 }

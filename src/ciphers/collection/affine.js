@@ -9,9 +9,9 @@ import * as utils from '../utils'
 //
 // -----------------------------------------------------------------------------
 export class Affine {
-  NAME = 'affine'
-  LABEL = 'Affine'
-  DESC = {
+  KEY = 'affine'
+  NAME = 'Affine'
+  ABOUT = {
     text: `
       The affine cipher is a type of monoalphabetic substitution cipher,
       wherein each letter in an alphabet is mapped to its numeric equivalent,
@@ -33,35 +33,35 @@ export class Affine {
     }
   }
 
-  ALLOWED_COPRIMES = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
+  __ALLOWED_COPRIMES = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
 
   INPUTS = [
     {
+      type: Number,
       name: 'coprime',
       label: 'Co-prime',
-      description: 'The coprimes of 26 are: ' + this.ALLOWED_COPRIMES.join(', '),
-      type: Number,
+      description: 'The coprimes of 26 are: ' + this.__ALLOWED_COPRIMES.join(', '),
       default: this.DEFAULT_ARGS.inputs.coprime,
       validation: this.validateCoprime
     },
     {
+      type: Number,
       name: 'shift',
       label: 'Shift',
       description: 'Enter a number (positive/negative) to shift the alphabet by.',
-      type: Number,
       default: this.DEFAULT_ARGS.inputs.shift
     }
   ]
 
   validateCoprime (n) {
-    return this.ALLOWED_COPRIMES.indexOf(parseInt(n, 10)) >= 0
+    return this.__ALLOWED_COPRIMES.indexOf(parseInt(n, 10)) >= 0
   }
 
   //  @run
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
   run (args) {
-    const opts = utils.extendCopy(this.DEFAULT_ARGS, args)
+    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
     const alpha = utils.getAlpha()
     const shift = utils.makeValidInt(opts.inputs.shift, this.DEFAULT_ARGS.inputs.shift)
     const coprime = utils.makeValidInt(opts.inputs.coprime, this.DEFAULT_ARGS.inputs.coprime)
