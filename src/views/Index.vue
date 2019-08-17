@@ -2,13 +2,35 @@
   <div class="index">
     <h1><a href="/">cipher.codes</a></h1>
 
+    <div
+      class="toggle"
+      :class=[toggleClass]>
+      <label
+        for="encoding-toggle"
+        class="toggle__label">
+        <span class="toggle__text toggle__text--before">encode</span>
+        <span class="toggle__symbol"></span>
+        <span class="toggle__text toggle__text--after">decode</span>
+      </label>
+
+      <input
+        id="encoding-toggle"
+        class="toggle__input"
+        type="checkbox"
+        v-model="isEncoding" />
+    </div>
+
+    <textarea
+      :placeholder="textareaPlaceholder"
+      v-model="inputStr">
+    </textarea>
+
     <div class="ciphers">
       <Cipher
         v-for="importKey in cipherImportKeys"
         :key="importKey"
         :import-key="importKey" />
     </div>
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
   </div>
 </template>
 
@@ -24,6 +46,32 @@ export default {
   data () {
     return {
       cipherImportKeys: Object.keys(ciphers)
+    }
+  },
+  computed: {
+    inputStr: {
+      get () {
+        return this.$store.state.inputStr
+      },
+      set (inputStr) {
+        this.$store.commit('setInputStr', inputStr)
+      }
+    },
+    isEncoding: {
+      get () {
+        return this.$store.state.isEncoding
+      },
+      set (isEncoding) {
+        this.$store.commit('setIsEncoding', isEncoding)
+      }
+    },
+    toggleClass () {
+      const state = (this.isEncoding) ? 'yes' : 'no'
+      return `toggle--${state}`
+    },
+    textareaPlaceholder () {
+      const action = (this.isEncoding) ? 'encode' : 'decode'
+      return `Enter text to ${action}...`
     }
   }
 }
