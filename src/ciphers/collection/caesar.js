@@ -1,6 +1,7 @@
 'use strict'
 
 import * as utils from '../utils'
+import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
@@ -8,7 +9,7 @@ import * as utils from '../utils'
 //  This cipher shifts the letters in the alphabet by x (user defined value)
 //
 // -----------------------------------------------------------------------------
-export class Caesar {
+export class Caesar extends BaseCipher {
   KEY = 'caesar'
   NAME = 'Caesar'
   ABOUT = {
@@ -24,7 +25,7 @@ export class Caesar {
 
   DEFAULT_ARGS = {
     isEncoding: true,
-    string: '',
+    inputStr: '',
     inputs: {
       shift: 2
     }
@@ -40,23 +41,22 @@ export class Caesar {
     }
   ]
 
-  //  @run
+  //  @handleRun
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
-  run (args) {
-    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
-    const alpha = utils.getAlpha()
-    const shift = utils.makeValidInt(opts.inputs.shift, this.DEFAULT_ARGS.inputs.shift)
+  handleRun ({ isEncoding, inputStr, inputs }) {
+    const alpha = utils.ALPHA
+    const shift = utils.makeValidInt(inputs.shift, this.DEFAULT_ARGS.inputs.shift)
 
     let output = ''
 
-    utils.forEachCharacter(opts.string, (i, char, isUpper) => {
+    utils.forEachCharacter(inputStr, (i, char, isUpper) => {
       if (utils.isLetter(char)) {
         // The current position of the letter in the alphabet
         const letterPos = alpha.indexOf(char.toLowerCase())
 
         // Which direction are we moving? (addition/subtraction)
-        const direction = (opts.isEncoding) ? 1 : -1
+        const direction = (isEncoding) ? 1 : -1
 
         // Get the new letter position by shifting in the given direction
         let newLetterPos = letterPos + (direction * shift)

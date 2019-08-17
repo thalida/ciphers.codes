@@ -1,8 +1,7 @@
 <template>
   <div :id="cipherId" class="cipher">
-    {{cipher.KEY}}
     {{cipher.NAME}}
-    {{inputStr}} {{isEncoding}}
+    {{outputStr}}
   </div>
 </template>
 
@@ -21,13 +20,17 @@ export default {
     cipherId () {
       return `cipher-${this.cipher.KEY}`
     },
+    isEncoding () {
+      return this.$store.state.isEncoding
+    },
     inputStr () {
-      console.log(this.$store.state.inputStr)
       return this.$store.state.inputStr
     },
-    isEncoding () {
-      console.log(this.$store.state.isEncoding)
-      return this.$store.state.isEncoding
+    outputStr () {
+      return this.cipher.run({
+        isEncoding: this.isEncoding,
+        inputStr: this.inputStr
+      })
     }
   }
 }

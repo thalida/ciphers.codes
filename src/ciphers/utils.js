@@ -10,9 +10,13 @@ const ALPHA = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
   'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 ]
-const TOTAL_ALPHA = ALPHA.length
 const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+const TOTAL_ALPHA = ALPHA.length
 const ALPHANUMERIC = [].concat(ALPHA, NUMBERS)
+
+//  ALPHAGRID
+//  Create a 6 x 6 grid of the alphabet and numbers 0 - 9
+// ----------------------------------------------------------------------
 const ALPHAGRID = (() => {
   // We need to create a 6x6 grid of the alphanumeric characters
   const GRID_SIZE = 6
@@ -36,27 +40,11 @@ const ALPHAGRID = (() => {
 
 let cachedKeyedAlphas = {}
 
-export { TOTAL_ALPHA }
-
-//  ALPHA
-//  Return a copy of the basic alphabet
-// ----------------------------------------------------------------------
-export function getAlpha () {
-  return ALPHA.splice(0)
-}
-
-//  ALPHANUMERIC
-//  Return a copy of the alphabet & numbers 0 - 9 in an array
-// ----------------------------------------------------------------------
-export function getAlphaNumeric () {
-  return ALPHANUMERIC.splice(0)
-}
-
-//  ALPHAGRID
-//  Return a copy of the alphabet and numbers 0 - 9 in a 6 x 6 grid
-// ----------------------------------------------------------------------
-export function getAlphaGrid () {
-  return ALPHAGRID.splice(0)
+export {
+  ALPHA,
+  TOTAL_ALPHA,
+  ALPHANUMERIC,
+  ALPHAGRID
 }
 
 //  @setCase( char, boolean )
@@ -107,7 +95,7 @@ export function makeKeyedAlpha (key) {
     return cachedKeyedAlphas[key]
   }
 
-  let alpha = getAlpha()
+  let alpha = [...ALPHA]
   let keyedAlphabet = []
 
   // Return the regular alphabet if no key

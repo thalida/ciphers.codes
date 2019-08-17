@@ -1,6 +1,7 @@
 'use strict'
 
 import * as utils from '../utils'
+import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
@@ -9,7 +10,7 @@ import * as utils from '../utils'
 //  on the position of a pair of letters w/ respect to each other in the grid
 //
 // -----------------------------------------------------------------------------
-export class Playfair {
+export class Playfair extends BaseCipher {
   KEY = 'playfair'
   NAME = 'Playfair'
   ABOUT = {
@@ -101,7 +102,7 @@ export class Playfair {
     let strPairs = []
 
     if (!isEncoding && string.length % 2 === 1) {
-      string += this._placeholderChar
+      string += this.__PLACEHOLDER_CHAR
     }
 
     for (let i = 0; i < string.length; i += 2) {
@@ -109,7 +110,7 @@ export class Playfair {
       let nextLetter = string.charAt(i + 1)
 
       if (isEncoding && (currLetter === nextLetter || nextLetter.length === 0)) {
-        nextLetter = this._placeholderChar
+        nextLetter = this.__PLACEHOLDER_CHAR
         i -= 1
       }
 
@@ -163,24 +164,23 @@ export class Playfair {
     return char
   }
 
-  //  @run
+  //  @handleRun
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
-  run (args) {
-    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
-    const key = utils.makeValidKey(opts.inputs.key, this.DEFAULT_ARGS.inputs.key)
+  handleRun ({ isEncoding, inputStr, inputs }) {
+    const key = utils.makeValidKey(inputs.key, this.DEFAULT_ARGS.inputs.key)
     // Replace any j's with i's in the key
     const keyword = key.replace(/[j]+/gi, 'i').toLowerCase()
     // Created a grid based keyed version of the alphabet
     const alpha = this._getKeyedAlpha(keyword)
 
     // Remove any non letter character
-    opts.string = opts.string.replace(/[^A-Za-z]+/gi, '').toLowerCase()
+    inputStr = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
     // Replace any j's with i's
-    opts.string = opts.string.replace(/[j]+/gi, 'i').toLowerCase()
+    inputStr = inputStr.replace(/[j]+/gi, 'i').toLowerCase()
 
     // Convert the string to an array of pairs
-    const str = this._strToPairs(opts.string, opts.isEncoding)
+    const str = this._strToPairs(inputStr, isEncoding)
 
     let output = ''
 
@@ -194,16 +194,16 @@ export class Playfair {
         // Keep the same x coords
         char1.newCoords.x = char2.newCoords.x = char1.coords.x
         // Calculate the new y coord for each letter
-        char1.newCoords.y = this._calcNewCoord(char1.coords.y, opts.isEncoding)
-        char2.newCoords.y = this._calcNewCoord(char2.coords.y, opts.isEncoding)
+        char1.newCoords.y = this._calcNewCoord(char1.coords.y, isEncoding)
+        char2.newCoords.y = this._calcNewCoord(char2.coords.y, isEncoding)
 
       // If the two letters share the same column
       } else if (char1.coords.y === char2.coords.y) {
         // Keep the same y coords
         char1.newCoords.y = char2.newCoords.y = char1.coords.y
         // Calculate the the nex x coord for each letter
-        char1.newCoords.x = this._calcNewCoord(char1.coords.x, opts.isEncoding)
-        char2.newCoords.x = this._calcNewCoord(char2.coords.x, opts.isEncoding)
+        char1.newCoords.x = this._calcNewCoord(char1.coords.x, isEncoding)
+        char2.newCoords.x = this._calcNewCoord(char2.coords.x, isEncoding)
 
       // The two letters are on a diagonal from one another
       } else {
@@ -217,7 +217,7 @@ export class Playfair {
       output += `${letter1}${letter2}`
     }
 
-    if (opts.isEncoding) {
+    if (isEncoding) {
       output = output.replace(/(.{4})/g, '$1 ').trim()
     }
 

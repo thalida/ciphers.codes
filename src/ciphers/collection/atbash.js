@@ -1,6 +1,7 @@
 'use strict'
 
 import * as utils from '../utils'
+import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
@@ -8,7 +9,7 @@ import * as utils from '../utils'
 //  A simple cipher wherein the alphabet is reversed.
 //
 // -----------------------------------------------------------------------------
-export class Atbash {
+export class Atbash extends BaseCipher {
   KEY = 'atbash'
   NAME = 'Atbash'
   ABOUT = {
@@ -28,16 +29,15 @@ export class Atbash {
     string: ''
   }
 
-  //  @run
+  //  @handleRun
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
-  run (args) {
-    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
-    const alpha = utils.getAlpha()
+  handleRun ({ inputStr }) {
+    const alpha = utils.ALPHA
 
     let output = ''
 
-    utils.forEachCharacter(opts.string, (i, char, isUpper) => {
+    utils.forEachCharacter(inputStr, (i, char, isUpper) => {
       if (utils.isLetter(char)) {
         // Get the current position in the alphabet
         const letterPos = alpha.indexOf(char.toLowerCase())

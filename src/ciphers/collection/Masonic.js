@@ -1,6 +1,7 @@
 'use strict'
 
 import * as utils from '../utils'
+import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
@@ -10,7 +11,7 @@ import * as utils from '../utils'
 //  just return the letter as is
 //
 // -----------------------------------------------------------------------------
-export class Masonic {
+export class Masonic extends BaseCipher {
   KEY = 'mason'
   NAME = 'Masonic'
   ABOUT = {
@@ -26,25 +27,24 @@ export class Masonic {
 
   DEFAULT_ARGS = {
     isEncoding: true,
-    string: '',
-    useFont: true
+    string: ''
   }
 
-  //  @run
+  __USE_FONT = true
+
+  //  @handleRun
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
-  run (args) {
-    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
-
-    if (opts.useFont) {
-      return opts.string
+  handleRun ({ isEncoding, inputStr }) {
+    if (this.__USE_FONT) {
+      return inputStr
     }
 
     let output = ''
 
-    utils.forEachCharacter(opts.string, (i, char) => {
+    utils.forEachCharacter(inputStr, (i, char) => {
       char = char.toLowerCase()
-      if (opts.isEncoding && char.match(/^[a-z]$/)) {
+      if (isEncoding && char.match(/^[a-z]$/)) {
         char = '<span class="mason_text">' + char + '</span>'
       }
       output += char

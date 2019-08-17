@@ -1,13 +1,14 @@
 'use strict'
 
 import * as utils from '../utils'
+import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
 //  Vigenère
 //
 // -----------------------------------------------------------------------------
-export class Vigenere {
+export class Vigenere extends BaseCipher {
   KEY = 'vigenere'
   NAME = 'Vigenère'
   ABOUT = {
@@ -40,18 +41,17 @@ export class Vigenere {
     }
   ]
 
-  //  @run
+  //  @handleRun
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
-  run (args) {
-    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
-    const alpha = utils.getAlpha()
+  handleRun ({ isEncoding, inputStr, inputs }) {
+    const alpha = utils.ALPHA
 
     // Remove any non letter characters from the string
-    const string = opts.string.replace(/[^A-Za-z]+/gi, '').toLowerCase()
+    const string = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
 
     const keyBase = utils
-      .makeValidKey(opts.inputs.key, this.DEFAULT_ARGS.inputs.key)
+      .makeValidKey(inputs.key, this.DEFAULT_ARGS.inputs.key)
       // Remove any spaces from the key
       .replace(/[\s]+/gi, '').toLowerCase()
 
@@ -68,7 +68,7 @@ export class Vigenere {
     }
 
     utils.forEachCharacter(string, (i, char) => {
-      const direction = (opts.isEncoding) ? 1 : -1
+      const direction = (isEncoding) ? 1 : -1
 
       // Get the position of the character in the alphabet
       const alphaPos = alpha.indexOf(char)

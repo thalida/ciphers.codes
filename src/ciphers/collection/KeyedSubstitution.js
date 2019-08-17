@@ -1,6 +1,7 @@
 'use strict'
 
 import * as utils from '../utils'
+import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
@@ -9,7 +10,7 @@ import * as utils from '../utils'
 //  encoded based on the position of the letters in this keyed alphabet.
 //
 // -----------------------------------------------------------------------------
-export class KeyedSubstitution {
+export class KeyedSubstitution extends BaseCipher {
   KEY = 'keyed_substitution'
   NAME = 'Keyed Substitution'
   ABOUT = {
@@ -42,26 +43,25 @@ export class KeyedSubstitution {
     }
   ]
 
-  //  @run
+  //  @handleRun
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
-  run (args) {
-    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
-    const alpha = utils.getAlpha()
-    const key = utils.makeValidKey(opts.inputs.key, this.DEFAULT_ARGS.inputs.key)
+  handleRun ({ isEncoding, inputStr, inputs }) {
+    const alpha = utils.ALPHA
+    const key = utils.makeValidKey(inputs.key, this.DEFAULT_ARGS.inputs.key)
 
     // Create an alphabet w/ this key in the beginning of it
     var keyedAlpha = utils.makeKeyedAlpha(key)
 
     let output = ''
 
-    utils.forEachCharacter(opts.string, (i, char, isUpper) => {
+    utils.forEachCharacter(inputStr, (i, char, isUpper) => {
       if (utils.isLetter(char)) {
         // Figure out what alphabet the current string is based on
-        var letterArr = (opts.isEncoding) ? alpha : keyedAlpha
+        var letterArr = (isEncoding) ? alpha : keyedAlpha
 
         // What alphabet are we converting the string to
-        var encodedLetterArr = (opts.isEncoding) ? keyedAlpha : alpha
+        var encodedLetterArr = (isEncoding) ? keyedAlpha : alpha
 
         // Get the current position of the letter in the array
         var letterPos = letterArr.indexOf(char.toLowerCase())

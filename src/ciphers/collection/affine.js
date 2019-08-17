@@ -1,6 +1,7 @@
 'use strict'
 
 import * as utils from '../utils'
+import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
@@ -8,7 +9,7 @@ import * as utils from '../utils'
 //  A simple shift cipher based on the Caesar cipher
 //
 // -----------------------------------------------------------------------------
-export class Affine {
+export class Affine extends BaseCipher {
   KEY = 'affine'
   NAME = 'Affine'
   ABOUT = {
@@ -57,25 +58,24 @@ export class Affine {
     return this.__ALLOWED_COPRIMES.indexOf(parseInt(n, 10)) >= 0
   }
 
-  //  @run
+  //  @handleRun
   //  Encodes/Decodes a string w/ the given arguments
   // ----------------------------------------------------------------------
-  run (args) {
-    const opts = Object.assign({}, this.DEFAULT_ARGS, args)
-    const alpha = utils.getAlpha()
-    const shift = utils.makeValidInt(opts.inputs.shift, this.DEFAULT_ARGS.inputs.shift)
-    const coprime = utils.makeValidInt(opts.inputs.coprime, this.DEFAULT_ARGS.inputs.coprime)
+  handleRun ({ isEncoding, inputStr, inputs }) {
+    const alpha = utils.ALPHA
+    const shift = utils.makeValidInt(inputs.shift, this.DEFAULT_ARGS.inputs.shift)
+    const coprime = utils.makeValidInt(inputs.coprime, this.DEFAULT_ARGS.inputs.coprime)
 
     let output = ''
 
-    utils.forEachCharacter(opts.string, (i, char, isUpper) => {
+    utils.forEachCharacter(inputStr, (i, char, isUpper) => {
       // If the current character is a letter, get the new position
       // of the letter in the alphabet based on if we are encoding/decoding
       if (utils.isLetter(char)) {
         let letterPos = alpha.indexOf(char.toLowerCase())
         let newLetterPos = 0
 
-        if (opts.isEncoding) {
+        if (isEncoding) {
           newLetterPos = (coprime * letterPos) + shift
         } else {
           newLetterPos = (utils.TOTAL_ALPHA - coprime) * (letterPos - shift)
