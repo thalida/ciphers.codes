@@ -33,11 +33,11 @@ export class Caesar extends BaseCipher {
 
   INPUTS = [
     {
-      type: Number,
+      type: 'number',
       name: 'shift',
       label: 'Shift by',
       description: 'Enter a number (positive/negative) to shift the alphabet by.',
-      default: this.DEFAULT_ARGS.inputs.shift
+      value: this.DEFAULT_ARGS.inputs.shift
     }
   ]
 

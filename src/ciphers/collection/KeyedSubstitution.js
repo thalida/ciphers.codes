@@ -28,18 +28,19 @@ export class KeyedSubstitution extends BaseCipher {
     isEncoding: true,
     string: '',
     inputs: {
-      key: 'private'
+      key: 'lorem'
     }
   }
 
   INPUTS = [
     {
-      type: String,
+      type: 'text',
       name: 'key',
       label: 'Key',
       description: 'Create a key by entering text without using duplicate letters.',
       placeholder: '',
-      default: this.DEFAULT_ARGS.inputs.key
+      value: this.DEFAULT_ARGS.inputs.key,
+      postProcess: utils.removeDuplicateChars.bind(this)
     }
   ]
 

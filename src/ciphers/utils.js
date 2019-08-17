@@ -82,6 +82,12 @@ export function isLetter (str) {
   return str.match(/^[A-Za-z]$/)
 }
 
+export function removeDuplicateChars (key) {
+  let keyArr = key.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('')
+  let deduped = new Set(keyArr)
+  return [...deduped].join('')
+}
+
 //  @makeKeyedAlpha
 //  Create a keyed version of the alphabet - which is a common trick
 //  among ciphers/codes.

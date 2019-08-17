@@ -38,19 +38,20 @@ export class Affine extends BaseCipher {
 
   INPUTS = [
     {
-      type: Number,
+      type: 'select',
       name: 'coprime',
       label: 'Co-prime',
       description: 'The coprimes of 26 are: ' + this.__ALLOWED_COPRIMES.join(', '),
-      default: this.DEFAULT_ARGS.inputs.coprime,
-      validation: this.validateCoprime
+      value: this.DEFAULT_ARGS.inputs.coprime,
+      options: this.__ALLOWED_COPRIMES,
+      validate: this.validateCoprime.bind(this)
     },
     {
-      type: Number,
+      type: 'number',
       name: 'shift',
       label: 'Shift',
       description: 'Enter a number (positive/negative) to shift the alphabet by.',
-      default: this.DEFAULT_ARGS.inputs.shift
+      value: this.DEFAULT_ARGS.inputs.shift
     }
   ]
 
