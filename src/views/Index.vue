@@ -1,22 +1,30 @@
 <template>
   <div class="index">
-    index.
+    <h1><a href="/">cipher.codes</a></h1>
+
+    <div class="ciphers">
+      <Cipher
+        v-for="importKey in cipherImportKeys"
+        :key="importKey"
+        :import-key="importKey" />
+    </div>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-
-import * as ciphers from '@/ciphers/collection'
-console.log(ciphers)
-console.log((new ciphers.Affine()).run({ string: 'Acdefghijkl. Mnopqrs! Tuvwxyz' }))
+import * as ciphers from '@/ciphers'
+import Cipher from '@/components/Cipher.vue'
 
 export default {
   name: 'index',
   components: {
-    // HelloWorld
+    Cipher
+  },
+  data () {
+    return {
+      cipherImportKeys: Object.keys(ciphers)
+    }
   }
 }
 </script>
