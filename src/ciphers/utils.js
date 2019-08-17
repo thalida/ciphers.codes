@@ -130,7 +130,7 @@ export function makeValidInt (currVal, defaultVal) {
     return currVal
   }
 
-  if (typeof currVal === 'string') {
+  if (typeof currVal === 'string' && currVal.length > 0) {
     return parseInt(currVal, 10)
   }
 
