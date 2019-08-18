@@ -1,5 +1,3 @@
-// something about all of the below feels wrong... why? i dunno.
-
 import * as Affine from './collection/Affine'
 import * as Atbash from './collection/Atbash'
 import * as Caesar from './collection/Caesar'
@@ -26,8 +24,6 @@ let ciphersByKey = ciphers.reduce((obj, cipher) => {
 }, {})
 
 export const CIPHER_KEYS = Object.keys(ciphersByKey)
-
 export function getCipherByKey (key) {
-  let loweredKey = key.toLowerCase()
-  return ciphersByKey[loweredKey]
+  return ciphersByKey[key.toLowerCase()]
 }

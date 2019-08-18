@@ -1,20 +1,20 @@
 <template>
   <div :id="cipherId" class="cipher">
     <h2>
-      <router-link
-        :to="{
-          name: 'about',
-          params: { cipherKey }
-        }">
+      <router-link :to="{name: 'about', params: { cipherKey }}">
         {{cipher.NAME}}
       </router-link>
     </h2>
+
     <div class="inputs" v-if="cipherHasInputs">
       <div
         class="input"
         v-for="(input, index) in cipherInputs"
         :key="index">
-        {{input.label}}
+        <span>
+          {{input.label}}
+        </span>
+
         <input
           v-if="input.type === 'text' || input.type === 'number'"
           :type="input.type"
@@ -22,6 +22,7 @@
           v-model="input.value"
           @input="handleInputChange(input, $event)"
           @blur="handleInputBlur(input, $event)" />
+
         <select
           v-if="input.type === 'select'"
           v-model="input.value"
@@ -36,10 +37,19 @@
         </select>
       </div>
     </div>
+
     <textarea
       v-model="outputStr"
       disabled>
     </textarea>
+
+    <button
+      type="button"
+      v-clipboard:copy="outputStr"
+      v-clipboard:success="handleCopySuccess"
+      v-clipboard:error="handleCopyError">
+      copy
+    </button>
   </div>
 </template>
 
@@ -107,6 +117,12 @@ export default {
       ) {
         input.value = `${this.cipherInputDefaults[input.name]}`
       }
+    },
+    handleCopySuccess () {
+      this.$emit('copy-success', this.cipher)
+    },
+    handleCopyError () {
+      this.$emit('copy-error', this.cipher)
     }
   }
 }

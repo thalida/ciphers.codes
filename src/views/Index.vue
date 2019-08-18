@@ -1,38 +1,58 @@
 <template>
   <div class="index">
-    <h1><a href="/">cipher.codes</a></h1>
+    <h1>
+      <router-link :to="{ name: 'index' }">
+        cipher.codes
+      </router-link>
+    </h1>
 
-    <div
-      class="toggle"
-      :class=[toggleClass]>
-      <label
-        for="encoding-toggle"
-        class="toggle__label">
-        <span class="toggle__text toggle__text--before">encode</span>
-        <span class="toggle__symbol"></span>
-        <span class="toggle__text toggle__text--after">decode</span>
-      </label>
+    <section class="input-area">
+      <div
+        class="toggle"
+        :class=[toggleClass]>
+        <label
+          for="encoding-toggle"
+          class="toggle__label">
+          <span class="toggle__text toggle__text--before">encode</span>
+          <span class="toggle__symbol"></span>
+          <span class="toggle__text toggle__text--after">decode</span>
+        </label>
+        <input
+          id="encoding-toggle"
+          class="toggle__input"
+          type="checkbox"
+          v-model="isEncoding" />
+      </div>
 
-      <input
-        id="encoding-toggle"
-        class="toggle__input"
-        type="checkbox"
-        v-model="isEncoding" />
-    </div>
+      <textarea
+        class="textarea textarea--fancy"
+        :placeholder="textareaPlaceholder"
+        v-model="inputStr">
+      </textarea>
+    </section>
 
-    <textarea
-      :placeholder="textareaPlaceholder"
-      v-model="inputStr">
-    </textarea>
-
-    <div class="ciphers">
+    <section class="ciphers">
       <Cipher
         v-for="cipherKey in cipherKeys"
         :key="cipherKey"
-        :cipher-key="cipherKey" />
+        :cipher-key="cipherKey"
+        @copy-success="handleCopySuccess"
+        @copy-error="handleCopyError" />
+    </section>
+
+    <div
+      class="toast"
+      v-show="toast.isVisible">
+      {{ toast.message }}
     </div>
 
-    <router-view :key="$route.path"></router-view>
+    <footer>
+      <a href="https://thalida.me" target="_blank">uni</a>
+    </footer>
+
+    <div class="modal">
+      <router-view :key="$route.path"></router-view>
+    </div>
   </div>
 </template>
 
@@ -47,7 +67,12 @@ export default {
   },
   data () {
     return {
-      cipherKeys: CIPHER_KEYS
+      cipherKeys: CIPHER_KEYS,
+      toast: {
+        isVisible: false,
+        timeout: null,
+        message: null
+      }
     }
   },
   computed: {
@@ -74,6 +99,35 @@ export default {
     textareaPlaceholder () {
       const action = (this.isEncoding) ? 'encode' : 'decode'
       return `Enter text to ${action}...`
+    }
+  },
+  methods: {
+    renderToast (type, res) {
+      if (this.timeoutID !== null) {
+        window.clearTimeout(this.toast.timeout)
+      }
+
+      let message = ''
+      if (type === 'copy:success') {
+        message = `Copied ${res.cipher.NAME} text to clipboard`
+      } else if (type === 'copy:error') {
+        message = `Error copying ${res.cipher.NAME} text`
+      }
+
+      this.toast.isVisible = true
+      this.toast.message = message
+
+      this.toast.timeout = window.setTimeout(() => {
+        this.toast.isVisible = false
+        this.toast.message = null
+        this.toast.timeout = null
+      }, 3000)
+    },
+    handleCopySuccess (cipher) {
+      this.renderToast('copy:success', {cipher})
+    },
+    handleCopyError (cipher) {
+      this.renderToast('copy:error', {cipher})
     }
   }
 }

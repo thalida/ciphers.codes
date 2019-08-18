@@ -1,6 +1,11 @@
 <template>
   <div class="about">
-    learn about {{cipher.ABOUT}}
+      <router-link :to="{ name: 'index' }">
+        X
+      </router-link>
+    {{cipher.ABOUT.text}}
+    {{cipher.ABOUT.source.url}}
+    {{cipher.INPUTS}}
   </div>
 </template>
 
@@ -14,9 +19,6 @@ export default {
     return {
       cipher: getCipherByKey(this.cipherKey)
     }
-  },
-  components: {
-    // HelloWorld
   }
 }
 </script>

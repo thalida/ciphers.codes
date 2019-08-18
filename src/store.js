@@ -15,8 +15,5 @@ export default new Vuex.Store({
     setIsEncoding (state, isEncoding) {
       state.isEncoding = isEncoding
     }
-  },
-  actions: {
-
   }
 })
