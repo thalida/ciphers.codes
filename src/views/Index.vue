@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { cipherKeys } from '@/ciphers'
+import { CIPHER_KEYS } from '@/ciphers'
 import Cipher from '@/components/Cipher.vue'
 
 export default {
@@ -45,7 +45,7 @@ export default {
   },
   data () {
     return {
-      cipherKeys
+      cipherKeys: CIPHER_KEYS
     }
   },
   computed: {

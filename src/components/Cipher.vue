@@ -63,7 +63,7 @@ export default {
       cipherHasInputs,
       cipherId: `cipher-${cipher.KEY}`,
       cipherInputs: (cipherHasInputs) ? [...cipher.INPUTS] : null,
-      cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULT_ARGS.inputs : null
+      cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null
     }
   },
   computed: {

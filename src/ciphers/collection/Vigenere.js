@@ -1,89 +1,95 @@
 'use strict'
 
 import * as utils from '../utils'
-import BaseCipher from '../BaseCipher'
 
 // =============================================================================
 //
 //  Vigenère
 //
 // -----------------------------------------------------------------------------
-export default class Vigenere extends BaseCipher {
-  KEY = 'vigenere'
-  NAME = 'Vigenère'
-  ABOUT = {
-    text: `
-      A simple polyalphabetic substitution cipher which uses a tableau
-      composed of each of the 26 options for a Caesar Cipher.
-    `,
-    source: {
-      title: 'Wikipedia',
-      url: 'http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher'
-    }
+
+export const KEY = 'vigenere'
+export const NAME = 'Vigenère'
+export const ABOUT = {
+  text: `A simple polyalphabetic substitution cipher which uses a tableau composed of each of the 26 options for a Caesar Cipher.`,
+  source: {
+    title: 'Wikipedia',
+    url: 'http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher'
+  }
+}
+
+export const DEFAULTS = {
+  isEncoding: true,
+  string: '',
+  inputs: {
+    key: 'dolor'
+  }
+}
+
+export const INPUTS = [
+  {
+    type: 'text',
+    name: 'key',
+    label: 'Key',
+    description: 'Create a key by entering text without using duplicate letters.',
+    placeholder: '',
+    value: DEFAULTS.inputs.key,
+    postProcess: utils.removeDuplicateChars.bind(this)
+  }
+]
+
+export function run ({ isEncoding, inputStr, inputs }) {
+  isEncoding = (typeof isEncoding === 'boolean')
+    ? isEncoding
+    : DEFAULTS.isEncoding
+
+  inputStr = (typeof inputStr === 'string')
+    ? inputStr
+    : DEFAULTS.inputStr
+
+  if (typeof DEFAULTS.inputs !== 'undefined') {
+    inputs = Object.assign({}, DEFAULTS.inputs, inputs)
+  } else {
+    inputs = null
   }
 
-  DEFAULT_ARGS = {
-    isEncoding: true,
-    string: '',
-    inputs: {
-      key: 'dolor'
-    }
-  }
+  const alpha = utils.ALPHA
 
-  INPUTS = [
-    {
-      type: 'text',
-      name: 'key',
-      label: 'Key',
-      description: 'Create a key by entering text without using duplicate letters.',
-      placeholder: '',
-      value: this.DEFAULT_ARGS.inputs.key,
-      postProcess: utils.removeDuplicateChars.bind(this)
-    }
-  ]
+  // Remove any non letter characters from the string
+  const string = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
 
-  //  @handleRun
-  //  Encodes/Decodes a string w/ the given arguments
-  // ----------------------------------------------------------------------
-  handleRun ({ isEncoding, inputStr, inputs }) {
-    const alpha = utils.ALPHA
+  const keyBase = utils
+    .makeValidKey(inputs.key, DEFAULTS.inputs.key)
+    // Remove any spaces from the key
+    .replace(/[\s]+/gi, '').toLowerCase()
 
-    // Remove any non letter characters from the string
-    const string = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
+  let key = ''
+  let output = ''
 
-    const keyBase = utils
-      .makeValidKey(inputs.key, this.DEFAULT_ARGS.inputs.key)
-      // Remove any spaces from the key
-      .replace(/[\s]+/gi, '').toLowerCase()
-
-    let key = ''
-    let output = ''
-
-    while (key.length < string.length && keyBase.length > 0) {
-      utils.forEachCharacter(keyBase, (i, char) => {
-        if (key.length >= string.length) {
-          return
-        }
-        key += char
-      })
-    }
-
-    utils.forEachCharacter(string, (i, char) => {
-      const direction = (isEncoding) ? 1 : -1
-
-      // Get the position of the character in the alphabet
-      const alphaPos = alpha.indexOf(char)
-
-      // Get the char in the key at this position
-      // Then get the position of that character in the regular alphabet
-      let keyPos = alpha.indexOf(key.charAt(i))
-      keyPos = (keyPos === -1) ? 0 : keyPos
-
-      const pos = alphaPos + (direction * keyPos)
-
-      output += alpha[utils.mod(pos, utils.TOTAL_ALPHA)]
+  while (key.length < string.length && keyBase.length > 0) {
+    utils.forEachCharacter(keyBase, (i, char) => {
+      if (key.length >= string.length) {
+        return
+      }
+      key += char
     })
-
-    return output
   }
+
+  utils.forEachCharacter(string, (i, char) => {
+    const direction = (isEncoding) ? 1 : -1
+
+    // Get the position of the character in the alphabet
+    const alphaPos = alpha.indexOf(char)
+
+    // Get the char in the key at this position
+    // Then get the position of that character in the regular alphabet
+    let keyPos = alpha.indexOf(key.charAt(i))
+    keyPos = (keyPos === -1) ? 0 : keyPos
+
+    const pos = alphaPos + (direction * keyPos)
+
+    output += alpha[utils.mod(pos, utils.TOTAL_ALPHA)]
+  })
+
+  return output
 }

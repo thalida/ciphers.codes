@@ -1,11 +1,13 @@
-import Affine from './collection/Affine'
-import Atbash from './collection/Atbash'
-import Caesar from './collection/Caesar'
-import KeyedSubstitution from './collection/KeyedSubstitution'
-import Masonic from './collection/Masonic'
-import Playfair from './collection/Playfair'
-import PolybiusSquare from './collection/PolybiusSquare'
-import Vigenere from './collection/Vigenere'
+// something about all of the below feels wrong... why? i dunno.
+
+import * as Affine from './collection/Affine'
+import * as Atbash from './collection/Atbash'
+import * as Caesar from './collection/Caesar'
+import * as KeyedSubstitution from './collection/KeyedSubstitution'
+import * as Masonic from './collection/Masonic'
+import * as Playfair from './collection/Playfair'
+import * as PolybiusSquare from './collection/PolybiusSquare'
+import * as Vigenere from './collection/Vigenere'
 
 let ciphers = [
   Affine,
@@ -18,24 +20,14 @@ let ciphers = [
   Vigenere
 ]
 
-let cipherKeys = []
-let ciphersByKey = {}
+let ciphersByKey = ciphers.reduce((obj, cipher) => {
+  obj[cipher.KEY] = cipher
+  return obj
+}, {})
 
-for (let i = 0; i < ciphers.length; i += 1) {
-  let Cipher = ciphers[i]
-  let cipherInstance = new Cipher()
-  const key = cipherInstance.KEY
-  cipherKeys.push(key)
-  ciphersByKey[key] = Cipher
-}
-
-export {
-  ciphers,
-  cipherKeys,
-  ciphersByKey
-}
+export const CIPHER_KEYS = Object.keys(ciphersByKey)
 
 export function getCipherByKey (key) {
   let loweredKey = key.toLowerCase()
-  return new ciphersByKey[loweredKey]()
+  return ciphersByKey[loweredKey]
 }

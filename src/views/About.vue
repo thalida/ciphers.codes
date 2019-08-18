@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    learn about {{cipher}}
+    learn about {{cipher.ABOUT}}
   </div>
 </template>
 
