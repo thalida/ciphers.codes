@@ -1,5 +1,20 @@
 # ciphers.codes
 
+## Tasks
+- [ ] Setup tests for ciphers
+- [ ] Style general page layout + containers
+- [ ] Style main input box area
+- [ ] Style all ciphers
+- [ ] Style modal / about view
+- [ ] Style toast
+- [ ] Update about view content
+- [ ] Add unicorn icon
+- [ ] Add copy icon (make?)
+- [ ] QA various text lengths
+- [ ] screenreader QA
+- [ ] vision / color QA
+- [ ] browserstack QA
+
 ## Project setup
 ```
 npm install
