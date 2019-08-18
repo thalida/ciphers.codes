@@ -11,7 +11,7 @@ import BaseCipher from '../BaseCipher'
 //  Example: a => 11, b => 12, c => 13 etc
 //
 // -----------------------------------------------------------------------------
-export class PolybiusSquare extends BaseCipher {
+export default class PolybiusSquare extends BaseCipher {
   KEY = 'polybius_square'
   NAME = 'Polybius Square'
   ABOUT = {

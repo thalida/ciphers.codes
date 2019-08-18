@@ -9,7 +9,7 @@ import BaseCipher from '../BaseCipher'
 //  A simple cipher wherein the alphabet is reversed.
 //
 // -----------------------------------------------------------------------------
-export class Atbash extends BaseCipher {
+export default class Atbash extends BaseCipher {
   KEY = 'atbash'
   NAME = 'Atbash'
   ABOUT = {

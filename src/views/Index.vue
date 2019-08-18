@@ -27,15 +27,15 @@
 
     <div class="ciphers">
       <Cipher
-        v-for="importKey in cipherImportKeys"
-        :key="importKey"
-        :import-key="importKey" />
+        v-for="cipherKey in cipherKeys"
+        :key="cipherKey"
+        :cipher-key="cipherKey" />
     </div>
   </div>
 </template>
 
 <script>
-import * as ciphers from '@/ciphers'
+import { cipherKeys } from '@/ciphers'
 import Cipher from '@/components/Cipher.vue'
 
 export default {
@@ -45,7 +45,7 @@ export default {
   },
   data () {
     return {
-      cipherImportKeys: Object.keys(ciphers)
+      cipherKeys
     }
   },
   computed: {

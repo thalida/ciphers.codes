@@ -10,7 +10,7 @@ import BaseCipher from '../BaseCipher'
 //  encoded based on the position of the letters in this keyed alphabet.
 //
 // -----------------------------------------------------------------------------
-export class KeyedSubstitution extends BaseCipher {
+export default class KeyedSubstitution extends BaseCipher {
   KEY = 'keyed_substitution'
   NAME = 'Keyed Substitution'
   ABOUT = {

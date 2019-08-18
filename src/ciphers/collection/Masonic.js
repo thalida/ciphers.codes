@@ -11,7 +11,7 @@ import BaseCipher from '../BaseCipher'
 //  just return the letter as is
 //
 // -----------------------------------------------------------------------------
-export class Masonic extends BaseCipher {
+export default class Masonic extends BaseCipher {
   KEY = 'mason'
   NAME = 'Masonic'
   ABOUT = {

@@ -1,6 +1,14 @@
 <template>
   <div :id="cipherId" class="cipher">
-    <h2>{{cipher.NAME}}</h2>
+    <h2>
+      <router-link
+        :to="{
+          name: 'about',
+          params: { cipherKey }
+        }">
+        {{cipher.NAME}}
+      </router-link>
+    </h2>
     <div class="inputs" v-if="cipherHasInputs">
       <div
         class="input"
@@ -36,26 +44,24 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-import * as ciphers from '@/ciphers'
+import { getCipherByKey } from '@/ciphers'
 
 export default {
   name: 'Cipher',
   props: {
-    importKey: String
+    cipherKey: String
   },
   data () {
-    let cipher = new ciphers[this.importKey]()
+    let cipher = getCipherByKey(this.cipherKey)
     const cipherHasInputs = (
       typeof cipher.INPUTS !== 'undefined' &&
       cipher.INPUTS !== null &&
       Array.isArray(cipher.INPUTS)
     )
-    const cipherId = `cipher-${cipher.KEY}`
     return {
       cipher,
       cipherHasInputs,
-      cipherId,
+      cipherId: `cipher-${cipher.KEY}`,
       cipherInputs: (cipherHasInputs) ? [...cipher.INPUTS] : null,
       cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULT_ARGS.inputs : null
     }

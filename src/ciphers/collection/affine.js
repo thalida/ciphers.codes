@@ -9,7 +9,7 @@ import BaseCipher from '../BaseCipher'
 //  A simple shift cipher based on the Caesar cipher
 //
 // -----------------------------------------------------------------------------
-export class Affine extends BaseCipher {
+export default class Affine extends BaseCipher {
   KEY = 'affine'
   NAME = 'Affine'
   ABOUT = {

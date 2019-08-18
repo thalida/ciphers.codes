@@ -9,7 +9,7 @@ import BaseCipher from '../BaseCipher'
 //  This cipher shifts the letters in the alphabet by x (user defined value)
 //
 // -----------------------------------------------------------------------------
-export class Caesar extends BaseCipher {
+export default class Caesar extends BaseCipher {
   KEY = 'caesar'
   NAME = 'Caesar'
   ABOUT = {

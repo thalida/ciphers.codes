@@ -10,7 +10,7 @@ import BaseCipher from '../BaseCipher'
 //  on the position of a pair of letters w/ respect to each other in the grid
 //
 // -----------------------------------------------------------------------------
-export class Playfair extends BaseCipher {
+export default class Playfair extends BaseCipher {
   KEY = 'playfair'
   NAME = 'Playfair'
   ABOUT = {

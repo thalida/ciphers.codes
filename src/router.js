@@ -14,10 +14,10 @@ export default new Router({
       component: Index
     },
     {
-      path: '/learn/:cipher',
-      name: 'learn',
+      path: '/about/:cipherKey',
+      name: 'about',
       props: true,
-      component: () => import(/* webpackChunkName: "learn" */ './views/Learn.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
       path: '*',

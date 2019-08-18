@@ -8,7 +8,7 @@ import BaseCipher from '../BaseCipher'
 //  Vigenère
 //
 // -----------------------------------------------------------------------------
-export class Vigenere extends BaseCipher {
+export default class Vigenere extends BaseCipher {
   KEY = 'vigenere'
   NAME = 'Vigenère'
   ABOUT = {
