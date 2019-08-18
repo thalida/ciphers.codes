@@ -12,7 +12,7 @@ import * as utils from '../utils'
 // -----------------------------------------------------------------------------
 const __USE_FONT = true
 
-export const KEY = 'mason'
+export const KEY = 'masonic'
 export const NAME = 'Masonic'
 export const ABOUT = {
   text: `A geometric simple substitution cipher which exchanges letters for symbols which are fragments of a grid.`,
