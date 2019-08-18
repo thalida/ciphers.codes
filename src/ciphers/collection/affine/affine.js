@@ -1,6 +1,6 @@
 'use strict'
 
-import * as utils from '../utils'
+import * as utils from '@/ciphers/utils'
 
 // =============================================================================
 //
@@ -23,7 +23,7 @@ export const ABOUT = {
 
 export const DEFAULTS = {
   isEncoding: true,
-  string: '',
+  inputStr: '',
   inputs: {
     shift: 2,
     coprime: 5
@@ -51,19 +51,21 @@ export const INPUTS = [
   }
 ]
 
-export function run ({ isEncoding, inputStr, inputs }) {
-  isEncoding = (typeof isEncoding === 'boolean')
-    ? isEncoding
+export function run (args) {
+  let isEncoding = (args && typeof args.isEncoding === 'boolean')
+    ? args.isEncoding
     : DEFAULTS.isEncoding
 
-  inputStr = (typeof inputStr === 'string')
-    ? inputStr
+  let inputStr = (args && typeof args.inputStr === 'string')
+    ? args.inputStr
     : DEFAULTS.inputStr
+
+  let inputs = (args && typeof args.inputs !== 'undefined')
+    ? args.inputs
+    : {}
 
   if (typeof DEFAULTS.inputs !== 'undefined') {
     inputs = Object.assign({}, DEFAULTS.inputs, inputs)
-  } else {
-    inputs = null
   }
 
   const alpha = utils.ALPHA

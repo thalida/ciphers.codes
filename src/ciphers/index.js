@@ -1,21 +1,21 @@
-import * as Affine from './collection/Affine'
-import * as Atbash from './collection/Atbash'
-import * as Caesar from './collection/Caesar'
-import * as KeyedSubstitution from './collection/KeyedSubstitution'
-import * as Masonic from './collection/Masonic'
-import * as Playfair from './collection/Playfair'
-import * as PolybiusSquare from './collection/PolybiusSquare'
-import * as Vigenere from './collection/Vigenere'
+import * as affine from './collection/affine'
+import * as atbash from './collection/atbash'
+import * as caesar from './collection/caesar'
+import * as keyedSubstitution from './collection/keyedSubstitution'
+import * as masonic from './collection/masonic'
+import * as playfair from './collection/playfair'
+import * as polybiusSquare from './collection/polybiusSquare'
+import * as vigenere from './collection/vigenere'
 
 let ciphers = [
-  Affine,
-  Atbash,
-  Caesar,
-  KeyedSubstitution,
-  Masonic,
-  Playfair,
-  PolybiusSquare,
-  Vigenere
+  affine,
+  atbash,
+  caesar,
+  keyedSubstitution,
+  masonic,
+  playfair,
+  polybiusSquare,
+  vigenere
 ]
 
 let ciphersByKey = ciphers.reduce((obj, cipher) => {

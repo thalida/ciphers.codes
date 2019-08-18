@@ -124,10 +124,10 @@ export default {
       }, 3000)
     },
     handleCopySuccess (cipher) {
-      this.renderToast('copy:success', {cipher})
+      this.renderToast('copy:success', { cipher })
     },
     handleCopyError (cipher) {
-      this.renderToast('copy:error', {cipher})
+      this.renderToast('copy:error', { cipher })
     }
   }
 }

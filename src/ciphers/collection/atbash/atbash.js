@@ -1,6 +1,6 @@
 'use strict'
 
-import * as utils from '../utils'
+import * as utils from '@/ciphers/utils'
 
 // =============================================================================
 //
@@ -21,7 +21,7 @@ export const ABOUT = {
 
 export const DEFAULTS = {
   isEncoding: true,
-  string: ''
+  inputStr: ''
 }
 
 export function run ({ inputStr }) {
