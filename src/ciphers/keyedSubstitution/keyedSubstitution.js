@@ -47,7 +47,7 @@ export const INPUTS = [
     description: 'Create a key by entering text without using duplicate letters.',
     placeholder: '',
     value: SAMPLE_INPUTS.key,
-    postProcess: utils.removeDuplicateChars.bind(this)
+    postProcess: utils.makeValidKey.bind(this)
   }
 ]
 

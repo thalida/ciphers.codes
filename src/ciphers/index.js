@@ -1,11 +1,11 @@
-import * as affine from './collection/affine'
-import * as atbash from './collection/atbash'
-import * as caesar from './collection/caesar'
-import * as keyedSubstitution from './collection/keyedSubstitution'
-import * as masonic from './collection/masonic'
-import * as playfair from './collection/playfair'
-import * as polybiusSquare from './collection/polybiusSquare'
-import * as vigenere from './collection/vigenere'
+import * as affine from './affine'
+import * as atbash from './atbash'
+import * as caesar from './caesar'
+import * as keyedSubstitution from './keyedSubstitution'
+import * as masonic from './masonic'
+import * as playfair from './playfair'
+import * as polybiusSquare from './polybiusSquare'
+import * as vigenere from './vigenere'
 
 let ciphers = [
   affine,

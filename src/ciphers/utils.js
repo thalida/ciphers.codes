@@ -3,21 +3,23 @@
 // =============================================================================
 //
 //  Cipher Utils
-//  General functions and variables to be used by some/all of the ciphers.
+//  General functions and variables to be used by more than one cipher
 //
+// =============================================================================
+
+//  Standard English Letters & Numbers
 // -----------------------------------------------------------------------------
-const ALPHA = [
+export const ALPHA = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
   'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 ]
-const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-const TOTAL_ALPHA = ALPHA.length
-const ALPHANUMERIC = [].concat(ALPHA, NUMBERS)
+export const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+export const ALPHANUMERIC = [].concat(ALPHA, NUMBERS)
+export const TOTAL_ALPHA = ALPHA.length
 
-//  ALPHAGRID
-//  Create a 6 x 6 grid of the alphabet and numbers 0 - 9
-// ----------------------------------------------------------------------
-const ALPHAGRID = (() => {
+//  ALPHAGRID: A 6 x 6 grid of the alphabet and numbers 0 - 9
+// -----------------------------------------------------------------------------
+export const ALPHAGRID = (() => {
   // We need to create a 6x6 grid of the alphanumeric characters
   const GRID_SIZE = 6
   let grid = new Array(GRID_SIZE)
@@ -38,32 +40,40 @@ const ALPHAGRID = (() => {
   return grid
 })()
 
-let cachedKeyedAlphas = {}
-
-export {
-  ALPHA,
-  TOTAL_ALPHA,
-  ALPHANUMERIC,
-  ALPHAGRID
+//  mod
+//  A fix for JS issues with modding a negative number
+// -----------------------------------------------------------------------------
+export function mod (a, b) {
+  return ((a % b) + b) % b
 }
 
-//  @setCase( char, boolean )
+//  isLetter
+//  Check if a given str has only letters
+// -----------------------------------------------------------------------------
+export function isLetter (str) {
+  return str.match(/^[A-Za-z]$/)
+}
+
+//  setCase (char:chart, toUpper:boolean)
 //  Check if the char should be made uppercase, if so do so. #poetry
-// ----------------------------------------------------------------------
-export function setCase (char, makeUpperCase) {
-  return (makeUpperCase === true) ? char.toUpperCase() : char
+// -----------------------------------------------------------------------------
+export function setCase (char, toUpper) {
+  return (toUpper) ? char.toUpperCase() : char.toLowerCase()
 }
 
-//  @forEachCharacter( string, int, function )
+//  forEachCharacter (string:string, (increment:int,) cb:function)
+//    increment is optional
 //  Loop through a given string and call the passed function
 //  with the current index, letter, and if that letter is uppercase.
-// ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 export function forEachCharacter (string, increment, cb) {
+  // if increment is not passed in, default to 1
   if (typeof increment === 'function') {
     cb = increment
     increment = 1
   }
 
+  // A callback is required
   if (typeof cb !== 'function') {
     return
   }
@@ -75,27 +85,45 @@ export function forEachCharacter (string, increment, cb) {
   }
 }
 
-//  @isLetter
-//  Check if a given str has only letters
-// ----------------------------------------------------------------------
-export function isLetter (str) {
-  return str.match(/^[A-Za-z]$/)
+//  makeValidInt
+//  Converts the given input to a valid int
+// -----------------------------------------------------------------------------
+export function makeValidInt (currVal, defaultVal) {
+  if (typeof currVal === 'number') {
+    return currVal
+  }
+
+  if (typeof currVal === 'string' && currVal.length > 0) {
+    return parseInt(currVal, 10)
+  }
+
+  return defaultVal
 }
 
-export function removeDuplicateChars (key) {
-  let keyArr = key.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('')
-  let deduped = new Set(keyArr)
-  return [...deduped].join('')
+//  makeValidKey
+//  Converts the given string into a valid key (no dupe chars and all lowercase)
+// -----------------------------------------------------------------------------
+export function makeValidKey (string, defaultKey) {
+  if (typeof string !== 'string') {
+    return (typeof defaultKey === 'string') ? defaultKey : null
+  }
+
+  let charsArray = string.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('')
+  let uniqueChars = new Set(charsArray)
+  let key = [...uniqueChars].join('') // remake into a string
+
+  return key
 }
 
-//  @makeKeyedAlpha
+//  makeKeyedAlpha
 //  Create a keyed version of the alphabet - which is a common trick
 //  among ciphers/codes.
 //
 //  Example:
 //  key: 'lorem'
 //  keyed alphabet: loremabcdfghijknpqstuvwxyz
-// ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+let cachedKeyedAlphas = {}
 export function makeKeyedAlpha (key) {
   if (typeof cachedKeyedAlphas[key] !== 'undefined') {
     return cachedKeyedAlphas[key]
@@ -125,33 +153,9 @@ export function makeKeyedAlpha (key) {
   return keyedAlphabet
 }
 
-export function makeValidInt (currVal, defaultVal) {
-  if (typeof currVal === 'number') {
-    return currVal
-  }
-
-  if (typeof currVal === 'string' && currVal.length > 0) {
-    return parseInt(currVal, 10)
-  }
-
-  return defaultVal
-}
-
-export function makeValidKey (currVal, defaultVal) {
-  if (typeof currVal === 'string') {
-    return currVal.toLowerCase()
-  }
-
-  return defaultVal
-}
-
-//  @mod
-//  A fix for JS issues with modding a negative number
-// ----------------------------------------------------------------------
-export function mod (a, b) {
-  return ((a % b) + b) % b
-}
-
+//  parseCipherArgs
+//  Convert and sanitize cipher arguments
+// -----------------------------------------------------------------------------
 export function parseCipherArgs (args, defaults) {
   let isEncoding = (args && typeof args.isEncoding === 'boolean')
     ? args.isEncoding

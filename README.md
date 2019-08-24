@@ -11,15 +11,15 @@
     - [x] polybiusSquare
     - [x] vigenere
 - [x] clean up args in ciphers
-- [ ] review ciphers + tests and clear up any confusing logic
-    - [ ] affine
-    - [ ] atbash
-    - [ ] caesar
-    - [ ] keyedSubstitution
-    - [ ] masonic (no test required)
-    - [ ] playfair
-    - [ ] polybiusSquare
-    - [ ] vigenere
+- [x] review ciphers + tests and clear up any confusing logic
+    - [x] affine
+    - [x] atbash
+    - [x] caesar
+    - [x] keyedSubstitution
+    - [x] masonic (no test required)
+    - [x] playfair
+    - [x] polybiusSquare
+    - [x] vigenere
 - [ ] Review cipher utils and clean up
 - [ ] Style general page layout + containers
 - [ ] Style main input box area
