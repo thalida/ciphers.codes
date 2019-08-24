@@ -38,9 +38,9 @@ describe('cipher:affine', () => {
       expected: testStrings.normal
     },
     {
-      label: 'should encode with coprime 1 and shift 0',
+      label: 'should decode with coprime 1 and shift 0',
       args: {
-        isEncoding: true,
+        isEncoding: false,
         inputStr: testStrings.normal,
         inputs: { coprime: 1, shift: 0 }
       },

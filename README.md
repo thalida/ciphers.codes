@@ -4,7 +4,7 @@
 - [ ] Setup tests for ciphers
     - [x] affine
     - [x] atbash
-    - [ ] caesar
+    - [x] caesar
     - [ ] keyedSubstitution
     - [ ] masonic
     - [ ] playfair

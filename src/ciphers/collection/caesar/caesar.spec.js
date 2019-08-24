@@ -1,47 +1,78 @@
-/* eslint-disable no-tabs */
+'use strict'
 
-// 'use strict';
+import { assert } from 'chai'
+import * as caesar from './caesar'
 
-// describe('cipher service', function(){
-// 	var mockCollection;
-// 	var mockUtils;
-// 	var cipherService;
+describe('cipher:caesar', () => {
+  let testStrings = {
+    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
+    shiftThree: 'DefghijklmnopqrstuvwxyzabC - 0123456789'
+  }
 
-// 	var cipherArgs = {
-// 		addons: {shift: 3}
-// 	};
-// 	var cipherStrs = {
-// 		normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-// 		encoded: 'DefghijklmnopqrstuvwxyzabC - 0123456789'
-// 	};
+  let testCases = [
+    {
+      label: 'should encode with shift 3',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { shift: 3 }
+      },
+      expected: testStrings.shiftThree
+    },
+    {
+      label: 'should decode with shift 3',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.shiftThree,
+        inputs: { shift: 3 }
+      },
+      expected: testStrings.normal
+    },
+    {
+      label: 'should encode with shift 0',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { shift: 0 }
+      },
+      expected: testStrings.normal
+    },
+    {
+      label: 'should decode with shift 0',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.normal,
+        inputs: { shift: 0 }
+      },
+      expected: testStrings.normal
+    }
+  ]
+  testCases.forEach((testCase) => {
+    it(testCase.label, () => {
+      let outputStr = caesar.run(testCase.args)
+      assert.equal(outputStr, testCase.expected)
+    })
+  })
 
-// 	beforeEach(angular.mock.module('app'));
+  it('should encode alphabet using defaults', () => {
+    let noArgsOutputStr = caesar.run()
+    let defaultArgsOutputStr = caesar.run(caesar.DEFAULTS)
+    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+  })
 
-// 	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, caesarService){
-// 		mockCollection = cipherCollection;
-// 		mockUtils = cipherUtils;
-// 		cipherService = caesarService;
-// 	}));
+  it('should be the same after encode and decode', () => {
+    const inputs = { shift: 15 }
+    let encodeOutputStr = caesar.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
 
-// 	it('should encode alphabet by 3', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.encoded);
-// 	});
-
-// 	it('should decode alphabet by 3', function() {
-// 		cipherArgs.isEncoding = false;
-// 		cipherArgs.string = cipherStrs.encoded;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
-// 	});
-
-// 	it('should encode alphabet by 0', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-// 		cipherArgs.addons.shift = null;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
-// 	});
-// });
+    let decodeOutputStr = caesar.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal(testStrings.normal, decodeOutputStr)
+  })
+})
