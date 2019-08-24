@@ -24,7 +24,11 @@ export const DEFAULTS = {
   inputStr: ''
 }
 
-export function run ({ inputStr }) {
+export function run (args) {
+  let inputStr = (args && typeof args.inputStr === 'string')
+    ? args.inputStr
+    : DEFAULTS.inputStr
+
   const alpha = utils.ALPHA
 
   let output = ''

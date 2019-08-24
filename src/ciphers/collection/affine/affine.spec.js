@@ -1,6 +1,6 @@
 'use strict'
 
-import { assert, expect } from 'chai'
+import { assert } from 'chai'
 import * as affine from './affine'
 
 describe('cipher:affine', () => {
@@ -36,6 +36,15 @@ describe('cipher:affine', () => {
         inputs: { coprime: 1, shift: 0 }
       },
       expected: testStrings.normal
+    },
+    {
+      label: 'should encode with coprime 1 and shift 0',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { coprime: 1, shift: 0 }
+      },
+      expected: testStrings.normal
     }
   ]
   testCases.forEach((testCase) => {
@@ -48,6 +57,22 @@ describe('cipher:affine', () => {
   it('should encode alphabet using defaults', () => {
     let noArgsOutputStr = affine.run()
     let defaultArgsOutputStr = affine.run(affine.DEFAULTS)
-    expect(noArgsOutputStr).equal(defaultArgsOutputStr)
+    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+  })
+
+  it('should be the same after encode and decode', () => {
+    const inputs = { coprime: 7, shift: 20 }
+    let encodeOutputStr = affine.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
+
+    let decodeOutputStr = affine.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal(testStrings.normal, decodeOutputStr)
   })
 })

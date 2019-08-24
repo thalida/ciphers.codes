@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit 'src/**/*.spec.js'"
+    "test:unit": "vue-cli-service test:unit 'src/**/*.spec.js'",
+    "test:unit:watch": "vue-cli-service test:unit 'src/**/*.spec.js' --watch"
   },
   "dependencies": {
     "core-js": "^2.6.5",

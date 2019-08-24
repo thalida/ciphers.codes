@@ -1,37 +1,56 @@
-/* eslint-disable no-tabs */
+'use strict'
 
-// 'use strict';
+import { assert } from 'chai'
+import * as atbash from './atbash'
 
-// describe('atbash service', function(){
-// 	var mockCollection;
-// 	var mockUtils;
-// 	var cipherService;
+describe('cipher:atbash', () => {
+  let testStrings = {
+    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
+    encoded: 'ZyxwvutsrqponmlkjihgfedcbA - 0123456789'
+  }
 
-// 	var cipherArgs = {};
-// 	var cipherStrs = {
-// 		normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-// 		encoded: 'ZyxwvutsrqponmlkjihgfedcbA - 0123456789'
-// 	};
+  let testCases = [
+    {
+      label: 'should encode',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal
+      },
+      expected: testStrings.encoded
+    },
+    {
+      label: 'should decode',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.encoded
+      },
+      expected: testStrings.normal
+    }
+  ]
+  testCases.forEach((testCase) => {
+    it(testCase.label, () => {
+      let outputStr = atbash.run(testCase.args)
+      assert.equal(outputStr, testCase.expected)
+    })
+  })
 
-// 	beforeEach(angular.mock.module('app'));
+  it('should encode alphabet using defaults', () => {
+    let noArgsOutputStr = atbash.run()
+    let defaultArgsOutputStr = atbash.run(atbash.DEFAULTS)
+    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+  })
 
-// 	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, atbashService){
-// 		mockCollection = cipherCollection;
-// 		mockUtils = cipherUtils;
-// 		cipherService = atbashService;
-// 	}));
+  it('should be the same after encode and decode', () => {
+    let encodeOutputStr = atbash.run({
+      isEncoding: true,
+      inputStr: testStrings.normal
+    })
 
-// 	it('should reverse the alphabet', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
+    let decodeOutputStr = atbash.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr
+    })
 
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.encoded);
-// 	});
-
-// 	it('should return the standard alphabet', function() {
-// 		cipherArgs.isEncoding = false;
-// 		cipherArgs.string = cipherStrs.encoded;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
-// 	});
-// });
+    assert.equal(testStrings.normal, decodeOutputStr)
+  })
+})

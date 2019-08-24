@@ -84,7 +84,7 @@ export function run (args) {
       if (isEncoding) {
         newLetterPos = (coprime * letterPos) + shift
       } else {
-        newLetterPos = (utils.TOTAL_ALPHA - coprime) * (letterPos - shift)
+        newLetterPos = _modInverse(coprime) * (letterPos - shift)
       }
 
       // The new letter position may be out of bounds,
@@ -98,4 +98,27 @@ export function run (args) {
   })
 
   return output
+}
+
+function _modInverse (coprime) {
+  let mod = utils.TOTAL_ALPHA
+  let inverse = 1
+  let y = 0
+
+  while (coprime > 1) {
+    let origMod = mod
+    let origY = y
+    let quotient = Math.floor(coprime / mod)
+
+    mod = coprime % mod
+    coprime = origMod
+    y = inverse - quotient * y
+    inverse = origY
+
+    if (inverse < 0) {
+      inverse += utils.TOTAL_ALPHA
+    }
+  }
+
+  return inverse
 }

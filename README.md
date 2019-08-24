@@ -2,6 +2,14 @@
 
 ## Tasks
 - [ ] Setup tests for ciphers
+    - [x] affine
+    - [x] atbash
+    - [ ] caesar
+    - [ ] keyedSubstitution
+    - [ ] masonic
+    - [ ] playfair
+    - [ ] polybiusSquare
+    - [ ] vigenere
 - [ ] Style general page layout + containers
 - [ ] Style main input box area
 - [ ] Style all ciphers
