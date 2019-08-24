@@ -8,7 +8,7 @@
     - [x] keyedSubstitution
     - [x] masonic (no test required)
     - [x] playfair
-    - [ ] polybiusSquare
+    - [x] polybiusSquare
     - [ ] vigenere
 - [ ] Style general page layout + containers
 - [ ] Style main input box area

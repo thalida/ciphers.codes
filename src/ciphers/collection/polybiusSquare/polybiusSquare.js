@@ -26,10 +26,14 @@ export const DEFAULTS = {
   inputStr: ''
 }
 
-export function run ({ isEncoding, inputStr }) {
-  isEncoding = (typeof isEncoding === 'boolean')
-    ? isEncoding
+export function run (args) {
+  let isEncoding = (args && typeof args.isEncoding === 'boolean')
+    ? args.isEncoding
     : DEFAULTS.isEncoding
+
+  let inputStr = (args && typeof args.inputStr === 'string')
+    ? args.inputStr
+    : DEFAULTS.inputStr
 
   const alphanumeric = utils.ALPHANUMERIC
   const alphagrid = utils.ALPHAGRID
