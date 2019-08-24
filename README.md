@@ -10,6 +10,16 @@
     - [x] playfair
     - [x] polybiusSquare
     - [x] vigenere
+- [x] clean up args in ciphers
+- [ ] review ciphers + tests and clear up any confusing logic
+    - [ ] affine
+    - [ ] atbash
+    - [ ] caesar
+    - [ ] keyedSubstitution
+    - [ ] masonic (no test required)
+    - [ ] playfair
+    - [ ] polybiusSquare
+    - [ ] vigenere
 - [ ] Style general page layout + containers
 - [ ] Style main input box area
 - [ ] Style all ciphers

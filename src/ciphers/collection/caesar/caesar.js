@@ -37,26 +37,11 @@ export const INPUTS = [
 ]
 
 export function run (args) {
-  let isEncoding = (args && typeof args.isEncoding === 'boolean')
-    ? args.isEncoding
-    : DEFAULTS.isEncoding
-
-  let inputStr = (args && typeof args.inputStr === 'string')
-    ? args.inputStr
-    : DEFAULTS.inputStr
-
-  let inputs = (args && typeof args.inputs !== 'undefined')
-    ? args.inputs
-    : {}
-
-  if (typeof DEFAULTS.inputs !== 'undefined') {
-    inputs = Object.assign({}, DEFAULTS.inputs, inputs)
-  }
+  let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
+  let output = ''
 
   const alpha = utils.ALPHA
   const shift = utils.makeValidInt(inputs.shift, DEFAULTS.inputs.shift)
-
-  let output = ''
 
   utils.forEachCharacter(inputStr, (i, char, isUpper) => {
     if (utils.isLetter(char)) {

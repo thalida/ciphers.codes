@@ -44,21 +44,8 @@ export const INPUTS = [
 ]
 
 export function run (args) {
-  let isEncoding = (args && typeof args.isEncoding === 'boolean')
-    ? args.isEncoding
-    : DEFAULTS.isEncoding
-
-  let inputStr = (args && typeof args.inputStr === 'string')
-    ? args.inputStr
-    : DEFAULTS.inputStr
-
-  let inputs = (args && typeof args.inputs !== 'undefined')
-    ? args.inputs
-    : {}
-
-  if (typeof DEFAULTS.inputs !== 'undefined') {
-    inputs = Object.assign({}, DEFAULTS.inputs, inputs)
-  }
+  let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
+  let output = ''
 
   const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key)
   // Replace any j's with i's in the key
@@ -73,8 +60,6 @@ export function run (args) {
 
   // Convert the string to an array of pairs
   const str = _strToPairs(inputStr, isEncoding)
-
-  let output = ''
 
   for (let i = 0; i < str.length; i++) {
     // Get the info for the first + second characters of the pair

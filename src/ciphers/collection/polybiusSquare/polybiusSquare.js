@@ -27,19 +27,12 @@ export const DEFAULTS = {
 }
 
 export function run (args) {
-  let isEncoding = (args && typeof args.isEncoding === 'boolean')
-    ? args.isEncoding
-    : DEFAULTS.isEncoding
-
-  let inputStr = (args && typeof args.inputStr === 'string')
-    ? args.inputStr
-    : DEFAULTS.inputStr
+  let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
+  let output = ''
 
   const alphanumeric = utils.ALPHANUMERIC
   const alphagrid = utils.ALPHAGRID
   const alphaGridSize = alphagrid.length - 1 // the 0 index isn't used
-
-  let output = ''
 
   // Remove all spaces from the string
   inputStr = inputStr.replace(/[\s]+/gi, '')

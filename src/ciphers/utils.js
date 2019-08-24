@@ -151,3 +151,23 @@ export function makeValidKey (currVal, defaultVal) {
 export function mod (a, b) {
   return ((a % b) + b) % b
 }
+
+export function parseCipherArgs (args, defaults) {
+  let isEncoding = (args && typeof args.isEncoding === 'boolean')
+    ? args.isEncoding
+    : defaults.isEncoding
+
+  let inputStr = (args && typeof args.inputStr === 'string')
+    ? args.inputStr
+    : defaults.inputStr
+
+  let inputs = (args && typeof args.inputs !== 'undefined')
+    ? args.inputs
+    : {}
+
+  if (typeof defaults.inputs !== 'undefined') {
+    inputs = Object.assign({}, defaults.inputs, inputs)
+  }
+
+  return { isEncoding, inputStr, inputs }
+}

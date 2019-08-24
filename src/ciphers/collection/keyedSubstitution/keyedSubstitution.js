@@ -41,29 +41,14 @@ export const INPUTS = [
 ]
 
 export function run (args) {
-  let isEncoding = (args && typeof args.isEncoding === 'boolean')
-    ? args.isEncoding
-    : DEFAULTS.isEncoding
-
-  let inputStr = (args && typeof args.inputStr === 'string')
-    ? args.inputStr
-    : DEFAULTS.inputStr
-
-  let inputs = (args && typeof args.inputs !== 'undefined')
-    ? args.inputs
-    : {}
-
-  if (typeof DEFAULTS.inputs !== 'undefined') {
-    inputs = Object.assign({}, DEFAULTS.inputs, inputs)
-  }
+  let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
+  let output = ''
 
   const alpha = utils.ALPHA
   const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key)
 
   // Create an alphabet w/ this key in the beginning of it
   var keyedAlpha = utils.makeKeyedAlpha(key)
-
-  let output = ''
 
   utils.forEachCharacter(inputStr, (i, char, isUpper) => {
     if (utils.isLetter(char)) {

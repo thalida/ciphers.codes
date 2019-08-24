@@ -27,16 +27,13 @@ export const DEFAULTS = {
   inputStr: ''
 }
 
-export function run ({ isEncoding, inputStr }) {
+export function run (args) {
+  let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
+  let output = ''
+
   if (__USE_FONT) {
     return inputStr
   }
-
-  isEncoding = (typeof isEncoding === 'boolean')
-    ? isEncoding
-    : DEFAULTS.isEncoding
-
-  let output = ''
 
   utils.forEachCharacter(inputStr, (i, char) => {
     char = char.toLowerCase()

@@ -25,13 +25,10 @@ export const DEFAULTS = {
 }
 
 export function run (args) {
-  let inputStr = (args && typeof args.inputStr === 'string')
-    ? args.inputStr
-    : DEFAULTS.inputStr
+  let { inputStr } = utils.parseCipherArgs(args, DEFAULTS)
+  let output = ''
 
   const alpha = utils.ALPHA
-
-  let output = ''
 
   utils.forEachCharacter(inputStr, (i, char, isUpper) => {
     if (utils.isLetter(char)) {

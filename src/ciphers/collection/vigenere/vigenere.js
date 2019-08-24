@@ -39,21 +39,8 @@ export const INPUTS = [
 ]
 
 export function run (args) {
-  let isEncoding = (args && typeof args.isEncoding === 'boolean')
-    ? args.isEncoding
-    : DEFAULTS.isEncoding
-
-  let inputStr = (args && typeof args.inputStr === 'string')
-    ? args.inputStr
-    : DEFAULTS.inputStr
-
-  let inputs = (args && typeof args.inputs !== 'undefined')
-    ? args.inputs
-    : {}
-
-  if (typeof DEFAULTS.inputs !== 'undefined') {
-    inputs = Object.assign({}, DEFAULTS.inputs, inputs)
-  }
+  let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
+  let output = ''
 
   const alpha = utils.ALPHA
 
@@ -66,7 +53,6 @@ export function run (args) {
     .replace(/[\s]+/gi, '').toLowerCase()
 
   let key = ''
-  let output = ''
 
   while (key.length < string.length && keyBase.length > 0) {
     utils.forEachCharacter(keyBase, (i, char) => {
