@@ -42,4 +42,22 @@ describe('cipher:playfair', () => {
     let defaultArgsOutputStr = playfair.run(playfair.DEFAULTS)
     assert.equal(noArgsOutputStr, defaultArgsOutputStr)
   })
+
+  it('should encode and decode with sample inputs', () => {
+    const inputs = playfair.SAMPLE_INPUTS
+    assert.containsAllKeys(inputs, ['key'])
+
+    let encodeOutputStr = playfair.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
+
+    let decodeOutputStr = playfair.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal('abcdefghixiklmnopqrstuvwxyzx', decodeOutputStr)
+  })
 })

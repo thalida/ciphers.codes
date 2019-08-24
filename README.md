@@ -6,7 +6,7 @@
     - [x] atbash
     - [x] caesar
     - [x] keyedSubstitution
-    - [x] masonic (no test required)
+    - [x] masonic
     - [x] playfair
     - [x] polybiusSquare
     - [x] vigenere

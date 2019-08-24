@@ -29,6 +29,12 @@ export const DEFAULTS = {
   }
 }
 
+//  Sample Inputs
+// -----------------------------------------------------------------------------
+export const SAMPLE_INPUTS = {
+  key: 'hide'
+}
+
 //  Inputs
 // -----------------------------------------------------------------------------
 export const INPUTS = [
@@ -38,7 +44,7 @@ export const INPUTS = [
     label: 'Key',
     description: 'Create a key by entering text without using duplicate letters.',
     placeholder: '',
-    value: DEFAULTS.inputs.key,
+    value: SAMPLE_INPUTS.key,
     postProcess: utils.removeDuplicateChars.bind(this)
   }
 ]

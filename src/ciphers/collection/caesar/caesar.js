@@ -30,6 +30,12 @@ export const DEFAULTS = {
   }
 }
 
+//  Sample Inputs
+// -----------------------------------------------------------------------------
+export const SAMPLE_INPUTS = {
+  shift: 5
+}
+
 //  Inputs
 // -----------------------------------------------------------------------------
 export const INPUTS = [
@@ -38,7 +44,7 @@ export const INPUTS = [
     name: 'shift',
     label: 'Shift by',
     description: 'Enter a number (positive/negative) to shift the alphabet by.',
-    value: DEFAULTS.inputs.shift
+    value: SAMPLE_INPUTS.shift
   }
 ]
 

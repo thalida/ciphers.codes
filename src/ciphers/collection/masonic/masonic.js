@@ -22,10 +22,6 @@ export const ABOUT = {
   }
 }
 
-//  Private Variables
-// -----------------------------------------------------------------------------
-const __USE_FONT = true
-
 //  Default Arguments
 // -----------------------------------------------------------------------------
 export const DEFAULTS = {
@@ -36,13 +32,15 @@ export const DEFAULTS = {
 //  Main Run Function
 //  Returns the encoded / decoded string based on the cipher rules
 // -----------------------------------------------------------------------------
-export function run (args) {
+export function run (args, useFont) {
+  useFont = (typeof useFont === 'boolean') ? useFont : true
+
   let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
 
   // Masonic cipher can't be represented by a plaintext string
   // Return the input string if we'll use a font to represent the cipher
-  if (__USE_FONT) {
+  if (useFont) {
     return inputStr
   }
 
@@ -50,7 +48,7 @@ export function run (args) {
   utils.forEachCharacter(inputStr, (i, char) => {
     char = char.toLowerCase()
     if (isEncoding && char.match(/^[a-z]$/)) {
-      char = '<span class="mason_text">' + char + '</span>'
+      char = `<span class="masonic">${char}</span>`
     }
     output += char
   })

@@ -35,6 +35,13 @@ export const DEFAULTS = {
   }
 }
 
+//  Sample Inputs
+// -----------------------------------------------------------------------------
+export const SAMPLE_INPUTS = {
+  shift: 6,
+  coprime: __ALLOWED_COPRIMES[1]
+}
+
 //  Inputs
 // -----------------------------------------------------------------------------
 export const INPUTS = [
@@ -43,7 +50,7 @@ export const INPUTS = [
     name: 'coprime',
     label: 'Co-prime',
     description: 'The coprimes of 26 are: ' + __ALLOWED_COPRIMES.join(', '),
-    value: DEFAULTS.inputs.coprime,
+    value: SAMPLE_INPUTS.coprime,
     options: __ALLOWED_COPRIMES,
     validate (n) {
       return __ALLOWED_COPRIMES.indexOf(parseInt(n, 10)) >= 0
@@ -54,7 +61,7 @@ export const INPUTS = [
     name: 'shift',
     label: 'Shift',
     description: 'Enter a number (positive/negative) to shift the alphabet by.',
-    value: DEFAULTS.inputs.shift
+    value: SAMPLE_INPUTS.shift
   }
 ]
 

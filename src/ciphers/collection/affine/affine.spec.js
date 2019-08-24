@@ -75,4 +75,23 @@ describe('cipher:affine', () => {
     })
     assert.equal(testStrings.normal, decodeOutputStr)
   })
+
+  it('should encode and decode with sample inputs', () => {
+    const inputs = affine.SAMPLE_INPUTS
+    assert.containsAllKeys(inputs, ['coprime', 'shift'])
+
+    let encodeOutputStr = affine.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
+
+    let decodeOutputStr = affine.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+
+    assert.equal(testStrings.normal, decodeOutputStr)
+  })
 })

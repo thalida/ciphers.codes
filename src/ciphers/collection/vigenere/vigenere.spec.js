@@ -76,4 +76,22 @@ describe('cipher:vigenere', () => {
     })
     assert.equal(testStrings.decoded, decodeOutputStr)
   })
+
+  it('should encode and decode with sample inputs', () => {
+    const inputs = vigenere.SAMPLE_INPUTS
+    assert.containsAllKeys(inputs, ['key'])
+
+    let encodeOutputStr = vigenere.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
+
+    let decodeOutputStr = vigenere.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal(testStrings.decoded, decodeOutputStr)
+  })
 })

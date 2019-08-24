@@ -37,6 +37,12 @@ export const DEFAULTS = {
   }
 }
 
+//  Sample Inputs
+// -----------------------------------------------------------------------------
+export const SAMPLE_INPUTS = {
+  key: 'private'
+}
+
 //  Inputs
 // -----------------------------------------------------------------------------
 export const INPUTS = [
@@ -46,7 +52,7 @@ export const INPUTS = [
     label: 'Key',
     description: 'Create a key by entering text without using duplicate letters.',
     placeholder: '',
-    value: DEFAULTS.inputs.key,
+    value: SAMPLE_INPUTS.key,
     postProcess: utils.removeDuplicateChars.bind(this)
   }
 ]
@@ -64,10 +70,11 @@ export function run (args) {
   // Created a grid based keyed version of the alphabet
   const alpha = _getKeyedAlpha(keyword)
 
-  // Remove any non letter character
-  inputStr = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
-  // Replace any j's with i's
-  inputStr = inputStr.replace(/[j]+/gi, 'i').toLowerCase()
+  inputStr = inputStr
+    // Remove any non letter character
+    .replace(/[^A-Za-z]+/gi, '').toLowerCase()
+    // Replace any j's with i's
+    .replace(/[j]+/gi, 'i').toLowerCase()
 
   // Convert the string to an array of pairs
   const str = _strToPairs(inputStr, isEncoding)

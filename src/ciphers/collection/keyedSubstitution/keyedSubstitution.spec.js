@@ -75,4 +75,22 @@ describe('cipher:keyedSubstitution', () => {
     })
     assert.equal(testStrings.normal, decodeOutputStr)
   })
+
+  it('should encode and decode with sample inputs', () => {
+    const inputs = keyedSubstitution.SAMPLE_INPUTS
+    assert.containsAllKeys(inputs, ['key'])
+
+    let encodeOutputStr = keyedSubstitution.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
+
+    let decodeOutputStr = keyedSubstitution.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal(testStrings.normal, decodeOutputStr)
+  })
 })

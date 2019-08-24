@@ -75,4 +75,22 @@ describe('cipher:caesar', () => {
     })
     assert.equal(testStrings.normal, decodeOutputStr)
   })
+
+  it('should encode and decode with sample inputs', () => {
+    const inputs = caesar.SAMPLE_INPUTS
+    assert.containsAllKeys(inputs, ['shift'])
+
+    let encodeOutputStr = caesar.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
+
+    let decodeOutputStr = caesar.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal(testStrings.normal, decodeOutputStr)
+  })
 })
