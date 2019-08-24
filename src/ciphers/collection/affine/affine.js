@@ -7,10 +7,9 @@ import * as utils from '@/ciphers/utils'
 //  Affine
 //  A simple shift cipher based on the Caesar cipher
 //
+// =============================================================================
+//  About this Cipher
 // -----------------------------------------------------------------------------
-
-const __ALLOWED_COPRIMES = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
-
 export const KEY = 'affine'
 export const NAME = 'Affine'
 export const ABOUT = {
@@ -21,15 +20,23 @@ export const ABOUT = {
   }
 }
 
+//  Private Variables
+// -----------------------------------------------------------------------------
+const __ALLOWED_COPRIMES = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
+
+//  Default Arguments
+// -----------------------------------------------------------------------------
 export const DEFAULTS = {
   isEncoding: true,
   inputStr: '',
   inputs: {
     shift: 0,
-    coprime: 1
+    coprime: __ALLOWED_COPRIMES[0]
   }
 }
 
+//  Inputs
+// -----------------------------------------------------------------------------
 export const INPUTS = [
   {
     type: 'select',
@@ -51,6 +58,9 @@ export const INPUTS = [
   }
 ]
 
+//  Main Run Function
+//  Returns the encoded / decoded string based on the cipher rules
+// -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
@@ -85,6 +95,13 @@ export function run (args) {
   return output
 }
 
+//  HELPER FUNCTIONS for THIS CIPHER ONLY!!
+// =============================================================================
+
+//  modInverse
+//  takes: coprime
+//  returns: the multiplicative inverse of the coprime
+// -----------------------------------------------------------------------------
 function _modInverse (coprime) {
   let mod = utils.TOTAL_ALPHA
   let inverse = 1

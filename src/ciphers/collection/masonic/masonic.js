@@ -9,9 +9,9 @@ import * as utils from '@/ciphers/utils'
 //  A special font is being used for this cipher, so it currently
 //  just return the letter as is
 //
+// =============================================================================
+//  About this Cipher
 // -----------------------------------------------------------------------------
-const __USE_FONT = true
-
 export const KEY = 'masonic'
 export const NAME = 'Masonic'
 export const ABOUT = {
@@ -22,19 +22,31 @@ export const ABOUT = {
   }
 }
 
+//  Private Variables
+// -----------------------------------------------------------------------------
+const __USE_FONT = true
+
+//  Default Arguments
+// -----------------------------------------------------------------------------
 export const DEFAULTS = {
   isEncoding: true,
   inputStr: ''
 }
 
+//  Main Run Function
+//  Returns the encoded / decoded string based on the cipher rules
+// -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
 
+  // Masonic cipher can't be represented by a plaintext string
+  // Return the input string if we'll use a font to represent the cipher
   if (__USE_FONT) {
     return inputStr
   }
 
+  // Otherwise loop over each letter and wrap in a span for visual rendering
   utils.forEachCharacter(inputStr, (i, char) => {
     char = char.toLowerCase()
     if (isEncoding && char.match(/^[a-z]$/)) {

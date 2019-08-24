@@ -7,8 +7,9 @@ import * as utils from '@/ciphers/utils'
 //  Atbash
 //  A simple cipher wherein the alphabet is reversed.
 //
+// =============================================================================
+//  About this Cipher
 // -----------------------------------------------------------------------------
-
 export const KEY = 'atbash'
 export const NAME = 'Atbash'
 export const ABOUT = {
@@ -19,11 +20,16 @@ export const ABOUT = {
   }
 }
 
+//  Default Arguments
+// -----------------------------------------------------------------------------
 export const DEFAULTS = {
   isEncoding: true,
   inputStr: ''
 }
 
+//  Main Run Function
+//  Returns the encoded / decoded string based on the cipher rules
+// -----------------------------------------------------------------------------
 export function run (args) {
   let { inputStr } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''

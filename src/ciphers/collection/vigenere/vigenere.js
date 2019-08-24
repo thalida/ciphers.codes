@@ -6,8 +6,9 @@ import * as utils from '@/ciphers/utils'
 //
 //  Vigenère
 //
+// =============================================================================
+//  About this Cipher
 // -----------------------------------------------------------------------------
-
 export const KEY = 'vigenere'
 export const NAME = 'Vigenère'
 export const ABOUT = {
@@ -18,6 +19,8 @@ export const ABOUT = {
   }
 }
 
+//  Default Arguments
+// -----------------------------------------------------------------------------
 export const DEFAULTS = {
   isEncoding: true,
   inputStr: '',
@@ -26,6 +29,8 @@ export const DEFAULTS = {
   }
 }
 
+//  Inputs
+// -----------------------------------------------------------------------------
 export const INPUTS = [
   {
     type: 'text',
@@ -38,6 +43,9 @@ export const INPUTS = [
   }
 ]
 
+//  Main Run Function
+//  Returns the encoded / decoded string based on the cipher rules
+// -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
@@ -52,8 +60,10 @@ export function run (args) {
     // Remove any spaces from the key
     .replace(/[\s]+/gi, '').toLowerCase()
 
+  // Generate the key by looping over keyBase until key is === the length of
+  // the input string. ex. string == 'helloworld' and keyBase = 'hide'
+  // then key = hidehidehi
   let key = ''
-
   while (key.length < string.length && keyBase.length > 0) {
     utils.forEachCharacter(keyBase, (i, char) => {
       if (key.length >= string.length) {

@@ -9,8 +9,9 @@ import * as utils from '@/ciphers/utils'
 //  corresponded to it's coordinates in the gri.
 //  Example: a => 11, b => 12, c => 13 etc
 //
+// =============================================================================
+//  About this Cipher
 // -----------------------------------------------------------------------------
-
 export const KEY = 'polybius_square'
 export const NAME = 'Polybius Square'
 export const ABOUT = {
@@ -21,15 +22,21 @@ export const ABOUT = {
   }
 }
 
+//  Default Arguments
+// -----------------------------------------------------------------------------
 export const DEFAULTS = {
   isEncoding: true,
   inputStr: ''
 }
 
+//  Main Run Function
+//  Returns the encoded / decoded string based on the cipher rules
+// -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
 
+  const space = ' '
   const alphanumeric = utils.ALPHANUMERIC
   const alphagrid = utils.ALPHAGRID
   const alphaGridSize = alphagrid.length - 1 // the 0 index isn't used
@@ -49,7 +56,7 @@ export function run (args) {
         const letterPos = alphanumeric.indexOf(char.toString()) + 1
         const x = Math.ceil(letterPos / alphaGridSize)
         const y = (letterPos % alphaGridSize === 0) ? alphaGridSize : letterPos % alphaGridSize
-        output += `${x}${y} `
+        output += `${x}${y}${space}`
       }
     } else {
       // Get the x and y "characters" ex. 13 => x: 1, y: 3

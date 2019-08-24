@@ -8,11 +8,9 @@ import * as utils from '@/ciphers/utils'
 //  Converts the alphabet into a 5x5 grid of letters and encrypts based
 //  on the position of a pair of letters w/ respect to each other in the grid
 //
+// =============================================================================
+//  About this Cipher
 // -----------------------------------------------------------------------------
-const __PLACEHOLDER_CHAR = 'x'
-const __KEYED_ARR_SIZE = 5
-const __KEYED_ALPHAS = []
-
 export const KEY = 'playfair'
 export const NAME = 'Playfair'
 export const ABOUT = {
@@ -23,6 +21,14 @@ export const ABOUT = {
   }
 }
 
+//  Private Variables
+// -----------------------------------------------------------------------------
+const __PLACEHOLDER_CHAR = 'x'
+const __KEYED_ARR_SIZE = 5
+const __KEYED_ALPHAS = []
+
+//  Default Arguments
+// -----------------------------------------------------------------------------
 export const DEFAULTS = {
   isEncoding: true,
   inputStr: '',
@@ -31,6 +37,8 @@ export const DEFAULTS = {
   }
 }
 
+//  Inputs
+// -----------------------------------------------------------------------------
 export const INPUTS = [
   {
     type: 'text',
@@ -43,6 +51,9 @@ export const INPUTS = [
   }
 ]
 
+//  Main Run Function
+//  Returns the encoded / decoded string based on the cipher rules
+// -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
@@ -101,9 +112,12 @@ export function run (args) {
   return output
 }
 
-//  @_getKeyedAlpha
+//  HELPER FUNCTIONS for THIS CIPHER ONLY!!
+// =============================================================================
+
+//  _getKeyedAlpha
 //  Add the key to the alphabet and then convert into a 5x5 array
-// ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 function _getKeyedAlpha (key) {
   // Return if we've already generated the grided keyed alphabet
   if (typeof __KEYED_ALPHAS[key] !== 'undefined') {
@@ -144,12 +158,12 @@ function _getKeyedAlpha (key) {
   return alphaGrid
 }
 
-//  @_strToPairs
+//  _strToPairs
 //  Convert a given string in to an array of pairs
 //  X's are used to fill in the missing spot of a pair and also
 //  to separate out duplicate letters.
 //  Example: Hellos => [[h,e],[l,x],[l,o],[s,x]]
-// ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 function _strToPairs (string, isEncoding) {
   let strPairs = []
 
@@ -172,9 +186,9 @@ function _strToPairs (string, isEncoding) {
   return strPairs
 }
 
-//  @_getCoords
+//  _getCoords
 //  Get the current coordinates of the letter in the array
-// ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 function _getCoords (str, array) {
   const arrSize = array.length
 
@@ -189,9 +203,9 @@ function _getCoords (str, array) {
   return false
 }
 
-//  @_calcNewCoord
+//  _calcNewCoord
 //  Calculate the new coordinate based on if we're encoding/decoding
-// ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 function _calcNewCoord (coord, isEncoding) {
   // Get the last valid index of the array
   const lastArrIdx = __KEYED_ARR_SIZE - 1

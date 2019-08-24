@@ -7,6 +7,8 @@ import * as utils from '@/ciphers/utils'
 //  Caesar Cipher
 //  This cipher shifts the letters in the alphabet by x (user defined value)
 //
+// =============================================================================
+//  About this Cipher
 // -----------------------------------------------------------------------------
 export const KEY = 'caesar'
 export const NAME = 'Caesar'
@@ -18,6 +20,8 @@ export const ABOUT = {
   }
 }
 
+//  Default Arguments
+// -----------------------------------------------------------------------------
 export const DEFAULTS = {
   isEncoding: true,
   inputStr: '',
@@ -26,6 +30,8 @@ export const DEFAULTS = {
   }
 }
 
+//  Inputs
+// -----------------------------------------------------------------------------
 export const INPUTS = [
   {
     type: 'number',
@@ -36,6 +42,9 @@ export const INPUTS = [
   }
 ]
 
+//  Main Run Function
+//  Returns the encoded / decoded string based on the cipher rules
+// -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''

@@ -20,6 +20,7 @@
     - [ ] playfair
     - [ ] polybiusSquare
     - [ ] vigenere
+- [ ] Review cipher utils and clean up
 - [ ] Style general page layout + containers
 - [ ] Style main input box area
 - [ ] Style all ciphers
