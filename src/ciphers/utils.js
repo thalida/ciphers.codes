@@ -51,13 +51,21 @@ export function mod (a, b) {
 //  Check if a given str has only letters
 // -----------------------------------------------------------------------------
 export function isLetter (str) {
-  return str.match(/^[A-Za-z]$/)
+  if (typeof str !== 'string') {
+    return false
+  }
+
+  const matches = str.match(/^[A-Za-z]$/)
+  return (matches) ? matches.length > 0 : false
 }
 
 //  setCase (char:chart, toUpper:boolean)
 //  Check if the char should be made uppercase, if so do so. #poetry
 // -----------------------------------------------------------------------------
 export function setCase (char, toUpper) {
+  if (typeof char !== 'string') {
+    return char
+  }
   return (toUpper) ? char.toUpperCase() : char.toLowerCase()
 }
 
@@ -94,7 +102,10 @@ export function makeValidInt (currVal, defaultVal) {
   }
 
   if (typeof currVal === 'string' && currVal.length > 0) {
-    return parseInt(currVal, 10)
+    let number = parseInt(currVal, 10)
+    if (!isNaN(number)) {
+      return number
+    }
   }
 
   return defaultVal
@@ -125,38 +136,34 @@ export function makeValidKey (string, defaultKey) {
 // -----------------------------------------------------------------------------
 let cachedKeyedAlphas = {}
 export function makeKeyedAlpha (key) {
+  key = makeValidKey(key)
+
   if (typeof cachedKeyedAlphas[key] !== 'undefined') {
     return cachedKeyedAlphas[key]
   }
 
   let alpha = [...ALPHA]
-  let keyedAlphabet = []
 
   // Return the regular alphabet if no key
-  if (key.length === 0 || key === null) {
+  if (typeof key !== 'string' || key.length <= 0) {
     return alpha
   }
 
-  // Loop through each letter in the key -- and remove that letter
-  // from the regular alphabet
-  forEachCharacter(key, (index, char) => {
-    const n = alpha.indexOf(char.toLowerCase())
-    alpha.splice(n, 1)
-  })
-
-  // Add the key + the rest of the alphabet
-  keyedAlphabet = key.split('').concat(alpha)
+  let keyedAlphabet = [].concat(key.split('')).concat(alpha)
+  let uniqueKeyedAlphabet = new Set(keyedAlphabet)
+  let uniqueKeyedAlphabetArr = [...uniqueKeyedAlphabet]
 
   // Save this keyed alphabet
-  cachedKeyedAlphas[key] = keyedAlphabet
-
-  return keyedAlphabet
+  cachedKeyedAlphas[key] = uniqueKeyedAlphabetArr
+  return cachedKeyedAlphas[key]
 }
 
 //  parseCipherArgs
 //  Convert and sanitize cipher arguments
 // -----------------------------------------------------------------------------
 export function parseCipherArgs (args, defaults) {
+  defaults = Object.assign({}, { isEncoding: true, inputStr: '', inputs: {} }, defaults)
+
   let isEncoding = (args && typeof args.isEncoding === 'boolean')
     ? args.isEncoding
     : defaults.isEncoding
@@ -165,11 +172,12 @@ export function parseCipherArgs (args, defaults) {
     ? args.inputStr
     : defaults.inputStr
 
-  let inputs = (args && typeof args.inputs !== 'undefined')
-    ? args.inputs
-    : {}
+  let inputs = {}
+  if (args && typeof args.inputs === 'object' && args.inputs !== null) {
+    inputs = args.inputs
+  }
 
-  if (typeof defaults.inputs !== 'undefined') {
+  if (typeof defaults.inputs === 'object' && defaults.inputs !== null) {
     inputs = Object.assign({}, defaults.inputs, inputs)
   }
 
