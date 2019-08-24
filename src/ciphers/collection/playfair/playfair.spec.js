@@ -1,48 +1,45 @@
-/* eslint-disable no-tabs */
+'use strict'
 
-// 'use strict';
+import { assert } from 'chai'
+import * as playfair from './playfair'
 
-// describe('playfair service', function(){
-// 	var mockCollection;
-// 	var mockUtils;
-// 	var cipherService;
+describe('cipher:playfair', () => {
+  let testStrings = {
+    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
+    encodedWithLorem: 'bcdf mdhi srkn olhm qscx upwx yzvy',
+    decodedWithLorem: 'abcdefghixiklmnopqrstuvwxyzx'
+  }
 
-// 	var cipherArgs = {
-// 		addons: {key: 'lorem'}
-// 	};
-// 	var cipherStrs = {
-// 		normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-// 		encoded: 'bcdf mdhi srkn olhm qscx upwx yzvy',
-// 		decoded: 'abcdefghixiklmnopqrstuvwxyzx'
-// 	};
+  let testCases = [
+    {
+      label: 'should encode with key "lorem"',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { key: 'lorem' }
+      },
+      expected: testStrings.encodedWithLorem
+    },
+    {
+      label: 'should decode with key "lorem"',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.encodedWithLorem,
+        inputs: { key: 'lorem' }
+      },
+      expected: testStrings.decodedWithLorem
+    }
+  ]
+  testCases.forEach((testCase) => {
+    it(testCase.label, () => {
+      let outputStr = playfair.run(testCase.args)
+      assert.equal(outputStr, testCase.expected)
+    })
+  })
 
-// 	beforeEach(angular.mock.module('app'));
-
-// 	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, playfairService){
-// 		mockCollection = cipherCollection;
-// 		mockUtils = cipherUtils;
-// 		cipherService = playfairService;
-// 	}));
-
-// 	it('should return encoded alphabet', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.encoded);
-// 	});
-
-// 	it('should return decoded alphabet', function() {
-// 		cipherArgs.isEncoding = false;
-// 		cipherArgs.string = cipherStrs.encoded;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.decoded);
-// 	});
-
-// 	it('should encode alphabet with a blank key', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-// 		cipherArgs.addons.key = null;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual('bcde akhi hykf mnop lust uqwx yzvy');
-// 	});
-// });
+  it('should encode alphabet using defaults', () => {
+    let noArgsOutputStr = playfair.run()
+    let defaultArgsOutputStr = playfair.run(playfair.DEFAULTS)
+    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+  })
+})

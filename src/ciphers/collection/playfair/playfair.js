@@ -27,7 +27,7 @@ export const DEFAULTS = {
   isEncoding: true,
   inputStr: '',
   inputs: {
-    key: 'ipsum'
+    key: ''
   }
 }
 
@@ -43,19 +43,21 @@ export const INPUTS = [
   }
 ]
 
-export function run ({ isEncoding, inputStr, inputs }) {
-  isEncoding = (typeof isEncoding === 'boolean')
-    ? isEncoding
+export function run (args) {
+  let isEncoding = (args && typeof args.isEncoding === 'boolean')
+    ? args.isEncoding
     : DEFAULTS.isEncoding
 
-  inputStr = (typeof inputStr === 'string')
-    ? inputStr
+  let inputStr = (args && typeof args.inputStr === 'string')
+    ? args.inputStr
     : DEFAULTS.inputStr
+
+  let inputs = (args && typeof args.inputs !== 'undefined')
+    ? args.inputs
+    : {}
 
   if (typeof DEFAULTS.inputs !== 'undefined') {
     inputs = Object.assign({}, DEFAULTS.inputs, inputs)
-  } else {
-    inputs = null
   }
 
   const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key)

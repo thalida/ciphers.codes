@@ -7,7 +7,7 @@
     - [x] caesar
     - [x] keyedSubstitution
     - [x] masonic (no test required)
-    - [ ] playfair
+    - [x] playfair
     - [ ] polybiusSquare
     - [ ] vigenere
 - [ ] Style general page layout + containers
