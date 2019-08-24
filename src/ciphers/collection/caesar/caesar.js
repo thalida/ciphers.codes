@@ -22,7 +22,7 @@ export const DEFAULTS = {
   isEncoding: true,
   inputStr: '',
   inputs: {
-    shift: 2
+    shift: 0
   }
 }
 

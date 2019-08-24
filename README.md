@@ -5,8 +5,8 @@
     - [x] affine
     - [x] atbash
     - [x] caesar
-    - [ ] keyedSubstitution
-    - [ ] masonic
+    - [x] keyedSubstitution
+    - [x] masonic (no test required)
     - [ ] playfair
     - [ ] polybiusSquare
     - [ ] vigenere

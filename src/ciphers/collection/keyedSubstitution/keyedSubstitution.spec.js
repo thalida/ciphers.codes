@@ -1,47 +1,78 @@
-/* eslint-disable no-tabs */
+'use strict'
 
-// 'use strict';
+import { assert } from 'chai'
+import * as keyedSubstitution from './keyedSubstitution'
 
-// describe('keyedsup service', function(){
-// 	var mockCollection;
-// 	var mockUtils;
-// 	var cipherService;
+describe('cipher:keyedSubstitution', () => {
+  let testStrings = {
+    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
+    keyedWithLorem: 'LoremabcdfghijknpqstuvwxyZ - 0123456789'
+  }
 
-// 	var cipherArgs = {
-// 		addons: {key: 'lorem'}
-// 	};
-// 	var cipherStrs = {
-// 		normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-// 		encoded: 'LoremabcdfghijknpqstuvwxyZ - 0123456789'
-// 	};
+  let testCases = [
+    {
+      label: 'should encode with key "lorem"',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { key: 'lorem' }
+      },
+      expected: testStrings.keyedWithLorem
+    },
+    {
+      label: 'should decode with key "lorem"',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.keyedWithLorem,
+        inputs: { key: 'lorem' }
+      },
+      expected: testStrings.normal
+    },
+    {
+      label: 'should encode with key ""',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { key: '' }
+      },
+      expected: testStrings.normal
+    },
+    {
+      label: 'should decode with key ""',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.normal,
+        inputs: { key: null }
+      },
+      expected: testStrings.normal
+    }
+  ]
+  testCases.forEach((testCase) => {
+    it(testCase.label, () => {
+      let outputStr = keyedSubstitution.run(testCase.args)
+      assert.equal(outputStr, testCase.expected)
+    })
+  })
 
-// 	beforeEach(angular.mock.module('app'));
+  it('should encode alphabet using defaults', () => {
+    let noArgsOutputStr = keyedSubstitution.run()
+    let defaultArgsOutputStr = keyedSubstitution.run(keyedSubstitution.DEFAULTS)
+    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+  })
 
-// 	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, keyedsubService){
-// 		mockCollection = cipherCollection;
-// 		mockUtils = cipherUtils;
-// 		cipherService = keyedsubService;
-// 	}));
+  it('should be the same after encode and decode', () => {
+    const inputs = { key: 'hide' }
+    let encodeOutputStr = keyedSubstitution.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
 
-// 	it('should return keyed alphabet', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.encoded);
-// 	});
-
-// 	it('should return the standard alphabet', function() {
-// 		cipherArgs.isEncoding = false;
-// 		cipherArgs.string = cipherStrs.encoded;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
-// 	});
-
-// 	it('should encode alphabet with a blank key', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-// 		cipherArgs.addons.key = null;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.normal);
-// 	});
-// });
+    let decodeOutputStr = keyedSubstitution.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal(testStrings.normal, decodeOutputStr)
+  })
+})

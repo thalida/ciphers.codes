@@ -25,8 +25,8 @@ export const DEFAULTS = {
   isEncoding: true,
   inputStr: '',
   inputs: {
-    shift: 2,
-    coprime: 5
+    shift: 0,
+    coprime: 1
   }
 }
 
