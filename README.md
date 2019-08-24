@@ -1,7 +1,7 @@
 # ciphers.codes
 
 ## Tasks
-- [ ] Setup tests for ciphers
+- [x] Setup tests for ciphers
     - [x] affine
     - [x] atbash
     - [x] caesar
@@ -9,7 +9,7 @@
     - [x] masonic (no test required)
     - [x] playfair
     - [x] polybiusSquare
-    - [ ] vigenere
+    - [x] vigenere
 - [ ] Style general page layout + containers
 - [ ] Style main input box area
 - [ ] Style all ciphers

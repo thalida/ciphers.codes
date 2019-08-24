@@ -1,48 +1,79 @@
-/* eslint-disable no-tabs */
+'use strict'
 
-// 'use strict';
+import { assert } from 'chai'
+import * as vigenere from './vigenere'
 
-// describe('vigenere service', function(){
-// 	var mockCollection;
-// 	var mockUtils;
-// 	var cipherService;
+describe('cipher:vigenere', () => {
+  let testStrings = {
+    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
+    encodedWithLorem: 'lpthqquymvvzdraaeiwffjnbkk',
+    decoded: 'abcdefghijklmnopqrstuvwxyz'
+  }
 
-// 	var cipherArgs = {
-// 		addons: {key: 'lorem'}
-// 	};
-// 	var cipherStrs = {
-// 		normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-// 		encoded: 'lpthqquymvvzdraaeiwffjnbkk',
-// 		decoded: 'abcdefghijklmnopqrstuvwxyz'
-// 	};
+  let testCases = [
+    {
+      label: 'should encode with key "lorem"',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { key: 'lorem' }
+      },
+      expected: testStrings.encodedWithLorem
+    },
+    {
+      label: 'should decode with key "lorem"',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.encodedWithLorem,
+        inputs: { key: 'lorem' }
+      },
+      expected: testStrings.decoded
+    },
+    {
+      label: 'should encode with key ""',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.normal,
+        inputs: { key: '' }
+      },
+      expected: testStrings.decoded
+    },
+    {
+      label: 'should decode with key ""',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.normal,
+        inputs: { key: '' }
+      },
+      expected: testStrings.decoded
+    }
+  ]
+  testCases.forEach((testCase) => {
+    it(testCase.label, () => {
+      let outputStr = vigenere.run(testCase.args)
+      assert.equal(outputStr, testCase.expected)
+    })
+  })
 
-// 	beforeEach(angular.mock.module('app'));
+  it('should encode alphabet using defaults', () => {
+    let noArgsOutputStr = vigenere.run()
+    let defaultArgsOutputStr = vigenere.run(vigenere.DEFAULTS)
+    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+  })
 
-// 	beforeEach(angular.mock.inject(function(cipherCollection, cipherUtils, vigenereService){
-// 		mockCollection = cipherCollection;
-// 		mockUtils = cipherUtils;
-// 		cipherService = vigenereService;
-// 	}));
+  it('should be the same after encode and decode', () => {
+    const inputs = { key: 'fake' }
+    let encodeOutputStr = vigenere.run({
+      isEncoding: true,
+      inputStr: testStrings.normal,
+      inputs
+    })
 
-// 	it('should return encoded alphabet', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.encoded);
-// 	});
-
-// 	it('should return decoded alphabet', function() {
-// 		cipherArgs.isEncoding = false;
-// 		cipherArgs.string = cipherStrs.encoded;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual(cipherStrs.decoded);
-// 	});
-
-// 	it('should encode alphabet with a blank key', function() {
-// 		cipherArgs.isEncoding = true;
-// 		cipherArgs.string = cipherStrs.normal;
-// 		cipherArgs.addons.key = null;
-
-// 		expect(cipherService.run(cipherArgs)).toEqual('abcdefghijklmnopqrstuvwxyz');
-// 	});
-// });
+    let decodeOutputStr = vigenere.run({
+      isEncoding: false,
+      inputStr: encodeOutputStr,
+      inputs
+    })
+    assert.equal(testStrings.decoded, decodeOutputStr)
+  })
+})
