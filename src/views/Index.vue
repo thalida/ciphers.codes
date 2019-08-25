@@ -40,11 +40,13 @@
         @copy-error="handleCopyError" />
     </section>
 
-    <div
-      class="toast"
-      v-show="toast.isVisible">
-      {{ toast.message }}
-    </div>
+    <transition name="toast-fade" mode="out-in">
+      <div
+        class="toast"
+        v-show="toast.isVisible">
+        {{ toast.message }}
+      </div>
+    </transition>
 
     <footer>
       <a href="https://thalida.me" target="_blank">
@@ -121,7 +123,6 @@ export default {
 
       this.toast.timeout = window.setTimeout(() => {
         this.toast.isVisible = false
-        this.toast.message = null
         this.toast.timeout = null
       }, 3000)
     },
@@ -263,6 +264,33 @@ export default {
       outline: none !important;
       border: 0.4em solid #FFEEC3;
     }
+  }
+
+  .toast {
+    display: flex;
+    position: fixed;
+    align-self: center;
+    bottom: 1.6em;
+    margin: 0 auto;
+    padding: 0.8em 1.6em;
+    font-size: 1.4em;
+    background-color: #001D56;
+    color: #ffffff;
+    border-radius: 2em;
+    box-shadow: 0px 0px 16px rgba(#001D56, 0.15);
+    transition: all 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
+    opacity: 1;
+  }
+
+  .toast-fade-enter-active,
+  .toast-fade-leave-active {
+    transition: all 300ms ease;
+  }
+
+  .toast-fade-enter,
+  .toast-fade-leave-active {
+    bottom: -6.0em;
+    opacity: 0;
   }
 }
 </style>
