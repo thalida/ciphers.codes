@@ -29,6 +29,10 @@
 - [ ] Update about view content
 - [x] Add unicorn icon
 - [x] Add copy icon (make?)
+- [ ] Add frontend tests
+    - [ ] Index
+    - [ ] About
+    - [ ] Cipher Component
 - [ ] QA
     - [ ] various text lengths
     - [ ] screenreaders
