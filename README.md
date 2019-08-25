@@ -29,6 +29,11 @@
 - [ ] Update about view content
 - [x] Add unicorn icon
 - [x] Add copy icon (make?)
+- [ ] CSS cleanup
+- [ ] Frontend commenting
+- [ ] Verify PWA is working
+- [ ] Update meta data and icons
+- [ ] Setup hosting -- github? Private?
 - [ ] Add frontend tests
     - [ ] Index
     - [ ] About

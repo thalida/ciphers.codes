@@ -21,6 +21,10 @@ body {
   color: #001D56;
 }
 
+.body--with-modal {
+  overflow: hidden;
+}
+
 #app {
   display: block;
   margin: 0 auto;

@@ -292,5 +292,21 @@ export default {
     bottom: -6.0em;
     opacity: 0;
   }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+  }
+
+  .body--with-modal & {
+    .modal {
+      display: flex;
+    }
+  }
 }
 </style>
