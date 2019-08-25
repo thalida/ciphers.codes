@@ -66,3 +66,6 @@ npm run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Attributions
+Unicorn emoji icon from https://github.com/twitter/twemoji

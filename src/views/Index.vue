@@ -47,7 +47,9 @@
     </div>
 
     <footer>
-      <a href="https://thalida.me" target="_blank">uni</a>
+      <a href="https://thalida.me" target="_blank">
+        <img src="../assets/unicorn.svg" />
+      </a>
     </footer>
 
     <div class="modal">
@@ -149,6 +151,21 @@ export default {
     }
   }
 
+  footer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    a {
+      height: 3.2em;
+      width: 3.2em;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
+
   .input-section {
     display: flex;
     flex-flow: column nowrap;
@@ -233,14 +250,14 @@ export default {
   .textarea.textarea--fancy {
     border: 0;
     resize: vertical;
-    height: 7.0em;
-    min-height: 3.5em;
-    max-height: 14.0em;
+    height: 8.0em;
+    min-height: 4.0em;
+    max-height: 16.0em;
     padding: 1.0em;
     border: 0.4em solid #ffffff;
     font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
     color: #001D56;
-    transition: all 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
+    transition: border 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
 
     &:focus {
       outline: none !important;
