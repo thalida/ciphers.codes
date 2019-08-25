@@ -17,7 +17,11 @@ describe('cipher:affine', () => {
         inputStr: testStrings.normal,
         inputs: { coprime: 5, shift: 3 }
       },
-      expected: testStrings.shiftThree
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.shiftThree,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with coprime 5 and shift 3',
@@ -26,7 +30,11 @@ describe('cipher:affine', () => {
         inputStr: testStrings.shiftThree,
         inputs: { coprime: 5, shift: 3 }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     },
     {
       label: 'should encode with coprime 1 and shift 0',
@@ -35,7 +43,11 @@ describe('cipher:affine', () => {
         inputStr: testStrings.normal,
         inputs: { coprime: 1, shift: 0 }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with coprime 1 and shift 0',
@@ -44,54 +56,77 @@ describe('cipher:affine', () => {
         inputStr: testStrings.normal,
         inputs: { coprime: 1, shift: 0 }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     }
   ]
   testCases.forEach((testCase) => {
     it(testCase.label, () => {
-      let outputStr = affine.run(testCase.args)
-      assert.equal(outputStr, testCase.expected)
+      let results = affine.run(testCase.args)
+      assert.deepEqual(results, testCase.expected)
     })
   })
 
   it('should encode alphabet using defaults', () => {
-    let noArgsOutputStr = affine.run()
-    let defaultArgsOutputStr = affine.run(affine.DEFAULTS)
-    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+    let noArgsResults = affine.run()
+    let defaultArgsResults = affine.run(affine.DEFAULTS)
+    assert.deepEqual(noArgsResults, defaultArgsResults)
   })
 
   it('should be the same after encode and decode', () => {
     const inputs = { coprime: 7, shift: 20 }
-    let encodeOutputStr = affine.run({
+    let encodeResults = affine.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = affine.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = affine.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.normal, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 
   it('should encode and decode with sample inputs', () => {
     const inputs = affine.SAMPLE_INPUTS
     assert.containsAllKeys(inputs, ['coprime', 'shift'])
 
-    let encodeOutputStr = affine.run({
+    let encodeResults = affine.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = affine.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = affine.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
 
-    assert.equal(testStrings.normal, decodeOutputStr)
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 })

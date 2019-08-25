@@ -37,11 +37,17 @@ export function run (args, useFont) {
 
   let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
+  let results = {
+    isSuccess: true,
+    outputStr: null,
+    errorStr: null
+  }
 
   // Masonic cipher can't be represented by a plaintext string
   // Return the input string if we'll use a font to represent the cipher
   if (useFont) {
-    return inputStr
+    results.outputStr = inputStr
+    return results
   }
 
   // Otherwise loop over each letter and wrap in a span for visual rendering
@@ -53,5 +59,6 @@ export function run (args, useFont) {
     output += char
   })
 
-  return output
+  results.outputStr = output
+  return results
 }

@@ -17,7 +17,11 @@ describe('cipher:keyedSubstitution', () => {
         inputStr: testStrings.normal,
         inputs: { key: 'lorem' }
       },
-      expected: testStrings.keyedWithLorem
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.keyedWithLorem,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with key "lorem"',
@@ -26,7 +30,11 @@ describe('cipher:keyedSubstitution', () => {
         inputStr: testStrings.keyedWithLorem,
         inputs: { key: 'lorem' }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     },
     {
       label: 'should encode with key ""',
@@ -35,7 +43,11 @@ describe('cipher:keyedSubstitution', () => {
         inputStr: testStrings.normal,
         inputs: { key: '' }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with key ""',
@@ -44,53 +56,77 @@ describe('cipher:keyedSubstitution', () => {
         inputStr: testStrings.normal,
         inputs: { key: null }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     }
   ]
   testCases.forEach((testCase) => {
     it(testCase.label, () => {
-      let outputStr = keyedSubstitution.run(testCase.args)
-      assert.equal(outputStr, testCase.expected)
+      let results = keyedSubstitution.run(testCase.args)
+      assert.deepEqual(results, testCase.expected)
     })
   })
 
   it('should encode alphabet using defaults', () => {
-    let noArgsOutputStr = keyedSubstitution.run()
-    let defaultArgsOutputStr = keyedSubstitution.run(keyedSubstitution.DEFAULTS)
-    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+    let noArgsResults = keyedSubstitution.run()
+    let defaultArgsResults = keyedSubstitution.run(keyedSubstitution.DEFAULTS)
+    assert.deepEqual(noArgsResults, defaultArgsResults)
   })
 
   it('should be the same after encode and decode', () => {
     const inputs = { key: 'hide' }
-    let encodeOutputStr = keyedSubstitution.run({
+    let encodeResults = keyedSubstitution.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = keyedSubstitution.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = keyedSubstitution.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.normal, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 
   it('should encode and decode with sample inputs', () => {
     const inputs = keyedSubstitution.SAMPLE_INPUTS
     assert.containsAllKeys(inputs, ['key'])
 
-    let encodeOutputStr = keyedSubstitution.run({
+    let encodeResults = keyedSubstitution.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = keyedSubstitution.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = keyedSubstitution.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.normal, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 })

@@ -99,7 +99,13 @@ export function run (args) {
     output += utils.setCase(char, isUpper)
   })
 
-  return output
+  // This cipher will always be successful
+  // it can cleanly ignore characters it doesn't know how to handle
+  return {
+    isSuccess: true,
+    outputStr: output,
+    errorStr: null
+  }
 }
 
 //  HELPER FUNCTIONS for THIS CIPHER ONLY!!

@@ -16,7 +16,11 @@ describe('cipher:atbash', () => {
         isEncoding: true,
         inputStr: testStrings.normal
       },
-      expected: testStrings.encoded
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.encoded,
+        errorStr: null
+      }
     },
     {
       label: 'should decode',
@@ -24,33 +28,46 @@ describe('cipher:atbash', () => {
         isEncoding: false,
         inputStr: testStrings.encoded
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     }
   ]
   testCases.forEach((testCase) => {
     it(testCase.label, () => {
-      let outputStr = atbash.run(testCase.args)
-      assert.equal(outputStr, testCase.expected)
+      let results = atbash.run(testCase.args)
+      assert.deepEqual(results, testCase.expected)
     })
   })
 
   it('should encode alphabet using defaults', () => {
-    let noArgsOutputStr = atbash.run()
-    let defaultArgsOutputStr = atbash.run(atbash.DEFAULTS)
-    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+    let noArgsResults = atbash.run()
+    let defaultArgsResults = atbash.run(atbash.DEFAULTS)
+    assert.deepEqual(noArgsResults, defaultArgsResults)
   })
 
   it('should be the same after encode and decode', () => {
-    let encodeOutputStr = atbash.run({
+    let encodeResults = atbash.run({
       isEncoding: true,
       inputStr: testStrings.normal
     })
 
-    let decodeOutputStr = atbash.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = atbash.run({
       isEncoding: false,
-      inputStr: encodeOutputStr
+      inputStr: encodeResults.outputStr
     })
 
-    assert.equal(testStrings.normal, decodeOutputStr)
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 })

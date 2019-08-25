@@ -51,5 +51,9 @@ export function run (args) {
     output += utils.setCase(char, isUpper)
   })
 
-  return output
+  return {
+    isSuccess: true,
+    outputStr: output,
+    errorStr: null
+  }
 }

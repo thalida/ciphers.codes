@@ -69,12 +69,21 @@ export function run (args) {
   const keyword = key.replace(/[j]+/gi, 'i').toLowerCase()
   // Created a grid based keyed version of the alphabet
   const alpha = _getKeyedAlpha(keyword)
+  const origInputStr = inputStr
 
   inputStr = inputStr
     // Remove any non letter character
     .replace(/[^A-Za-z]+/gi, '').toLowerCase()
     // Replace any j's with i's
     .replace(/[j]+/gi, 'i').toLowerCase()
+
+  if (inputStr.length === 0 && origInputStr.length > 0) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `Sorry, the entered string contains all non-letter characters which Playfair cipher cannot handle.`
+    }
+  }
 
   // Convert the string to an array of pairs
   const str = _strToPairs(inputStr, isEncoding)
@@ -109,6 +118,7 @@ export function run (args) {
     // Get the letters corresponding to each coord in the grid
     const letter1 = alpha[char1.newCoords.x][char1.newCoords.y]
     const letter2 = alpha[char2.newCoords.x][char2.newCoords.y]
+
     output += `${letter1}${letter2}`
   }
 
@@ -116,7 +126,11 @@ export function run (args) {
     output = output.replace(/(.{4})/g, '$1 ').trim()
   }
 
-  return output
+  return {
+    isSuccess: true,
+    outputStr: output,
+    errorStr: null
+  }
 }
 
 //  HELPER FUNCTIONS for THIS CIPHER ONLY!!

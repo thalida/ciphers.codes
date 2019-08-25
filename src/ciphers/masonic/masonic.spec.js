@@ -18,7 +18,11 @@ describe('cipher:masonic', () => {
         inputStr: testStrings.normal
       },
       useFont: true,
-      expected: testStrings.useFontTrue
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.useFontTrue,
+        errorStr: null
+      }
     },
     {
       label: 'should encode with useFont false',
@@ -27,7 +31,11 @@ describe('cipher:masonic', () => {
         inputStr: testStrings.normal
       },
       useFont: false,
-      expected: testStrings.useFontFalse
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.useFontFalse,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with useFont null',
@@ -36,7 +44,11 @@ describe('cipher:masonic', () => {
         inputStr: testStrings.normal
       },
       useFont: null,
-      expected: testStrings.useFontTrue
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.useFontTrue,
+        errorStr: null
+      }
     },
     {
       label: 'should encode with useFont undefined',
@@ -44,35 +56,49 @@ describe('cipher:masonic', () => {
         isEncoding: true,
         inputStr: testStrings.normal
       },
-      expected: testStrings.useFontTrue
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.useFontTrue,
+        errorStr: null
+      }
     }
   ]
   testCases.forEach((testCase) => {
     it(testCase.label, () => {
-      let outputStr = masonic.run(testCase.args, testCase.useFont)
-      assert.equal(outputStr, testCase.expected)
+      let results = masonic.run(testCase.args, testCase.useFont)
+      assert.deepEqual(results, testCase.expected)
     })
   })
 
   it('should encode alphabet using defaults', () => {
-    let noArgsOutputStr = masonic.run()
-    let defaultArgsOutputStr = masonic.run(masonic.DEFAULTS)
-    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+    let noArgsResults = masonic.run()
+    let defaultArgsResults = masonic.run(masonic.DEFAULTS)
+    assert.deepEqual(noArgsResults, defaultArgsResults)
   })
 
   it('should be the same after encode and decode', () => {
     const inputs = { key: 'hide' }
-    let encodeOutputStr = masonic.run({
+    let encodeResults = masonic.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = masonic.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = masonic.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.normal, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 })

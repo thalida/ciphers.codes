@@ -57,9 +57,18 @@ export function run (args) {
   let output = ''
 
   const alpha = utils.ALPHA
+  const origInputStr = inputStr
 
   // Remove any non letter characters from the string
-  const string = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
+  inputStr = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
+
+  if (inputStr.length === 0 && origInputStr.length > 0) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `Sorry, the entered string contains all non-letter characters which Vigenère cipher cannot handle.`
+    }
+  }
 
   const keyBase = utils
     .makeValidKey(inputs.key, DEFAULTS.inputs.key)
@@ -70,16 +79,16 @@ export function run (args) {
   // the input string. ex. string == 'helloworld' and keyBase = 'hide'
   // then key = hidehidehi
   let key = ''
-  while (key.length < string.length && keyBase.length > 0) {
+  while (key.length < inputStr.length && keyBase.length > 0) {
     utils.forEachCharacter(keyBase, (i, char) => {
-      if (key.length >= string.length) {
+      if (key.length >= inputStr.length) {
         return
       }
       key += char
     })
   }
 
-  utils.forEachCharacter(string, (i, char) => {
+  utils.forEachCharacter(inputStr, (i, char) => {
     const direction = (isEncoding) ? 1 : -1
 
     // Get the position of the character in the alphabet
@@ -95,5 +104,9 @@ export function run (args) {
     output += alpha[utils.mod(pos, utils.TOTAL_ALPHA)]
   })
 
-  return output
+  return {
+    isSuccess: true,
+    outputStr: output,
+    errorStr: null
+  }
 }

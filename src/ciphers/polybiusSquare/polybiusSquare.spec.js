@@ -17,7 +17,11 @@ describe('cipher:polybiusSquare', () => {
         isEncoding: true,
         inputStr: testStrings.normal
       },
-      expected: testStrings.encoded
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.encoded,
+        errorStr: null
+      }
     },
     {
       label: 'should decode',
@@ -25,19 +29,23 @@ describe('cipher:polybiusSquare', () => {
         isEncoding: false,
         inputStr: testStrings.encoded
       },
-      expected: testStrings.decoded
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.decoded,
+        errorStr: null
+      }
     }
   ]
   testCases.forEach((testCase) => {
     it(testCase.label, () => {
-      let outputStr = polybiusSquare.run(testCase.args)
-      assert.equal(outputStr, testCase.expected)
+      let results = polybiusSquare.run(testCase.args)
+      assert.deepEqual(results, testCase.expected)
     })
   })
 
   it('should encode alphabet using defaults', () => {
-    let noArgsOutputStr = polybiusSquare.run()
-    let defaultArgsOutputStr = polybiusSquare.run(polybiusSquare.DEFAULTS)
-    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+    let noArgsResults = polybiusSquare.run()
+    let defaultArgsResults = polybiusSquare.run(polybiusSquare.DEFAULTS)
+    assert.deepEqual(noArgsResults, defaultArgsResults)
   })
 })

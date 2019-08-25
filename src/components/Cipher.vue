@@ -94,11 +94,17 @@ export default {
       }, {})
     },
     outputStr () {
-      return this.cipher.run({
+      let results = this.cipher.run({
         isEncoding: this.isEncoding,
         inputStr: this.inputStr,
         inputs: this.inputValues
       })
+
+      if (typeof results === 'string') {
+        return results
+      }
+
+      return (results.isSuccess) ? results.outputStr : results.errorStr
     }
   },
   methods: {

@@ -17,7 +17,11 @@ describe('cipher:caesar', () => {
         inputStr: testStrings.normal,
         inputs: { shift: 3 }
       },
-      expected: testStrings.shiftThree
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.shiftThree,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with shift 3',
@@ -26,7 +30,11 @@ describe('cipher:caesar', () => {
         inputStr: testStrings.shiftThree,
         inputs: { shift: 3 }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     },
     {
       label: 'should encode with shift 0',
@@ -35,7 +43,11 @@ describe('cipher:caesar', () => {
         inputStr: testStrings.normal,
         inputs: { shift: 0 }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with shift 0',
@@ -44,53 +56,78 @@ describe('cipher:caesar', () => {
         inputStr: testStrings.normal,
         inputs: { shift: 0 }
       },
-      expected: testStrings.normal
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.normal,
+        errorStr: null
+      }
     }
   ]
   testCases.forEach((testCase) => {
     it(testCase.label, () => {
-      let outputStr = caesar.run(testCase.args)
-      assert.equal(outputStr, testCase.expected)
+      let outputResults = caesar.run(testCase.args)
+      assert.deepEqual(outputResults, testCase.expected)
     })
   })
 
   it('should encode alphabet using defaults', () => {
-    let noArgsOutputStr = caesar.run()
-    let defaultArgsOutputStr = caesar.run(caesar.DEFAULTS)
-    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+    let noArgsResults = caesar.run()
+    let defaultArgsResults = caesar.run(caesar.DEFAULTS)
+    assert.deepEqual(noArgsResults, defaultArgsResults)
   })
 
   it('should be the same after encode and decode', () => {
     const inputs = { shift: 15 }
-    let encodeOutputStr = caesar.run({
+
+    let encodeResults = caesar.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = caesar.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = caesar.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.normal, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 
   it('should encode and decode with sample inputs', () => {
     const inputs = caesar.SAMPLE_INPUTS
     assert.containsAllKeys(inputs, ['shift'])
 
-    let encodeOutputStr = caesar.run({
+    let encodeResults = caesar.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = caesar.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = caesar.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.normal, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.normal,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 })

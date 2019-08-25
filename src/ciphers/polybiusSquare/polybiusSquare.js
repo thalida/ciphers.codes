@@ -74,5 +74,9 @@ export function run (args) {
     }
   })
 
-  return output.trim()
+  return {
+    isSuccess: true,
+    outputStr: output.trim(),
+    errorStr: null
+  }
 }

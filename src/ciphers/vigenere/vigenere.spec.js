@@ -18,7 +18,11 @@ describe('cipher:vigenere', () => {
         inputStr: testStrings.normal,
         inputs: { key: 'lorem' }
       },
-      expected: testStrings.encodedWithLorem
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.encodedWithLorem,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with key "lorem"',
@@ -27,7 +31,11 @@ describe('cipher:vigenere', () => {
         inputStr: testStrings.encodedWithLorem,
         inputs: { key: 'lorem' }
       },
-      expected: testStrings.decoded
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.decoded,
+        errorStr: null
+      }
     },
     {
       label: 'should encode with key ""',
@@ -36,7 +44,11 @@ describe('cipher:vigenere', () => {
         inputStr: testStrings.normal,
         inputs: { key: '' }
       },
-      expected: testStrings.decoded
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.decoded,
+        errorStr: null
+      }
     },
     {
       label: 'should decode with key ""',
@@ -45,53 +57,77 @@ describe('cipher:vigenere', () => {
         inputStr: testStrings.normal,
         inputs: { key: '' }
       },
-      expected: testStrings.decoded
+      expected: {
+        isSuccess: true,
+        outputStr: testStrings.decoded,
+        errorStr: null
+      }
     }
   ]
   testCases.forEach((testCase) => {
     it(testCase.label, () => {
-      let outputStr = vigenere.run(testCase.args)
-      assert.equal(outputStr, testCase.expected)
+      let results = vigenere.run(testCase.args)
+      assert.deepEqual(results, testCase.expected)
     })
   })
 
   it('should encode alphabet using defaults', () => {
-    let noArgsOutputStr = vigenere.run()
-    let defaultArgsOutputStr = vigenere.run(vigenere.DEFAULTS)
-    assert.equal(noArgsOutputStr, defaultArgsOutputStr)
+    let noArgsResults = vigenere.run()
+    let defaultArgsResults = vigenere.run(vigenere.DEFAULTS)
+    assert.deepEqual(noArgsResults, defaultArgsResults)
   })
 
   it('should be the same after encode and decode', () => {
     const inputs = { key: 'fake' }
-    let encodeOutputStr = vigenere.run({
+    let encodeResults = vigenere.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = vigenere.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = vigenere.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.decoded, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.decoded,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 
   it('should encode and decode with sample inputs', () => {
     const inputs = vigenere.SAMPLE_INPUTS
     assert.containsAllKeys(inputs, ['key'])
 
-    let encodeOutputStr = vigenere.run({
+    let encodeResults = vigenere.run({
       isEncoding: true,
       inputStr: testStrings.normal,
       inputs
     })
 
-    let decodeOutputStr = vigenere.run({
+    assert.isTrue(encodeResults.isSuccess)
+    assert.isString(encodeResults.outputStr)
+
+    let decodeResults = vigenere.run({
       isEncoding: false,
-      inputStr: encodeOutputStr,
+      inputStr: encodeResults.outputStr,
       inputs
     })
-    assert.equal(testStrings.decoded, decodeOutputStr)
+
+    let expected = {
+      isSuccess: true,
+      outputStr: testStrings.decoded,
+      errorStr: null
+    }
+
+    assert.deepEqual(decodeResults, expected)
   })
 })
