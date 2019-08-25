@@ -29,6 +29,8 @@
 - [ ] Update about view content
 - [x] Add unicorn icon
 - [x] Add copy icon (make?)
+- [ ] Add mason font or gliphs
+- [ ] Add animations on buttons, links, inputs, etc
 - [ ] CSS cleanup
 - [ ] Frontend commenting
 - [ ] Verify PWA is working

@@ -1,9 +1,26 @@
 <template>
   <div class="about">
-    <router-link :to="{ name: 'index' }">X</router-link>
-    {{cipher.ABOUT.text}}
-    {{cipher.ABOUT.source.url}}
-    {{cipher.INPUTS}}
+    <div class="about__close">
+      <router-link :to="{ name: 'index' }"></router-link>
+    </div>
+    <h1>{{cipher.NAME}}</h1>
+    <div class="about__text">
+      <p>{{cipher.ABOUT.text}}</p>
+      <a :href="cipher.ABOUT.source.url" target="_blank">
+        {{cipher.ABOUT.source.title}}
+      </a>
+    </div>
+
+    <div class="about__inputs" v-if="cipherHasInputs">
+      <h2>Inputs</h2>
+      <div
+        class="about__input"
+        v-for="(input, index) in cipher.INPUTS"
+        :key="index">
+        <h3>{{input.label}}</h3>
+        <p>{{input.description}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,8 +31,15 @@ export default {
   name: 'about',
   props: ['cipherKey'],
   data () {
+    let cipher = getCipherByKey(this.cipherKey)
+    const cipherHasInputs = (
+      typeof cipher.INPUTS !== 'undefined' &&
+      cipher.INPUTS !== null &&
+      Array.isArray(cipher.INPUTS)
+    )
     return {
-      cipher: getCipherByKey(this.cipherKey)
+      cipher,
+      cipherHasInputs
     }
   },
   beforeCreate () {
@@ -32,10 +56,67 @@ export default {
 <style lang="scss" scoped>
 .about {
   display: flex;
+  flex-flow: column nowrap;
   position: relative;
   margin: 0 auto;
   width: 50%;
   min-width: 30.0em; // 300px
   max-width: 50.0em; // 500px
+  opacity: 1;
+
+  h3 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0.4em 0;
+  }
+
+  &__close {
+    display: flex;
+    align-self: flex-end;
+    margin: 3.2em 0;
+
+    a {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      height: 1.8em;
+      width: 1.8em;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 1.8em;
+        width: 0.2em;
+        background-color: #2B73FF;
+        border-radius: 0.2em;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &__text {
+    a {
+      font-size: 1.6em;
+    }
+  }
+
+  &__inputs {
+    margin-top: 3.2em;
+  }
+
+  &__input {
+    margin-top: 1.6em;
+  }
 }
 </style>

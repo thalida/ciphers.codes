@@ -57,6 +57,7 @@
     <div class="modal">
       <router-view :key="$route.path"></router-view>
     </div>
+
   </div>
 </template>
 

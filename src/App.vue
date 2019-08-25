@@ -35,18 +35,25 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+p {
   margin: 0;
   padding: 0;
 }
 
 h1,
 h2 {
-  font-size: 1.8em // 18px
+  font-size: 1.8em; // 18px
+  font-weight: 600;
 }
 
 h3 {
-  font-size: 1.6em // 16px
+  font-size: 1.6em; // 16px
+  font-weight: 600;
+}
+
+p {
+  font-size: 1.6em; // 16px
 }
 
 a {
