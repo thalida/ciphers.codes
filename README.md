@@ -21,18 +21,19 @@
     - [x] polybiusSquare
     - [x] vigenere
 - [x] Review cipher utils and clean up
-- [ ] Style general page layout + containers
-- [ ] Style main input box area
-- [ ] Style all ciphers
+- [x] Style general page layout + containers
+- [x] Style main input box area
+- [x] Style all ciphers
 - [ ] Style modal / about view
-- [ ] Style toast
+- [x] Style toast
 - [ ] Update about view content
-- [ ] Add unicorn icon
-- [ ] Add copy icon (make?)
-- [ ] QA various text lengths
-- [ ] screenreader QA
-- [ ] vision / color QA
-- [ ] browserstack QA
+- [x] Add unicorn icon
+- [x] Add copy icon (make?)
+- [ ] QA
+    - [ ] various text lengths
+    - [ ] screenreaders
+    - [ ] vision / color
+    - [ ] browserstack
 
 ## Project setup
 ```
