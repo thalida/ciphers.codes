@@ -24,15 +24,24 @@
 - [x] Style general page layout + containers
 - [x] Style main input box area
 - [x] Style all ciphers
-- [ ] Style modal / about view
+- [x] Style modal / about view
 - [x] Style toast
 - [ ] Update about view content
 - [x] Add unicorn icon
 - [x] Add copy icon (make?)
 - [ ] Add mason font or gliphs
-- [ ] Add animations on buttons, links, inputs, etc
 - [ ] CSS cleanup
-- [ ] Frontend commenting
+    - [ ] Add animations on buttons, links, inputs, etc
+    - [ ] Standardize focus styles
+    - [ ] comments
+- [ ] HTML cleanup
+    - [ ] comments
+    - [ ] alt tags and titles
+    - [ ] enter key support
+    - [ ] encode toggle tab / keyboard support
+    - [ ] modal default focus on x
+    - [ ] ciphers group skip tab support
+- [ ] Research fixed items vue
 - [ ] Verify PWA is working
 - [ ] Update meta data and icons
 - [ ] Setup hosting -- github? Private?

@@ -201,10 +201,10 @@ export default {
     position: absolute;
     right: 1em;
     bottom: 1em;
-    width: 1.6em;
-    height: 1.6em;
+    width: 1.4em;
+    height: 1.4em;
     cursor: pointer;
-    border: 1px solid #2B73FF;
+    border: 0.1em solid #2B73FF;
     border-radius: 0 0.2em 0 0;
     background-color: #F4F4F4;
 
@@ -214,9 +214,9 @@ export default {
       position: absolute;
       top: 0.25em;
       right: 0.25em;
-      width: 1.6em;
-      height: 1.6em;
-      border: 1px solid #2B73FF;
+      width: 1.4em;
+      height: 1.4em;
+      border: 0.1em solid #2B73FF;
       border-radius: 0.2em;
       background-color: #F4F4F4;
       box-shadow: 0.2em -0.2em 0 #F4F4F4;
@@ -233,10 +233,11 @@ export default {
 
     &:focus {
       outline: none !important;
-      border: 1px solid #001D56;
+      border: 0.1em solid #001D56;
+      background-color: #FFEEC3;
 
       &::after {
-        border: 1px solid #001D56;
+        border: 0.1em solid #001D56;
         background-color: #FFEEC3;
       }
     }
