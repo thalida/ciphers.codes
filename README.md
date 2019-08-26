@@ -30,12 +30,12 @@
 - [x] Add unicorn icon
 - [x] Add copy icon (make?)
 - [ ] Add mason font or gliphs
-- [ ] CSS cleanup
+- [x] CSS cleanup
     - [x] Add animations on buttons, links, inputs, etc
     - [x] Standardize focus styles
-    - [ ] comments
-    - [ ] variables
-    - [ ] simplify styles
+    - [x] comments
+    - [x] variables
+    - [x] simplify styles
 - [ ] HTML cleanup
     - [ ] comments
     - [ ] alt tags and titles

@@ -118,18 +118,13 @@ export default {
     }
   }
 
-  &__text {
-    a {
-      font-size: 1.6em;
-    }
+  &__text a,
+  &__input {
+    font-size: 1.6em;
   }
 
   &__inputs {
     margin-top: 3.2em;
-  }
-
-  &__input {
-    margin-top: 1.6em;
   }
 }
 </style>

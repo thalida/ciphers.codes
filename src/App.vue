@@ -15,6 +15,9 @@ html {
   box-sizing: inherit;
 }
 
+// body
+// Base body styles including hiding scrollbars when modal is visible
+// -----------------------------------------------------------------------------
 body {
   padding: 0;
   margin: 0;
@@ -27,6 +30,9 @@ body {
   overflow: hidden;
 }
 
+// #app
+// Wraps around all rendered content
+// -----------------------------------------------------------------------------
 #app {
   display: block;
   margin: 0 auto;
@@ -35,6 +41,9 @@ body {
   max-width: 50.0em; // 500px
 }
 
+// h1, h2, h3, p, a
+// Reset and style the above base text styles
+// -----------------------------------------------------------------------------
 h1,
 h2,
 h3,
@@ -69,6 +78,9 @@ a {
   }
 }
 
+// ::selection
+// Update text highlight / default selection color
+// -----------------------------------------------------------------------------
 ::selection {
   background: $color__selection;
 }

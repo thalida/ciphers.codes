@@ -51,7 +51,7 @@
     </transition>
 
     <footer>
-      <a href="https://thalida.me" target="_blank">
+      <a class="unicorn__link" href="https://thalida.me" target="_blank">
         <img src="../assets/unicorn.svg" />
       </a>
     </footer>
@@ -154,6 +154,7 @@ export default {
     margin: 1.6em 0;
     text-align: center;
 
+    // make the main header link look like normal text
     a {
       color: $color__text;
       text-decoration: none;
@@ -165,7 +166,7 @@ export default {
     width: 100%;
     justify-content: flex-end;
 
-    a {
+    .unicorn__link {
       height: 3.2em;
       width: 3.2em;
 
@@ -248,6 +249,7 @@ export default {
       left: 1.6em;
     }
 
+    // Highlight the state that'll be selected after enter / submit
     &.toggle--on .toggle__label:hover .toggle__text--off,
     &.toggle--off .toggle__label:hover .toggle__text--on {
       opacity: 1;
@@ -257,6 +259,7 @@ export default {
 
   .textarea.textarea--fancy {
     border: 0;
+    // Allow the text area to be resized vertically only
     resize: vertical;
     height: 8.0em;
     min-height: 4.0em;
