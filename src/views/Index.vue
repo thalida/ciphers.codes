@@ -197,6 +197,12 @@ export default {
       flex-flow: row nowrap;
       align-items: center;
       cursor: pointer;
+
+      &:hover {
+        .toggle__text {
+          opacity: 1;
+        }
+      }
     }
 
     &__text {
@@ -224,7 +230,7 @@ export default {
         height: 1.6em;
         border-radius: 50%;
         background-color: #FFB5D3;
-        transition: all 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
+        transition: all 300ms ease;
       }
     }
 
