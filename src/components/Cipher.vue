@@ -1,5 +1,8 @@
 <template>
-  <div :id="cipherId" class="cipher">
+  <div
+    :id="cipherId"
+    class="cipher"
+    :class="{'cipher--has-error': !cipherResults.isSuccess}">
     <div class="cipher__header">
       <h2>
         <router-link :to="{name: 'about', params: { cipherKey }}">
@@ -38,19 +41,20 @@
       </div>
     </div>
 
-    <textarea
-      class="cipher__output"
-      v-model="outputStr"
-      disabled>
-    </textarea>
-
-    <button
-      class="cipher__copy"
-      type="button"
-      v-clipboard:copy="outputStr"
-      v-clipboard:success="handleCopySuccess"
-      v-clipboard:error="handleCopyError">
-    </button>
+    <div class="cipher__output">
+      <textarea
+        class="cipher__textarea"
+        v-model="outputStr"
+        disabled>
+      </textarea>
+      <button
+        class="cipher__copy"
+        type="button"
+        v-clipboard:copy="outputStr"
+        v-clipboard:success="handleCopySuccess"
+        v-clipboard:error="handleCopyError">
+      </button>
+    </div>
   </div>
 </template>
 
@@ -93,18 +97,19 @@ export default {
         return pairs
       }, {})
     },
-    outputStr () {
+    cipherResults () {
       let results = this.cipher.run({
         isEncoding: this.isEncoding,
         inputStr: this.inputStr,
         inputs: this.inputValues
       })
 
-      if (typeof results === 'string') {
-        return results
-      }
-
-      return (results.isSuccess) ? results.outputStr : results.errorStr
+      return results
+    },
+    outputStr () {
+      return (this.cipherResults.isSuccess)
+        ? this.cipherResults.outputStr
+        : this.cipherResults.errorStr
     }
   },
   methods: {
@@ -191,40 +196,54 @@ export default {
   }
 
   &__output {
-    border: 0;
-    resize: none;
-    height: 8.0em;
-    padding: 1.0em;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em;
     border: 0;
     border-radius: 0 0.8em 0.8em 0.8em;
-    font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
-    color: #001D56;
     background-color: #F4F4F4;
   }
 
+  &__textarea {
+    border: 0;
+    resize: none;
+    height: 8.0em;
+    width: calc(100% - 1.8em);
+    font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
+    color: #001D56;
+    background: transparent;
+  }
+
   &__copy {
-    display: block;
-    position: absolute;
-    right: 1em;
-    bottom: 1em;
+    display: flex;
+    flex-flow: column nowrap;
+    position: relative;
+    background: transparent;
+    border: 0;
+    padding: 0;
     width: 1.4em;
     height: 1.4em;
     cursor: pointer;
-    border: 0.1em solid #2B73FF;
-    border-radius: 0 0.2em 0 0;
-    background-color: #F4F4F4;
 
+    &::before,
     &::after {
       content: '';
       display: block;
       position: absolute;
-      top: 0.25em;
-      right: 0.25em;
-      width: 1.4em;
-      height: 1.4em;
+      width: 100%;
+      height: 100%;
       border: 0.1em solid #2B73FF;
       border-radius: 0.2em;
       background-color: #F4F4F4;
+    }
+
+    &::before {
+      top: -0.4em;
+      right: -0.4em;
+    }
+
+    &::after {
       box-shadow: 0.2em -0.2em 0 #F4F4F4;
     }
 
@@ -239,13 +258,21 @@ export default {
 
     &:focus {
       outline: none !important;
-      border: 0.1em solid #001D56;
-      background-color: #FFEEC3;
 
+      &::before,
       &::after {
         border: 0.1em solid #001D56;
         background-color: #FFEEC3;
       }
+    }
+  }
+
+  &--has-error {
+    .cipher__copy {
+      display: none;
+    }
+    .cipher__output {
+      opacity: 0.5;
     }
   }
 }
