@@ -12,7 +12,9 @@
         :class=[toggleClass]>
         <label
           for="encoding-toggle"
-          class="toggle__label">
+          class="toggle__label"
+          tabindex="0"
+          v-on:keyup.enter="handleToggleEnter()">
           <span class="toggle__text toggle__text--on">encode</span>
           <span class="toggle__symbol"></span>
           <span class="toggle__text toggle__text--off">decode</span>
@@ -132,6 +134,9 @@ export default {
     },
     handleCopyError (cipher) {
       this.renderToast('copy:error', { cipher })
+    },
+    handleToggleEnter () {
+      this.isEncoding = !this.isEncoding
     }
   }
 }
@@ -197,18 +202,12 @@ export default {
       flex-flow: row nowrap;
       align-items: center;
       cursor: pointer;
-
-      &:hover {
-        .toggle__text {
-          opacity: 1;
-        }
-      }
     }
 
     &__text {
       font-size: 1.6em;
       opacity: 0.5;
-      transition: all 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
+      transition: all 300ms ease;
     }
 
     &__symbol {
@@ -242,6 +241,13 @@ export default {
       .toggle__symbol::after {
         left: 0;
       }
+
+      .toggle__label:hover {
+        .toggle__text.toggle__text--off {
+          opacity: 1;
+          text-shadow: 0 0 0.2em darken(#FFEEC3, 20%);
+        }
+      }
     }
 
     &.toggle--off {
@@ -251,6 +257,13 @@ export default {
 
       .toggle__symbol::after {
         left: 1.6em;
+      }
+
+      .toggle__label:hover {
+        .toggle__text.toggle__text--on {
+          opacity: 1;
+          text-shadow: 0 0 0.2em darken(#FFEEC3, 20%);
+        }
       }
     }
   }

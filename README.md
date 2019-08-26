@@ -31,8 +31,8 @@
 - [x] Add copy icon (make?)
 - [ ] Add mason font or gliphs
 - [ ] CSS cleanup
-    - [ ] Add animations on buttons, links, inputs, etc
-    - [ ] Standardize focus styles
+    - [x] Add animations on buttons, links, inputs, etc
+    - [x] Standardize focus styles
     - [ ] comments
 - [ ] HTML cleanup
     - [ ] comments

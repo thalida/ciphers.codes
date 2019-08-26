@@ -15,10 +15,11 @@
           class="cipher__input"
           v-for="(input, index) in cipherInputs"
           :key="index">
-          <label>{{input.label}}</label>
+          <label :for="`${cipherId}__input--${index}`">{{input.label}}</label>
 
           <input
             v-if="input.type === 'text' || input.type === 'number'"
+            :id="`${cipherId}__input--${index}`"
             :type="input.type"
             :placeholder="input.placeholder"
             v-model="input.value"
@@ -27,6 +28,7 @@
 
           <select
             v-if="input.type === 'select'"
+            :id="`${cipherId}__input--${index}`"
             v-model="input.value"
             @input="handleInputChange(input, $event)"
             @blur="handleInputBlur(input, $event)">
@@ -250,6 +252,7 @@ export default {
       border: 0.1em solid #2B73FF;
       border-radius: 0.2em;
       background-color: #F4F4F4;
+      transition: all 150ms ease;
     }
 
     &::before {
@@ -262,7 +265,6 @@ export default {
     }
 
     &:hover {
-      outline: none !important;
       opacity: 0.8;
 
       &::after {
@@ -277,6 +279,9 @@ export default {
       &::after {
         border: 0.1em solid #001D56;
         background-color: #FFEEC3;
+        box-shadow: 0 0 0 transparent;
+        top: 0;
+        right: 0;
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="about__close">
-      <router-link :to="{ name: 'index' }"></router-link>
+      <router-link :to="{ name: 'index' }" v-focus></router-link>
     </div>
     <h1>{{cipher.NAME}}</h1>
     <div class="about__text">
@@ -81,18 +81,19 @@ export default {
       display: flex;
       position: relative;
       justify-content: center;
-      height: 1.8em;
-      width: 1.8em;
+      height: 2em;
+      width: 2em;
 
       &::before,
       &::after {
         content: "";
         display: block;
         position: absolute;
-        height: 1.8em;
+        height: 2em;
         width: 0.2em;
         background-color: #2B73FF;
         border-radius: 0.2em;
+        transition: all 300ms ease;
       }
 
       &::before {
@@ -101,6 +102,16 @@ export default {
 
       &::after {
         transform: rotate(-45deg);
+      }
+
+      &:hover {
+        &::before {
+          transform: rotate(90deg);
+        }
+
+        &::after {
+          transform: rotate(-90deg);
+        }
       }
     }
   }

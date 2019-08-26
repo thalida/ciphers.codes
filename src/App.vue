@@ -59,6 +59,8 @@ p {
 a {
   color: #2B73FF;
   text-decoration: underline;
+  backgorund-color: transparent;
+  transition: background-color 300ms ease;
 
   &:hover {
     background-color: #FFEEC3;
