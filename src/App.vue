@@ -5,6 +5,8 @@
 </template>
 
 <style lang="scss">
+@import './assets/css/_variables';
+
 // https://www.paulirish.com/2012/box-sizing-border-box-ftw/
 html {
   box-sizing: border-box;
@@ -16,9 +18,9 @@ html {
 body {
   padding: 0;
   margin: 0;
-  background: #fff;
   font: normal normal 62.5%/1.2 'Signika', Arial, sans-serif;
-  color: #001D56;
+  background: $color__background;
+  color: $color__text;
 }
 
 .body--with-modal {
@@ -57,17 +59,17 @@ p {
 }
 
 a {
-  color: #2B73FF;
+  color: $color__link;
   text-decoration: underline;
   backgorund-color: transparent;
   transition: background-color 300ms ease;
 
   &:hover {
-    background-color: #FFEEC3;
+    background-color: $color__link--hover;
   }
 }
 
 ::selection {
-  background: rgba(#C7C9FF, 0.7);
+  background: $color__selection;
 }
 </style>

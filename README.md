@@ -34,6 +34,8 @@
     - [x] Add animations on buttons, links, inputs, etc
     - [x] Standardize focus styles
     - [ ] comments
+    - [ ] variables
+    - [ ] simplify styles
 - [ ] HTML cleanup
     - [ ] comments
     - [ ] alt tags and titles

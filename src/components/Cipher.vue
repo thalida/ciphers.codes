@@ -143,6 +143,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/css/_variables';
+
 .cipher {
   display: flex;
   position: relative;
@@ -177,13 +179,13 @@ export default {
       border: 0;
       font: normal normal 1.0em/1.2 'Signika', Arial, sans-serif;
       border-radius: 0.6em;
-      border: 0.2em solid #FFEEC3;
-      background-color: #FFEEC3;
+      border: 0.2em solid $color__yellow;
+      background-color: $color__yellow;
       text-align: left;
 
       &:focus {
         outline: none !important;
-        border: 0.2em solid darken(#FFEEC3, 20%);
+        border: 0.2em solid $color__yellow--darker;
       }
     }
 
@@ -206,7 +208,7 @@ export default {
     padding: 1em;
     border: 0;
     border-radius: 0 2em 2em 2em;
-    background-color: #F4F4F4;
+    background-color: $color__gray;
 
     &::after {
       content: "";
@@ -216,7 +218,7 @@ export default {
       left: 0;
       height: 4em;
       width: 100%;
-      background: linear-gradient(transparent, #F4F4F4);
+      background: linear-gradient(transparent, $color__gray);
     }
   }
 
@@ -227,7 +229,7 @@ export default {
     height: 8.0em;
     width: calc(100% - 1.8em);
     font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
-    color: #001D56;
+    color: $color__text;
     background: transparent;
   }
 
@@ -249,9 +251,9 @@ export default {
       position: absolute;
       width: 100%;
       height: 100%;
-      border: 0.1em solid #2B73FF;
+      border: 0.1em solid $color__blue--vibrant;
       border-radius: 0.2em;
-      background-color: #F4F4F4;
+      background-color: $color__gray;
       transition: all 150ms ease;
     }
 
@@ -261,14 +263,14 @@ export default {
     }
 
     &::after {
-      box-shadow: 0.2em -0.2em 0 #F4F4F4;
+      box-shadow: 0.2em -0.2em 0 $color__gray;
     }
 
     &:hover {
       opacity: 0.8;
 
       &::after {
-        background-color: #FFEEC3;
+        background-color: $color__yellow;
       }
     }
 
@@ -277,8 +279,8 @@ export default {
 
       &::before,
       &::after {
-        border: 0.1em solid #001D56;
-        background-color: #FFEEC3;
+        border: 0.1em solid $color__blue--darker;
+        background-color: $color__yellow--darker;
         box-shadow: 0 0 0 transparent;
         top: 0;
         right: 0;

@@ -54,6 +54,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/css/_variables';
+
 .about {
   display: flex;
   flex-flow: column nowrap;
@@ -91,7 +93,7 @@ export default {
         position: absolute;
         height: 2em;
         width: 0.2em;
-        background-color: #2B73FF;
+        background-color: $color__link;
         border-radius: 0.2em;
         transition: all 300ms ease;
       }

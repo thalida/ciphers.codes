@@ -143,6 +143,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/css/_variables';
+
 .index {
   display: flex;
   flex-flow: column nowrap;
@@ -153,7 +155,7 @@ export default {
     text-align: center;
 
     a {
-      color: #001D56;
+      color: $color__text;
       text-decoration: none;
     }
   }
@@ -180,7 +182,7 @@ export default {
     overflow: hidden;
     margin-bottom: 3.2em;
 
-    box-shadow: 0px 0px 3.2em rgba(#001D56, 0.2);
+    box-shadow: 0px 0px 3.2em $color__blue--darker--faded;
     border-radius: 1.6em;
   }
 
@@ -191,7 +193,7 @@ export default {
     align-items: center;
     width: 100%;
     height: 4.8em;
-    background: #FFF5F9;
+    background: $color__pink;
 
     &__input {
       visibility: hidden;
@@ -219,7 +221,7 @@ export default {
       height: 0.4em;
       margin: 0 0.8em;
       border-radius: 0.4em;
-      background-color: #C7C9FF;
+      background-color: $color__purple;
 
       &::after {
         content: '';
@@ -228,43 +230,28 @@ export default {
         width: 1.6em;
         height: 1.6em;
         border-radius: 50%;
-        background-color: #FFB5D3;
+        background-color: $color__pink--darker;
         transition: all 300ms ease;
       }
     }
 
-    &.toggle--on {
-      .toggle__text.toggle__text--on {
+    &.toggle--on .toggle__text--on,
+    &.toggle--off .toggle__text--off {
         opacity: 1;
-      }
-
-      .toggle__symbol::after {
-        left: 0;
-      }
-
-      .toggle__label:hover {
-        .toggle__text.toggle__text--off {
-          opacity: 1;
-          text-shadow: 0 0 0.2em darken(#FFEEC3, 20%);
-        }
-      }
     }
 
-    &.toggle--off {
-      .toggle__text.toggle__text--off {
-        opacity: 1;
-      }
+    &.toggle--on .toggle__symbol::after {
+      left: 0;
+    }
 
-      .toggle__symbol::after {
-        left: 1.6em;
-      }
+    &.toggle--off .toggle__symbol::after {
+      left: 1.6em;
+    }
 
-      .toggle__label:hover {
-        .toggle__text.toggle__text--on {
-          opacity: 1;
-          text-shadow: 0 0 0.2em darken(#FFEEC3, 20%);
-        }
-      }
+    &.toggle--on .toggle__label:hover .toggle__text--off,
+    &.toggle--off .toggle__label:hover .toggle__text--on {
+      opacity: 1;
+      text-shadow: 0 0 0.2em $color__yellow--darker;
     }
   }
 
@@ -275,14 +262,14 @@ export default {
     min-height: 4.0em;
     max-height: 16.0em;
     padding: 1.0em;
-    border: 0.4em solid #ffffff;
+    border: 0.4em solid $color__white;
     font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
-    color: #001D56;
+    color: $color__text;
     transition: border 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
 
     &:focus {
       outline: none !important;
-      border: 0.4em solid #FFEEC3;
+      border: 0.4em solid $color__yellow;
     }
   }
 
@@ -294,10 +281,10 @@ export default {
     margin: 0 auto;
     padding: 0.8em 1.6em;
     font-size: 1.4em;
-    background-color: #001D56;
-    color: #ffffff;
+    background-color: $color__blue--darker;
+    color: $color__white;
     border-radius: 2em;
-    box-shadow: 0px 0px 16px rgba(#001D56, 0.15);
+    box-shadow: 0px 0px 16px $color__blue--darker--faded;
     transition: all 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
     opacity: 1;
   }
@@ -320,7 +307,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #ffffff;
+    background: $color__background;
   }
 
   .body--with-modal & {
