@@ -64,4 +64,8 @@ a {
     background-color: #FFEEC3;
   }
 }
+
+::selection {
+  background: rgba(#C7C9FF, 0.7);
+}
 </style>

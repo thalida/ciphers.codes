@@ -197,17 +197,31 @@ export default {
 
   &__output {
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: space-around;
+    overflow: hidden;
     padding: 1em;
     border: 0;
-    border-radius: 0 0.8em 0.8em 0.8em;
+    border-radius: 0 2em 2em 2em;
     background-color: #F4F4F4;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4em;
+      width: 100%;
+      background: linear-gradient(transparent, #F4F4F4);
+    }
   }
 
   &__textarea {
     border: 0;
     resize: none;
+    cursor: text;
     height: 8.0em;
     width: calc(100% - 1.8em);
     font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
