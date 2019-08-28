@@ -3,7 +3,7 @@ import { CIPHER_KEYS } from '@/ciphers'
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from './views/Index.vue'
-import About from './views/About.vue'
+import Modal from './views/Modal.vue'
 
 Vue.use(Router)
 
@@ -20,7 +20,7 @@ const router = new Router({
           path: 'about/:cipherKey',
           name: 'about',
           props: true,
-          component: About
+          component: Modal
         }
       ]
     },

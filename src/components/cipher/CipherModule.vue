@@ -1,22 +1,27 @@
 <template>
   <div
     :id="cipherId"
-    class="cipher"
-    :class="{'cipher--has-error': !cipherResults.isSuccess}">
-    <div class="cipher__header">
+    class="cipher-module"
+    :class="{'cipher-module--has-error': !cipherResults.isSuccess}">
+    <!-- Cipher name + Inputs -->
+    <div class="cipher-module__header">
+      <!-- Cipher & Link to Cipher About -->
       <h2>
         <router-link :to="{name: 'about', params: { cipherKey }}">
           {{cipher.NAME}}
         </router-link>
       </h2>
 
-      <div class="cipher__inputs" v-if="cipherHasInputs">
+      <!-- All Inputs (hidden for ciphers w/o input) -->
+      <div class="cipher-module__inputs" v-if="cipherHasInputs">
         <div
-          class="cipher__input"
+          class="cipher-module__input"
           v-for="(input, index) in cipherInputs"
           :key="index">
+          <!-- Input label -->
           <label :for="`${cipherId}__input--${index}`">{{input.label}}</label>
 
+          <!-- Supported inputs: text, number, and select -->
           <input
             v-if="input.type === 'text' || input.type === 'number'"
             :id="`${cipherId}__input--${index}`"
@@ -43,14 +48,18 @@
       </div>
     </div>
 
-    <div class="cipher__output">
+    <!-- Cipher Output -->
+    <div class="cipher-module__output">
+      <!-- Use a textarea so we don't have to convert \r\n to <br /> -->
       <textarea
-        class="cipher__textarea"
+        class="cipher-module__textarea"
         v-model="outputStr"
         disabled>
       </textarea>
+
+      <!-- Copy output text to clipboard -->
       <button
-        class="cipher__copy"
+        class="cipher-module__copy"
         type="button"
         v-clipboard:copy="outputStr"
         v-clipboard:success="handleCopySuccess"
@@ -78,8 +87,8 @@ export default {
     return {
       cipher,
       cipherHasInputs,
-      cipherId: `cipher-${cipher.KEY}`,
-      cipherInputs: (cipherHasInputs) ? [...cipher.INPUTS] : null,
+      cipherId: `cipher-module--${cipher.KEY}`,
+      cipherInputs: (cipherHasInputs) ? cipher.INPUTS : null,
       cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null
     }
   },
@@ -143,9 +152,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/css/_variables';
+@import '../../assets/css/_variables';
 
-.cipher {
+.cipher-module {
   display: flex;
   position: relative;
   flex-flow: column nowrap;
@@ -289,10 +298,10 @@ export default {
   }
 
   &--has-error {
-    .cipher__copy {
+    .cipher-module__copy {
       display: none;
     }
-    .cipher__output {
+    .cipher-module__output {
       opacity: 0.5;
     }
   }

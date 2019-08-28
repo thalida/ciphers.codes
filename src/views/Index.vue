@@ -1,24 +1,30 @@
 <template>
   <div class="index">
-    <h1>
-      <router-link :to="{ name: 'index' }">
+    <h1 class="site-title">
+      <router-link class="site-link" :to="{ name: 'index' }">
         cipher.codes
       </router-link>
     </h1>
 
     <section class="input-section">
+      <!-- Encode / Decode Toggle -->
       <div
         class="toggle"
         :class=[toggleClass]>
+        <!-- Label is the visible element, clicking it toggles the checkbox -->
         <label
           for="encoding-toggle"
           class="toggle__label"
           tabindex="0"
           v-on:keyup.enter="handleToggleEnter()">
+          <!-- encode label -->
           <span class="toggle__text toggle__text--on">encode</span>
+          <!-- switch -->
           <span class="toggle__symbol"></span>
+          <!-- decode label -->
           <span class="toggle__text toggle__text--off">decode</span>
         </label>
+        <!-- Hidden checkbox input -->
         <input
           id="encoding-toggle"
           class="toggle__input"
@@ -26,6 +32,7 @@
           v-model="isEncoding" />
       </div>
 
+      <!-- Input textarea -->
       <textarea
         class="textarea textarea--fancy"
         :placeholder="textareaPlaceholder"
@@ -33,8 +40,9 @@
       </textarea>
     </section>
 
+    <!-- List of all ciphers and their outputs -->
     <section class="ciphers">
-      <Cipher
+      <CipherModule
         v-for="cipherKey in cipherKeys"
         :key="cipherKey"
         :cipher-key="cipherKey"
@@ -42,6 +50,7 @@
         @copy-error="handleCopyError" />
     </section>
 
+    <!-- Toast is ready when we click the copy icon on a cipher -->
     <transition name="toast-fade" mode="out-in">
       <div
         class="toast"
@@ -50,28 +59,25 @@
       </div>
     </transition>
 
+    <!-- Unicorn footer -->
     <footer>
       <a class="unicorn__link" href="https://thalida.me" target="_blank">
         <img src="../assets/unicorn.svg" />
       </a>
     </footer>
 
-    <div class="modal">
-      <router-view :key="$route.path"></router-view>
-    </div>
-
+    <!-- About modal content -->
+    <router-view :key="$route.path"></router-view>
   </div>
 </template>
 
 <script>
 import { CIPHER_KEYS } from '@/ciphers'
-import Cipher from '@/components/Cipher.vue'
+import CipherModule from '@/components/cipher/CipherModule.vue'
 
 export default {
   name: 'index',
-  components: {
-    Cipher
-  },
+  components: { CipherModule },
   data () {
     return {
       cipherKeys: CIPHER_KEYS,
@@ -146,19 +152,15 @@ export default {
 @import '../assets/css/_variables';
 
 .index {
-  display: flex;
-  flex-flow: column nowrap;
-  width: 100%;
-
-  h1 {
+  .site-title {
     margin: 1.6em 0;
     text-align: center;
+  }
 
-    // make the main header link look like normal text
-    a {
-      color: $color__text;
-      text-decoration: none;
-    }
+  // make the main header link look like normal text
+  .site-link {
+    color: $color__text;
+    text-decoration: none;
   }
 
   footer {
@@ -301,22 +303,6 @@ export default {
   .toast-fade-leave-active {
     bottom: -6.0em;
     opacity: 0;
-  }
-
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: $color__background;
-  }
-
-  .body--with-modal & {
-    .modal {
-      display: flex;
-    }
   }
 }
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <router-view id="app" class="content-frame" />
 </template>
 
 <style lang="scss">
@@ -30,15 +28,17 @@ body {
   overflow: hidden;
 }
 
-// #app
+// .content-frame
 // Wraps around all rendered content
 // -----------------------------------------------------------------------------
-#app {
-  display: block;
+.content-frame {
+  display: flex;
+  flex-flow: column nowrap;
   margin: 0 auto;
   width: 50%;
   min-width: 30.0em; // 300px
   max-width: 50.0em; // 500px
+  opacity: 1;
 }
 
 // h1, h2, h3, p, a
@@ -47,9 +47,14 @@ body {
 h1,
 h2,
 h3,
-p {
+p,
+header,
+footer {
   margin: 0;
   padding: 0;
+  a {
+    font-size: 1em;
+  }
 }
 
 h1,
@@ -69,6 +74,7 @@ p {
 
 a {
   color: $color__link;
+  font-size: 1.6em; // 16px
   text-decoration: underline;
   backgorund-color: transparent;
   transition: background-color 300ms ease;
