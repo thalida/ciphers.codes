@@ -3,7 +3,7 @@ import { CIPHER_KEYS } from '@/ciphers'
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from './views/Index.vue'
-import Modal from './views/Modal.vue'
+import CipherModal from './views/CipherModal.vue'
 
 Vue.use(Router)
 
@@ -17,10 +17,10 @@ const router = new Router({
       component: Index,
       children: [
         {
-          path: 'about/:cipherKey',
-          name: 'about',
+          path: '/:cipherKey',
+          name: 'cipher',
           props: true,
-          component: Modal
+          component: CipherModal
         }
       ]
     },
@@ -33,8 +33,8 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (
-    to.name !== 'about' ||
-    (to.name === 'about' && CIPHER_KEYS.includes(to.params.cipherKey))
+    to.name !== 'cipher' ||
+    (to.name === 'cipher' && CIPHER_KEYS.includes(to.params.cipherKey))
   ) {
     return next()
   }

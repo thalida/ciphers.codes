@@ -1,32 +1,54 @@
 <template>
-  <div class="modal">
+  <div
+    class="cipher-modal"
+    role="dialog"
+    :aria-label="modalAriaLabel">
     <div class="content-frame">
-      <div class="modal__close">
-        <router-link :to="{ name: 'index' }" v-focus></router-link>
+      <div class="cipher-modal__close">
+        <router-link
+          :to="{ name: 'index' }"
+          aria-label="Close modal"></router-link>
       </div>
-      <CipherAbout :cipher-key="cipherKey" />
+
+      <h1>{{cipher.NAME}}</h1>
+      <div>
+        <p>{{cipher.ABOUT.text}}</p>
+        <a :href="cipher.ABOUT.source.url" target="_blank">
+          {{cipher.ABOUT.source.title}}
+        </a>
+      </div>
+
+      <div class="cipher-modal__inputs" v-if="cipherHasInputs">
+        <h2>Inputs</h2>
+        <div
+          class="cipher-modal__input"
+          v-for="(input, index) in cipher.INPUTS"
+          :key="index">
+          <h3>{{input.label}}</h3>
+          <p>{{input.description}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import CipherAbout from '@/components/cipher/CipherAbout.vue'
+import { getCipherByKey } from '@/ciphers'
 
 export default {
   name: 'modal',
   props: ['cipherKey'],
-  components: { CipherAbout },
-  directives: {
-    focus: {
-      inserted: function (el) {
-        el.focus()
-      },
-      update: function (el) {
-        el.focus()
-      },
-      componentUpdated: function (el) {
-        el.focus()
-      }
+  data () {
+    let cipher = getCipherByKey(this.cipherKey)
+    const cipherHasInputs = (
+      typeof cipher.INPUTS !== 'undefined' &&
+      cipher.INPUTS !== null &&
+      Array.isArray(cipher.INPUTS)
+    )
+    return {
+      cipher,
+      cipherHasInputs,
+      modalAriaLabel: `${cipher.NAME} informational modal`
     }
   },
   beforeCreate () {
@@ -43,7 +65,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/css/_variables';
 
-.modal {
+.cipher-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -99,6 +121,18 @@ export default {
         }
       }
     }
+  }
+
+  p {
+    margin: 0.5em 0 1em;
+  }
+
+  &__inputs {
+    margin-top: 3.2em;
+  }
+
+  &__input {
+    margin-top: 1.6em;
   }
 }
 </style>

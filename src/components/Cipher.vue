@@ -7,7 +7,7 @@
     <div class="cipher-module__header">
       <!-- Cipher & Link to Cipher About -->
       <h2>
-        <router-link :to="{name: 'about', params: { cipherKey }}">
+        <router-link :to="{name: 'cipher', params: { cipherKey }}">
           {{cipher.NAME}}
         </router-link>
       </h2>
@@ -53,14 +53,17 @@
       <!-- Use a textarea so we don't have to convert \r\n to <br /> -->
       <textarea
         class="cipher-module__textarea"
+        :aria-label="textareaLabel"
+        selectedState
         v-model="outputStr"
-        disabled>
+        readonly>
       </textarea>
 
       <!-- Copy output text to clipboard -->
       <button
         class="cipher-module__copy"
         type="button"
+        :aria-label="copyBtnLabel"
         v-clipboard:copy="outputStr"
         v-clipboard:success="handleCopySuccess"
         v-clipboard:error="handleCopyError">
@@ -121,6 +124,12 @@ export default {
       return (this.cipherResults.isSuccess)
         ? this.cipherResults.outputStr
         : this.cipherResults.errorStr
+    },
+    textareaLabel () {
+      return `${this.cipher.NAME} output`
+    },
+    copyBtnLabel () {
+      return `Copy ${this.cipher.NAME} output text`
     }
   },
   methods: {
@@ -152,7 +161,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/css/_variables';
+@import '../assets/css/_variables';
 
 .cipher-module {
   display: flex;
