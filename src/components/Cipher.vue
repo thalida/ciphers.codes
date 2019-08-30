@@ -1,8 +1,10 @@
 <template>
-  <div
+  <article
     :id="cipherId"
     class="cipher-module"
-    :class="{'cipher-module--has-error': !cipherResults.isSuccess}">
+    :class="{'cipher-module--has-error': !cipherResults.isSuccess}"
+    tabindex="0"
+    :aria-label="cipherAriaLabel">
     <!-- Cipher name + Inputs -->
     <div class="cipher-module__header">
       <!-- Cipher & Link to Cipher About -->
@@ -69,7 +71,7 @@
         v-clipboard:error="handleCopyError">
       </button>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>
@@ -92,7 +94,8 @@ export default {
       cipherHasInputs,
       cipherId: `cipher-module--${cipher.KEY}`,
       cipherInputs: (cipherHasInputs) ? cipher.INPUTS : null,
-      cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null
+      cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null,
+      cipherAriaLabel: `${cipher.NAME} Output`
     }
   },
   computed: {

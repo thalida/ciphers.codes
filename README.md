@@ -36,14 +36,14 @@
     - [x] comments
     - [x] variables
     - [x] simplify styles
-- [ ] HTML work
+- [x] HTML work
     - [x] comments
     - [x] alt tags and titles
     - [x] enter key support
     - [x] encode toggle tab / keyboard support
     - [x] modal default focus on x (fix bug)
-    - [ ] ciphers group skip tab support(?)
-    - [ ] make modal tabs work correctly
+    - [x] ciphers group skip tab support(?)
+    - [x] make modal tabs work correctly
 - [ ] convert unicorn to pure css
 - [ ] Research fixed items vue
 - [ ] Verify PWA is working

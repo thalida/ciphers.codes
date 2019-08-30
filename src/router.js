@@ -2,6 +2,8 @@ import { CIPHER_KEYS } from '@/ciphers'
 
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
+
 import Index from './views/Index.vue'
 import CipherModal from './views/CipherModal.vue'
 
@@ -32,14 +34,20 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (
-    to.name !== 'cipher' ||
-    (to.name === 'cipher' && CIPHER_KEYS.includes(to.params.cipherKey))
-  ) {
-    return next()
+  let isModalVisible = false
+  let redirect = false
+
+  if (to.name === 'cipher') {
+    if (CIPHER_KEYS.includes(to.params.cipherKey)) {
+      isModalVisible = true
+    } else {
+      redirect = true
+    }
   }
 
-  return next('/')
+  store.commit('setIsModalVisible', isModalVisible)
+
+  return (redirect) ? next('/') : next()
 })
 
 export default router

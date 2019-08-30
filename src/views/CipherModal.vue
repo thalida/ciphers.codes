@@ -33,6 +33,9 @@
 </template>
 
 <script>
+// https://github.com/davidtheclark/focus-trap
+import createFocusTrap from 'focus-trap'
+
 import { getCipherByKey } from '@/ciphers'
 
 export default {
@@ -40,22 +43,27 @@ export default {
   props: ['cipherKey'],
   data () {
     let cipher = getCipherByKey(this.cipherKey)
-    const cipherHasInputs = (
-      typeof cipher.INPUTS !== 'undefined' &&
-      cipher.INPUTS !== null &&
-      Array.isArray(cipher.INPUTS)
-    )
     return {
       cipher,
-      cipherHasInputs,
-      modalAriaLabel: `${cipher.NAME} informational modal`
+      cipherHasInputs: (
+        typeof cipher.INPUTS !== 'undefined' &&
+        cipher.INPUTS !== null &&
+        Array.isArray(cipher.INPUTS)
+      ),
+      modalAriaLabel: `${cipher.NAME} informational modal`,
+      focusTrap: null
     }
   },
-  beforeCreate () {
+  mounted () {
     let $body = document.getElementsByTagName('body')[0]
     $body.classList.add('body--with-modal')
+
+    this.focusTrap = createFocusTrap(this.$el, {})
+    this.focusTrap.activate()
   },
   beforeDestroy () {
+    this.focusTrap.deactivate()
+
     let $body = document.getElementsByTagName('body')[0]
     $body.classList.remove('body--with-modal')
   }

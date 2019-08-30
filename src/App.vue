@@ -1,5 +1,22 @@
 <template>
-  <router-view id="app" class="content-frame" />
+  <div id="app">
+    <header class="content-frame">
+      <h1 class="site-title">
+        <router-link class="site-link" :to="{ name: 'index' }">
+          cipher.codes
+        </router-link>
+      </h1>
+    </header>
+
+    <router-view class="content-frame" />
+
+    <!-- Unicorn footer -->
+    <footer>
+      <a class="unicorn__link" href="https://thalida.me" target="_blank">
+        <img alt="unicorn emoji" src="./assets/unicorn.svg" />
+      </a>
+    </footer>
+  </div>
 </template>
 
 <style lang="scss">
@@ -89,5 +106,31 @@ a {
 // -----------------------------------------------------------------------------
 ::selection {
   background: $color__selection;
+}
+
+.site-title {
+  margin: 1.6em 0;
+  text-align: center;
+}
+
+// make the main header link look like normal text
+.site-link {
+  color: $color__text;
+  text-decoration: none;
+}
+
+footer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+
+  .unicorn__link {
+    height: 3.2em;
+    width: 3.2em;
+
+    img {
+      height: 100%;
+    }
+  }
 }
 </style>

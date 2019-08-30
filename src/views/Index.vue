@@ -1,14 +1,8 @@
 <template>
   <div class="index">
-    <header>
-      <h1 class="site-title">
-        <router-link class="site-link" :to="{ name: 'index' }">
-          cipher.codes
-        </router-link>
-      </h1>
-    </header>
-
-    <main>
+    <main
+      class="index__main"
+      :inert="(isModalVisible) ? 'true' : 'false'">
       <form class="input-form" @submit.prevent>
         <div class="input-form__settings">
           <button
@@ -36,18 +30,24 @@
       </form>
 
       <!-- List of all ciphers and their outputs -->
-      <section class="ciphers">
+      <section
+        role="feed"
+        class="ciphers"
+        aria-label="Cipher Results">
         <Cipher
-          v-for="cipherKey in cipherKeys"
+          v-for="(cipherKey, index) in cipherKeys"
           :key="cipherKey"
           :cipher-key="cipherKey"
           @copy-success="handleCopySuccess"
-          @copy-error="handleCopyError" />
+          @copy-error="handleCopyError"
+          :aria-posinset="index + 1"
+          :aria-setsize="cipherKeys.length" />
       </section>
 
       <!-- Toast is ready when we click the copy icon on a cipher -->
       <transition name="toast-fade" mode="out-in">
         <div
+          role="alert"
           class="toast"
           v-show="toast.isVisible">
           {{ toast.message }}
@@ -55,25 +55,12 @@
       </transition>
     </main>
 
-    <!-- Unicorn footer -->
-    <footer>
-      <a class="unicorn__link" href="https://thalida.me" target="_blank">
-        <img alt="unicorn emoji" src="../assets/unicorn.svg" />
-      </a>
-    </footer>
-
     <!-- Nested views -- Modal content -->
-    <router-view :key="$route.path"></router-view>
-
-    <!-- <img src="../assets/unicorn.svg" /> -->
-
-    <!-- <div class="unicorn">
-      <div class="unicorn__body">
-        <div class="unicorn__head"></div>
-        <div class="unicorn__neck"></div>
-        <div class="unicorn__torso d"></div>
-      </div>
-    </div> -->
+    <router-view
+      role="dialog"
+      aria-modal="true"
+      :key="$route.path">
+    </router-view>
   </div>
 </template>
 
@@ -110,6 +97,9 @@ export default {
       set (isEncoding) {
         this.$store.commit('setIsEncoding', isEncoding)
       }
+    },
+    isModalVisible () {
+      return this.$store.state.isModalVisible
     },
     selectedState () {
       return (this.isEncoding) ? 'encode' : 'decode'
@@ -165,30 +155,9 @@ export default {
 @import '../assets/css/_variables';
 
 .index {
-  .site-title {
-    margin: 1.6em 0;
-    text-align: center;
-  }
-
-  // make the main header link look like normal text
-  .site-link {
-    color: $color__text;
-    text-decoration: none;
-  }
-
-  footer {
+  &__main {
     display: flex;
-    width: 100%;
-    justify-content: flex-end;
-
-    .unicorn__link {
-      height: 3.2em;
-      width: 3.2em;
-
-      img {
-        height: 100%;
-      }
-    }
+    flex-flow: column nowrap;
   }
 
   .input-form {
@@ -200,35 +169,35 @@ export default {
 
     box-shadow: 0px 0px 3.2em $color__blue--darker--faded;
     border-radius: 1.6em;
-  }
 
-  .input-form__textarea {
-    border: 0;
-    // Allow the text area to be resized vertically only
-    resize: vertical;
-    height: 8.0em;
-    min-height: 4.0em;
-    max-height: 16.0em;
-    padding: 1.0em;
-    border: 0.4em solid $color__white;
-    font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
-    color: $color__text;
-    transition: border 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
+    &__textarea {
+      border: 0;
+      // Allow the text area to be resized vertically only
+      resize: vertical;
+      height: 8.0em;
+      min-height: 4.0em;
+      max-height: 16.0em;
+      padding: 1.0em;
+      border: 0.4em solid $color__white;
+      font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
+      color: $color__text;
+      transition: border 300ms cubic-bezier(0.65, 0.05, 0.36, 1);
 
-    &:focus {
-      outline: none !important;
-      border: 0.4em solid $color__yellow;
+      &:focus {
+        outline: none !important;
+        border: 0.4em solid $color__yellow;
+      }
     }
-  }
 
-  .input-form__settings {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 4.8em;
-    background: $color__pink;
+    &__settings {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 4.8em;
+      background: $color__pink;
+    }
   }
 
   .toggle {
