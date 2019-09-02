@@ -44,20 +44,28 @@
     - [x] modal default focus on x (fix bug)
     - [x] ciphers group skip tab support(?)
     - [x] make modal tabs work correctly
-- [ ] convert unicorn to pure css
-- [ ] Research fixed items vue
+- [ ] (?) convert unicorn to pure css
+- [-] Research fixed items vue (won't use fixed header)
 - [ ] Verify PWA is working
-- [ ] Update meta data and icons
+- [ ] Update metadata and site icons
 - [ ] Setup hosting -- github? Private?
 - [ ] Add frontend tests
     - [ ] Index
-    - [ ] About
+    - [ ] Aboutnpm i vue-fixed-header
     - [ ] Cipher Component
 - [ ] QA
-    - [ ] various text lengths
-    - [ ] screenreaders
-    - [ ] vision / color
+    - [x] various text lengths
+    - [x] screenreaders
+    - [x] vision / color
     - [ ] browserstack
+- [ ] Make Cipher Validations More robust (stricter input checking)
+    - [ ] affine
+    - [ ] atbash
+    - [ ] caesar
+    - [ ] keyedSubstitution
+    - [ ] masonic (no test required)
+    - [ ] playfair
+    - [ ] polybiusSquare
 
 ## Project setup
 ```
