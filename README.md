@@ -49,7 +49,7 @@
 - [ ] [?] convert unicorn to pure css
 - [ ] [?] Verify PWA is working
 - [ ] Update metadata and site icons
-- [ ] Setup hosting -- github? Private?
+- [x] Setup hosting -- github? Private?
 - [ ] [LATER (sorry future me)] Add frontend tests
     - [ ] Index
     - [ ] About
