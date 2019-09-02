@@ -34,6 +34,30 @@ describe('cipher:polybiusSquare', () => {
         outputStr: testStrings.decoded,
         errorStr: null
       }
+    },
+    {
+      label: 'should show validation error on encode',
+      args: {
+        isEncoding: true,
+        inputStr: '!@#'
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: 'Sorry, the entered string contains no letters or numbers which Polybius Square cipher cannot handle.'
+      }
+    },
+    {
+      label: 'should show validation error on decode',
+      args: {
+        isEncoding: false,
+        inputStr: '9A'
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: 'The entered string must contain two consecutive numbers to be decoded by Polybius Square cipher.'
+      }
     }
   ]
   testCases.forEach((testCase) => {

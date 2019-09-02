@@ -44,7 +44,23 @@ export function run (args) {
   // Remove all spaces from the string
   inputStr = inputStr.replace(/[\s]+/gi, '')
 
-  // If we're encoding we need to go trough letter by letter. BUT,
+  if (isEncoding && inputStr.match(/([a-zA-Z0-9]+)/gm) === null) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `Sorry, the entered string contains no letters or numbers which ${NAME} cipher cannot handle.`
+    }
+  }
+
+  if (!isEncoding && inputStr.match(/([0-9]{2,})/gm) === null) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `The entered string must contain two consecutive numbers to be decoded by ${NAME} cipher.`
+    }
+  }
+
+  // If we're encoding we need to go through letter by letter. BUT,
   // If we're decoding we need to get each pair of numbers.
   const increment = (isEncoding) ? 1 : 2
   utils.forEachCharacter(inputStr, increment, (i, char) => {
