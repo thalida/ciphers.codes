@@ -29,7 +29,7 @@
 - [ ] Update about view content
 - [x] Add unicorn icon
 - [x] Add copy icon (make?)
-- [ ] Add mason font or gliphs
+- [x] Add mason font or gliphs
 - [x] CSS cleanup
     - [x] Add animations on buttons, links, inputs, etc
     - [x] Standardize focus styles
@@ -46,7 +46,7 @@
     - [x] make modal tabs work correctly
 - [ ] (?) convert unicorn to pure css
 - [-] Research fixed items vue (won't use fixed header)
-- [ ] Verify PWA is working
+- [ ] (?) Verify PWA is working
 - [ ] Update metadata and site icons
 - [ ] Setup hosting -- github? Private?
 - [ ] Add frontend tests

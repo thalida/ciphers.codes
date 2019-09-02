@@ -1,8 +1,7 @@
 <template>
   <article
-    :id="cipherId"
     class="cipher-module"
-    :class="{'cipher-module--has-error': !cipherResults.isSuccess}"
+    :class="[cipherClass, {'cipher-module--has-error': !cipherResults.isSuccess}]"
     :aria-label="cipherAriaLabel">
     <!-- Cipher name + Inputs -->
     <div class="cipher-module__header">
@@ -20,12 +19,12 @@
           v-for="(input, index) in cipherInputs"
           :key="index">
           <!-- Input label -->
-          <label :for="`${cipherId}__input--${index}`">{{input.label}}</label>
+          <label :for="`${cipherClass}__input--${index}`">{{input.label}}</label>
 
           <!-- Supported inputs: text, number, and select -->
           <input
             v-if="input.type === 'text' || input.type === 'number'"
-            :id="`${cipherId}__input--${index}`"
+            :id="`${cipherClass}__input--${index}`"
             :type="input.type"
             :placeholder="input.placeholder"
             v-model="input.value"
@@ -34,7 +33,7 @@
 
           <select
             v-if="input.type === 'select'"
-            :id="`${cipherId}__input--${index}`"
+            :id="`${cipherClass}__input--${index}`"
             v-model="input.value"
             @input="handleInputChange(input, $event)"
             @blur="handleInputBlur(input, $event)">
@@ -91,7 +90,7 @@ export default {
     return {
       cipher,
       cipherHasInputs,
-      cipherId: `cipher-module--${cipher.KEY}`,
+      cipherClass: `cipher-module--${cipher.KEY}`,
       cipherInputs: (cipherHasInputs) ? cipher.INPUTS : null,
       cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null,
       cipherAriaLabel: `${cipher.NAME} Output`
@@ -164,6 +163,7 @@ export default {
 
 <style scoped lang="scss">
 @import '../assets/css/_variables';
+@import '../assets/fonts/babelstonepigpen/font';
 
 .cipher-module {
   display: flex;
@@ -315,6 +315,10 @@ export default {
     .cipher-module__output {
       opacity: 0.5;
     }
+  }
+
+  &--masonic:not(&--has-error) &__textarea {
+    font-family: "Masonic", "Signika", Arial, sans-serif;
   }
 }
 </style>
