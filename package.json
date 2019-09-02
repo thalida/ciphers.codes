@@ -5,7 +5,7 @@
   "description": "",
   "repository": "https://github.com/thalida/CiphersCodes",
   "scripts": {
-    "prebuild": "npm run clean && npm run test",
+    "prebuild": "npm run clean",
     "build": "NODE_ENV=production webpack -p --progress --colors",
     "deploy": "NODE_ENV=production gh-pages -d dist",
     "build:deploy": "npm run build && npm run deploy",
