@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/css/_variables';
+@import '~@/assets/css/_variables';
 
 .cipher-modal {
   display: none;

@@ -65,7 +65,7 @@
 
 <script>
 import { CIPHER_KEYS } from '@/ciphers'
-import Cipher from '@/components/Cipher.vue'
+import Cipher from '@/components/Cipher/Cipher.vue'
 
 export default {
   name: 'index',
@@ -151,7 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/css/_variables';
+@import '~@/assets/css/_variables';
 
 .index {
   &__main {

@@ -44,14 +44,14 @@
     - [x] modal default focus on x (fix bug)
     - [x] ciphers group skip tab support(?)
     - [x] make modal tabs work correctly
-- [ ] (?) convert unicorn to pure css
 - [-] Research fixed items vue (won't use fixed header)
-- [ ] (?) Verify PWA is working
+- [ ] [?] convert unicorn to pure css
+- [ ] [?] Verify PWA is working
 - [ ] Update metadata and site icons
 - [ ] Setup hosting -- github? Private?
-- [ ] Add frontend tests
+- [ ] [LATER (sorry future me)] Add frontend tests
     - [ ] Index
-    - [ ] Aboutnpm i vue-fixed-header
+    - [ ] About
     - [ ] Cipher Component
 - [ ] QA
     - [x] various text lengths
