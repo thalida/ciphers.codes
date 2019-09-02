@@ -13,7 +13,7 @@
       <h1>{{cipher.NAME}}</h1>
       <div>
         <p>{{cipher.ABOUT.text}}</p>
-        <a :href="cipher.ABOUT.source.url" target="_blank">
+        <a :href="cipher.ABOUT.source.url" target="_blank" rel="noopener">
           {{cipher.ABOUT.source.title}}
         </a>
       </div>

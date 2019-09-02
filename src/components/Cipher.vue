@@ -3,7 +3,6 @@
     :id="cipherId"
     class="cipher-module"
     :class="{'cipher-module--has-error': !cipherResults.isSuccess}"
-    tabindex="0"
     :aria-label="cipherAriaLabel">
     <!-- Cipher name + Inputs -->
     <div class="cipher-module__header">

@@ -12,8 +12,13 @@
 
     <!-- Unicorn footer -->
     <footer>
-      <a class="unicorn__link" href="https://thalida.me" target="_blank">
-        <img alt="unicorn emoji" src="./assets/unicorn.svg" />
+      <a
+        class="unicorn__link"
+        title="Creator website"
+        href="https://thalida.me"
+        target="_blank"
+        rel="noopener">
+        <img alt="" src="./assets/unicorn.svg" />
       </a>
     </footer>
   </div>

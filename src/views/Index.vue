@@ -31,7 +31,6 @@
 
       <!-- List of all ciphers and their outputs -->
       <section
-        role="feed"
         class="ciphers"
         aria-label="Cipher Results">
         <Cipher
