@@ -1,4 +1,5 @@
 # ciphers.codes
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c0a8e041-7f3b-4492-82e1-2bf0d0a8afc9/deploy-status)](https://app.netlify.com/sites/cipherscodes/deploys)
 
 ## Tasks
 - [x] Setup tests for ciphers
