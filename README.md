@@ -46,19 +46,19 @@
     - [x] ciphers group skip tab support(?)
     - [x] make modal tabs work correctly
 - [-] Research fixed items vue (won't use fixed header)
-- [ ] [?] convert unicorn to pure css
-- [ ] [?] Verify PWA is working
+- [ ] ~convert unicorn to pure css~
+- [ ] ~Verify PWA is working~
 - [ ] Update metadata and site icons
 - [x] Setup hosting -- github? Private?
 - [ ] [LATER (sorry future me)] Add frontend tests
     - [ ] Index
     - [ ] About
     - [ ] Cipher Component
-- [ ] QA
+- [x] QA
     - [x] various text lengths
     - [x] screenreaders
     - [x] vision / color
-    - [ ] browserstack
+    - [x] browserstack
 - [ ] Make Cipher Validations More robust (stricter input checking)
     - [ ] affine
     - [ ] atbash

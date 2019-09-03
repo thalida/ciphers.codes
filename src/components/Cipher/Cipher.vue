@@ -197,6 +197,7 @@ export default {
     select {
       height: 2.0em;
       border: 0;
+      padding: 0.1em 0.2em;
       font: normal normal 1.0em/1.2 'Signika', Arial, sans-serif;
       border-radius: 0.6em;
       border: 0.2em solid $color__yellow;
