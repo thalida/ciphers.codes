@@ -48,7 +48,7 @@
 - [-] Research fixed items vue (won't use fixed header)
 - [ ] ~convert unicorn to pure css~
 - [ ] ~Verify PWA is working~
-- [ ] Update metadata and site icons
+- [x] Update metadata and site icons
 - [x] Setup hosting -- github? Private?
 - [ ] [LATER (sorry future me)] Add frontend tests
     - [ ] Index
