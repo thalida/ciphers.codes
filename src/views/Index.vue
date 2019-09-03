@@ -1,7 +1,11 @@
 <template>
   <div class="index">
+    <header class="content-frame">
+      <h1 class="site-title">cipher.codes</h1>
+    </header>
+
     <main
-      class="index__main"
+      class="index__main content-frame"
       :inert="(isModalVisible) ? 'true' : 'false'">
       <form class="input-form" @submit.prevent>
         <div class="input-form__settings">
@@ -53,6 +57,18 @@
         </div>
       </transition>
     </main>
+
+    <!-- Unicorn footer -->
+    <footer>
+      <a
+        class="unicorn__link"
+        title="Creator website"
+        href="https://thalida.me"
+        target="_blank"
+        rel="noopener">
+        <img alt="" src="../assets/night-unicorn.svg" />
+      </a>
+    </footer>
 
     <!-- Nested views -- Modal content -->
     <router-view

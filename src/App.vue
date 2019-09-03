@@ -1,27 +1,5 @@
 <template>
-  <div id="app">
-    <header class="content-frame">
-      <h1 class="site-title">
-        <router-link class="site-link" :to="{ name: 'index' }">
-          cipher.codes
-        </router-link>
-      </h1>
-    </header>
-
-    <router-view class="content-frame" />
-
-    <!-- Unicorn footer -->
-    <footer>
-      <a
-        class="unicorn__link"
-        title="Creator website"
-        href="https://thalida.me"
-        target="_blank"
-        rel="noopener">
-        <img alt="" src="./assets/unicorn.svg" />
-      </a>
-    </footer>
-  </div>
+  <router-view id="app" />
 </template>
 
 <style lang="scss">
@@ -118,20 +96,17 @@ a {
   text-align: center;
 }
 
-// make the main header link look like normal text
-.site-link {
-  color: $color__text;
-  text-decoration: none;
-}
-
 footer {
   display: flex;
-  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: auto;
   justify-content: flex-end;
 
   .unicorn__link {
-    height: 3.2em;
-    width: 3.2em;
+    height: 4.8em;
+    width: 4.8em;
 
     img {
       height: 100%;

@@ -3,14 +3,21 @@
     class="cipher-modal"
     role="dialog"
     :aria-label="modalAriaLabel">
-    <div class="content-frame">
+    <header class="cipher-modal__header content-frame">
+      <h1>
+        <router-link class="site-link" :to="{ name: 'index' }">
+          cipher.codes
+        </router-link>
+      </h1>
       <div class="cipher-modal__close">
         <router-link
           :to="{ name: 'index' }"
           aria-label="Close modal"></router-link>
       </div>
+    </header>
 
-      <h1>{{cipher.NAME}}</h1>
+    <main class="content-frame">
+      <h2>{{cipher.NAME}}</h2>
       <div>
         <p>{{cipher.ABOUT.text}}</p>
         <a :href="cipher.ABOUT.source.url" target="_blank" rel="noopener">
@@ -19,7 +26,7 @@
       </div>
 
       <div class="cipher-modal__inputs" v-if="cipherHasInputs">
-        <h2>Inputs</h2>
+        <h3>Inputs</h3>
         <div
           class="cipher-modal__input"
           v-for="(input, index) in cipher.INPUTS"
@@ -28,7 +35,19 @@
           <p>{{input.description}}</p>
         </div>
       </div>
-    </div>
+    </main>
+
+    <!-- Unicorn footer -->
+    <footer>
+      <a
+        class="unicorn__link"
+        title="Creator website"
+        href="https://thalida.me"
+        target="_blank"
+        rel="noopener">
+        <img alt="" src="../assets/night-unicorn.svg" />
+      </a>
+    </footer>
   </div>
 </template>
 
@@ -76,6 +95,7 @@ export default {
 .cipher-modal {
   display: none;
   position: fixed;
+  flex-flow: column nowrap;
   top: 0;
   left: 0;
   width: 100%;
@@ -86,10 +106,17 @@ export default {
     display: flex;
   }
 
+  &__header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3.2em auto;
+  }
+
   &__close {
     display: flex;
     align-self: flex-end;
-    margin: 3.2em 0;
 
     a {
       display: flex;
