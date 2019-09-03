@@ -229,17 +229,6 @@ export default {
     border: 0;
     border-radius: 0 2em 2em 2em;
     background-color: $color__gray;
-
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 4em;
-      width: 100%;
-      background: linear-gradient(transparent, $color__gray);
-    }
   }
 
   &__textarea {
