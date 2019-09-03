@@ -45,9 +45,9 @@
     - [x] modal default focus on x (fix bug)
     - [x] ciphers group skip tab support(?)
     - [x] make modal tabs work correctly
-- [-] Research fixed items vue (won't use fixed header)
-- [ ] ~convert unicorn to pure css~
-- [ ] ~Verify PWA is working~
+- [x] (research - won't make fixed) Research fixed items vue
+- [-] (nvm) convert unicorn to pure css
+- [x] Verify PWA is working
 - [x] Update metadata and site icons
 - [x] Setup hosting -- github? Private?
 - [ ] [LATER (sorry future me)] Add frontend tests
@@ -67,8 +67,15 @@
     - [ ] masonic (no test required)
     - [ ] playfair
     - [ ] polybiusSquare
+- [ ] Add modal open / close animation
+- [ ] see if i can get the focus state to disappear faster (transition bug?)
+- [ ] move to input + decode action on cipher
+- [ ] title text on unicorn to (?)
+- [ ] keep inputs scrolled ot bottom when typing option (?)
 
-## Project setup
+## Development
+
+### Project Setup
 ```
 npm install
 ```
@@ -98,8 +105,5 @@ npm run lint
 npm run test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### Attributions
+## Attributions
 Unicorn emoji icon from https://github.com/twitter/twemoji
