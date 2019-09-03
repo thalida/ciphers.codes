@@ -225,6 +225,7 @@ export default {
     padding: 0;
     margin: 0;
     font: normal normal 1em/1.2 'Signika', Arial, sans-serif;
+    cursor: pointer;
 
     &__text {
       color: #825d6c;
