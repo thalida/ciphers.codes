@@ -228,7 +228,7 @@ export default {
     cursor: pointer;
 
     &__text {
-      color: #825d6c;
+      color: #6e3ff5;
       font-size: 1.6em;
       transition: all 300ms ease;
     }
@@ -242,8 +242,6 @@ export default {
       height: 0.4em;
       margin: 0 0.8em;
       border-radius: 0.4em;
-      // background-color: $color__purple;
-      background-color: rgba(#825d6c, 0.5);
 
       &::after {
         content: '';
@@ -252,31 +250,37 @@ export default {
         width: 1.6em;
         height: 1.6em;
         border-radius: 50%;
-        // background-color: $color__pink--darker;
+        background-color: #d40050;
         transition: all 300ms ease;
-        background-color: #9417ec;
       }
     }
 
     &.toggle--encode .toggle__text--encode,
     &.toggle--decode .toggle__text--decode {
-      // color: $color__link;
-      color: #9417ec;
+      color: #d40050;
     }
 
-    &.toggle--encode .toggle__symbol::after {
-      left: 0;
+    &.toggle--encode .toggle__symbol {
+      background-image: linear-gradient(90deg, #d40050 0%, #6e3ff5 100%);
+
+      &::after {
+        left: 0;
+      }
     }
 
-    &.toggle--decode .toggle__symbol::after {
-      left: 1.6em;
+    &.toggle--decode .toggle__symbol {
+      background-image: linear-gradient(-90deg, #d40050 0%, #6e3ff5 100%);
+
+      &::after {
+        left: 1.6em;
+      }
     }
 
     // Highlight the state that'll be selected after enter / submit
     &.toggle--encode:hover .toggle__text--decode,
     &.toggle--decode:hover .toggle__text--encode {
       opacity: 1;
-      text-shadow: 0 0 0.2em $color__yellow--darker;
+      text-shadow: 0 0 0.2em rgba($color__blue--darker, 0.3);
     }
   }
 
