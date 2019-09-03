@@ -7,7 +7,9 @@
     <div class="cipher-module__header">
       <!-- Cipher & Link to Cipher About -->
       <h2>
-        <router-link :to="{name: 'cipher', params: { cipherKey }}">
+        <router-link
+          :to="{name: 'cipher', params: { cipherKey }}"
+          :title="cipherLinkTitle">
           {{cipher.NAME}}
         </router-link>
       </h2>
@@ -93,7 +95,8 @@ export default {
       cipherClass: `cipher-module--${cipher.KEY}`,
       cipherInputs: (cipherHasInputs) ? cipher.INPUTS : null,
       cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null,
-      cipherAriaLabel: `${cipher.NAME} Output`
+      cipherAriaLabel: `${cipher.NAME} Output`,
+      cipherLinkTitle: `Learn more about ${cipher.NAME}`
     }
   },
   computed: {

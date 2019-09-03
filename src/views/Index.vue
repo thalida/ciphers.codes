@@ -48,7 +48,7 @@
       </section>
 
       <!-- Toast is ready when we click the copy icon on a cipher -->
-      <transition name="toast-fade" mode="out-in">
+      <transition name="toast-fade-out-in-" mode="out-in">
         <div
           role="alert"
           class="toast"
@@ -71,11 +71,13 @@
     </footer>
 
     <!-- Nested views -- Modal content -->
-    <router-view
-      role="dialog"
-      aria-modal="true"
-      :key="$route.path">
-    </router-view>
+    <transition name="modal-transition-up-" mode="out-in" appear>
+      <router-view
+        role="dialog"
+        aria-modal="true"
+        :key="$route.path">
+      </router-view>
+    </transition>
   </div>
 </template>
 
@@ -300,15 +302,27 @@ export default {
     opacity: 1;
   }
 
-  .toast-fade-enter-active,
-  .toast-fade-leave-active {
+  .toast-fade-out-in--enter-active,
+  .toast-fade-out-in--leave-active {
     transition: all 300ms ease;
   }
 
-  .toast-fade-enter,
-  .toast-fade-leave-active {
+  .toast-fade-out-in--enter,
+  .toast-fade-out-in--leave-to {
     bottom: -6.0em;
     opacity: 0;
+  }
+
+  .modal-transition-up--enter-active,
+  .modal-transition-up--leave-active {
+    display: flex;
+    transition: top 400ms ease;
+    box-shadow: 0 -10em 10em white;
+  }
+
+  .modal-transition-up--enter,
+  .modal-transition-up--leave-to {
+    top: 100%;
   }
 }
 </style>
