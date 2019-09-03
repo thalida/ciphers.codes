@@ -2,7 +2,7 @@
 # [context.deploy-preview]
 # [context.branch-deploy]
 # branch: staging
-# branch: prod-archives-2016
+# branch: 2016
 [build]
   base = ""
   command = "npm run build"
