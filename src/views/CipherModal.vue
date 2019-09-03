@@ -3,7 +3,7 @@
     class="cipher-modal"
     role="dialog"
     :aria-label="modalAriaLabel">
-    <header class="cipher-modal__header content-frame">
+    <div class="header cipher-modal__header content-frame">
       <h1>
         <router-link class="site-link" :to="{ name: 'index' }">
           cipher.codes
@@ -14,9 +14,9 @@
           :to="{ name: 'index' }"
           aria-label="Close modal"></router-link>
       </div>
-    </header>
+    </div>
 
-    <main class="content-frame">
+    <div class="main content-frame">
       <h2>{{cipher.NAME}}</h2>
       <div>
         <p>{{cipher.ABOUT.text}}</p>
@@ -35,10 +35,10 @@
           <p>{{input.description}}</p>
         </div>
       </div>
-    </main>
+    </div>
 
     <!-- Unicorn footer -->
-    <footer>
+    <div class="footer">
       <a
         class="unicorn__link"
         title="Creator website"
@@ -47,7 +47,7 @@
         rel="noopener">
         <img alt="" src="../assets/night-unicorn.svg" />
       </a>
-    </footer>
+    </div>
   </div>
 </template>
 
