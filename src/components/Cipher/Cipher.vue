@@ -424,13 +424,13 @@ export default {
 
     &::before {
       bottom: 0;
-      left: -0.17em;
+      left: -0.2em;
       transform-origin: bottom right;
     }
 
     &::after {
       top: 0;
-      right: -0.17em;
+      right: -0.2em;
       transform-origin: top left;
     }
 

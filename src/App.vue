@@ -71,7 +71,7 @@ a {
   color: $color__link;
   font-size: 1.6em; // 16px
   text-decoration: underline;
-  backgorund-color: transparent;
+  background-color: transparent;
   transition: background-color 300ms ease;
 
   &:hover {
@@ -101,8 +101,8 @@ footer,
   justify-content: flex-end;
 
   .unicorn__link {
-    height: 4.8em;
-    width: 4.8em;
+    height: 4em;
+    width: 4em;
 
     img {
       height: 100%;
