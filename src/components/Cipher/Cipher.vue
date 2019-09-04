@@ -3,6 +3,7 @@
     class="cipher-module"
     :class="[cipherClass, {'cipher-module--has-error': !cipherResults.isSuccess}]"
     :aria-label="cipherAriaLabel">
+
     <!-- Cipher name + Inputs -->
     <div class="cipher-module__header">
       <!-- Cipher & Link to Cipher About -->
@@ -46,9 +47,16 @@
               {{ option }}
             </option>
           </select>
+
         </div>
       </div>
     </div>
+
+    <transition name="notice-transition-fade-" mode="out-in">
+      <div class="cipher-module__notice" v-if="keyNotice.isVisible">
+        Made key all lowercase letters with no duplicates
+      </div>
+    </transition>
 
     <!-- Cipher Output -->
     <div class="cipher-module__output">
@@ -75,6 +83,7 @@
 </template>
 
 <script>
+import * as utils from '@/ciphers/utils'
 import { getCipherByKey } from '@/ciphers'
 
 export default {
@@ -96,7 +105,11 @@ export default {
       cipherInputs: (cipherHasInputs) ? cipher.INPUTS : null,
       cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null,
       cipherAriaLabel: `${cipher.NAME} Output`,
-      cipherLinkTitle: `Learn more about ${cipher.NAME}`
+      cipherLinkTitle: `Learn more about ${cipher.NAME}`,
+      keyNotice: {
+        isVisible: false,
+        timeout: null
+      }
     }
   },
   computed: {
@@ -137,9 +150,29 @@ export default {
     }
   },
   methods: {
+    renderKeyNotice () {
+      if (this.keyNotice.timeout !== null) {
+        window.clearTimeout(this.keyNotice.timeout)
+      }
+
+      this.keyNotice.isVisible = true
+
+      this.keyNotice.timeout = window.setTimeout(() => {
+        this.keyNotice.isVisible = false
+        this.keyNotice.timeout = null
+      }, 3000)
+    },
     handleInputChange (input, e) {
-      if (input.postProcess) {
-        input.value = input.postProcess(e.target.value)
+      if (input.forceToValidKey) {
+        const origValue = e.target.value
+        let valueAsKey = utils.makeValidKey(e.target.value)
+
+        if (origValue !== valueAsKey) {
+          this.renderKeyNotice()
+          console.log(origValue, valueAsKey, 'why?')
+        }
+
+        input.value = valueAsKey
       }
     },
     handleInputBlur (input, e) {
@@ -221,6 +254,26 @@ export default {
     input[type="text"] {
       width: 6.0em;
     }
+  }
+
+  &__notice {
+    display: block;
+    text-align: right;
+    font-size: 1.2em;
+    color: $color__plum;
+    margin-bottom: 0.8em;
+    height: auto;
+  }
+
+  .notice-transition-fade--enter-active,
+  .notice-transition-fade--leave-active {
+    transition: all 300ms ease;
+  }
+
+  .notice-transition-fade--enter,
+  .notice-transition-fade--leave-to {
+    opacity: 0;
+    height: 0;
   }
 
   &__output {

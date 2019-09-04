@@ -48,7 +48,7 @@
       </section>
 
       <!-- Toast is ready when we click the copy icon on a cipher -->
-      <transition name="toast-fade-out-in-" mode="out-in">
+      <transition name="toast-transition-up-" mode="out-in">
         <div
           role="alert"
           class="toast"
@@ -136,7 +136,7 @@ export default {
   },
   methods: {
     renderToast (type, res) {
-      if (this.timeoutID !== null) {
+      if (this.toast.timeout !== null) {
         window.clearTimeout(this.toast.timeout)
       }
 
@@ -302,13 +302,13 @@ export default {
     opacity: 1;
   }
 
-  .toast-fade-out-in--enter-active,
-  .toast-fade-out-in--leave-active {
+  .toast-transition-up--enter-active,
+  .toast-transition-up--leave-active {
     transition: all 300ms ease;
   }
 
-  .toast-fade-out-in--enter,
-  .toast-fade-out-in--leave-to {
+  .toast-transition-up--enter,
+  .toast-transition-up--leave-to {
     bottom: -6.0em;
     opacity: 0;
   }
