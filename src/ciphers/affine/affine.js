@@ -92,11 +92,11 @@ export function run (args) {
       // The new letter position may be out of bounds,
       // mod the letter to get the valid position.
       newLetterPos = utils.mod(newLetterPos, utils.TOTAL_ALPHA)
-      char = alpha[newLetterPos]
+      char = utils.setCase(alpha[newLetterPos], isUpper)
     }
 
     // If the character was originally uppercase, make it uppercase again
-    output += utils.setCase(char, isUpper)
+    output += char
   })
 
   // This cipher will always be successful

@@ -60,7 +60,7 @@
     - [x] vision / color
     - [x] browserstack
 - [ ] Make Cipher Validations More robust (stricter input checking)
-    - [ ] affine
+    - [x] affine
     - [ ] atbash
     - [ ] caesar
     - [ ] keyedSubstitution
@@ -75,6 +75,7 @@
 - [x] title text on about links
 - [x] show popup on enter of invalid keys near the input
 - [x] speed up modal (300ms?)
+- [ ] switch to foggy netlify replacement
 
 ## Development
 
