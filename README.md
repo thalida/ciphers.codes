@@ -45,12 +45,12 @@
     - [x] modal default focus on x (fix bug)
     - [x] ciphers group skip tab support(?)
     - [x] make modal tabs work correctly
-- [x] (research - won't make fixed) Research fixed items vue
+- [x] Research fixed items vue
 - [-] (nvm) convert unicorn to pure css
 - [x] Verify PWA is working
 - [x] Update metadata and site icons
 - [x] Setup hosting -- github? Private?
-- [ ] [LATER (sorry future me)] Add frontend tests
+- [ ] Add frontend tests
     - [ ] Index
     - [ ] About
     - [ ] Cipher Component
