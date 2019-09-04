@@ -71,7 +71,7 @@
 - [x] see if i can get the focus state to disappear faster (transition bug?)
 - [ ] move to input + decode action on cipher
 - [x] title text on unicorn to (?)
-- [ ] keep inputs scrolled ot bottom when typing option (?)
+- [x] keep inputs scrolled ot bottom when typing option (?)
 - [x] title text on about links
 - [x] show popup on enter of invalid keys near the input
 - [x] speed up modal (300ms?)

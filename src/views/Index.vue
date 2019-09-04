@@ -189,8 +189,7 @@ export default {
 
     &__textarea {
       border: 0;
-      // Allow the text area to be resized vertically only
-      resize: vertical;
+      resize: none;
       height: 8.0em;
       min-height: 4.0em;
       max-height: 16.0em;

@@ -109,8 +109,19 @@ export default {
       keyNotice: {
         isVisible: false,
         timeout: null
-      }
+      },
+      $inputTextarea: null,
+      $outputTextarea: null
     }
+  },
+  mounted () {
+    this.$inputTextarea = document.querySelector('.input-form__textarea')
+    this.$outputTextarea = this.$el.querySelector('.cipher-module__textarea')
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'setInputStr') {
+        this.setTextareaScrollPos()
+      }
+    })
   },
   computed: {
     isEncoding () {
@@ -150,6 +161,9 @@ export default {
     }
   },
   methods: {
+    setTextareaScrollPos () {
+      this.$outputTextarea.scrollTop = this.$inputTextarea.scrollTop
+    },
     renderKeyNotice () {
       if (this.keyNotice.timeout !== null) {
         window.clearTimeout(this.keyNotice.timeout)
