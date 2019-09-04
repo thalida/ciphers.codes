@@ -5,9 +5,9 @@ Vue.use(Vuex)
 
 let inputSamples = [
   `When zombies arrive, quickly fax judge Pat.`,
-  `Never, never assume that what you have achieved is fucking good enough. If you’re not being fucking honest with yourself how could you ever hope to communicate something meaningful to someone else? When you sit down to work, external critics aren’t the enemy.`,
-  `Unbelievable! Some idiot disabled his firewall, meaning all the computers on Seven are teeming with viruses, plus I've just had to walk all the way down the motherfudging stairs, because the lifts are broken AGAIN!`
-].map((str) => `AbcdefghijklmnopqrstuvwxyZ & 0123456789\r\n--\r\n${str}`)
+  `Never, never assume that what you have achieved is fucking good enough.`,
+  `I've just had to walk all the way down the motherfudging stairs, because the lifts are broken AGAIN!`
+].map((str) => `ABCdefghijklmnopqrstuvwXYZ\r\n\r\n0123456789\r\n\r\n!@#$%^&*()\r\n\r\n${str}`)
 const randSampleIndex = Math.floor(Math.random() * inputSamples.length)
 
 export default new Vuex.Store({

@@ -191,8 +191,6 @@ export default {
       border: 0;
       resize: none;
       height: 8.0em;
-      min-height: 4.0em;
-      max-height: 16.0em;
       padding: 1.0em;
       border: 0.4em solid $color__white;
       font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;

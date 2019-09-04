@@ -296,7 +296,7 @@ export default {
     align-items: center;
     justify-content: space-around;
     overflow: hidden;
-    padding: 1em;
+    padding: 1em 1em 1em 0.4em;
     border: 0;
     border-radius: 0 2em 2em 2em;
     background-color: $color__gray;
@@ -304,9 +304,10 @@ export default {
 
   &__textarea {
     border: 0;
+    padding: 0.4em;
     resize: none;
     cursor: text;
-    height: 8.0em;
+    height: 7.2em; // (padding * 2)  - 8.0em height
     width: calc(100% - 1.8em);
     font: normal normal 1.8em/1.2 'Signika', Arial, sans-serif;
     color: $color__text;
