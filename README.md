@@ -69,7 +69,7 @@
     - [ ] polybiusSquare
 - [x] Add modal open / close animation
 - [x] see if i can get the focus state to disappear faster (transition bug?)
-- [ ] move to input + decode action on cipher
+- [x] move to input + decode action on cipher
 - [x] title text on unicorn to (?)
 - [x] keep inputs scrolled ot bottom when typing option (?)
 - [x] title text on about links

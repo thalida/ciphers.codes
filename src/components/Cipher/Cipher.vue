@@ -1,7 +1,11 @@
 <template>
   <article
     class="cipher-module"
-    :class="[cipherClass, {'cipher-module--has-error': !cipherResults.isSuccess}]"
+    :class="[
+      cipherClass,
+      {'cipher-module--has-error': !cipherResults.isSuccess},
+      (isEncoding) ? 'cipher-module--encoded' : 'cipher-module--decoded'
+    ]"
     :aria-label="cipherAriaLabel">
 
     <!-- Cipher name + Inputs -->
@@ -69,15 +73,27 @@
         readonly>
       </textarea>
 
-      <!-- Copy output text to clipboard -->
-      <button
-        class="cipher-module__copy"
-        type="button"
-        :aria-label="copyBtnLabel"
-        v-clipboard:copy="outputStr"
-        v-clipboard:success="handleCopySuccess"
-        v-clipboard:error="handleCopyError">
-      </button>
+      <div class="cipher-module__actions">
+        <!-- Move output to input and toggle switch. -->
+        <button
+          class="cipher-module__actions__item cipher-module__reverse"
+          type="button"
+          :title="reverseBtnLabel"
+          :aria-label="reverseBtnLabel"
+          v-on:click="handleReverseSubmit">
+        </button>
+
+        <!-- Copy output text to clipboard -->
+        <button
+          class="cipher-module__actions__item cipher-module__copy"
+          type="button"
+          :title="copyBtnLabel"
+          :aria-label="copyBtnLabel"
+          v-clipboard:copy="outputStr"
+          v-clipboard:success="handleCopySuccess"
+          v-clipboard:error="handleCopyError">
+        </button>
+      </div>
     </div>
   </article>
 </template>
@@ -106,6 +122,9 @@ export default {
       cipherInputDefaults: (cipherHasInputs) ? cipher.DEFAULTS.inputs : null,
       cipherAriaLabel: `${cipher.NAME} Output`,
       cipherLinkTitle: `Learn more about ${cipher.NAME}`,
+      copyBtnLabel: `Copy ${cipher.NAME} output`,
+      reverseBtnLabel: `Reverse ${cipher.NAME} output`,
+      textareaLabel: `${cipher.NAME} output`,
       keyNotice: {
         isVisible: false,
         timeout: null
@@ -152,12 +171,6 @@ export default {
       return (this.cipherResults.isSuccess)
         ? this.cipherResults.outputStr
         : this.cipherResults.errorStr
-    },
-    textareaLabel () {
-      return `${this.cipher.NAME} output`
-    },
-    copyBtnLabel () {
-      return `Copy ${this.cipher.NAME} output text`
     }
   },
   methods: {
@@ -200,6 +213,10 @@ export default {
       ) {
         input.value = `${this.cipherInputDefaults[input.name]}`
       }
+    },
+    handleReverseSubmit () {
+      this.$store.commit('setInputStr', this.outputStr)
+      this.$store.commit('toggleIsEncoding')
     },
     handleCopySuccess () {
       this.$emit('copy-success', this.cipher)
@@ -314,6 +331,16 @@ export default {
     background: transparent;
   }
 
+  &__actions {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    &__item {
+      margin: 1em 0;
+    }
+  }
+
   &__copy {
     display: flex;
     flex-flow: column nowrap;
@@ -332,7 +359,7 @@ export default {
       position: absolute;
       width: 100%;
       height: 100%;
-      border: 0.1em solid $color__blue--vibrant;
+      border: 0.2em solid $color__blue--vibrant;
       border-radius: 0.2em;
       background-color: $color__gray;
       transition: all 150ms ease;
@@ -356,11 +383,9 @@ export default {
     }
 
     &:focus {
-      outline: none !important;
-
       &::before,
       &::after {
-        border: 0.1em solid $color__blue--darker;
+        border-color: $color__blue--darker;
         background-color: $color__yellow--darker;
         box-shadow: 0 0 0 transparent;
         top: 0;
@@ -369,8 +394,77 @@ export default {
     }
   }
 
+  &__reverse {
+    display: flex;
+    flex-flow: row nowrap;
+    position: relative;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    width: 0.6em;
+    height: 1.4em;
+    cursor: pointer;
+    margin-left: 0.4em;
+    border-left: 0.2em solid $color__link;
+    border-right: 0.2em solid $color__link;
+    transition: all 150ms ease;
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0.2em;
+      height: 0.8em;
+      background: $color__link;
+      border-radius: 0.1em;
+      transform: rotate(-30deg);
+      transition: all 150ms ease;
+    }
+
+    &::before {
+      bottom: 0;
+      left: -0.17em;
+      transform-origin: bottom right;
+    }
+
+    &::after {
+      top: 0;
+      right: -0.17em;
+      transform-origin: top left;
+    }
+
+    .cipher-module--encoded &:hover,
+    .cipher-module--encoded &:focus {
+      border-left-color: $color__purple;
+      border-right-color: $color__plum;
+
+      &::before {
+        background: $color__purple;
+      }
+
+      &::after {
+        background: $color__plum;
+      }
+    }
+
+    .cipher-module--decoded &:hover,
+    .cipher-module--decoded &:focus {
+      border-left-color: $color__plum;
+      border-right-color: $color__purple;
+
+      &::before {
+        background: $color__plum;
+      }
+
+      &::after {
+        background: $color__purple;
+      }
+    }
+  }
+
   &--has-error {
-    .cipher-module__copy {
+    .cipher-module__actions {
       display: none;
     }
     .cipher-module__output {

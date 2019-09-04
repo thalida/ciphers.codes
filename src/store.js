@@ -24,6 +24,9 @@ export default new Vuex.Store({
     setIsEncoding (state, isEncoding) {
       state.isEncoding = isEncoding
     },
+    toggleIsEncoding (state) {
+      state.isEncoding = !state.isEncoding
+    },
     setIsModalVisible (state, isModalVisible) {
       state.isModalVisible = isModalVisible
     }

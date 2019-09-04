@@ -227,9 +227,16 @@ export default {
     cursor: pointer;
 
     &__text {
-      color: $color__toggle--default;
       font-size: 1.6em;
       transition: all 300ms ease;
+
+      &--encode {
+        color: $color__toggle--encode;
+      }
+
+      &--decode {
+        color: $color__toggle--decode;
+      }
     }
 
     &__symbol {
@@ -241,6 +248,7 @@ export default {
       height: 0.4em;
       margin: 0 0.8em;
       border-radius: 0.4em;
+      background-image: linear-gradient(90deg, $color__toggle--encode 0%, $color__toggle--decode 100%);
 
       &::after {
         content: '';
@@ -249,30 +257,18 @@ export default {
         width: 1.6em;
         height: 1.6em;
         border-radius: 50%;
-        background-color: $color__toggle--selected;
         transition: all 300ms ease;
       }
     }
 
-    &.toggle--encode .toggle__text--encode,
-    &.toggle--decode .toggle__text--decode {
-      color: $color__toggle--selected;
+    &.toggle--encode .toggle__symbol::after {
+      left: 0;
+      background-color: $color__toggle--encode;
     }
 
-    &.toggle--encode .toggle__symbol {
-      background-image: linear-gradient(90deg, $color__toggle--selected 0%, $color__toggle--default 100%);
-
-      &::after {
-        left: 0;
-      }
-    }
-
-    &.toggle--decode .toggle__symbol {
-      background-image: linear-gradient(-90deg, $color__toggle--selected 0%, $color__toggle--default 100%);
-
-      &::after {
-        left: 1.6em;
-      }
+    &.toggle--decode .toggle__symbol::after {
+      left: 1.6em;
+      background-color: $color__toggle--decode;
     }
 
     // Highlight the state that'll be selected after enter / submit
