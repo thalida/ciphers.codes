@@ -7,31 +7,34 @@
     <main
       class="index__main content-frame"
       :inert="(isModalVisible) ? 'true' : 'false'">
-      <form class="input-form" @submit.prevent>
-        <div class="input-form__settings">
-          <button
-            role="switch"
-            class="toggle"
-            :class=[toggleClass]
-            :aria-checked="toggleAriaChecked"
-            v-on:click="handleToggleSubmit">
-            <!-- encode label -->
-            <span class="toggle__text toggle__text--encode">encode</span>
-            <!-- switch -->
-            <span class="toggle__symbol"></span>
-            <!-- decode label -->
-            <span class="toggle__text toggle__text--decode">decode</span>
-          </button>
-        </div>
 
-        <!-- Input textarea -->
-        <textarea
-          class="input-form__textarea"
-          :aria-label="textareaLabel"
-          :placeholder="textareaPlaceholder"
-          v-model="inputStr">
-        </textarea>
-      </form>
+      <fixed-header>
+        <form class="input-form" @submit.prevent>
+          <div class="input-form__settings">
+            <button
+              role="switch"
+              class="toggle"
+              :class=[toggleClass]
+              :aria-checked="toggleAriaChecked"
+              v-on:click="handleToggleSubmit">
+              <!-- encode label -->
+              <span class="toggle__text toggle__text--encode">encode</span>
+              <!-- switch -->
+              <span class="toggle__symbol"></span>
+              <!-- decode label -->
+              <span class="toggle__text toggle__text--decode">decode</span>
+            </button>
+          </div>
+
+          <!-- Input textarea -->
+          <textarea
+            class="input-form__textarea"
+            :aria-label="textareaLabel"
+            :placeholder="textareaPlaceholder"
+            v-model="inputStr">
+          </textarea>
+        </form>
+      </fixed-header>
 
       <!-- List of all ciphers and their outputs -->
       <section
@@ -82,12 +85,14 @@
 </template>
 
 <script>
+import FixedHeader from 'vue-fixed-header'
+
 import { CIPHER_KEYS } from '@/ciphers'
 import Cipher from '@/components/Cipher/Cipher.vue'
 
 export default {
   name: 'index',
-  components: { Cipher },
+  components: { FixedHeader, Cipher },
   data () {
     return {
       cipherKeys: CIPHER_KEYS,
@@ -182,10 +187,21 @@ export default {
     flex-flow: column nowrap;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 3.2em;
+    margin: 0 0 3.2em;
 
     box-shadow: 0px 0px 3.2em $color__blue--darker--faded;
     border-radius: 1.6em;
+    transition: margin 300ms ease;
+
+    &.vue-fixed-header--isFixed {
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      margin: 3.2em auto;
+      width: 50%;
+      min-width: 30.0em; // 300px
+      max-width: 50.0em; // 500px
+    }
 
     &__textarea {
       border: 0;

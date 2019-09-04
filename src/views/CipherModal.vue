@@ -104,6 +104,7 @@ export default {
 
   .body--with-modal & {
     display: flex;
+    z-index: 1;
   }
 
   &__header {
