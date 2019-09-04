@@ -230,7 +230,7 @@ export default {
     cursor: pointer;
 
     &__text {
-      color: #6e3ff5;
+      color: $color__toggle--default;
       font-size: 1.6em;
       transition: all 300ms ease;
     }
@@ -252,18 +252,18 @@ export default {
         width: 1.6em;
         height: 1.6em;
         border-radius: 50%;
-        background-color: #d40050;
+        background-color: $color__toggle--selected;
         transition: all 300ms ease;
       }
     }
 
     &.toggle--encode .toggle__text--encode,
     &.toggle--decode .toggle__text--decode {
-      color: #d40050;
+      color: $color__toggle--selected;
     }
 
     &.toggle--encode .toggle__symbol {
-      background-image: linear-gradient(90deg, #d40050 0%, #6e3ff5 100%);
+      background-image: linear-gradient(90deg, $color__toggle--selected 0%, $color__toggle--default 100%);
 
       &::after {
         left: 0;
@@ -271,7 +271,7 @@ export default {
     }
 
     &.toggle--decode .toggle__symbol {
-      background-image: linear-gradient(-90deg, #d40050 0%, #6e3ff5 100%);
+      background-image: linear-gradient(-90deg, $color__toggle--selected 0%, $color__toggle--default 100%);
 
       &::after {
         left: 1.6em;
@@ -316,7 +316,7 @@ export default {
   .modal-transition-up--enter-active,
   .modal-transition-up--leave-active {
     display: flex;
-    transition: top 400ms ease;
+    transition: top 300ms ease;
     box-shadow: 0 -10em 10em white;
   }
 
