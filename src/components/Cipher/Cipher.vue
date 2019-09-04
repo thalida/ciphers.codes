@@ -260,7 +260,7 @@ export default {
     display: block;
     text-align: right;
     font-size: 1.2em;
-    color: $color__plum;
+    color: $color__purple;
     margin-bottom: 0.8em;
     height: auto;
   }
