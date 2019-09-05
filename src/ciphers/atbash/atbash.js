@@ -32,8 +32,16 @@ export const DEFAULTS = {
 // -----------------------------------------------------------------------------
 export function run (args) {
   let { inputStr } = utils.parseCipherArgs(args, DEFAULTS)
-  let output = ''
 
+  if (inputStr.match(/([a-zA-Z]+)/gm) === null) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `${NAME} requires an input with at least one letter.`
+    }
+  }
+
+  let output = ''
   const alpha = utils.ALPHA
 
   utils.forEachCharacter(inputStr, (i, char, isUpper) => {

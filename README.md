@@ -61,7 +61,7 @@
     - [x] browserstack
 - [ ] Make Cipher Validations More robust (stricter input checking)
     - [x] affine
-    - [ ] atbash
+    - [x] atbash
     - [ ] caesar
     - [ ] keyedSubstitution
     - [x] masonic

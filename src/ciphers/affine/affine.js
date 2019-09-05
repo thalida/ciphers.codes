@@ -70,11 +70,6 @@ export const INPUTS = [
 // -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
-  let output = ''
-
-  const alpha = utils.ALPHA
-  const shift = utils.makeValidInt(inputs.shift, DEFAULTS.inputs.shift)
-  const coprime = utils.makeValidInt(inputs.coprime, DEFAULTS.inputs.coprime)
 
   if (inputStr.match(/([a-zA-Z]+)/gm) === null) {
     return {
@@ -83,6 +78,12 @@ export function run (args) {
       errorStr: `${NAME} requires an input with at least one letter.`
     }
   }
+
+  let output = ''
+
+  const alpha = utils.ALPHA
+  const shift = utils.makeValidInt(inputs.shift, DEFAULTS.inputs.shift)
+  const coprime = utils.makeValidInt(inputs.coprime, DEFAULTS.inputs.coprime)
 
   utils.forEachCharacter(inputStr, (i, char, isUpper) => {
     // If the current character is a letter, get the new position
