@@ -62,7 +62,7 @@
 - [ ] Make Cipher Validations More robust (stricter input checking)
     - [x] affine
     - [x] atbash
-    - [ ] caesar
+    - [x] caesar
     - [ ] keyedSubstitution
     - [x] masonic
     - [x] playfair
