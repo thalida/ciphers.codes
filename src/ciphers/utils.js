@@ -69,6 +69,17 @@ export function setCase (char, toUpper) {
   return (toUpper) ? char.toUpperCase() : char.toLowerCase()
 }
 
+//  matchCase (char:char, charToMatch:char)
+//  Force the char to match the given case of charToMatch
+// -----------------------------------------------------------------------------
+export function matchCase (char, charToMatch) {
+  if (typeof char !== 'string') {
+    return char
+  }
+  const isUpper = charToMatch.match(/^[A-Z]$/) !== null
+  return (isUpper) ? char.toUpperCase() : char.toLowerCase()
+}
+
 //  forEachCharacter (string:string, (increment:int,) cb:function)
 //    increment is optional
 //  Loop through a given string and call the passed function
@@ -114,9 +125,14 @@ export function makeValidInt (currVal, defaultVal) {
 //  makeValidKey
 //  Converts the given string into a valid key (no dupe chars and all lowercase)
 // -----------------------------------------------------------------------------
-export function makeValidKey (string, defaultKey) {
+export function makeValidKey (string, defaultKey, mode) {
   if (typeof string !== 'string') {
     return (typeof defaultKey === 'string') ? defaultKey : null
+  }
+
+  // For Playfair: Replace any j's with i's in the key
+  if (mode === 'playfair') {
+    string = string.replace(/[j]+/gi, 'i').toLowerCase()
   }
 
   let charsArray = string.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('')

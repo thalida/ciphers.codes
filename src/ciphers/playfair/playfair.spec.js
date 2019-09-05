@@ -5,10 +5,9 @@ import * as playfair from './playfair'
 
 describe('cipher:playfair', () => {
   let testStrings = {
-    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-    allNumbers: '0123456789',
-    encodedWithLorem: 'bcdf mdhi srkn olhm qscx upwx yzvy',
-    decodedWithLorem: 'abcdefghixiklmnopqrstuvwxyzx'
+    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789 - hi! this is my sentence.',
+    encodedWithLorem: 'BcdfmdhisrknolhmqscxupwxyzW - 0123456789 - nk! sikx su rx tmkydifry.',
+    decodedWithLorem: 'AbcdefghixiklmnopqrstuvwxyZ - 0123456789 - hi! this is my sentencex.'
   }
 
   let testCases = [
@@ -36,19 +35,6 @@ describe('cipher:playfair', () => {
         isSuccess: true,
         outputStr: testStrings.decodedWithLorem,
         errorStr: null
-      }
-    },
-    {
-      label: 'should error on all invalid string with key "lorem"',
-      args: {
-        isEncoding: true,
-        inputStr: testStrings.allNumbers,
-        inputs: { key: 'lorem' }
-      },
-      expected: {
-        isSuccess: false,
-        outputStr: null,
-        errorStr: `Sorry, the entered string contains all non-letter characters which Playfair cipher cannot handle.`
       }
     }
   ]
@@ -86,7 +72,7 @@ describe('cipher:playfair', () => {
 
     let expected = {
       isSuccess: true,
-      outputStr: 'abcdefghixiklmnopqrstuvwxyzx',
+      outputStr: testStrings.decodedWithLorem,
       errorStr: null
     }
 

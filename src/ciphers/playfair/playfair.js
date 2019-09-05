@@ -64,66 +64,65 @@ export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
   let output = ''
 
-  const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key)
-  // Replace any j's with i's in the key
-  const keyword = key.replace(/[j]+/gi, 'i').toLowerCase()
-  // Created a grid based keyed version of the alphabet
-  const alpha = _getKeyedAlpha(keyword)
-  const origInputStr = inputStr
+  const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key, KEY)
+  const alpha = _getKeyedAlpha(key) // a grid based keyed version of the alphabet
 
-  inputStr = inputStr
-    // Remove any non letter character
-    .replace(/[^A-Za-z]+/gi, '').toLowerCase()
-    // Replace any j's with i's
-    .replace(/[j]+/gi, 'i').toLowerCase()
+  // Replace any j's with i's
+  inputStr = inputStr.replace(/[j]+/gi, 'i')
 
-  if (inputStr.length === 0 && origInputStr.length > 0) {
-    return {
-      isSuccess: false,
-      outputStr: null,
-      errorStr: `Sorry, the entered string contains all non-letter characters which Playfair cipher cannot handle.`
+  let letter1 = null
+  let letter2 = null
+  let skipped = ''
+  let i = -1
+
+  while (true) {
+    i += 1 // always grab the next character at the start
+    const currChar = inputStr[i]
+
+    // We don't have a unprocessed letter AND the current char is undefined
+    // EXIT THE WHILE LOOP
+    if (letter1 === null && typeof currChar === 'undefined') {
+      break
     }
-  }
 
-  // Convert the string to an array of pairs
-  const str = _strToPairs(inputStr, isEncoding)
+    // handle non-letters
+    if (currChar && !utils.isLetter(currChar)) {
+      // We have no valid chars, update the output
+      if (letter1 === null) {
+        output += currChar
+        continue
+      }
 
-  for (let i = 0; i < str.length; i++) {
-    // Get the info for the first + second characters of the pair
-    const char1 = _formatChar(alpha, str[i][0])
-    const char2 = _formatChar(alpha, str[i][1])
+      skipped += currChar
+      continue
+    }
 
-    // If the two letters are on the same row
-    if (char1.coords.x === char2.coords.x) {
-      // Keep the same x coords
-      char1.newCoords.x = char2.newCoords.x = char1.coords.x
-      // Calculate the new y coord for each letter
-      char1.newCoords.y = _calcNewCoord(char1.coords.y, isEncoding)
-      char2.newCoords.y = _calcNewCoord(char2.coords.y, isEncoding)
+    // We don't have a first letter yet, lets set one!
+    // Then move on to grab the next letter
+    if (letter1 === null) {
+      letter1 = currChar
+      continue
+    }
 
-    // If the two letters share the same column
-    } else if (char1.coords.y === char2.coords.y) {
-      // Keep the same y coords
-      char1.newCoords.y = char2.newCoords.y = char1.coords.y
-      // Calculate the the nex x coord for each letter
-      char1.newCoords.x = _calcNewCoord(char1.coords.x, isEncoding)
-      char2.newCoords.x = _calcNewCoord(char2.coords.x, isEncoding)
+    // Yas! We've made it to a state where we have the second letter!!
+    const isValidLetter2 = currChar && letter1 !== currChar
+    letter2 = (isValidLetter2) ? currChar : __PLACEHOLDER_CHAR
 
-    // The two letters are on a diagonal from one another
+    // Get transform the chars into their encoded/decoded state
+    let { char1Idx, char2Idx } = _getNewCharIndexes(isEncoding, letter1, letter2, alpha)
+    const newLetter1 = utils.matchCase(alpha[char1Idx], letter1)
+    const newLetter2 = utils.matchCase(alpha[char2Idx], letter2)
+
+    if (isValidLetter2) {
+      output += `${newLetter1}${skipped}${newLetter2}`
     } else {
-      char1.newCoords = { x: char1.coords.x, y: char2.coords.y }
-      char2.newCoords = { x: char2.coords.x, y: char1.coords.y }
+      output += `${newLetter1}${newLetter2}${skipped}`
     }
 
-    // Get the letters corresponding to each coord in the grid
-    const letter1 = alpha[char1.newCoords.x][char1.newCoords.y]
-    const letter2 = alpha[char2.newCoords.x][char2.newCoords.y]
-
-    output += `${letter1}${letter2}`
-  }
-
-  if (isEncoding) {
-    output = output.replace(/(.{4})/g, '$1 ').trim()
+    // Resets!
+    letter1 = (letter1 !== currChar) ? null : currChar
+    letter2 = null
+    skipped = ''
   }
 
   return {
@@ -145,108 +144,62 @@ function _getKeyedAlpha (key) {
     return __KEYED_ALPHAS[key]
   }
 
-  // Create the flat keyed alphabet
   const keyedAlpha = utils.makeKeyedAlpha(key)
-
-  // The current index of the keyedAlphabet
-  let keyedIdx = 0
-
-  // What size grid are we making
-  let alphaGrid = new Array(__KEYED_ARR_SIZE)
-
-  for (let x = 0; x < __KEYED_ARR_SIZE; x += 1) {
-    alphaGrid[x] = new Array(__KEYED_ARR_SIZE)
-
-    for (let y = 0; y < __KEYED_ARR_SIZE; y += 1) {
-      // If we're not on 'j' in the keyed alphabet then add the
-      // current letter in the key to it's position on the grid
-      if (keyedAlpha[keyedIdx] !== 'j') {
-        alphaGrid[x][y] = keyedAlpha[keyedIdx]
-      } else {
-        // We encountered and skipped j, so lets NOT count this
-        // position as filled on the grid
-        y -= 1
-      }
-
-      // Move onto the next letter in the keyed alphabet
-      keyedIdx += 1
-    }
-  }
+  const jIndex = keyedAlpha.indexOf('j')
+  keyedAlpha.splice(jIndex, 1)
 
   // Cache this gridded keyed alphabet
-  __KEYED_ALPHAS[key] = alphaGrid
+  __KEYED_ALPHAS[key] = keyedAlpha
 
-  return alphaGrid
+  return keyedAlpha
 }
 
-//  _strToPairs
-//  Convert a given string in to an array of pairs
-//  X's are used to fill in the missing spot of a pair and also
-//  to separate out duplicate letters.
-//  Example: Hellos => [[h,e],[l,x],[l,o],[s,x]]
+//  _getNewCharIndexes
+//  Calculate the new index of the character being transformed
 // -----------------------------------------------------------------------------
-function _strToPairs (string, isEncoding) {
-  let strPairs = []
+function _getNewCharIndexes (isEncoding, char1, char2, keyedAlpha) {
+  const char1Pos = _getCoords(char1.toLowerCase(), keyedAlpha)
+  const char2Pos = _getCoords(char2.toLowerCase(), keyedAlpha)
 
-  if (!isEncoding && string.length % 2 === 1) {
-    string += __PLACEHOLDER_CHAR
+  let char1Idx = null
+  let char2Idx = null
+
+  // If the two letters are on the same row
+  if (char1Pos.x === char2Pos.x) {
+    const x = (char1Pos.x * __KEYED_ARR_SIZE)
+    char1Idx = x + _calcNewCoord(char1Pos.y, isEncoding)
+    char2Idx = x + _calcNewCoord(char2Pos.y, isEncoding)
+
+  // If the two letters share the same column
+  } else if (char1Pos.y === char2Pos.y) {
+    char1Idx = (_calcNewCoord(char1Pos.x, isEncoding) * __KEYED_ARR_SIZE) + char1Pos.y
+    char2Idx = (_calcNewCoord(char2Pos.x, isEncoding) * __KEYED_ARR_SIZE) + char1Pos.y
+
+  // The two letters are on a diagonal from one another
+  } else {
+    char1Idx = (char1Pos.x * __KEYED_ARR_SIZE) + char2Pos.y
+    char2Idx = (char2Pos.x * __KEYED_ARR_SIZE) + char1Pos.y
   }
 
-  for (let i = 0; i < string.length; i += 2) {
-    const currLetter = string.charAt(i)
-    let nextLetter = string.charAt(i + 1)
-
-    if (isEncoding && (currLetter === nextLetter || nextLetter.length === 0)) {
-      nextLetter = __PLACEHOLDER_CHAR
-      i -= 1
-    }
-
-    strPairs.push([currLetter, nextLetter])
-  }
-
-  return strPairs
+  return { char1Idx, char2Idx }
 }
 
 //  _getCoords
 //  Get the current coordinates of the letter in the array
 // -----------------------------------------------------------------------------
-function _getCoords (str, array) {
-  const arrSize = array.length
-
-  for (let x = 0; x < arrSize; x += 1) {
-    for (let y = 0; y < arrSize; y += 1) {
-      if (str === array[x][y]) {
-        return { x, y }
-      }
-    }
+function _getCoords (char, keyedAlpha) {
+  const idx = keyedAlpha.indexOf(char)
+  return {
+    x: Math.floor(idx / __KEYED_ARR_SIZE),
+    y: utils.mod(idx, __KEYED_ARR_SIZE)
   }
-
-  return false
 }
 
 //  _calcNewCoord
 //  Calculate the new coordinate based on if we're encoding/decoding
 // -----------------------------------------------------------------------------
 function _calcNewCoord (coord, isEncoding) {
-  // Get the last valid index of the array
-  const lastArrIdx = __KEYED_ARR_SIZE - 1
-
   // Add/subtract based on the action we're performing
   let newCoord = (isEncoding) ? (coord + 1) : (coord - 1)
-
-  // Make sure the new coords are within the bounds of the grid
-  newCoord = (newCoord > lastArrIdx) ? 0 : newCoord
-  newCoord = (newCoord < 0) ? lastArrIdx : newCoord
-
-  return newCoord
-}
-
-function _formatChar (alpha, letter) {
-  let char = {}
-
-  char.letter = (letter === 'j') ? 'i' : letter
-  char.coords = _getCoords(char.letter, alpha)
-  char.newCoords = { x: null, y: null }
-
-  return char
+  return utils.mod(newCoord, __KEYED_ARR_SIZE)
 }

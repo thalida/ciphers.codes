@@ -61,12 +61,13 @@
     - [x] browserstack
 - [ ] Make Cipher Validations More robust (stricter input checking)
     - [x] affine
-    - [ ] atbash
-    - [ ] caesar
-    - [ ] keyedSubstitution
-    - [ ] masonic (no test required)
-    - [ ] playfair
+    - [x] atbash
+    - [x] caesar
+    - [x] keyedSubstitution
+    - [x] masonic
+    - [x] playfair
     - [ ] polybiusSquare
+    - [ ] vigenere
 - [x] Add modal open / close animation
 - [x] see if i can get the focus state to disappear faster (transition bug?)
 - [x] move to input + decode action on cipher
