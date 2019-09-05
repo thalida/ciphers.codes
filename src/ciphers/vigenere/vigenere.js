@@ -54,26 +54,19 @@ export const INPUTS = [
 // -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
-  let output = ''
 
-  const alpha = utils.ALPHA
-  const origInputStr = inputStr
-
-  // Remove any non letter characters from the string
-  inputStr = inputStr.replace(/[^A-Za-z]+/gi, '').toLowerCase()
-
-  if (inputStr.length === 0 && origInputStr.length > 0) {
+  if (inputStr.match(/([a-zA-Z]+)/gm) === null) {
     return {
       isSuccess: false,
       outputStr: null,
-      errorStr: `Sorry, the entered string contains all non-letter characters which Vigenère cipher cannot handle.`
+      errorStr: `${NAME} requires an input with at least one letter.`
     }
   }
 
-  const keyBase = utils
-    .makeValidKey(inputs.key, DEFAULTS.inputs.key)
-    // Remove any spaces from the key
-    .replace(/[\s]+/gi, '').toLowerCase()
+  let output = ''
+
+  const alpha = utils.ALPHA
+  const keyBase = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key)
 
   // Generate the key by looping over keyBase until key is === the length of
   // the input string. ex. string == 'helloworld' and keyBase = 'hide'
@@ -88,20 +81,23 @@ export function run (args) {
     })
   }
 
-  utils.forEachCharacter(inputStr, (i, char) => {
-    const direction = (isEncoding) ? 1 : -1
+  utils.forEachCharacter(inputStr, (i, char, isUpper) => {
+    if (utils.isLetter(char)) {
+      const direction = (isEncoding) ? 1 : -1
 
-    // Get the position of the character in the alphabet
-    const alphaPos = alpha.indexOf(char)
+      // Get the position of the character in the alphabet
+      const alphaPos = alpha.indexOf(char.toLowerCase())
 
-    // Get the char in the key at this position
-    // Then get the position of that character in the regular alphabet
-    let keyPos = alpha.indexOf(key.charAt(i))
-    keyPos = (keyPos === -1) ? 0 : keyPos
+      // Get the char in the key at this position
+      // Then get the position of that character in the regular alphabet
+      let keyPos = alpha.indexOf(key.charAt(i))
+      keyPos = (keyPos === -1) ? 0 : keyPos
 
-    const pos = alphaPos + (direction * keyPos)
+      const pos = alphaPos + (direction * keyPos)
+      char = utils.setCase(alpha[utils.mod(pos, utils.TOTAL_ALPHA)], isUpper)
+    }
 
-    output += alpha[utils.mod(pos, utils.TOTAL_ALPHA)]
+    output += char
   })
 
   return {

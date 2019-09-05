@@ -6,8 +6,8 @@ import * as vigenere from './vigenere'
 describe('cipher:vigenere', () => {
   let testStrings = {
     normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-    encodedWithLorem: 'lpthqquymvvzdraaeiwffjnbkk',
-    decoded: 'abcdefghijklmnopqrstuvwxyz'
+    encodedWithLorem: 'LpthqquymvvzdraaeiwffjnbkK - 0123456789',
+    notLetters: '!@#$ 01234'
   }
 
   let testCases = [
@@ -33,7 +33,7 @@ describe('cipher:vigenere', () => {
       },
       expected: {
         isSuccess: true,
-        outputStr: testStrings.decoded,
+        outputStr: testStrings.normal,
         errorStr: null
       }
     },
@@ -46,7 +46,7 @@ describe('cipher:vigenere', () => {
       },
       expected: {
         isSuccess: true,
-        outputStr: testStrings.decoded,
+        outputStr: testStrings.normal,
         errorStr: null
       }
     },
@@ -59,8 +59,32 @@ describe('cipher:vigenere', () => {
       },
       expected: {
         isSuccess: true,
-        outputStr: testStrings.decoded,
+        outputStr: testStrings.normal,
         errorStr: null
+      }
+    },
+    {
+      label: 'should error on encode with all special chars and numbers',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.notLetters
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Vigenère requires an input with at least one letter.`
+      }
+    },
+    {
+      label: 'should error on decode with all special chars and numbers',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.notLetters
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Vigenère requires an input with at least one letter.`
       }
     }
   ]
@@ -96,7 +120,7 @@ describe('cipher:vigenere', () => {
 
     let expected = {
       isSuccess: true,
-      outputStr: testStrings.decoded,
+      outputStr: testStrings.normal,
       errorStr: null
     }
 
@@ -124,7 +148,7 @@ describe('cipher:vigenere', () => {
 
     let expected = {
       isSuccess: true,
-      outputStr: testStrings.decoded,
+      outputStr: testStrings.normal,
       errorStr: null
     }
 

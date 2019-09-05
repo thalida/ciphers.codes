@@ -59,7 +59,7 @@
     - [x] screenreaders
     - [x] vision / color
     - [x] browserstack
-- [ ] Make Cipher Validations More robust (stricter input checking)
+- [x] Make Cipher Validations More robust (stricter input checking)
     - [x] affine
     - [x] atbash
     - [x] caesar
@@ -67,7 +67,7 @@
     - [x] masonic
     - [x] playfair
     - [x] polybiusSquare
-    - [ ] vigenere
+    - [x] vigenere
 - [x] Add modal open / close animation
 - [x] see if i can get the focus state to disappear faster (transition bug?)
 - [x] move to input + decode action on cipher
