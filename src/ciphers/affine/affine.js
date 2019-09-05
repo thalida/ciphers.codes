@@ -76,6 +76,14 @@ export function run (args) {
   const shift = utils.makeValidInt(inputs.shift, DEFAULTS.inputs.shift)
   const coprime = utils.makeValidInt(inputs.coprime, DEFAULTS.inputs.coprime)
 
+  if (inputStr.match(/([a-zA-Z]+)/gm) === null) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `${NAME} requires an input with at least one letter.`
+    }
+  }
+
   utils.forEachCharacter(inputStr, (i, char, isUpper) => {
     // If the current character is a letter, get the new position
     // of the letter in the alphabet based on if we are encoding/decoding

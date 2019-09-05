@@ -60,7 +60,7 @@
     - [x] vision / color
     - [x] browserstack
 - [ ] Make Cipher Validations More robust (stricter input checking)
-    - [ ] affine
+    - [x] affine
     - [ ] atbash
     - [ ] caesar
     - [ ] keyedSubstitution
