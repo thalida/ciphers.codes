@@ -28,6 +28,14 @@
 - [x] Style modal / about view
 - [x] Style toast
 - [ ] Update about view content
+    - [ ] affine
+    - [ ] atbash
+    - [ ] caesar
+    - [ ] keyedSubstitution
+    - [ ] masonic
+    - [ ] playfair
+    - [ ] polybiusSquare
+    - [ ] vigenere
 - [x] Add unicorn icon
 - [x] Add copy icon (make?)
 - [x] Add mason font or gliphs
