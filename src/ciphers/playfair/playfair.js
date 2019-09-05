@@ -62,6 +62,15 @@ export const INPUTS = [
 // -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr, inputs } = utils.parseCipherArgs(args, DEFAULTS)
+
+  if (inputStr.match(/([a-zA-Z]+)/gm) === null) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `${NAME} requires an input with at least one letter.`
+    }
+  }
+
   let output = ''
 
   const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key, KEY)

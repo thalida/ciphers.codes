@@ -7,7 +7,8 @@ describe('cipher:playfair', () => {
   let testStrings = {
     normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789 - hi! this is my sentence.',
     encodedWithLorem: 'BcdfmdhisrknolhmqscxupwxyzW - 0123456789 - nk! sikx su rx tmkydifry.',
-    decodedWithLorem: 'AbcdefghixiklmnopqrstuvwxyZ - 0123456789 - hi! this is my sentencex.'
+    decodedWithLorem: 'AbcdefghixiklmnopqrstuvwxyZ - 0123456789 - hi! this is my sentencex.',
+    notLetters: '!@#$ 01234'
   }
 
   let testCases = [
@@ -35,6 +36,30 @@ describe('cipher:playfair', () => {
         isSuccess: true,
         outputStr: testStrings.decodedWithLorem,
         errorStr: null
+      }
+    },
+    {
+      label: 'should error on encode with all special chars and numbers',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.notLetters
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Playfair requires an input with at least one letter.`
+      }
+    },
+    {
+      label: 'should error on decode with all special chars and numbers',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.notLetters
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Playfair requires an input with at least one letter.`
       }
     }
   ]
