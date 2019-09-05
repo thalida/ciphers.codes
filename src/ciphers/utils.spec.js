@@ -3,6 +3,7 @@
 import chai from 'chai'
 import spies from 'chai-spies'
 import * as utils from './utils'
+import * as playfair from './playfair'
 
 chai.use(spies)
 
@@ -186,6 +187,8 @@ describe('ciphers:utils', () => {
     { args: ['hello'], expected: 'heloabcdfgijkmnpqrstuvwxyz'.split('') },
     { args: [3], expected: 'abcdefghijklmnopqrstuvwxyz'.split('') },
     { args: [''], expected: 'abcdefghijklmnopqrstuvwxyz'.split('') },
+    { args: ['lorem', null, playfair.KEY], expected: 'loremabcdfghiknpqstuvwxyz'.split('') },
+    { args: ['xyz 123x'], expected: 'xyzabcdefghijklmnopqrstuvw'.split('') },
     { args: [null], expected: 'abcdefghijklmnopqrstuvwxyz'.split('') },
     { args: [undefined], expected: 'abcdefghijklmnopqrstuvwxyz'.split('') }
   ]

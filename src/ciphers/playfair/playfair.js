@@ -25,7 +25,6 @@ export const ABOUT = {
 // -----------------------------------------------------------------------------
 const __PLACEHOLDER_CHAR = 'x'
 const __KEYED_ARR_SIZE = 5
-const __KEYED_ALPHAS = []
 
 //  Default Arguments
 // -----------------------------------------------------------------------------
@@ -73,8 +72,8 @@ export function run (args) {
 
   let output = ''
 
-  const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key, KEY)
-  const alpha = _getKeyedAlpha(key) // a grid based keyed version of the alphabet
+  // a grid based keyed version of the alphabet
+  const alpha = utils.makeKeyedAlpha(inputs.key, DEFAULTS.inputs.key, KEY)
 
   // Replace any j's with i's
   inputStr = inputStr.replace(/[j]+/gi, 'i')
@@ -143,26 +142,6 @@ export function run (args) {
 
 //  HELPER FUNCTIONS for THIS CIPHER ONLY!!
 // =============================================================================
-
-//  _getKeyedAlpha
-//  Add the key to the alphabet and then convert into a 5x5 array
-// -----------------------------------------------------------------------------
-function _getKeyedAlpha (key) {
-  // Return if we've already generated the grided keyed alphabet
-  if (typeof __KEYED_ALPHAS[key] !== 'undefined') {
-    return __KEYED_ALPHAS[key]
-  }
-
-  const keyedAlpha = utils.makeKeyedAlpha(key)
-  const jIndex = keyedAlpha.indexOf('j')
-  keyedAlpha.splice(jIndex, 1)
-
-  // Cache this gridded keyed alphabet
-  __KEYED_ALPHAS[key] = keyedAlpha
-
-  return keyedAlpha
-}
-
 //  _getNewCharIndexes
 //  Calculate the new index of the character being transformed
 // -----------------------------------------------------------------------------

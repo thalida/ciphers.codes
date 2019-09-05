@@ -151,11 +151,12 @@ export function makeValidKey (string, defaultKey, mode) {
 //  keyed alphabet: loremabcdfghijknpqstuvwxyz
 // -----------------------------------------------------------------------------
 let cachedKeyedAlphas = {}
-export function makeKeyedAlpha (key) {
-  key = makeValidKey(key)
+export function makeKeyedAlpha (string, defaultKey, mode) {
+  let key = makeValidKey(string, defaultKey, mode)
+  let cacheKey = `${key}-${mode}`
 
-  if (typeof cachedKeyedAlphas[key] !== 'undefined') {
-    return cachedKeyedAlphas[key]
+  if (typeof cachedKeyedAlphas[cacheKey] !== 'undefined') {
+    return cachedKeyedAlphas[cacheKey]
   }
 
   let alpha = [...ALPHA]
@@ -166,12 +167,19 @@ export function makeKeyedAlpha (key) {
   }
 
   let keyedAlphabet = [].concat(key.split('')).concat(alpha)
+
+  // For Playfair: Replace any j's with i's in the key
+  if (mode === 'playfair') {
+    const jIndex = keyedAlphabet.indexOf('j')
+    keyedAlphabet.splice(jIndex, 1)
+  }
+
   let uniqueKeyedAlphabet = new Set(keyedAlphabet)
   let uniqueKeyedAlphabetArr = [...uniqueKeyedAlphabet]
 
   // Save this keyed alphabet
-  cachedKeyedAlphas[key] = uniqueKeyedAlphabetArr
-  return cachedKeyedAlphas[key]
+  cachedKeyedAlphas[cacheKey] = uniqueKeyedAlphabetArr
+  return cachedKeyedAlphas[cacheKey]
 }
 
 //  parseCipherArgs

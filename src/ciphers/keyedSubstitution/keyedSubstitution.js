@@ -68,21 +68,20 @@ export function run (args) {
   let output = ''
 
   const alpha = utils.ALPHA
-  const key = utils.makeValidKey(inputs.key, DEFAULTS.inputs.key)
 
   // Create an alphabet w/ this key in the beginning of it
-  var keyedAlpha = utils.makeKeyedAlpha(key)
+  const keyedAlpha = utils.makeKeyedAlpha(inputs.key, DEFAULTS.inputs.key)
 
   utils.forEachCharacter(inputStr, (i, char, isUpper) => {
     if (utils.isLetter(char)) {
       // Figure out what alphabet the current string is based on
-      var letterArr = (isEncoding) ? alpha : keyedAlpha
+      let letterArr = (isEncoding) ? alpha : keyedAlpha
 
       // What alphabet are we converting the string to
-      var encodedLetterArr = (isEncoding) ? keyedAlpha : alpha
+      let encodedLetterArr = (isEncoding) ? keyedAlpha : alpha
 
       // Get the current position of the letter in the array
-      var letterPos = letterArr.indexOf(char.toLowerCase())
+      let letterPos = letterArr.indexOf(char.toLowerCase())
 
       // Get the letter in the same position of the encoded Alphabet
       char = utils.setCase(encodedLetterArr[letterPos], isUpper)
