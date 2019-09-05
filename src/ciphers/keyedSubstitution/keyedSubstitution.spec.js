@@ -6,7 +6,8 @@ import * as keyedSubstitution from './keyedSubstitution'
 describe('cipher:keyedSubstitution', () => {
   let testStrings = {
     normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
-    keyedWithLorem: 'LoremabcdfghijknpqstuvwxyZ - 0123456789'
+    keyedWithLorem: 'LoremabcdfghijknpqstuvwxyZ - 0123456789',
+    notLetters: '!@#$ 01234'
   }
 
   let testCases = [
@@ -60,6 +61,30 @@ describe('cipher:keyedSubstitution', () => {
         isSuccess: true,
         outputStr: testStrings.normal,
         errorStr: null
+      }
+    },
+    {
+      label: 'should error on encode with all special chars and numbers',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.notLetters
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Keyed Substitution requires an input with at least one letter.`
+      }
+    },
+    {
+      label: 'should error on decode with all special chars and numbers',
+      args: {
+        isEncoding: false,
+        inputStr: testStrings.notLetters
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Keyed Substitution requires an input with at least one letter.`
       }
     }
   ]

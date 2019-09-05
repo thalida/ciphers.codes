@@ -36,6 +36,15 @@ export function run (args, useFont) {
   useFont = (typeof useFont === 'boolean') ? useFont : true
 
   let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
+
+  if (inputStr.match(/([a-zA-Z0-9]+)/gm) === null) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `${NAME} requires an input with at least one letter or number.`
+    }
+  }
+
   let output = ''
   let results = {
     isSuccess: true,

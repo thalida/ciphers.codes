@@ -61,6 +61,30 @@ describe('cipher:masonic', () => {
         outputStr: testStrings.useFontTrue,
         errorStr: null
       }
+    },
+    {
+      label: 'should error on encode with all special chars and numbers',
+      args: {
+        isEncoding: true,
+        inputStr: testStrings.notLetters
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Masonic requires an input with at least one letter or number.`
+      }
+    },
+    {
+      label: 'should error on decode with all special chars and numbers',
+      args: {
+        isEncoding: false,
+        inputStr: ''
+      },
+      expected: {
+        isSuccess: false,
+        outputStr: null,
+        errorStr: `Masonic requires an input with at least one letter or number.`
+      }
     }
   ]
   testCases.forEach((testCase) => {

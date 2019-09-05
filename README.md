@@ -63,7 +63,7 @@
     - [x] affine
     - [x] atbash
     - [x] caesar
-    - [ ] keyedSubstitution
+    - [x] keyedSubstitution
     - [x] masonic
     - [x] playfair
     - [x] polybiusSquare
