@@ -76,10 +76,10 @@ export function run (args) {
       var letterPos = letterArr.indexOf(char.toLowerCase())
 
       // Get the letter in the same position of the encoded Alphabet
-      char = encodedLetterArr[letterPos]
+      char = utils.setCase(encodedLetterArr[letterPos], isUpper)
     }
 
-    output += utils.setCase(char, isUpper)
+    output += char
   })
 
   return {

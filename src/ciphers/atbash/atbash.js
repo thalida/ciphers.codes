@@ -44,11 +44,11 @@ export function run (args) {
       // Get the position from the other end of the alphabet
       const newLetterPos = utils.TOTAL_ALPHA - letterPos - 1
 
-      char = alpha[newLetterPos]
+      char = utils.setCase(alpha[newLetterPos], isUpper)
     }
 
     // If the character was uppercase, make it so again
-    output += utils.setCase(char, isUpper)
+    output += char
   })
 
   return {

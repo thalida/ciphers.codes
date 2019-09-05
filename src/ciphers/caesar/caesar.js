@@ -72,10 +72,10 @@ export function run (args) {
       // Mod the new position in case we've gone past the bounds of the alphabet
       newLetterPos = utils.mod(newLetterPos, utils.TOTAL_ALPHA)
 
-      char = alpha[newLetterPos]
+      char = utils.setCase(alpha[newLetterPos], isUpper)
     }
 
-    output += utils.setCase(char, isUpper)
+    output += char
   })
 
   return {
