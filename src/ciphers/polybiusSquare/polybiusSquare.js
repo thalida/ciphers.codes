@@ -52,7 +52,7 @@ export function run (args) {
     return {
       isSuccess: false,
       outputStr: null,
-      errorStr: `${NAME} requires an input with at least one letter or number. (It cannot handle special characters.)`
+      errorStr: `${NAME} requires an input with at least one letter or number. (Special characters will be omitted.)`
     }
   }
 

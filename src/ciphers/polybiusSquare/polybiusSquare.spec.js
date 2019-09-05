@@ -44,7 +44,7 @@ describe('cipher:polybiusSquare', () => {
       expected: {
         isSuccess: false,
         outputStr: null,
-        errorStr: 'Polybius Square requires an input with at least one letter or number. (It cannot handle special characters.)'
+        errorStr: 'Polybius Square requires an input with at least one letter or number. (Special characters will be omitted.)'
       }
     },
     {

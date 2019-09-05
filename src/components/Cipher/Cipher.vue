@@ -472,7 +472,7 @@ export default {
     }
   }
 
-  &--masonic:not(&--has-error) &__textarea {
+  &.cipher-module--encoded.cipher-module--masonic:not(&--has-error) &__textarea {
     font-family: "Masonic", "Signika", Arial, sans-serif;
   }
 }
