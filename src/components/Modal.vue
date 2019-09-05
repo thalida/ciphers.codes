@@ -1,15 +1,15 @@
 <template>
   <div
-    class="cipher-modal"
+    class="modal"
     role="dialog"
     :aria-label="modalAriaLabel">
-    <div class="header cipher-modal__header content-frame">
+    <div class="header modal__header content-frame">
       <h1>
         <router-link class="site-link" :to="{ name: 'index' }">
           cipher.codes
         </router-link>
       </h1>
-      <div class="cipher-modal__close">
+      <div class="modal__close">
         <router-link
           :to="{ name: 'index' }"
           aria-label="Close modal"></router-link>
@@ -17,24 +17,7 @@
     </div>
 
     <div class="main content-frame">
-      <h2>{{cipher.NAME}}</h2>
-      <div>
-        <p>{{cipher.ABOUT.text}}</p>
-        <a :href="cipher.ABOUT.source.url" target="_blank" rel="noopener">
-          {{cipher.ABOUT.source.title}}
-        </a>
-      </div>
-
-      <div class="cipher-modal__inputs" v-if="cipherHasInputs">
-        <h3>Inputs</h3>
-        <div
-          class="cipher-modal__input"
-          v-for="(input, index) in cipher.INPUTS"
-          :key="index">
-          <h3>{{input.label}}</h3>
-          <p>{{input.description}}</p>
-        </div>
-      </div>
+      <slot></slot>
     </div>
 
     <!-- Unicorn footer -->
@@ -55,21 +38,13 @@
 // https://github.com/davidtheclark/focus-trap
 import createFocusTrap from 'focus-trap'
 
-import { getCipherByKey } from '@/ciphers'
-
 export default {
   name: 'modal',
-  props: ['cipherKey'],
+  props: {
+    modalAriaLabel: String
+  },
   data () {
-    let cipher = getCipherByKey(this.cipherKey)
     return {
-      cipher,
-      cipherHasInputs: (
-        typeof cipher.INPUTS !== 'undefined' &&
-        cipher.INPUTS !== null &&
-        Array.isArray(cipher.INPUTS)
-      ),
-      modalAriaLabel: `${cipher.NAME} informational modal`,
       focusTrap: null
     }
   },
@@ -92,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/css/_variables';
 
-.cipher-modal {
+.modal {
   display: none;
   position: fixed;
   flex-flow: column nowrap;
@@ -157,18 +132,6 @@ export default {
         }
       }
     }
-  }
-
-  p {
-    margin: 0.5em 0 1em;
-  }
-
-  &__inputs {
-    margin-top: 3.2em;
-  }
-
-  &__input {
-    margin-top: 1.6em;
   }
 }
 </style>

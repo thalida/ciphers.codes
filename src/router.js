@@ -5,7 +5,7 @@ import Router from 'vue-router'
 import store from './store'
 
 import Index from './views/Index.vue'
-import CipherModal from './views/CipherModal.vue'
+import About from './views/About.vue'
 
 Vue.use(Router)
 
@@ -19,10 +19,10 @@ const router = new Router({
       component: Index,
       children: [
         {
-          path: '/:cipherKey',
-          name: 'cipher',
+          path: 'about/:cipherKey',
+          name: 'aboutCipher',
           props: true,
-          component: CipherModal
+          component: About
         }
       ]
     },
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
   let isModalVisible = false
   let redirect = false
 
-  if (to.name === 'cipher') {
+  if (to.name === 'aboutCipher') {
     if (CIPHER_KEYS.includes(to.params.cipherKey)) {
       isModalVisible = true
     } else {

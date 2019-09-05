@@ -13,7 +13,7 @@ import * as utils from '@/ciphers/utils'
 export const KEY = 'affine'
 export const NAME = 'Affine'
 export const ABOUT = {
-  text: `The affine cipher is a type of monoalphabetic substitution cipher, wherein each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter.`,
+  text: `A monoalphabetic substitution cipher. Each letter in the alphabet is mapped a number, encrypted using a math formula, and then converted back to a letter.`,
   source: {
     title: 'Wikipedia',
     url: 'http://en.wikipedia.org/wiki/Affine_cipher'

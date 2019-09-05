@@ -13,7 +13,7 @@
       <!-- Cipher & Link to Cipher About -->
       <h2>
         <router-link
-          :to="{name: 'cipher', params: { cipherKey }}"
+          :to="{ name: 'aboutCipher', params: { cipherKey } }"
           :title="cipherLinkTitle">
           {{cipher.NAME}}
         </router-link>
@@ -472,6 +472,7 @@ export default {
     }
   }
 
+  // blegh -- classes on classes on calsses
   &.cipher-module--encoded.cipher-module--masonic:not(&--has-error) &__textarea {
     font-family: "Masonic", "Signika", Arial, sans-serif;
   }

@@ -88,7 +88,7 @@
 import FixedHeader from 'vue-fixed-header'
 
 import { CIPHER_KEYS } from '@/ciphers'
-import Cipher from '@/components/Cipher/Cipher.vue'
+import Cipher from '@/components/Cipher.vue'
 
 export default {
   name: 'index',

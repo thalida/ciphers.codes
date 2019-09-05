@@ -84,7 +84,7 @@
 - [x] title text on about links
 - [x] show popup on enter of invalid keys near the input
 - [x] speed up modal (300ms?)
-- [ ] switch to foggy netlify replacement
+- [ ] Investigate foggy netlify replacement
 
 ## Development
 
