@@ -60,13 +60,13 @@
     - [x] vision / color
     - [x] browserstack
 - [ ] Make Cipher Validations More robust (stricter input checking)
-    - [x] affine
-    - [x] atbash
-    - [x] caesar
-    - [x] keyedSubstitution
+    - [ ] affine
+    - [ ] atbash
+    - [ ] caesar
+    - [ ] keyedSubstitution
     - [x] masonic
     - [x] playfair
-    - [ ] polybiusSquare
+    - [x] polybiusSquare
     - [ ] vigenere
 - [x] Add modal open / close animation
 - [x] see if i can get the focus state to disappear faster (transition bug?)

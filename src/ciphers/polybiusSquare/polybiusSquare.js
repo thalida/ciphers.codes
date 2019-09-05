@@ -22,6 +22,11 @@ export const ABOUT = {
   }
 }
 
+//  Local Variables
+// -----------------------------------------------------------------------------
+const __ENCODE_REGEX = /([a-zA-Z0-9]+)/gm
+const __DECODE_REGEX = /^[1-6]{2}(\s[1-6]{2})*$/
+
 //  Default Arguments
 // -----------------------------------------------------------------------------
 export const DEFAULTS = {
@@ -41,24 +46,26 @@ export function run (args) {
   const alphagrid = utils.ALPHAGRID
   const alphaGridSize = alphagrid.length - 1 // the 0 index isn't used
 
+  inputStr = inputStr.trim()
+
+  if (isEncoding && inputStr.match(__ENCODE_REGEX) === null) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `${NAME} requires an input with at least one letter or number. (It cannot handle special characters.)`
+    }
+  }
+
+  if (!isEncoding && __DECODE_REGEX.test(inputStr) === false) {
+    return {
+      isSuccess: false,
+      outputStr: null,
+      errorStr: `${NAME} requires an input with using only numbers 1-6, in pairs, and separated by spaces. For example: 15 46 11 31 34 26 15.`
+    }
+  }
+
   // Remove all spaces from the string
   inputStr = inputStr.replace(/[\s]+/gi, '')
-
-  if (isEncoding && inputStr.match(/([a-zA-Z0-9]+)/gm) === null) {
-    return {
-      isSuccess: false,
-      outputStr: null,
-      errorStr: `Sorry, the entered string contains no letters or numbers which ${NAME} cipher cannot handle.`
-    }
-  }
-
-  if (!isEncoding && inputStr.match(/([0-9]{2,})/gm) === null) {
-    return {
-      isSuccess: false,
-      outputStr: null,
-      errorStr: `The entered string must contain two consecutive numbers to be decoded by ${NAME} cipher.`
-    }
-  }
 
   // If we're encoding we need to go through letter by letter. BUT,
   // If we're decoding we need to get each pair of numbers.
@@ -78,15 +85,8 @@ export function run (args) {
       // Get the x and y "characters" ex. 13 => x: 1, y: 3
       const x = char
       const y = inputStr.charAt(i + 1)
-
-      // Check if the x, y are valid numbers/a valid pair
-      if (x.match(/^[1-6]$/) && y.match(/^[1-6]$/)) {
-        // Find the letter in the grid
-        var letter = alphagrid[x][y]
-        if (typeof letter !== 'undefined') {
-          output += letter
-        }
-      }
+      // Find the letter in the grid
+      output += alphagrid[x][y]
     }
   })
 

@@ -5,7 +5,7 @@ import * as polybiusSquare from './polybiusSquare'
 
 describe('cipher:polybiusSquare', () => {
   let testStrings = {
-    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789',
+    normal: 'AbcdefghijklmnopqrstuvwxyZ - 0123456789 ',
     encoded: '11 12 13 14 15 16 21 22 23 24 25 26 31 32 33 34 35 36 41 42 43 44 45 46 51 52 53 54 55 56 61 62 63 64 65 66',
     decoded: 'abcdefghijklmnopqrstuvwxyz0123456789'
   }
@@ -44,7 +44,7 @@ describe('cipher:polybiusSquare', () => {
       expected: {
         isSuccess: false,
         outputStr: null,
-        errorStr: 'Sorry, the entered string contains no letters or numbers which Polybius Square cipher cannot handle.'
+        errorStr: 'Polybius Square requires an input with at least one letter or number. (It cannot handle special characters.)'
       }
     },
     {
@@ -56,7 +56,7 @@ describe('cipher:polybiusSquare', () => {
       expected: {
         isSuccess: false,
         outputStr: null,
-        errorStr: 'The entered string must contain two consecutive numbers to be decoded by Polybius Square cipher.'
+        errorStr: 'Polybius Square requires an input with using only numbers 1-6, in pairs, and separated by spaces. For example: 15 46 11 31 34 26 15.'
       }
     }
   ]
