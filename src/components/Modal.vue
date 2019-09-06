@@ -3,12 +3,7 @@
     class="modal"
     role="dialog"
     :aria-label="modalAriaLabel">
-    <div class="header modal__header content-frame">
-      <h1>
-        <router-link class="site-link" :to="{ name: 'index' }">
-          cipher.codes
-        </router-link>
-      </h1>
+    <div class="modal__header">
       <div class="modal__close">
         <router-link
           :to="{ name: 'index' }"
@@ -16,7 +11,7 @@
       </div>
     </div>
 
-    <div class="main content-frame">
+    <div class="modal__main content-frame">
       <slot></slot>
     </div>
 
@@ -79,14 +74,22 @@ export default {
 
   .body--with-modal & {
     display: flex;
+    overflow: auto;
     z-index: 1;
   }
 
   &__header {
     display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    margin: 3.2em;
+  }
+
+  &__main {
     margin: 3.2em auto;
   }
 

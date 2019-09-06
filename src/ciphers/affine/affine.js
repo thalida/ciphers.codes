@@ -1,6 +1,7 @@
 'use strict'
 
 import * as utils from '@/ciphers/utils'
+import markdown from './affine.md'
 
 // =============================================================================
 //
@@ -12,13 +13,7 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'affine'
 export const NAME = 'Affine'
-export const ABOUT = {
-  text: `A monoalphabetic substitution cipher. Each letter in the alphabet is mapped a number, encrypted using a math formula, and then converted back to a letter.`,
-  source: {
-    title: 'Wikipedia',
-    url: 'http://en.wikipedia.org/wiki/Affine_cipher'
-  }
-}
+export const ABOUT_TEMPLATE = markdown
 
 //  Private Variables
 // -----------------------------------------------------------------------------
@@ -64,6 +59,11 @@ export const INPUTS = [
     value: SAMPLE_INPUTS.shift
   }
 ]
+
+export const INPUTS_BY_NAME = INPUTS.reduce((obj, input) => {
+  obj[input.name] = input
+  return obj
+}, {})
 
 //  Main Run Function
 //  Returns the encoded / decoded string based on the cipher rules

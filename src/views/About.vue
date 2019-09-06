@@ -1,45 +1,49 @@
 <template>
   <Modal
-    class="about-modal"
+    class="about"
     :modal-aria-label="modalAriaLabel">
-    <component v-bind:is="cipherComponent" :cipher="cipher"></component>
+    <component v-bind:is="cipherAbouComponent" :cipher="cipher"></component>
   </Modal>
 </template>
 
 <script>
 import { getCipherByKey } from '@/ciphers'
 import Modal from '@/components/Modal'
-import * as AboutPartials from '@/components/_partials/about'
 
 export default {
   name: 'about',
   props: ['cipherKey'],
-  components: {
-    Modal
-  },
+  components: { Modal },
   data () {
     let cipher = getCipherByKey(this.cipherKey)
     return {
       cipher,
-      cipherComponent: AboutPartials[this.cipherKey],
-      modalAriaLabel: `${cipher.NAME} informational modal`
+      modalAriaLabel: `${cipher.NAME} informational modal`,
+      cipherAbouComponent: {
+        props: ['cipher'],
+        template: `<div>${cipher.ABOUT_TEMPLATE}</div>`
+      }
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~@/assets/css/_variables';
 .about {
+  h1 {
+    font-size: 2.4em;
+  }
+
   p {
     margin: 0.5em 0 1em;
   }
 
-  &__inputs {
+  &__section {
     margin-top: 3.2em;
   }
 
-  &__input {
+  &__sub-section {
     margin-top: 1.6em;
   }
 }
