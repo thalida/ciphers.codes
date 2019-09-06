@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import 'highlight.js/styles/github.css'
+
 import { getCipherByKey } from '@/ciphers'
 import Modal from '@/components/Modal'
 

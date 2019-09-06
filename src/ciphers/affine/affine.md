@@ -14,13 +14,15 @@ ignored, and in my implementation they are printed as-is by the cipher.
 ## How it works
 
 ### Encoding
-```
-((coprime * letterPosition) + shift) % 26
+
+```js
+let encodedCharIndex = ((coprime * letterPosition) + shift) % 26
 ```
 
 ### Decoding
-```
-(modInverseOfCoprime * (letterPosition - shift)) % 26
+
+```js
+let decodedCharIndex = (modInverseOfCoprime * (letterPosition - shift)) % 26
 ```
 
 ### What is mod 26?

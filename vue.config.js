@@ -1,3 +1,19 @@
 module.exports = {
-  runtimeCompiler: true
+  runtimeCompiler: true,
+  chainWebpack: config => {
+    config.module
+      .rule('md')
+      .use('markdown-loader')
+      .loader('markdown-loader')
+      .tap(() => {
+        return {
+          highlight: function (code) {
+            return require('highlight.js').highlightAuto(code).value
+          },
+          smartLists: true,
+          smartypants: true,
+          xhtml: false
+        }
+      })
+  }
 }
