@@ -12,13 +12,7 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'atbash'
 export const NAME = 'Atbash'
-export const ABOUT = {
-  text: `A simple substitution cipher originally created for the Hebrew alphabet, when converted to work with the Latin Alphabet (abc), this cipher reverses the alphabet so that the cipher alphabet is now "zyxwvutsrqponmlkjihgfedcba".`,
-  source: {
-    title: 'Wikipedia',
-    url: 'http://en.wikipedia.org/wiki/Atbash'
-  }
-}
+export { default as ABOUT_TEMPLATE } from './atbash.md'
 
 //  Default Arguments
 // -----------------------------------------------------------------------------
@@ -64,4 +58,19 @@ export function run (args) {
     outputStr: output,
     errorStr: null
   }
+}
+
+export const SAMPLE_STRING = 'AbcdefghijklmnopqrstuvwXYZ - 0123456789 - !@#$'
+export function sampleEncoding () {
+  return run({
+    isEncoding: true,
+    inputStr: SAMPLE_STRING
+  }).outputStr
+}
+
+export function sampleDecoding () {
+  return run({
+    isEncoding: false,
+    inputStr: sampleEncoding(SAMPLE_STRING)
+  }).outputStr
 }

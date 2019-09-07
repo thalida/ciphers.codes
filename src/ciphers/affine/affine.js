@@ -1,7 +1,6 @@
 'use strict'
 
 import * as utils from '@/ciphers/utils'
-import markdown from './affine.md'
 
 // =============================================================================
 //
@@ -13,7 +12,7 @@ import markdown from './affine.md'
 // -----------------------------------------------------------------------------
 export const KEY = 'affine'
 export const NAME = 'Affine'
-export const ABOUT_TEMPLATE = markdown
+export { default as ABOUT_TEMPLATE } from './affine.md'
 
 //  Custom Variables
 // -----------------------------------------------------------------------------

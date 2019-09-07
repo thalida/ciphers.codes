@@ -12,7 +12,7 @@ finally converted back to a letter.
 ❌ Numbers (`0-9`) \
 ❌ Special Characters (`!@#$`)
 
-Numbers and Special Characters are included as-is in the output.
+Numbers and Special Characters are **outputted as-is** by this cipher.
 
 ## Source
 [View {{cipher.NAME}} on Github](https://github.com/thalida/ciphers.codes/blob/master/src/ciphers/affine/affine.js)

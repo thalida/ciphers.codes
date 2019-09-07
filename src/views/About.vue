@@ -93,6 +93,7 @@ export default {
 
   pre code {
     background-color: transparent;
+    padding: 0;
   }
 
   ul,

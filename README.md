@@ -29,7 +29,7 @@
 - [x] Style toast
 - [ ] Update about view content
     - [x] affine
-    - [ ] atbash
+    - [x] atbash
     - [ ] caesar
     - [ ] keyedSubstitution
     - [ ] masonic
