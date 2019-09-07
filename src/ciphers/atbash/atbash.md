@@ -13,9 +13,7 @@ Numbers and Special Characters are **outputted as-is** by this cipher.
 
 ---
 
-## Formula
-
-**Encoding & Decoding**
+## Formula for Encoding & Decoding
 ```js
 26 - letterPos
 ```
@@ -24,6 +22,12 @@ Numbers and Special Characters are **outputted as-is** by this cipher.
 
 
 ## Example
-**Sample String**: {{ cipher.SAMPLE_STRING }}\
-When, **Encoded**: {{ cipher.sampleEncoding() }}\
-Then, **Decoded**: {{ cipher.sampleDecoding() }}
+
+### Sample String
+{{ cipher.SAMPLE_STRING }}
+
+### When, **Encoded**
+{{ cipher.sampleEncoding() }}
+
+### Then, **Decoded**
+{{ cipher.sampleDecoding() }}

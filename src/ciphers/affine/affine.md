@@ -21,14 +21,14 @@ Numbers and Special Characters are **outputted as-is** by this cipher.
 
 ## Formulas
 
-**Encoding**
+### Encoding
 ```js
-((coprime * charIndex) + shift) mod 26
+((coprime * letterPosition) + shift) mod 26
 ```
 
-**Decoding**
+### Decoding
 ```js
-(modInverseOfCoprime * (charIndex - shift)) mod 26
+(modInverseOfCoprime * (letterPosition - shift)) mod 26
 ```
 
 ---
@@ -39,14 +39,19 @@ Based on the current settings for {{cipher.NAME}}:
 - `shift` = `{{cipher.INPUTS_BY_NAME.shift.value}}`
 - `modInverseOfCoprime` = `{{cipher.modInverse(cipher.INPUTS_BY_NAME.coprime.value)}}`
 
-**Sample String**: {{ cipher.SAMPLE_STRING }}\
-When, **Encoded**: {{ cipher.sampleEncoding() }}\
-Then, **Decoded**: {{ cipher.sampleDecoding() }}
+### Sample String
+{{ cipher.SAMPLE_STRING }}
+
+### When, **Encoded**
+{{ cipher.sampleEncoding() }}
+
+### Then, **Decoded**
+{{ cipher.sampleDecoding() }}
 
 ---
 
 ## How it works
-- `charIndex` is the index of the letter in the alphabet
+- `letterPosition` is the index of the letter
 - `coprime` and `shift` are two variables you pick!
 - `modInverseOfCoprime` is the modular multiplicative inverse of `coprime`
 
@@ -54,8 +59,8 @@ Then, **Decoded**: {{ cipher.sampleDecoding() }}
 You'll see a lot of references to `26`, it's not a magic number, just the
 number of letters in the English alphabet.
 
-### `charIndex`
-Index of the character in the English alphabet (0-indexed). For example,
+### `letterPosition`
+Index of the letter in the English alphabet (0-indexed). For example,
 A=0, B=1, C=2, and so on until Z=25.
 
 ### `coprime`
@@ -101,7 +106,7 @@ function _modInverse (coprime) {
 }
 ```
 
-### What is `mod 26`?
+### `mod 26`
 Both formulas for encoding and decoding have `mod 26` which performs the modulo (%)
 operation on the output.
 

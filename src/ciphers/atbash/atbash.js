@@ -60,7 +60,7 @@ export function run (args) {
   }
 }
 
-export const SAMPLE_STRING = 'AbcdefghijklmnopqrstuvwXYZ - 0123456789 - !@#$'
+export const SAMPLE_STRING = `Hello World! \r\n ABCDEFGHIJKLMNOPQRSTUVWXYZ \r\n abcdefghijklmnopqrstuvwxyz \r\n 0123456789 \r\n !@#$`
 export function sampleEncoding () {
   return run({
     isEncoding: true,

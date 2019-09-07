@@ -30,7 +30,7 @@
 - [ ] Update about view content
     - [x] affine
     - [x] atbash
-    - [ ] caesar
+    - [x] caesar
     - [ ] keyedSubstitution
     - [ ] masonic
     - [ ] playfair

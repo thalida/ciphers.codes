@@ -12,13 +12,7 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'caesar'
 export const NAME = 'Caesar'
-export const ABOUT = {
-  text: `A simple substitution cipher in which the alphabet is shifted up or down a specified number of positions.`,
-  source: {
-    title: 'Wikipedia',
-    url: 'http://en.wikipedia.org/wiki/Caesar_cipher'
-  }
-}
+export { default as ABOUT_TEMPLATE } from './caesar.md'
 
 //  Default Arguments
 // -----------------------------------------------------------------------------
@@ -43,10 +37,14 @@ export const INPUTS = [
     type: 'number',
     name: 'shift',
     label: 'Shift by',
-    description: 'Enter a number (positive/negative) to shift the alphabet by.',
     value: SAMPLE_INPUTS.shift
   }
 ]
+
+export const INPUTS_BY_NAME = INPUTS.reduce((obj, input) => {
+  obj[input.name] = input
+  return obj
+}, {})
 
 //  Main Run Function
 //  Returns the encoded / decoded string based on the cipher rules
@@ -92,4 +90,21 @@ export function run (args) {
     outputStr: output,
     errorStr: null
   }
+}
+
+export const SAMPLE_STRING = `Hello World! \r\n ABCDEFGHIJKLMNOPQRSTUVWXYZ \r\n abcdefghijklmnopqrstuvwxyz \r\n 0123456789 \r\n !@#$`
+export function sampleEncoding () {
+  return run({
+    isEncoding: true,
+    inputStr: SAMPLE_STRING,
+    inputs: utils.flattenCipherInputs(INPUTS)
+  }).outputStr
+}
+
+export function sampleDecoding () {
+  return run({
+    isEncoding: false,
+    inputStr: sampleEncoding(SAMPLE_STRING),
+    inputs: utils.flattenCipherInputs(INPUTS)
+  }).outputStr
 }
