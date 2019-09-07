@@ -7,10 +7,11 @@
 </template>
 
 <script>
-import { getCipherByKey } from '@/ciphers'
-import Modal from '@/components/Modal'
 import VueMarkdown from 'vue-markdown'
 import Prism from 'prismjs'
+
+import { getCipherByKey } from '@/ciphers'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'about',
