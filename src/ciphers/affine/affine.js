@@ -15,9 +15,9 @@ export const KEY = 'affine'
 export const NAME = 'Affine'
 export const ABOUT_TEMPLATE = markdown
 
-//  Private Variables
+//  Custom Variables
 // -----------------------------------------------------------------------------
-const __ALLOWED_COPRIMES = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
+export const ALLOWED_COPRIMES = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
 
 //  Default Arguments
 // -----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ export const DEFAULTS = {
   inputStr: '',
   inputs: {
     shift: 0,
-    coprime: __ALLOWED_COPRIMES[0]
+    coprime: ALLOWED_COPRIMES[0]
   }
 }
 
@@ -34,7 +34,7 @@ export const DEFAULTS = {
 // -----------------------------------------------------------------------------
 export const SAMPLE_INPUTS = {
   shift: 6,
-  coprime: __ALLOWED_COPRIMES[1]
+  coprime: ALLOWED_COPRIMES[1]
 }
 
 //  Inputs
@@ -44,18 +44,16 @@ export const INPUTS = [
     type: 'select',
     name: 'coprime',
     label: 'Co-prime',
-    description: 'The coprimes of 26 are: ' + __ALLOWED_COPRIMES.join(', '),
     value: SAMPLE_INPUTS.coprime,
-    options: __ALLOWED_COPRIMES,
+    options: ALLOWED_COPRIMES,
     validate (n) {
-      return __ALLOWED_COPRIMES.indexOf(parseInt(n, 10)) >= 0
+      return ALLOWED_COPRIMES.indexOf(parseInt(n, 10)) >= 0
     }
   },
   {
     type: 'number',
     name: 'shift',
     label: 'Shift',
-    description: 'Enter a number (positive/negative) to shift the alphabet by.',
     value: SAMPLE_INPUTS.shift
   }
 ]
@@ -95,7 +93,7 @@ export function run (args) {
       if (isEncoding) {
         newLetterPos = (coprime * letterPos) + shift
       } else {
-        newLetterPos = _modInverse(coprime) * (letterPos - shift)
+        newLetterPos = modInverse(coprime) * (letterPos - shift)
       }
 
       // The new letter position may be out of bounds,
@@ -122,9 +120,9 @@ export function run (args) {
 
 //  modInverse
 //  takes: coprime
-//  returns: the multiplicative inverse of the coprime
+//  returns: the modular multiplicative inverse of the coprime
 // -----------------------------------------------------------------------------
-function _modInverse (coprime) {
+export function modInverse (coprime) {
   let mod = utils.TOTAL_ALPHA
   let inverse = 1
   let y = 0
@@ -145,4 +143,21 @@ function _modInverse (coprime) {
   }
 
   return inverse
+}
+
+export const SAMPLE_STRING = 'AbcdefghijklmnopqrstuvwXYZ - 0123456789 - !@#$'
+export function sampleEncoding () {
+  return run({
+    isEncoding: true,
+    inputStr: SAMPLE_STRING,
+    inputs: utils.flattenCipherInputs(INPUTS)
+  }).outputStr
+}
+
+export function sampleDecoding () {
+  return run({
+    isEncoding: false,
+    inputStr: sampleEncoding(SAMPLE_STRING),
+    inputs: utils.flattenCipherInputs(INPUTS)
+  }).outputStr
 }
