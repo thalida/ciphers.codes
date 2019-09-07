@@ -63,10 +63,6 @@ h3 {
   font-weight: 600;
 }
 
-p {
-  font-size: 1.6em; // 16px
-}
-
 a {
   color: $color__link;
   font-size: 1.6em; // 16px

@@ -11,7 +11,7 @@ module.exports = {
             return require('highlight.js').highlightAuto(code).value
           },
           smartLists: true,
-          smartypants: true,
+          smartypants: false,
           xhtml: false
         }
       })

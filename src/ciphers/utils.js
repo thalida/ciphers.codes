@@ -207,3 +207,10 @@ export function parseCipherArgs (args, defaults) {
 
   return { isEncoding, inputStr, inputs }
 }
+
+export function flattenCipherInputs (inputsObj) {
+  return inputsObj.reduce((pairs, input) => {
+    pairs[input.name] = input.value
+    return pairs
+  }, {})
+}

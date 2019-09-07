@@ -153,10 +153,7 @@ export default {
       if (!this.cipherHasInputs) {
         return null
       }
-      return this.cipherInputs.reduce((pairs, input) => {
-        pairs[input.name] = input.value
-        return pairs
-      }, {})
+      return utils.flattenCipherInputs(this.cipherInputs)
     },
     cipherResults () {
       let results = this.cipher.run({
