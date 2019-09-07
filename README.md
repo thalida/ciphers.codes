@@ -95,8 +95,11 @@
 - [x] speed up modal (300ms?)
 - [ ] Investigate foggy netlify replacement
 - [x] Change modal close icon from fixed to absolute on close
-- [ ] Change rendering order, output markdown w/ {{}}, then wrap in <vue-markdown/>
+- [x] Change rendering order, output markdown w/ {{}}, then wrap in <vue-markdown/>
 - [ ] Add sample run through w/ various outputs for examples
+- [x] Change fontsize + lineheight on code samples (get line numbers also?)
+- [ ] test import entire cipher file
+- [ ] add katex support
 
 ## Development
 
