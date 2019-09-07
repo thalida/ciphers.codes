@@ -94,6 +94,9 @@
 - [x] show popup on enter of invalid keys near the input
 - [x] speed up modal (300ms?)
 - [ ] Investigate foggy netlify replacement
+- [x] Change modal close icon from fixed to absolute on close
+- [ ] Change rendering order, output markdown w/ {{}}, then wrap in <vue-markdown/>
+- [ ] Add sample run through w/ various outputs for examples
 
 ## Development
 

@@ -173,7 +173,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~@/assets/css/_variables';
 
 .index {
@@ -327,6 +327,10 @@ export default {
     display: flex;
     transition: top 300ms ease;
     box-shadow: 0 -10em 10em white;
+
+    .modal__header {
+      position: absolute;
+    }
   }
 
   .modal-transition-up--enter,
