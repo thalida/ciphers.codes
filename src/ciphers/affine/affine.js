@@ -12,7 +12,7 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'affine'
 export const NAME = 'Affine'
-export { default as ABOUT_TEMPLATE } from './affine.md'
+export { default as ABOUT_TEMPLATE } from 'raw-loader!./affine.md'
 
 //  Custom Variables
 // -----------------------------------------------------------------------------

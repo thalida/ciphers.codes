@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import 'highlight.js/styles/a11y-light.css'
-
 import { getCipherByKey } from '@/ciphers'
 import Modal from '@/components/Modal'
+import VueMarkdown from 'vue-markdown'
+import Prism from 'prismjs'
 
 export default {
   name: 'about',
@@ -23,14 +23,19 @@ export default {
       modalAriaLabel: `${cipher.NAME} informational modal`,
       cipherAbouComponent: {
         props: ['cipher'],
-        template: `<div>${cipher.ABOUT_TEMPLATE}</div>`
+        components: { VueMarkdown },
+        template: `<vue-markdown>${cipher.ABOUT_TEMPLATE}</vue-markdown>`
       }
     }
+  },
+  mounted () {
+    Prism.highlightAll()
   }
 }
 </script>
 
 <style lang="scss">
+@import '~@/assets/css/prism_theme';
 @import '~@/assets/css/_variables';
 .about {
   h1 {
@@ -61,19 +66,14 @@ export default {
     background-color: $color__gray;
   }
 
-  p,
-  pre {
-    line-height: 1.4em;
-    font-size: 1.6em; // 16px
-  }
-
   p {
     margin: 0.5em 0 1em 0;
+    font-size: 1.6em; // 16px
   }
 
   pre,
   code {
-    font: normal normal 1.6em / 2 'Fira Code', monospace;
+    font: normal normal 1.4em / 1.6 'Fira Code', monospace;
     overflow: auto;
   }
 
@@ -82,11 +82,11 @@ export default {
     margin: 2em 0;
     border-radius: 0.5em;
     box-shadow: 0 0 2em $color__blue--darker--faded;
-    // background: $color__gray;
   }
 
   code {
-    font-size: 1em;
+    font-size: 0.9em;
+    line-height: 2em;
     padding: 0.25em 0.5em;
     background-color: $color__purple--xtra-faded;
   }
@@ -99,18 +99,6 @@ export default {
   ul,
   ol {
     font-size: 1.6em;
-  }
-
-  li * {
-    font-size: 1em;
-  }
-
-  &__section {
-    margin-top: 3.2em;
-  }
-
-  &__sub-section {
-    margin-top: 1.6em;
   }
 }
 </style>

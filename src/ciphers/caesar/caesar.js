@@ -12,7 +12,7 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'caesar'
 export const NAME = 'Caesar'
-export { default as ABOUT_TEMPLATE } from './caesar.md'
+export { default as ABOUT_TEMPLATE } from 'raw-loader!./caesar.md'
 
 //  Default Arguments
 // -----------------------------------------------------------------------------

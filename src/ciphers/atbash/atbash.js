@@ -12,7 +12,7 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'atbash'
 export const NAME = 'Atbash'
-export { default as ABOUT_TEMPLATE } from './atbash.md'
+export { default as ABOUT_TEMPLATE } from 'raw-loader!./atbash.md'
 
 //  Default Arguments
 // -----------------------------------------------------------------------------
