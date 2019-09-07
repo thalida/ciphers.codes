@@ -28,6 +28,15 @@
 - [x] Style modal / about view
 - [x] Style toast
 - [ ] Update about view content
+    - [x] affine
+    - [ ] atbash
+    - [ ] caesar
+    - [ ] keyedSubstitution
+    - [ ] masonic
+    - [ ] playfair
+    - [ ] polybiusSquare
+    - [ ] vigenere
+- [ ] Cleanup / Validated about view content
     - [ ] affine
     - [ ] atbash
     - [ ] caesar
