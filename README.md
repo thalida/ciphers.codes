@@ -32,7 +32,7 @@
     - [x] atbash
     - [x] caesar
     - [x] keyedSubstitution
-    - [ ] masonic
+    - [x] masonic
     - [ ] playfair
     - [ ] polybiusSquare
     - [ ] vigenere

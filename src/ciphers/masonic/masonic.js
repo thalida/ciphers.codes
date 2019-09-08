@@ -14,13 +14,8 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'masonic'
 export const NAME = 'Masonic'
-export const ABOUT = {
-  text: `A geometric simple substitution cipher which exchanges letters for symbols which are fragments of a grid.`,
-  source: {
-    title: 'Wikipedia',
-    url: 'http://en.wikipedia.org/wiki/Pigpen_cipher'
-  }
-}
+export { default as ABOUT_TEMPLATE } from 'raw-loader!./masonic.md'
+export * from '@/ciphers/examples'
 
 //  Default Arguments
 // -----------------------------------------------------------------------------
