@@ -189,11 +189,14 @@ export default {
     handleInputChange (input, e) {
       if (input.forceToValidKey) {
         const origValue = e.target.value
-        let valueAsKey = utils.makeValidKey(e.target.value)
+        let valueAsKey = utils.makeValidKey(
+          e.target.value,
+          this.cipherInputDefaults[input.name],
+          this.cipher.KEY
+        )
 
         if (origValue !== valueAsKey) {
           this.renderKeyNotice()
-          console.log(origValue, valueAsKey, 'why?')
         }
 
         input.value = valueAsKey

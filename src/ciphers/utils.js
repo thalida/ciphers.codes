@@ -136,10 +136,12 @@ export function makeValidKey (string, defaultKey, mode) {
   }
 
   let charsArray = string.replace(/[^A-Za-z]+/gi, '').toLowerCase().split('')
-  let uniqueChars = new Set(charsArray)
-  let key = [...uniqueChars].join('') // remake into a string
 
-  return key
+  if (mode !== 'vigenere') {
+    charsArray = new Set(charsArray)
+  }
+
+  return [...charsArray].join('') // remake into a string
 }
 
 //  makeKeyedAlpha
