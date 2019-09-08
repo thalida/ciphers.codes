@@ -13,14 +13,8 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'keyed_substitution'
 export const NAME = 'Keyed Substitution'
-export const ABOUT = {
-  text: `A monoalphabetic substitution cipher, where a keyword placed into beginning of the alphabet, and any duplicated letters are removed.`,
-  source: {
-    title: 'Wikipedia',
-    url: 'http://en.wikipedia.org/wiki/Keyword_cipher'
-  }
-}
-
+export { default as ABOUT_TEMPLATE } from 'raw-loader!./keyedSubstitution.md'
+export * from '@/ciphers/examples'
 //  Default Arguments
 // -----------------------------------------------------------------------------
 export const DEFAULTS = {
@@ -50,6 +44,11 @@ export const INPUTS = [
     forceToValidKey: true
   }
 ]
+
+export const INPUTS_BY_NAME = INPUTS.reduce((obj, input) => {
+  obj[input.name] = input
+  return obj
+}, {})
 
 //  Main Run Function
 //  Returns the encoded / decoded string based on the cipher rules

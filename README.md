@@ -31,7 +31,7 @@
     - [x] affine
     - [x] atbash
     - [x] caesar
-    - [ ] keyedSubstitution
+    - [x] keyedSubstitution
     - [ ] masonic
     - [ ] playfair
     - [ ] polybiusSquare
