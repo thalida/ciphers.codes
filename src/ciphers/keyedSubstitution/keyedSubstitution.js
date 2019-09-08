@@ -11,7 +11,7 @@ import * as utils from '@/ciphers/utils'
 // =============================================================================
 //  About this Cipher
 // -----------------------------------------------------------------------------
-export const KEY = 'keyed_substitution'
+export const KEY = 'keyed-substitution'
 export const NAME = 'Keyed Substitution'
 export { default as ABOUT_TEMPLATE } from 'raw-loader!./keyedSubstitution.md'
 export * from '@/ciphers/examples'

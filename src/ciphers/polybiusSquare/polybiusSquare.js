@@ -12,15 +12,10 @@ import * as utils from '@/ciphers/utils'
 // =============================================================================
 //  About this Cipher
 // -----------------------------------------------------------------------------
-export const KEY = 'polybius_square'
+export const KEY = 'polybius-square'
 export const NAME = 'Polybius Square'
-export const ABOUT = {
-  text: `A cipher where each alphanumeric (a-z, 0-9) character is represented by it's coordinates in a grid. `,
-  source: {
-    title: 'Wikipedia',
-    url: 'http://en.wikipedia.org/wiki/Polybius_square'
-  }
-}
+export { default as ABOUT_TEMPLATE } from 'raw-loader!./polybiusSquare.md'
+export * from '@/ciphers/examples'
 
 //  Local Variables
 // -----------------------------------------------------------------------------
@@ -39,13 +34,10 @@ export const DEFAULTS = {
 // -----------------------------------------------------------------------------
 export function run (args) {
   let { isEncoding, inputStr } = utils.parseCipherArgs(args, DEFAULTS)
-  let output = ''
+  let output = []
 
-  const space = ' '
   const alphanumeric = utils.ALPHANUMERIC
-  const alphagrid = utils.ALPHAGRID
-  const alphaGridSize = alphagrid.length - 1 // the 0 index isn't used
-
+  const alphaGridSize = Math.sqrt(alphanumeric.length)
   inputStr = inputStr.trim()
 
   if (isEncoding && inputStr.match(__ENCODE_REGEX) === null) {
@@ -76,23 +68,25 @@ export function run (args) {
       // on it's position calculate the x and y coords in the grid
       char = char.toLowerCase()
       if (char.match(/^[a-z0-9]$/)) {
-        const letterPos = alphanumeric.indexOf(char.toString()) + 1
-        const x = Math.ceil(letterPos / alphaGridSize)
-        const y = (letterPos % alphaGridSize === 0) ? alphaGridSize : letterPos % alphaGridSize
-        output += `${x}${y}${space}`
+        const letterPos = alphanumeric.indexOf(char.toString())
+        const x = Math.floor(letterPos / alphaGridSize) + 1
+        const y = (letterPos % alphaGridSize) + 1
+        output.push(`${x}${y}`)
       }
     } else {
       // Get the x and y "characters" ex. 13 => x: 1, y: 3
-      const x = char
-      const y = inputStr.charAt(i + 1)
-      // Find the letter in the grid
-      output += alphagrid[x][y]
+      const x = parseInt(char, 10) - 1
+      const y = parseInt(inputStr.charAt(i + 1), 10) - 1
+      const charIndex = (x * alphaGridSize) + y
+      output.push(alphanumeric[charIndex])
     }
   })
 
+  output = (isEncoding) ? output.join(' ') : output.join('')
+
   return {
     isSuccess: true,
-    outputStr: output.trim(),
+    outputStr: output,
     errorStr: null
   }
 }

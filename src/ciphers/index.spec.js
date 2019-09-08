@@ -8,10 +8,10 @@ describe('ciphers:index', () => {
     'atbash',
     'affine',
     'caesar',
-    'keyed_substitution',
+    'keyed-substitution',
     'masonic',
     'playfair',
-    'polybius_square',
+    'polybius-square',
     'vigenere'
   ]
 

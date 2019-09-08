@@ -34,7 +34,7 @@
     - [x] keyedSubstitution
     - [x] masonic
     - [x] playfair
-    - [ ] polybiusSquare
+    - [x] polybiusSquare
     - [ ] vigenere
 - [ ] Cleanup / Validated about view content
     - [ ] affine

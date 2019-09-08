@@ -145,8 +145,8 @@ decodedCharacterIndex2 = (x2 * 5) + y1
 
 With the calculated `decodedCharacterIndex1` and `decodedCharacterIndex2`, you can get the decoded letter at that index in the cipher alphabet.
 
-### A note on `mod 5`
-Both formulas for encoding and decoding have `mod 5` which performs the modulo (%) operation on the output. This is a safe-keeping action to guarantee the character fits within the 5x5 grid. [Javascript doesn't have proper support for mod](https://dev.to/maurobringolf/a-neat-trick-to-compute-modulo-of-negative-numbers-111e) so this formula is used:
+### A note on `mod`
+This cipher uses `mod 5` which performs the modulo (%) operation. [Javascript doesn't have proper support for mod](https://dev.to/maurobringolf/a-neat-trick-to-compute-modulo-of-negative-numbers-111e) so this formula is used:
 ```js
 export function mod (a, b) {
   return ((a % b) + b) % b

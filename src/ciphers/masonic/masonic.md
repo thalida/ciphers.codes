@@ -10,10 +10,10 @@
 ❌ Symbols (`!@#$`)
 ❌ Emojis (`😍🤬👩🏾‍💻`)
 
-*Symbols*
+**Symbols**
 There is partial support for symbols, some implementations / fonts for this cipher support some symbols.
 
-*Emojis*
+**Emojis**
 Emoji are **outputted as-is** by this cipher.
 
 ## Source
