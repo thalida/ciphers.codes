@@ -24,12 +24,12 @@ body {
 // .content-frame
 // Wraps around all rendered content
 // -----------------------------------------------------------------------------
-.content-frame {
+.content-frame,
+.index .input-form.vue-fixed-header--isFixed {
   display: flex;
   flex-flow: column nowrap;
-  margin: 0 auto;
-  width: 50%;
-  min-width: 30.0em; // 300px
+  margin: 3.2em auto;
+  width: 90%;
   max-width: 50.0em; // 500px
   opacity: 1;
 }

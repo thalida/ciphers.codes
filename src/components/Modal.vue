@@ -86,11 +86,9 @@ export default {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    margin: 3.2em;
-  }
-
-  &__main {
-    margin: 3.2em auto;
+    margin: 1.6em 5%;
+    padding: 1.6em;
+    background-color: $color__background;
   }
 
   &__close {
@@ -115,6 +113,10 @@ export default {
         background-color: $color__link;
         border-radius: 0.2em;
         transition: all 300ms ease;
+
+        @media (max-width: 50.0em) {
+          box-shadow: 0 0 0.4em rgba($color__background, 0.3);
+        }
       }
 
       &::before {

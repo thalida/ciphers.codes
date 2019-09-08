@@ -27,7 +27,7 @@
 - [x] Style all ciphers
 - [x] Style modal / about view
 - [x] Style toast
-- [ ] Update about view content
+- [x] Update about view content
     - [x] affine
     - [x] atbash
     - [x] caesar
@@ -35,7 +35,7 @@
     - [x] masonic
     - [x] playfair
     - [x] polybiusSquare
-    - [ ] vigenere
+    - [x] vigenere
 - [ ] Cleanup / Validated about view content
     - [ ] affine
     - [ ] atbash
@@ -93,17 +93,18 @@
 - [x] title text on about links
 - [x] show popup on enter of invalid keys near the input
 - [x] speed up modal (300ms?)
-- [ ] Investigate foggy netlify replacement
+- [x] Investigate foggy netlify replacement (not found; on hold;)
 - [x] Change modal close icon from fixed to absolute on close
 - [x] Change rendering order, output markdown w/ {{}}, then wrap in <vue-markdown/>
-- [ ] Add sample run through w/ various outputs for examples
+- [x] Add sample run through w/ various outputs for examples
 - [x] Change fontsize + lineheight on code samples (get line numbers also?)
 - [x] (nvm) test import entire cipher file
 - [x] add katex support _(and removed)_
 - [ ] add x and checkmark emoji icons
 - [x] remove tutorial style code from input (only "fun" text)
 - [x] add emoji examples
-- [ ] improve mobile styling
+- [x] improve mobile styling
+    - [x] close icon styling
 
 ## Development
 

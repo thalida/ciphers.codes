@@ -197,10 +197,6 @@ export default {
       position: fixed;
       z-index: 1;
       top: 0;
-      margin: 3.2em auto;
-      width: 50%;
-      min-width: 30.0em; // 300px
-      max-width: 50.0em; // 500px
     }
 
     &__textarea {

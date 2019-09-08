@@ -47,6 +47,7 @@ export default {
 .about {
   h1 {
     font-size: 2.4em;
+    margin: 0;
   }
 
   h2 {
@@ -61,7 +62,6 @@ export default {
     font-size: 1.6em;
   }
 
-  h1,
   h2,
   h3,
   h4,
