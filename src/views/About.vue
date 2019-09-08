@@ -2,7 +2,11 @@
   <Modal
     class="about"
     :modal-aria-label="modalAriaLabel">
-    <component v-bind:is="cipherAbouComponent" :cipher="cipher"></component>
+    <component
+      v-bind:is="cipherAbouComponent"
+      :cipher="cipher"
+      :utils="utils">
+    </component>
   </Modal>
 </template>
 
@@ -10,6 +14,7 @@
 import VueMarkdown from 'vue-markdown'
 import Prism from 'prismjs'
 
+import * as utils from '@/ciphers/utils'
 import { getCipherByKey } from '@/ciphers'
 import Modal from '@/components/Modal'
 
@@ -20,10 +25,11 @@ export default {
   data () {
     let cipher = getCipherByKey(this.cipherKey)
     return {
+      utils,
       cipher,
       modalAriaLabel: `${cipher.NAME} informational modal`,
       cipherAbouComponent: {
-        props: ['cipher'],
+        props: ['cipher', 'utils'],
         components: { VueMarkdown },
         template: `<vue-markdown>${cipher.ABOUT_TEMPLATE}</vue-markdown>`
       }
@@ -49,6 +55,10 @@ export default {
 
   h3 {
     font-size: 1.8em;
+  }
+
+  h4 {
+    font-size: 1.6em;
   }
 
   h1,

@@ -98,8 +98,12 @@
 - [x] Change rendering order, output markdown w/ {{}}, then wrap in <vue-markdown/>
 - [ ] Add sample run through w/ various outputs for examples
 - [x] Change fontsize + lineheight on code samples (get line numbers also?)
-- [ ] test import entire cipher file
-- [ ] add katex support
+- [x] (nvm) test import entire cipher file
+- [x] add katex support _(and removed)_
+- [ ] add x and checkmark emoji icons
+- [x] remove tutorial style code from input (only "fun" text)
+- [x] add emoji examples
+- [ ] improve mobile styling
 
 ## Development
 

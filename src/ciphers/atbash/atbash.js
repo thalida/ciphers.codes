@@ -13,6 +13,7 @@ import * as utils from '@/ciphers/utils'
 export const KEY = 'atbash'
 export const NAME = 'Atbash'
 export { default as ABOUT_TEMPLATE } from 'raw-loader!./atbash.md'
+export * from '@/ciphers/examples'
 
 //  Default Arguments
 // -----------------------------------------------------------------------------
@@ -58,19 +59,4 @@ export function run (args) {
     outputStr: output,
     errorStr: null
   }
-}
-
-export const SAMPLE_STRING = `Hello World! \r\n ABCDEFGHIJKLMNOPQRSTUVWXYZ \r\n abcdefghijklmnopqrstuvwxyz \r\n 0123456789 \r\n !@#$`
-export function sampleEncoding () {
-  return run({
-    isEncoding: true,
-    inputStr: SAMPLE_STRING
-  }).outputStr
-}
-
-export function sampleDecoding () {
-  return run({
-    isEncoding: false,
-    inputStr: sampleEncoding(SAMPLE_STRING)
-  }).outputStr
 }

@@ -13,6 +13,7 @@ import * as utils from '@/ciphers/utils'
 export const KEY = 'affine'
 export const NAME = 'Affine'
 export { default as ABOUT_TEMPLATE } from 'raw-loader!./affine.md'
+export * from '@/ciphers/examples'
 
 //  Custom Variables
 // -----------------------------------------------------------------------------
@@ -142,21 +143,4 @@ export function modInverse (coprime) {
   }
 
   return inverse
-}
-
-export const SAMPLE_STRING = `Hello World! \r\n ABCDEFGHIJKLMNOPQRSTUVWXYZ \r\n abcdefghijklmnopqrstuvwxyz \r\n 0123456789 \r\n !@#$`
-export function sampleEncoding () {
-  return run({
-    isEncoding: true,
-    inputStr: SAMPLE_STRING,
-    inputs: utils.flattenCipherInputs(INPUTS)
-  }).outputStr
-}
-
-export function sampleDecoding () {
-  return run({
-    isEncoding: false,
-    inputStr: sampleEncoding(SAMPLE_STRING),
-    inputs: utils.flattenCipherInputs(INPUTS)
-  }).outputStr
 }

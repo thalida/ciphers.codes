@@ -6,8 +6,12 @@
 ✅ Lowercase letters (`a-z`)
 ❌ Numbers (`0-9`)
 ❌ Special Characters (`!@#$`)
+❌ Emojis (`😍🤬👩🏾‍💻`)
 
-Numbers and Special Characters are **outputted as-is** by this cipher.
+Numbers, special characters, and emoji are **outputted as-is** by this cipher.
+
+## Source
+[View {{cipher.NAME}} on Github](https://github.com/thalida/ciphers.codes/blob/master/src/ciphers/atbash/atbash.js)
 
 ---
 
@@ -19,13 +23,13 @@ Numbers and Special Characters are **outputted as-is** by this cipher.
 ---
 
 
-## Example
+## Live Example
 
 ### Sample String
 {{ cipher.SAMPLE_STRING }}
 
 ### When, **Encoded**
-{{ cipher.sampleEncoding() }}
+{{ cipher.encodingExample(cipher) }}
 
 ### Then, **Decoded**
-{{ cipher.sampleDecoding() }}
+{{ cipher.decodingExample(cipher) }}

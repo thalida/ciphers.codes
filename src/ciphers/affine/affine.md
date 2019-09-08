@@ -8,8 +8,9 @@
 ✅ Lowercase letters (`a-z`)
 ❌ Numbers (`0-9`)
 ❌ Special Characters (`!@#$`)
+❌ Emojis (`😍🤬👩🏾‍💻`)
 
-Numbers and Special Characters are **outputted as-is** by this cipher.
+Numbers, special characters, and emoji are **outputted as-is** by this cipher.
 
 ## Source
 [View {{cipher.NAME}} on Github](https://github.com/thalida/ciphers.codes/blob/master/src/ciphers/affine/affine.js)
@@ -31,19 +32,30 @@ Numbers and Special Characters are **outputted as-is** by this cipher.
 ---
 
 ## Live Example
+### Variables
 Based on the current settings for {{cipher.NAME}}:
 - `coprime = {{cipher.INPUTS_BY_NAME.coprime.value}}`
 - `shift = {{cipher.INPUTS_BY_NAME.shift.value}}`
 - `modInverseOfCoprime = {{cipher.modInverse(cipher.INPUTS_BY_NAME.coprime.value)}}`
 
+### Encoding Formula
+```js
+(({{cipher.INPUTS_BY_NAME.coprime.value}} * letterPosition) + {{cipher.INPUTS_BY_NAME.shift.value}}) mod 26
+```
+
+### Decoding Formula
+```js
+({{cipher.modInverse(cipher.INPUTS_BY_NAME.coprime.value)}} * (letterPosition - {{cipher.INPUTS_BY_NAME.shift.value}})) mod 26
+```
+
 ### Sample String
 {{ cipher.SAMPLE_STRING }}
 
 ### When, **Encoded**
-{{ cipher.sampleEncoding() }}
+{{ cipher.encodingExample(cipher) }}
 
 ### Then, **Decoded**
-{{ cipher.sampleDecoding() }}
+{{ cipher.decodingExample(cipher) }}
 
 ---
 
