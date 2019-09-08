@@ -4,13 +4,18 @@
 [{{cipher.NAME}}](http://en.wikipedia.org/wiki/Affine_cipher) is a monoalphabetic substitution cipher. Each letter in the alphabet is mapped to a number, then encrypted/decrypted using a math formula, and finally converted back to a letter.
 
 ## Supports
+✅ Perfect Decoding
 ✅ Uppercase letters (`A-Z`)
 ✅ Lowercase letters (`a-z`)
 ❌ Numbers (`0-9`)
-❌ Special Characters (`!@#$`)
+❌ Symbols (`!@#$`)
 ❌ Emojis (`😍🤬👩🏾‍💻`)
 
-Numbers, special characters, and emoji are **outputted as-is** by this cipher.
+**Numbers, Symbols, and Emojis**
+Numbers, symbols, and emoji are **outputted as-is** by this cipher.
+
+**What is "Perfect Decoding"?**
+Perfect Decoding is when the decoded text exactly matches the text that was encoded.
 
 ## Source
 [View {{cipher.NAME}} on Github](https://github.com/thalida/ciphers.codes/blob/master/src/ciphers/affine/affine.js)

@@ -4,13 +4,18 @@
 [{{cipher.NAME}}](http://en.wikipedia.org/wiki/Keyword_cipher) is a A monoalphabetic substitution cipher, where a keyword placed into beginning of the alphabet, and any duplicated letters are removed.
 
 ## Supports
+✅ Perfect Decoding
 ✅ Uppercase letters (`A-Z`)
 ✅ Lowercase letters (`a-z`)
 ❌ Numbers (`0-9`)
-❌ Special Characters (`!@#$`)
+❌ Symbols (`!@#$`)
 ❌ Emojis (`😍🤬👩🏾‍💻`)
 
-Numbers, special characters, and emoji are **outputted as-is** by this cipher.
+**Numbers, Symbols, and Emojis**
+Numbers, symbols, and emoji are **outputted as-is** by this cipher.
+
+**What is "Perfect Decoding"?**
+Perfect Decoding is when the decoded text exactly matches the text that was encoded.
 
 ## Source
 [View {{cipher.NAME}} on Github](https://github.com/thalida/ciphers.codes/blob/master/src/ciphers/keyedSubstitution/keyedSubstitution.js)
@@ -19,6 +24,7 @@ Numbers, special characters, and emoji are **outputted as-is** by this cipher.
 
 ## Method
 
+### Cipher Key
 Given a `key`, create a new alphabet with that key in front.
 For example, with a key of `private` you'll see the cipher alphabet below, in comparison to the standard English alphabet.
 

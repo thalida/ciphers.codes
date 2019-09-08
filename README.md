@@ -33,7 +33,7 @@
     - [x] caesar
     - [x] keyedSubstitution
     - [x] masonic
-    - [ ] playfair
+    - [x] playfair
     - [ ] polybiusSquare
     - [ ] vigenere
 - [ ] Cleanup / Validated about view content

@@ -7,10 +7,14 @@
 ✅ Uppercase letters (`A-Z`)
 ✅ Lowercase letters (`a-z`)
 ✅ Numbers (`0-9`)
-✅ Special Characters (`!@#$`)
+❌ Symbols (`!@#$`)
 ❌ Emojis (`😍🤬👩🏾‍💻`)
 
-There is **partial** support for special characters, and emoji are **outputted as-is** by this cipher.
+*Symbols*
+There is partial support for symbols, some implementations / fonts for this cipher support some symbols.
+
+*Emojis*
+Emoji are **outputted as-is** by this cipher.
 
 ## Source
 [View {{cipher.NAME}} on Github](https://github.com/thalida/ciphers.codes/blob/master/src/ciphers/masonic/masonic.js)

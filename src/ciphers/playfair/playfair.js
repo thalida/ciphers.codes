@@ -13,13 +13,8 @@ import * as utils from '@/ciphers/utils'
 // -----------------------------------------------------------------------------
 export const KEY = 'playfair'
 export const NAME = 'Playfair'
-export const ABOUT = {
-  text: `The playfair cipher combines the letters i and j so that the alphabet can fit on a 5x5 grid, as a result any "j" you use in your text, will be treated like an "i". Read more on how the Playfair cipher is encoded and decoded.`,
-  source: {
-    title: 'Wikipedia',
-    url: 'http://en.wikipedia.org/wiki/Playfair_cipher'
-  }
-}
+export { default as ABOUT_TEMPLATE } from 'raw-loader!./playfair.md'
+export * from '@/ciphers/examples'
 
 //  Private Variables
 // -----------------------------------------------------------------------------
@@ -56,6 +51,11 @@ export const INPUTS = [
   }
 ]
 
+export const INPUTS_BY_NAME = INPUTS.reduce((obj, input) => {
+  obj[input.name] = input
+  return obj
+}, {})
+
 //  Main Run Function
 //  Returns the encoded / decoded string based on the cipher rules
 // -----------------------------------------------------------------------------
@@ -76,7 +76,7 @@ export function run (args) {
   const alpha = utils.makeKeyedAlpha(inputs.key, DEFAULTS.inputs.key, KEY)
 
   // Replace any j's with i's
-  inputStr = inputStr.replace(/[j]+/gi, 'i')
+  inputStr = inputStr.replace(/[j]+/g, 'i').replace(/[J]+/g, 'I')
 
   let letter1 = null
   let letter2 = null
@@ -146,8 +146,8 @@ export function run (args) {
 //  Calculate the new index of the character being transformed
 // -----------------------------------------------------------------------------
 function _getNewCharIndexes (isEncoding, char1, char2, keyedAlpha) {
-  const char1Pos = _getCoords(char1.toLowerCase(), keyedAlpha)
-  const char2Pos = _getCoords(char2.toLowerCase(), keyedAlpha)
+  const char1Pos = getCoords(char1.toLowerCase(), keyedAlpha)
+  const char2Pos = getCoords(char2.toLowerCase(), keyedAlpha)
 
   let char1Idx = null
   let char2Idx = null
@@ -155,13 +155,13 @@ function _getNewCharIndexes (isEncoding, char1, char2, keyedAlpha) {
   // If the two letters are on the same row
   if (char1Pos.x === char2Pos.x) {
     const x = (char1Pos.x * __KEYED_ARR_SIZE)
-    char1Idx = x + _calcNewCoord(char1Pos.y, isEncoding)
-    char2Idx = x + _calcNewCoord(char2Pos.y, isEncoding)
+    char1Idx = x + calcNewCoord(char1Pos.y, isEncoding)
+    char2Idx = x + calcNewCoord(char2Pos.y, isEncoding)
 
   // If the two letters share the same column
   } else if (char1Pos.y === char2Pos.y) {
-    char1Idx = (_calcNewCoord(char1Pos.x, isEncoding) * __KEYED_ARR_SIZE) + char1Pos.y
-    char2Idx = (_calcNewCoord(char2Pos.x, isEncoding) * __KEYED_ARR_SIZE) + char1Pos.y
+    char1Idx = (calcNewCoord(char1Pos.x, isEncoding) * __KEYED_ARR_SIZE) + char1Pos.y
+    char2Idx = (calcNewCoord(char2Pos.x, isEncoding) * __KEYED_ARR_SIZE) + char1Pos.y
 
   // The two letters are on a diagonal from one another
   } else {
@@ -172,10 +172,10 @@ function _getNewCharIndexes (isEncoding, char1, char2, keyedAlpha) {
   return { char1Idx, char2Idx }
 }
 
-//  _getCoords
+//  getCoords
 //  Get the current coordinates of the letter in the array
 // -----------------------------------------------------------------------------
-function _getCoords (char, keyedAlpha) {
+export function getCoords (char, keyedAlpha) {
   const idx = keyedAlpha.indexOf(char)
   return {
     x: Math.floor(idx / __KEYED_ARR_SIZE),
@@ -183,10 +183,10 @@ function _getCoords (char, keyedAlpha) {
   }
 }
 
-//  _calcNewCoord
+//  calcNewCoord
 //  Calculate the new coordinate based on if we're encoding/decoding
 // -----------------------------------------------------------------------------
-function _calcNewCoord (coord, isEncoding) {
+export function calcNewCoord (coord, isEncoding) {
   // Add/subtract based on the action we're performing
   let newCoord = (isEncoding) ? (coord + 1) : (coord - 1)
   return utils.mod(newCoord, __KEYED_ARR_SIZE)
