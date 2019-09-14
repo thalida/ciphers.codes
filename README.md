@@ -105,6 +105,9 @@
 - [x] add emoji examples
 - [x] improve mobile styling
     - [x] close icon styling
+- [ ] update default text
+- [ ] increase spacing between sections
+- [x] figure out cache-busting with netlify (i dunno how)
 
 ## Development
 
